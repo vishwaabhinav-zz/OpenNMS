@@ -1,0 +1,17 @@
+#Sun Apr 21 17:06:45 IST 2013
+org.opennms.reporting.availability.Report=org.opennms.reporting.availability.descriptors.ReportDescriptor
+org.opennms.reporting.availability.Rows=org.opennms.reporting.availability.descriptors.RowsDescriptor
+org.opennms.reporting.availability.Section=org.opennms.reporting.availability.descriptors.SectionDescriptor
+org.opennms.reporting.availability.Day=org.opennms.reporting.availability.descriptors.DayDescriptor
+org.opennms.reporting.availability.Week=org.opennms.reporting.availability.descriptors.WeekDescriptor
+org.opennms.reporting.availability.DaysOfWeek=org.opennms.reporting.availability.descriptors.DaysOfWeekDescriptor
+org.opennms.reporting.availability.CatSections=org.opennms.reporting.availability.descriptors.CatSectionsDescriptor
+org.opennms.reporting.availability.CalendarTable=org.opennms.reporting.availability.descriptors.CalendarTableDescriptor
+org.opennms.reporting.availability.Created=org.opennms.reporting.availability.descriptors.CreatedDescriptor
+org.opennms.reporting.availability.Categories=org.opennms.reporting.availability.descriptors.CategoriesDescriptor
+org.opennms.reporting.availability.Row=org.opennms.reporting.availability.descriptors.RowDescriptor
+org.opennms.reporting.availability.ViewInfo=org.opennms.reporting.availability.descriptors.ViewInfoDescriptor
+org.opennms.reporting.availability.Value=org.opennms.reporting.availability.descriptors.ValueDescriptor
+org.opennms.reporting.availability.ClassicTable=org.opennms.reporting.availability.descriptors.ClassicTableDescriptor
+org.opennms.reporting.availability.Category=org.opennms.reporting.availability.descriptors.CategoryDescriptor
+org.opennms.reporting.availability.Col=org.opennms.reporting.availability.descriptors.ColDescriptor

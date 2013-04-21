@@ -1,0 +1,4 @@
+#Sun Apr 21 17:01:55 IST 2013
+org.opennms.netmgt.config.ami.AmiConfig=org.opennms.netmgt.config.ami.descriptors.AmiConfigDescriptor
+org.opennms.netmgt.config.ami.Definition=org.opennms.netmgt.config.ami.descriptors.DefinitionDescriptor
+org.opennms.netmgt.config.ami.Range=org.opennms.netmgt.config.ami.descriptors.RangeDescriptor

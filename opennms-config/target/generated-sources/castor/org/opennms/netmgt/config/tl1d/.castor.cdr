@@ -1,0 +1,3 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.tl1d.Tl1Element=org.opennms.netmgt.config.tl1d.descriptors.Tl1ElementDescriptor
+org.opennms.netmgt.config.tl1d.Tl1dConfiguration=org.opennms.netmgt.config.tl1d.descriptors.Tl1dConfigurationDescriptor

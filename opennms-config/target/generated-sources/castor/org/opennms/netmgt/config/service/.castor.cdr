@@ -1,0 +1,7 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.service.Service=org.opennms.netmgt.config.service.descriptors.ServiceDescriptor
+org.opennms.netmgt.config.service.ServiceConfiguration=org.opennms.netmgt.config.service.descriptors.ServiceConfigurationDescriptor
+org.opennms.netmgt.config.service.Argument=org.opennms.netmgt.config.service.descriptors.ArgumentDescriptor
+org.opennms.netmgt.config.service.Invoke=org.opennms.netmgt.config.service.descriptors.InvokeDescriptor
+org.opennms.netmgt.config.service.Value=org.opennms.netmgt.config.service.descriptors.ValueDescriptor
+org.opennms.netmgt.config.service.Attribute=org.opennms.netmgt.config.service.descriptors.AttributeDescriptor

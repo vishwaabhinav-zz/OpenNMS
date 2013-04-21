@@ -1,0 +1,6 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.notifications.Varbind=org.opennms.netmgt.config.notifications.descriptors.VarbindDescriptor
+org.opennms.netmgt.config.notifications.Parameter=org.opennms.netmgt.config.notifications.descriptors.ParameterDescriptor
+org.opennms.netmgt.config.notifications.Notification=org.opennms.netmgt.config.notifications.descriptors.NotificationDescriptor
+org.opennms.netmgt.config.notifications.Header=org.opennms.netmgt.config.notifications.descriptors.HeaderDescriptor
+org.opennms.netmgt.config.notifications.Notifications=org.opennms.netmgt.config.notifications.descriptors.NotificationsDescriptor

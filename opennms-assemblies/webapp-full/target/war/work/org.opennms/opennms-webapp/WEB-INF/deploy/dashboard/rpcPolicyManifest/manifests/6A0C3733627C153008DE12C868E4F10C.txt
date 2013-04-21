@@ -1,0 +1,2 @@
+serviceClass: org.opennms.dashboard.client.SurveillanceService
+path: 923817AFE1B364A0C7C44D9EB8FDDE25.gwt.rpc

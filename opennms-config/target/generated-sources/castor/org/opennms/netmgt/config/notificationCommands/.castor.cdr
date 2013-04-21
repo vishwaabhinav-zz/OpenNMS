@@ -1,0 +1,5 @@
+#Sun Apr 21 17:01:55 IST 2013
+org.opennms.netmgt.config.notificationCommands.Argument=org.opennms.netmgt.config.notificationCommands.descriptors.ArgumentDescriptor
+org.opennms.netmgt.config.notificationCommands.Header=org.opennms.netmgt.config.notificationCommands.descriptors.HeaderDescriptor
+org.opennms.netmgt.config.notificationCommands.Command=org.opennms.netmgt.config.notificationCommands.descriptors.CommandDescriptor
+org.opennms.netmgt.config.notificationCommands.NotificationCommands=org.opennms.netmgt.config.notificationCommands.descriptors.NotificationCommandsDescriptor

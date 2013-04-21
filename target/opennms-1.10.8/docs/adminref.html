@@ -1,0 +1,436 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>OpenNMS Administrator Reference Guide</title><link rel="stylesheet" href="common/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="opennms-adminref"></a>OpenNMS Administrator Reference Guide</h1></div><div><h2 class="subtitle">Configuration and Administration</h2></div><div><div class="authorgroup">
+			<h3 class="corpauthor">OpenNMS Development Team</h3>
+
+			<div class="author"><h3 class="author"><span class="firstname">Benjamin</span> <span class="surname">Reed</span></h3><code class="email">&lt;<a class="email" href="mailto:ranger@opennms.org">ranger@opennms.org</a>&gt;</code></div>
+			
+			<div class="author"><h3 class="author"><span class="firstname">Marshall</span> <span class="surname">Christy</span></h3></div>
+
+		</div></div><div><p class="copyright">Copyright &copy; 2004-2013 The OpenNMS Group, Inc.</p></div><div><div class="legalnotice"><a name="d131e17"></a><p>
+    Permission is granted to copy, distribute and/or modify this
+    document under the terms of the GNU Free Documentation License, Version
+    1.1 or any later version published by the Free Software Foundation; with
+    no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+    Texts. A copy of the license is available at 
+    <a class="ulink" href="http://www.gnu.org/copyleft/fdl.html" target="_top">http://www.gnu.org/copyleft/fdl.html</a>
+  </p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#overview">1. Overview</a></span></dt><dd><dl><dt><span class="section"><a href="#about">About This Document</a></span></dt></dl></dd><dt><span class="chapter"><a href="#configuration-files">2. Configuration Files</a></span></dt><dd><dl><dt><span class="section"><a href="#actiond-configuration.xml">actiond-configuration.xml</a></span></dt><dt><span class="section"><a href="#c3p0.properties">c3p0.properties</a></span></dt><dt><span class="section"><a href="#capsd-configuration.xml">capsd-configuration.xml</a></span></dt><dd><dl><dt><span class="section"><a href="#capsd-configuration.xml-header">the <code class="code">capsd-configuration</code> tag</a></span></dt><dt><span class="section"><a href="#capsd-configuration.xml-protocol-plugins">Protocol Plugins</a></span></dt></dl></dd><dt><span class="section"><a href="#categories.xml">categories.xml</a></span></dt><dd><dl><dt><span class="section"><a href="#categories.xml-categorygroup">Category Groups</a></span></dt><dt><span class="section"><a href="#categories.xml-global">Global Options</a></span></dt><dt><span class="section"><a href="#categories.xml-categories">Categories</a></span></dt></dl></dd><dt><span class="section"><a href="#chart-configuration.xml">chart-configuration.xml</a></span></dt><dt><span class="section"><a href="#collectd-configuration.xml">collectd-configuration.xml</a></span></dt><dt><span class="section"><a href="#create.sql">create.sql, get*.sql, set*.sql</a></span></dt><dt><span class="section"><a href="#database-schema.xml">database-schema.xml</a></span></dt><dt><span class="section"><a href="#datacollection-config.xml">datacollection-config.xml</a></span></dt><dt><span class="section"><a href="#destinationPaths.xml">destinationPaths.xml</a></span></dt><dt><span class="section"><a href="#dhcpd-configuration.xml">dhcpd-configuration.xml</a></span></dt><dt><span class="section"><a href="#discovery-configuration.xml">discovery-configuration.xml</a></span></dt><dt><span class="section"><a href="#eventconf.xml">eventconf.xml</a></span></dt><dt><span class="section"><a href="#eventd-configuration.xml">eventd-configuration.xml</a></span></dt><dt><span class="section"><a href="#events-archiver-configuration.xml">events-archiver-configuration.xml</a></span></dt><dt><span class="section"><a href="#events.archiver.properties">events.archiver.properties</a></span></dt><dt><span class="section"><a href="#groups.xml">groups.xml</a></span></dt><dt><span class="section"><a href="#http-datacollection-config.xml">http-datacollection-config.xml</a></span></dt><dt><span class="section"><a href="#javamail-configuration.properties">javamail-configuration.properties</a></span></dt><dt><span class="section"><a href="#jcifs.properties">jcifs.properties</a></span></dt><dt><span class="section"><a href="#jmx-datacollection-config.xml">jmx-datacollection-config.xml</a></span></dt><dt><span class="section"><a href="#ksc-performance-reports.xml">ksc-performance-reports.xml</a></span></dt><dt><span class="section"><a href="#linkd-configuration.xml">linkd-configuration.xml</a></span></dt><dt><span class="section"><a href="#log4j.properties">log4j.properties</a></span></dt><dt><span class="section"><a href="#log4j-controller.properties">log4j-controller.properties</a></span></dt><dt><span class="section"><a href="#magic-users.properties">magic-users.properties</a></span></dt><dt><span class="section"><a href="#map.disable">map.disable</a></span></dt><dt><span class="section"><a href="#map.properties">map.properties</a></span></dt><dt><span class="section"><a href="#model-importer.properties">model-importer.properties</a></span></dt><dt><span class="section"><a href="#monitoring-locations.xml">monitoring-locations.xml</a></span></dt><dt><span class="section"><a href="#notifd-configuration.xml">notifd-configuration.xml</a></span></dt><dt><span class="section"><a href="#notificationCommands.xml">notificationCommands.xml</a></span></dt><dt><span class="section"><a href="#notifications.xml">notifications.xml</a></span></dt><dt><span class="section"><a href="#nsclient-config.xml">nsclient-config.xml</a></span></dt><dt><span class="section"><a href="#nsclient-datacollection-config.xml">nsclient-datacollection-config.xml</a></span></dt><dt><span class="section"><a href="#opennms-datasources.xml">opennms-datasources.xml</a></span></dt><dt><span class="section"><a href="#opennms-server.xml">opennms-server.xml</a></span></dt><dt><span class="section"><a href="#opennms.properties">opennms.properties</a></span></dt><dt><span class="section"><a href="#otrs.properties">otrs.properties</a></span></dt><dt><span class="section"><a href="#poll-outages.xml">poll-outages.xml</a></span></dt><dt><span class="section"><a href="#poller-config.properties">poller-config.properties</a></span></dt><dt><span class="section"><a href="#poller-configuration.xml">poller-configuration.xml</a></span></dt><dt><span class="section"><a href="#response-adhoc-graph.properties">response-adhoc-graph.properties</a></span></dt><dt><span class="section"><a href="#response-graph.properties">response-graph.properties</a></span></dt><dt><span class="section"><a href="#rrd-configuration.properties">rrd-configuration.properties</a></span></dt><dt><span class="section"><a href="#rtc-configuration.xml">rtc-configuration.xml</a></span></dt><dt><span class="section"><a href="#scriptd-configuration.xml">scriptd-configuration.xml</a></span></dt><dt><span class="section"><a href="#service-configuration.xml">service-configuration.xml</a></span></dt><dt><span class="section"><a href="#site-status-views.xml">site-status-views.xml</a></span></dt><dt><span class="section"><a href="#snmp-adhoc-graph.properties">snmp-adhoc-graph.properties</a></span></dt><dt><span class="section"><a href="#snmp-config.xml">snmp-config.xml</a></span></dt><dt><span class="section"><a href="#snmp-graph.properties">snmp-graph.properties</a></span></dt><dt><span class="section"><a href="#statsd-configuration.xml">statsd-configuration.xml</a></span></dt><dt><span class="section"><a href="#surveillance-views.xml">surveillance-views.xml</a></span></dt><dt><span class="section"><a href="#syslogd-configuration.xml">syslogd-configuration.xml</a></span></dt><dt><span class="section"><a href="#threshd-configuration.xml">threshd-configuration.xml</a></span></dt><dt><span class="section"><a href="#thresholds.xml">thresholds.xml</a></span></dt><dt><span class="section"><a href="#tl1d-configuration.xml">tl1d-configuration.xml</a></span></dt><dt><span class="section"><a href="#translator-configuration.xml">translator-configuration.xml</a></span></dt><dt><span class="section"><a href="#trapd-configuration.xml">trapd-configuration.xml</a></span></dt><dt><span class="section"><a href="#users.xml">users.xml</a></span></dt><dt><span class="section"><a href="#vacuumd-configuration.xml">vacuumd-configuration.xml</a></span></dt><dt><span class="section"><a href="#viewsdisplay.xml">viewsdisplay.xml</a></span></dt><dt><span class="section"><a href="#vulnscand-configuration.xml">vulnscand-configuration.xml</a></span></dt><dt><span class="section"><a href="#xmlrpcd-configuration.xml">xmlrpcd-configuration.xml</a></span></dt><dt><span class="section"><a href="#xmpp-configuration.properties">xmpp-configuration.properties</a></span></dt></dl></dd></dl></div><div class="list-of-examples"><p><b>List of Examples</b></p><dl><dt>2.1. <a href="#d131e40">Example <code class="code">actiond-configuration.xml</code></a></dt><dt>2.2. <a href="#d131e152">Example <code class="code">capsd-configuration.xml</code></a></dt><dt>2.3. <a href="#d131e214">Example <code class="filename">categories.xml</code></a></dt></dl></div>
+
+	
+
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="overview"></a>Chapter&nbsp;1.&nbsp;Overview</h2></div><div><h3 class="subtitle"><i>Admin Reference Overview</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#about">About This Document</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="about"></a>About This Document</h2></div></div></div><p>
+			This document covers the configuration of OpenNMS.  In the following 
+			chapter we will cover each file and what it affects.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="configuration-files"></a>Chapter&nbsp;2.&nbsp;Configuration Files</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#actiond-configuration.xml">actiond-configuration.xml</a></span></dt><dt><span class="section"><a href="#c3p0.properties">c3p0.properties</a></span></dt><dt><span class="section"><a href="#capsd-configuration.xml">capsd-configuration.xml</a></span></dt><dd><dl><dt><span class="section"><a href="#capsd-configuration.xml-header">the <code class="code">capsd-configuration</code> tag</a></span></dt><dt><span class="section"><a href="#capsd-configuration.xml-protocol-plugins">Protocol Plugins</a></span></dt></dl></dd><dt><span class="section"><a href="#categories.xml">categories.xml</a></span></dt><dd><dl><dt><span class="section"><a href="#categories.xml-categorygroup">Category Groups</a></span></dt><dt><span class="section"><a href="#categories.xml-global">Global Options</a></span></dt><dt><span class="section"><a href="#categories.xml-categories">Categories</a></span></dt></dl></dd><dt><span class="section"><a href="#chart-configuration.xml">chart-configuration.xml</a></span></dt><dt><span class="section"><a href="#collectd-configuration.xml">collectd-configuration.xml</a></span></dt><dt><span class="section"><a href="#create.sql">create.sql, get*.sql, set*.sql</a></span></dt><dt><span class="section"><a href="#database-schema.xml">database-schema.xml</a></span></dt><dt><span class="section"><a href="#datacollection-config.xml">datacollection-config.xml</a></span></dt><dt><span class="section"><a href="#destinationPaths.xml">destinationPaths.xml</a></span></dt><dt><span class="section"><a href="#dhcpd-configuration.xml">dhcpd-configuration.xml</a></span></dt><dt><span class="section"><a href="#discovery-configuration.xml">discovery-configuration.xml</a></span></dt><dt><span class="section"><a href="#eventconf.xml">eventconf.xml</a></span></dt><dt><span class="section"><a href="#eventd-configuration.xml">eventd-configuration.xml</a></span></dt><dt><span class="section"><a href="#events-archiver-configuration.xml">events-archiver-configuration.xml</a></span></dt><dt><span class="section"><a href="#events.archiver.properties">events.archiver.properties</a></span></dt><dt><span class="section"><a href="#groups.xml">groups.xml</a></span></dt><dt><span class="section"><a href="#http-datacollection-config.xml">http-datacollection-config.xml</a></span></dt><dt><span class="section"><a href="#javamail-configuration.properties">javamail-configuration.properties</a></span></dt><dt><span class="section"><a href="#jcifs.properties">jcifs.properties</a></span></dt><dt><span class="section"><a href="#jmx-datacollection-config.xml">jmx-datacollection-config.xml</a></span></dt><dt><span class="section"><a href="#ksc-performance-reports.xml">ksc-performance-reports.xml</a></span></dt><dt><span class="section"><a href="#linkd-configuration.xml">linkd-configuration.xml</a></span></dt><dt><span class="section"><a href="#log4j.properties">log4j.properties</a></span></dt><dt><span class="section"><a href="#log4j-controller.properties">log4j-controller.properties</a></span></dt><dt><span class="section"><a href="#magic-users.properties">magic-users.properties</a></span></dt><dt><span class="section"><a href="#map.disable">map.disable</a></span></dt><dt><span class="section"><a href="#map.properties">map.properties</a></span></dt><dt><span class="section"><a href="#model-importer.properties">model-importer.properties</a></span></dt><dt><span class="section"><a href="#monitoring-locations.xml">monitoring-locations.xml</a></span></dt><dt><span class="section"><a href="#notifd-configuration.xml">notifd-configuration.xml</a></span></dt><dt><span class="section"><a href="#notificationCommands.xml">notificationCommands.xml</a></span></dt><dt><span class="section"><a href="#notifications.xml">notifications.xml</a></span></dt><dt><span class="section"><a href="#nsclient-config.xml">nsclient-config.xml</a></span></dt><dt><span class="section"><a href="#nsclient-datacollection-config.xml">nsclient-datacollection-config.xml</a></span></dt><dt><span class="section"><a href="#opennms-datasources.xml">opennms-datasources.xml</a></span></dt><dt><span class="section"><a href="#opennms-server.xml">opennms-server.xml</a></span></dt><dt><span class="section"><a href="#opennms.properties">opennms.properties</a></span></dt><dt><span class="section"><a href="#otrs.properties">otrs.properties</a></span></dt><dt><span class="section"><a href="#poll-outages.xml">poll-outages.xml</a></span></dt><dt><span class="section"><a href="#poller-config.properties">poller-config.properties</a></span></dt><dt><span class="section"><a href="#poller-configuration.xml">poller-configuration.xml</a></span></dt><dt><span class="section"><a href="#response-adhoc-graph.properties">response-adhoc-graph.properties</a></span></dt><dt><span class="section"><a href="#response-graph.properties">response-graph.properties</a></span></dt><dt><span class="section"><a href="#rrd-configuration.properties">rrd-configuration.properties</a></span></dt><dt><span class="section"><a href="#rtc-configuration.xml">rtc-configuration.xml</a></span></dt><dt><span class="section"><a href="#scriptd-configuration.xml">scriptd-configuration.xml</a></span></dt><dt><span class="section"><a href="#service-configuration.xml">service-configuration.xml</a></span></dt><dt><span class="section"><a href="#site-status-views.xml">site-status-views.xml</a></span></dt><dt><span class="section"><a href="#snmp-adhoc-graph.properties">snmp-adhoc-graph.properties</a></span></dt><dt><span class="section"><a href="#snmp-config.xml">snmp-config.xml</a></span></dt><dt><span class="section"><a href="#snmp-graph.properties">snmp-graph.properties</a></span></dt><dt><span class="section"><a href="#statsd-configuration.xml">statsd-configuration.xml</a></span></dt><dt><span class="section"><a href="#surveillance-views.xml">surveillance-views.xml</a></span></dt><dt><span class="section"><a href="#syslogd-configuration.xml">syslogd-configuration.xml</a></span></dt><dt><span class="section"><a href="#threshd-configuration.xml">threshd-configuration.xml</a></span></dt><dt><span class="section"><a href="#thresholds.xml">thresholds.xml</a></span></dt><dt><span class="section"><a href="#tl1d-configuration.xml">tl1d-configuration.xml</a></span></dt><dt><span class="section"><a href="#translator-configuration.xml">translator-configuration.xml</a></span></dt><dt><span class="section"><a href="#trapd-configuration.xml">trapd-configuration.xml</a></span></dt><dt><span class="section"><a href="#users.xml">users.xml</a></span></dt><dt><span class="section"><a href="#vacuumd-configuration.xml">vacuumd-configuration.xml</a></span></dt><dt><span class="section"><a href="#viewsdisplay.xml">viewsdisplay.xml</a></span></dt><dt><span class="section"><a href="#vulnscand-configuration.xml">vulnscand-configuration.xml</a></span></dt><dt><span class="section"><a href="#xmlrpcd-configuration.xml">xmlrpcd-configuration.xml</a></span></dt><dt><span class="section"><a href="#xmpp-configuration.properties">xmpp-configuration.properties</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="actiond-configuration.xml"></a>actiond-configuration.xml</h2></div></div></div><p>
+			Actions are external programs called based on events.  This file controls 
+			the number of concurrent actions allowed as well as a time out for waiting 
+			on a return.
+		</p><div class="glosslist"><dl><dt>outstanding-actions</dt><dd><p>
+						The maximum number of simultaneous processes launched by Actiond.
+						If the number of launched processes currently running reaches this
+						number, Actiond waits for a process to complete or get terminated
+						before it launches the next process.
+					</p></dd><dt>max-process-time</dt><dd><p>
+						The maximum time that a launched process can take to complete.
+						If execution time exceeds this time, the launched process is
+						terminated.
+					</p></dd></dl></div><div class="example"><a name="d131e40"></a><p class="title"><b>Example&nbsp;2.1.&nbsp;Example <code class="code">actiond-configuration.xml</code></b></p><div class="example-contents"><p>
+				Here is an example <code class="filename">actiond-configuration.xml</code>.
+
+				</p><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;actiond-configuration
+        max-outstanding-actions="10"
+        max-process-time="120000"&gt;
+&lt;/actiond-configuration&gt;</pre><p>
+			</p></div></div><br class="example-break"></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="c3p0.properties"></a>c3p0.properties</h2></div></div></div><p>
+			<a class="ulink" href="http://c3p0.sourceforge.net/" target="_top">C3P0</a> is the database connection
+			pooling technology used by OpenNMS.  In most cases you should never have to change
+			this file.  For details on configuration options, see <a class="ulink" href="http://www.mchange.com/projects/c3p0/index.html#configuration_properties" target="_top">the
+			c3p0 configuration properties appendix</a> in their documentation.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="capsd-configuration.xml"></a>capsd-configuration.xml</h2></div></div></div><p>
+			This file defines capabilities (services) to be checked for discovered nodes.
+		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="capsd-configuration.xml-header"></a>the <code class="code">capsd-configuration</code> tag</h3></div></div></div><p>
+				The &lt;capsd-configuration&gt; tag at the top of
+				<code class="filename">capsd-configuration.xml</code> controls some basic behaviors
+				of Capsd.  The following attributes are accepted:
+			</p><div class="glosslist"><dl><dt>rescan-frequency</dt><dd><p>
+							How long Capsd should wait before scanning existing nodes for
+							changes in available services, in milliseconds.  A value of
+							<code class="code">86400000</code> will cause Capsd to rescan nodes every
+							24 hours.
+						</p></dd><dt>initial-sleep-time</dt><dd><p>
+							How long Capsd should wait after OpenNMS starts before doing an
+							initial scan of known nodes.  A value of <code class="code">30000</code>
+							will cause Capsd to wait 30 seconds after startup before
+							attempting to check known nodes for available services.
+						</p></dd><dt>max-suspect-thread-pool-size</dt><dd><p>
+							The maximum number of Java threads to use for scanning hosts
+							upon receiving a <code class="code">discovery/newSuspect</code> event.
+						</p></dd><dt>max-rescan-thread-pool-size</dt><dd><p>
+							The maximum number of Java threads to use for the regular rescan
+							that occurs every <code class="code">rescan-frequency</code> milliseconds.
+						</p></dd><dt>abort-protocol-scans-if-no-route</dt><dd><p>
+							Flag which determines Capsd's behavior in the event
+							that a NoRouteToHost exception is generated during a protocol plugin
+							scan of an interface.  If true, Capsd will abort the protocol
+							scanning process for the interface.  Defaults to <code class="code">false</code>.
+						</p></dd><dt>delete-propagation-enabled</dt><dd><p>
+							Determine if deleting an service propagates to deleting the interface
+							if the service is the only one remaining on the interface.  Likewise
+							for the only interface on a node.  Defaults to <code class="code">true</code>.
+						</p></dd><dt>xmlrpc</dt><dd><p>
+							Flag which indicates if an external XMLRPC server has to be notified
+							with any event process errors.  Defaults to <code class="code">false</code>.
+						</p></dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="capsd-configuration.xml-protocol-plugins"></a>Protocol Plugins</h3></div></div></div><p>
+				Protocol plugin entries define the services that are available for
+				Capsd to detect.  They can refer to any Java class that implements the
+				OpenNMS <code class="code">org.opennms.netmgt.capsd.Plugin</code> interface.  A
+				large number of default plugins are provided as a part of OpenNMS.
+			</p><div class="section" lang="en"><div class="titlepage"></div><p>
+					The following attributes are a part of the &lt;protocol-plugin&gt; tag:
+				</p><div class="glosslist"><dl><dt>protocol</dt><dd><p>
+								The name of the protocol.  This is a user-configurable value that should match
+								similar service configuration entries in the <code class="filename">poller-configuration.xml</code>
+								file.  It is recommended that it only contain alphanumeric values.  By
+								convention, you can also append a dash and numbers, like so:
+								"<code class="code">HTTP-8080</code>" for common protocols listening on an alternate
+								port.
+							</p></dd><dt>class-name</dt><dd><p>The name of the Java class that implements the particular protocol.</p></dd><dt>scan</dt><dd><p>
+								Whether or not to scan this particular protocol.  If set to "off" Capsd will
+								ignore the protocol plugin.  Defaults to <code class="code">on</code>.
+							</p></dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="capsd-configuration.xml-protocol-plugins-properties"></a>Properties</h4></div></div></div><p>
+					A <code class="code">protocol-plugin</code> entry can optionally contain zero or more
+					<code class="code">property</code> entries which allow specifying configuration to be
+					passed as arguments to the plugin code.
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="capsd-configuration.xml-protocol-plugins-configuration"></a>Protocol Configuration</h4></div></div></div><p>
+					A <code class="code">protocol-plugin</code> entry can optionally contain zero or more
+					<code class="code">protocol-configuration</code> tags which specify a subset of addresses
+					for which the protocol should apply.
+				</p><p>
+					Each <code class="code">protocol-configuration</code> entry can contain zero or more of
+					the following ways of specifying addresses and ranges and of overriding
+					other general <code class="code">protocol-plugin</code> defaults:
+				</p><div class="glosslist"><dl><dt>specific</dt><dd><p>A single IP address.</p></dd><dt>range</dt><dd><p>A range of IP addresses.</p></dd><dt>property</dt><dd><p>
+								A <code class="code">protocol-plugin</code> key/value property which overrides
+								the defaults that are part of the container <code class="code">protocol-plugin</code>
+								entry.
+							</p></dd><dt>scan</dt><dd><p>
+								Whether or not the addresses defined in the <code class="code">specific</code>
+								and <code class="code">range</code> entries should be scanned.  Defaults to
+								<code class="code">on</code>.
+							</p></dd></dl></div></div><div class="example"><a name="d131e152"></a><p class="title"><b>Example&nbsp;2.2.&nbsp;Example <code class="code">capsd-configuration.xml</code></b></p><div class="example-contents"><p>
+					Here is an example <code class="filename">capsd-configuration.xml</code> that defines
+					the <code class="code">ICMP</code> protocol plugin, with a default timeout of 2000 milliseconds,
+					and 1 retry.  For the IP addresses 192.168.1.1 and 192.168.2.1 through 192.168.2.254,
+					it will use a timeout of 1000 instead.  Scanning is disabled for 192.168.1.2.
+
+					</p><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+&lt;capsd-configuration 
+  rescan-frequency="86400000" 
+  initial-sleep-time="30000" 
+  max-suspect-thread-pool-size="6"
+  max-rescan-thread-pool-size="3"&gt;
+
+  &lt;protocol-plugin protocol="ICMP" class-name="org.opennms.netmgt.capsd.plugins.IcmpPlugin" scan="on"&gt;
+    &lt;protocol-configuration&gt;
+      &lt;specific&gt;192.168.1.1&lt;/specific&gt;
+      &lt;range&gt;
+        &lt;begin&gt;192.168.2.1&lt;/begin&gt;
+        &lt;end&gt;192.168.2.254&lt;/end&gt;
+      &lt;/range&gt;
+      &lt;property key="timeout" value="1000" /&gt;
+    &lt;/protocol-configuration&gt;
+    &lt;protocol-configuration&gt;
+      &lt;specific&gt;192.168.1.2&lt;/specific&gt;
+      &lt;scan&gt;off&lt;/scan&gt;
+    &lt;/protocol-configuration&gt;
+    &lt;property key="timeout" value="2000" /&gt;
+    &lt;property key="retry" value="1" /&gt;
+  &lt;/protocol-plugin&gt;
+&lt;/capsd-configuration&gt;</pre><p>
+				</p></div></div><br class="example-break"></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="categories.xml"></a>categories.xml</h2></div></div></div><p>
+			This file allows you to configure the categories of a device based on the
+			mixture of services they run.  You can also set expected error and warning
+			levels for when availability drops below a certain percentage.  These
+			affect availability reports, as well as how the categories are displayed,
+			if they are defined in <code class="filename">viewsdisplay.xml</code> as well.
+		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="categories.xml-categorygroup"></a>Category Groups</h3></div></div></div><p>
+				Technically, the <code class="filename">categories.xml</code> file can have
+				more than one "group" of categories.  However, the &lt;categorygroup&gt;
+				tag never got fleshed out in the code and it is recommended you do not
+				use more than one &lt;categorygroup&gt; tag.
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="categories.xml-global"></a>Global Options</h3></div></div></div><p>
+				Inside the category group, there are a number of options that can
+				apply to all categories in the group.
+			</p><div class="glosslist"><dl><dt>name</dt><dd><p>
+							One (and only one) &lt;name&gt; tag should be in each
+							category group.  This is the short name of the
+							category group.
+						</p></dd><dt>comment</dt><dd><p>
+							One (and only one) &lt;comment&gt; tag should be in each
+							category group.  This is a longer description of the
+							category group.
+						</p></dd><dt>common</dt><dd><p>
+							A common rule that will be applied to every category in
+							the category group, in addition to that category's specific
+							rule.  The &lt;common&gt; tag should contain a single set of
+							&lt;rule&gt; tags.  For example:
+							</p><pre class="programlisting">&lt;common&gt;
+	&lt;rule&gt;&lt;![CDATA[IPADDR != '0.0.0.0']]&gt;&lt;/rule&gt;
+&lt;/common&gt;</pre><p>
+						</p></dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="categories.xml-categories"></a>Categories</h3></div></div></div><p>
+				Inside the category group, there can be a &lt;categories&gt; tag which
+				can contain one or more &lt;category&gt; tags.  The following tags are
+				allowed in a category.
+			</p><div class="glosslist"><dl><dt>label</dt><dd><p>
+							A descriptive label for the category.  This needs to be unique
+							across all categories, and will be displayed in the UI if the
+							category is referenced in <code class="filename">viewsdisplay.xml</code>.
+						</p></dd><dt>comment</dt><dd><p>
+							An optional tag with a detailed comment describing the category.
+						</p></dd><dt>normal</dt><dd><p>
+							The normal threshold value for the category in percent.  The
+							UI displays the category in green if the overall availability
+							for the category is equal to or greater than this value.
+						</p></dd><dt>warning</dt><dd><p>
+							The warning threshold value for the category in percent.  The
+							UI displays the category in yellow if the overall availability
+							for the category is equal to or greater than this value but
+							less than the normal threshold.  If availability is less than
+							this value, the category is displayed in red.
+						</p></dd><dt>service</dt><dd><p>
+							An optional tag specifying the service relevant to this category.
+							For a node ID/IP address/service tuple to be added to a category,
+							it will need to pass the category's rule and the service will need
+							to be in the category service list.  If there are no services
+							defined, all tuples that pass the rule are added to the category.
+						</p></dd><dt>rule</dt><dd><p>
+							The rule that defines what nodes/interfaces/services match the
+							category.  It can match on services (Is<span class="emphasis"><em>SERVICE</em></span>),
+							IP addresses, and a number of other criteria.
+						</p></dd></dl></div></div><div class="example"><a name="d131e214"></a><p class="title"><b>Example&nbsp;2.3.&nbsp;Example <code class="filename">categories.xml</code></b></p><div class="example-contents"><p>
+				Here is an example <code class="filename">categories.xml</code> that defines a series
+				of categories.  It defines a global &lt;rule&gt; that makes sure that we get
+				all IP devices in the 192.168 class B, and then individual categories which
+				have more specific rules.
+
+				</p><pre class="programlisting">&lt;catinfo&gt;
+	&lt;header&gt;
+	&lt;/header&gt;
+	&lt;categorygroup&gt;
+		&lt;name&gt;WebConsole&lt;/name&gt;
+		&lt;comment&gt;Service Level Availability by Functional Group&lt;/comment&gt;
+		&lt;common&gt;
+			&lt;rule&gt;&lt;![CDATA[IPADDR IPLIKE '192.168.*.*']]&gt;&lt;/rule&gt;
+		&lt;/common&gt;
+		&lt;categories&gt;
+			&lt;category&gt;
+				&lt;label&gt;&lt;![CDATA[Overall Service Availability]]&gt;&lt;/label&gt;
+				&lt;comment&gt;This category reflects overall availability of every device on the 192.168.*.* network.&lt;/comment&gt;
+				&lt;normal&gt;99.99&lt;/normal&gt;
+				&lt;warning&gt;97&lt;/warning&gt;
+				&lt;rule&gt;&lt;![CDATA[IPADDR != '0.0.0.0']]&gt;&lt;/rule&gt;
+			&lt;/category&gt;
+
+			&lt;category&gt;
+				&lt;label&gt;&lt;![CDATA[Pingable Routers]]&gt;&lt;/label&gt;
+				&lt;comment&gt;This category represents pingable routers with the "Router" service.&lt;/comment&gt;
+				&lt;normal&gt;99.99&lt;/normal&gt;
+				&lt;warning&gt;97&lt;/warning&gt;
+				&lt;service&gt;ICMP&lt;/service&gt;
+				&lt;service&gt;Router&lt;/service&gt;
+				&lt;rule&gt;&lt;![CDATA[(isICMP &amp; isRouter)]]&gt;&lt;/rule&gt;
+			&lt;/category&gt;
+			&lt;category&gt;
+				&lt;label&gt;&lt;![CDATA[VectaStar Elements]]&gt;&lt;/label&gt;
+				&lt;comment&gt;This category includes all managed interfaces which are related to the VectaStar system.&lt;/comment&gt;
+				&lt;normal&gt;99.99&lt;/normal&gt;
+				&lt;warning&gt;97&lt;/warning&gt;
+				&lt;rule&gt;&lt;![CDATA[(nodeSysOID like '.1.3.6.1.4.1.5419.1.3500.%')]]&gt;&lt;/rule&gt;
+			&lt;/category&gt;
+		&lt;/categories&gt;
+	&lt;/categorygroup&gt;
+&lt;/catinfo&gt;</pre><p>
+			</p></div></div><br class="example-break"></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chart-configuration.xml"></a>chart-configuration.xml</h2></div></div></div><p>
+			Used by some chart-generation code in the web UI.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collectd-configuration.xml"></a>collectd-configuration.xml</h2></div></div></div><p>
+			Configures various portions of data collection for RRD data.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="create.sql"></a>create.sql, get*.sql, set*.sql</h2></div></div></div><p>
+			The <code class="filename">create.sql</code> file is the template for creating the
+			OpenNMS database.  It is used by the installer, and generally should not
+			be modified.  The get*.sql and set*.sql files define a series of stored
+			procedures used in parts of the OpenNMS code.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="database-schema.xml"></a>database-schema.xml</h2></div></div></div><p>
+			This file is used internally by OpenNMS for the filtering system when
+			formatting database queries.  It is not meant to be modified by end-users.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="datacollection-config.xml"></a>datacollection-config.xml</h2></div></div></div><p>
+			This file is used for collecting data into round-robin databases for use in
+			thresholding and graphing.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="destinationPaths.xml"></a>destinationPaths.xml</h2></div></div></div><p>
+			This file contains definitions for notifiation destination paths.  It
+			specifies whom to notify and by what method they should be notified.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dhcpd-configuration.xml"></a>dhcpd-configuration.xml</h2></div></div></div><p>
+			Configures the built-in DHCP daemon in OpenNMS (used for DHCP capability
+			scanning and polling).
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="discovery-configuration.xml"></a>discovery-configuration.xml</h2></div></div></div><p>
+		This file defines the ranges of addresses to discover, (ping sweep) as well as time-outs, 
+		number of retries, and number of threads to dedicate to discovery.  This file also provides 
+		initial-sleep-time and restart-sleep-time.  These values are in milliseconds and control 
+		how long after OpenNMS is started, that discovery should begin it's initial pass through 
+		the addresses, and how long to wait between each additional pass.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="eventconf.xml"></a>eventconf.xml</h2></div></div></div><p>
+		This file defines the Universal Event Identifiers or UEIs as well as their event masks, 
+		descriptions, log messages, and severity levels.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="eventd-configuration.xml"></a>eventd-configuration.xml</h2></div></div></div><p>
+		This file defines operating parameters for Eventd such as time outs and number of 
+		listener threads.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="events-archiver-configuration.xml"></a>events-archiver-configuration.xml</h2></div></div></div><p>
+			Configuration for the event archiver daemon.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="events.archiver.properties"></a>events.archiver.properties</h2></div></div></div><p>
+			Logging configuration for the event archiver daemon.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="groups.xml"></a>groups.xml</h2></div></div></div><p>
+			This file holds information about user groups, used for determining group
+			membership for notifications.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="http-datacollection-config.xml"></a>http-datacollection-config.xml</h2></div></div></div><p>
+			This file defines configuration for collecting RRD data from HTTP and HTTPS.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="javamail-configuration.properties"></a>javamail-configuration.properties</h2></div></div></div><p>
+			This file contains configuration for sending e-mail from OpenNMS for
+			notifications, as well as the mail transport monitor.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="jcifs.properties"></a>jcifs.properties</h2></div></div></div><p>
+			This file defines configuration for accessing Windows SMB (CIFS) shares
+			from OpenNMS.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="jmx-datacollection-config.xml"></a>jmx-datacollection-config.xml</h2></div></div></div><p>
+			This file contains configuration for datacollection using the Java Management
+			eXtensions.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ksc-performance-reports.xml"></a>ksc-performance-reports.xml</h2></div></div></div><p>
+			This file contains configuration for KSC reports.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="linkd-configuration.xml"></a>linkd-configuration.xml</h2></div></div></div><p>
+			Configuration for the link daemon, used to collect path/link information
+			from routers for use in maps.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="log4j.properties"></a>log4j.properties</h2></div></div></div><p>
+			This file defines logging information, including log size and rotation, as well
+			as what level of logging should happen for different parts of the OpenNMS code.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="log4j-controller.properties"></a>log4j-controller.properties</h2></div></div></div><p>???</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="magic-users.properties"></a>magic-users.properties</h2></div></div></div><p>
+		This file includes special users, and takes precedence over users.xml for the users 
+		that it has information about.  This is used internally to control permissions for 
+		certain functions that interact with the web UI.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="map.disable"></a>map.disable</h2></div></div></div><p>
+			If this file exists, maps will not be enabled in the web UI.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="map.properties"></a>map.properties</h2></div></div></div><p>
+			This file configures the SVG map feature.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="model-importer.properties"></a>model-importer.properties</h2></div></div></div><p>
+			Information used by the model importer.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="monitoring-locations.xml"></a>monitoring-locations.xml</h2></div></div></div><p>
+			This file configures the monitoring locations used by the remote poller.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="notifd-configuration.xml"></a>notifd-configuration.xml</h2></div></div></div><p>
+			Configures the notification daemon including auto-acknowledgement
+			and notification queues.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="notificationCommands.xml"></a>notificationCommands.xml</h2></div></div></div><p>
+			This file defines how to accomplish various contact methods defined
+			in <code class="filename">destinationPaths.xml</code>.  This would include the location
+			of executable and aliases for each type of contact along with  any other
+			information needed to send information of the specific type.
+		</p><pre class="programlisting">&lt;command type="email"&gt;
+	&lt;name&gt;/bin/mail&lt;/name&gt;
+	&lt;lookup&gt;email&lt;/lookup&gt;
+	&lt;lookup&gt;mail&lt;/lookup&gt;
+	&lt;comment&gt;for sending email notifications&lt;/comment&gt;
+	&lt;argument streamed="false"&gt;
+		&lt;substitution&gt;-s&lt;/substitution&gt;
+		&lt;switch&gt;-subject&lt;/switch&gt;
+	&lt;/argument&gt;
+	&lt;argument streamed="false"&gt;
+		&lt;switch&gt;-email&lt;/switch&gt;
+	&lt;/argument&gt;
+	&lt;argument streamed="true"&gt;
+		&lt;switch&gt;-tm&lt;/switch&gt;
+	&lt;/argument&gt;
+&lt;/command&gt;</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="notifications.xml"></a>notifications.xml</h2></div></div></div><p>
+			This file defines which events or UEIs warrant notification and where the
+			notifications should be sent and escalated to.
+		</p><pre class="programlisting">&lt;notification name="nodeAdded"&gt;
+	&lt;uei&gt;&lt;![CDATA[http://uei.opennms.org/nodes/nodeAdded]]&gt;&lt;/uei&gt;
+	&lt;rule&gt;&lt;![CDATA[IPADDR IPLIKE *.*.*.*]]&gt;&lt;/rule&gt;
+	&lt;destinationPath&gt;Email-Network/Systems&lt;/destinationPath&gt;
+	&lt;text-message&gt;OpenNMS has discovered a new node named %parm[nodelabel]%.    Please be advised.&lt;/text-message&gt;
+	&lt;subject&gt;%parm[nodelabel]% discovered.&lt;/subject&gt;
+&lt;/notification&gt;</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="nsclient-config.xml"></a>nsclient-config.xml</h2></div></div></div><p>
+			Configure the NSClient poller.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="nsclient-datacollection-config.xml"></a>nsclient-datacollection-config.xml</h2></div></div></div><p>
+			Configure data collection through NSClient.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="opennms-datasources.xml"></a>opennms-datasources.xml</h2></div></div></div><p>
+			This file defines information for accessing the OpenNMS database.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="opennms-server.xml"></a>opennms-server.xml</h2></div></div></div><p>
+			Defines information about the management server.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="opennms.properties"></a>opennms.properties</h2></div></div></div><p>
+			Sets global properties for the OpenNMS JVM.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="otrs.properties"></a>otrs.properties</h2></div></div></div><p>
+			Configures properties for the OTRS ticketing plugin.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="poll-outages.xml"></a>poll-outages.xml</h2></div></div></div><p>
+			Configures scheduled outages.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="poller-config.properties"></a>poller-config.properties</h2></div></div></div><p>
+			Configures various classes and settings used by the web UI relating to pollers.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="poller-configuration.xml"></a>poller-configuration.xml</h2></div></div></div><p>
+		This file is used to define packages as well as set up the various pollers.  A 
+		package includes several items such as address ranges, services, outage calendars, 
+		and down time models.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="response-adhoc-graph.properties"></a>response-adhoc-graph.properties</h2></div></div></div><p>
+			Settings related to graphing adhoc reports.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="response-graph.properties"></a>response-graph.properties</h2></div></div></div><p>
+			Settings related to making response-time graphs.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="rrd-configuration.properties"></a>rrd-configuration.properties</h2></div></div></div><p>
+			Configuration for the RRD backend, including choosing RRDtool or JRobin
+			for making round-robin files and graphing.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="rtc-configuration.xml"></a>rtc-configuration.xml</h2></div></div></div><p>
+			This file defines properties for RTC (Real Time Console) such as the rolling window 
+			used to calculate percentages of down time, web UI refresh interval and how often 
+			RTC sends updates to the web interface.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="scriptd-configuration.xml"></a>scriptd-configuration.xml</h2></div></div></div><p>
+			Configure BSF languages used in Scriptd.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="service-configuration.xml"></a>service-configuration.xml</h2></div></div></div><p>
+		This file defines opennms services to start.  This is VM specific and controls which 
+		services are started in which VMs
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="site-status-views.xml"></a>site-status-views.xml</h2></div></div></div><p>???</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="snmp-adhoc-graph.properties"></a>snmp-adhoc-graph.properties</h2></div></div></div><p>
+			Settings related to graphing adhoc SNMP reports.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="snmp-config.xml"></a>snmp-config.xml</h2></div></div></div><p>
+		This file is used to define community strings for addresses or address ranges, one 
+		snmp-config entry per community.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="snmp-graph.properties"></a>snmp-graph.properties</h2></div></div></div><p>
+			This file is used to define RRD configurations for generating reports.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="statsd-configuration.xml"></a>statsd-configuration.xml</h2></div></div></div><p>
+			Configuration for Statsd (Top N reports).
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="surveillance-views.xml"></a>surveillance-views.xml</h2></div></div></div><p>How many freaking *-view things do we have?!?</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="syslogd-configuration.xml"></a>syslogd-configuration.xml</h2></div></div></div><p>
+			Configures the syslog daemon.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="threshd-configuration.xml"></a>threshd-configuration.xml</h2></div></div></div><p>
+			Configure which thresholding packages used to trigger alerts when various
+			thresholds are reached.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="thresholds.xml"></a>thresholds.xml</h2></div></div></div><p>
+			Configure thresholding groups based on RRD data.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tl1d-configuration.xml"></a>tl1d-configuration.xml</h2></div></div></div><p>
+			Configure the TL1 daemon for interacting with telecom devices.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="translator-configuration.xml"></a>translator-configuration.xml</h2></div></div></div><p>
+			Translate incoming events based on a set of criteria.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="trapd-configuration.xml"></a>trapd-configuration.xml</h2></div></div></div><p>
+			This file defines information for the OpenNMS SNMP trap daemon.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="users.xml"></a>users.xml</h2></div></div></div><p>
+			This file holds information about users and their contact information.
+			This information is used for authentication in the web UI, as well as
+			notifications.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vacuumd-configuration.xml"></a>vacuumd-configuration.xml</h2></div></div></div><p>
+			Configure Vacuumd, a daemon which periodically runs a series of commands
+			to keep OpenNMS running well (delete old events, clean up the database,
+			etc.)
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="viewsdisplay.xml"></a>viewsdisplay.xml</h2></div></div></div><p>
+		This file defines layout of categories for display in the web UI.  The actual
+		categories are defined in the categories.xml file.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vulnscand-configuration.xml"></a>vulnscand-configuration.xml</h2></div></div></div><p>
+			Configure Vulnscand, the Nessus vulnerability scanning integration.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="xmlrpcd-configuration.xml"></a>xmlrpcd-configuration.xml</h2></div></div></div><p>
+			Configure Xmlrpcd, used to be able to pass XML events back and forth
+			between OpenNMS and external tools.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="xmpp-configuration.properties"></a>xmpp-configuration.properties</h2></div></div></div><p>
+			Configure the XMPP (Jabber) notification strategy.
+		</p></div></div>
+
+</div></body></html>

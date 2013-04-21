@@ -1,0 +1,9 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.capsd.SmbAuth=org.opennms.netmgt.config.capsd.descriptors.SmbAuthDescriptor
+org.opennms.netmgt.config.capsd.Property=org.opennms.netmgt.config.capsd.descriptors.PropertyDescriptor
+org.opennms.netmgt.config.capsd.ProtocolConfiguration=org.opennms.netmgt.config.capsd.descriptors.ProtocolConfigurationDescriptor
+org.opennms.netmgt.config.capsd.ProtocolPlugin=org.opennms.netmgt.config.capsd.descriptors.ProtocolPluginDescriptor
+org.opennms.netmgt.config.capsd.Range=org.opennms.netmgt.config.capsd.descriptors.RangeDescriptor
+org.opennms.netmgt.config.capsd.IpManagement=org.opennms.netmgt.config.capsd.descriptors.IpManagementDescriptor
+org.opennms.netmgt.config.capsd.SmbConfig=org.opennms.netmgt.config.capsd.descriptors.SmbConfigDescriptor
+org.opennms.netmgt.config.capsd.CapsdConfiguration=org.opennms.netmgt.config.capsd.descriptors.CapsdConfigurationDescriptor

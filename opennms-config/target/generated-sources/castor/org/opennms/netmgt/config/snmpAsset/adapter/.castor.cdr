@@ -1,0 +1,7 @@
+#Sun Apr 21 17:01:55 IST 2013
+org.opennms.netmgt.config.snmpAsset.adapter.PackageChoice=org.opennms.netmgt.config.snmpAsset.adapter.descriptors.PackageChoiceDescriptor
+org.opennms.netmgt.config.snmpAsset.adapter.Package=org.opennms.netmgt.config.snmpAsset.adapter.descriptors.PackageDescriptor
+org.opennms.netmgt.config.snmpAsset.adapter.MibObj=org.opennms.netmgt.config.snmpAsset.adapter.descriptors.MibObjDescriptor
+org.opennms.netmgt.config.snmpAsset.adapter.SnmpAssetAdapterConfiguration=org.opennms.netmgt.config.snmpAsset.adapter.descriptors.SnmpAssetAdapterConfigurationDescriptor
+org.opennms.netmgt.config.snmpAsset.adapter.AssetField=org.opennms.netmgt.config.snmpAsset.adapter.descriptors.AssetFieldDescriptor
+org.opennms.netmgt.config.snmpAsset.adapter.MibObjs=org.opennms.netmgt.config.snmpAsset.adapter.descriptors.MibObjsDescriptor

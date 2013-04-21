@@ -1,0 +1,6 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.xmlrpcd.SubscribedEvent=org.opennms.netmgt.config.xmlrpcd.descriptors.SubscribedEventDescriptor
+org.opennms.netmgt.config.xmlrpcd.Subscription=org.opennms.netmgt.config.xmlrpcd.descriptors.SubscriptionDescriptor
+org.opennms.netmgt.config.xmlrpcd.ExternalServers=org.opennms.netmgt.config.xmlrpcd.descriptors.ExternalServersDescriptor
+org.opennms.netmgt.config.xmlrpcd.XmlrpcdConfiguration=org.opennms.netmgt.config.xmlrpcd.descriptors.XmlrpcdConfigurationDescriptor
+org.opennms.netmgt.config.xmlrpcd.XmlrpcServer=org.opennms.netmgt.config.xmlrpcd.descriptors.XmlrpcServerDescriptor

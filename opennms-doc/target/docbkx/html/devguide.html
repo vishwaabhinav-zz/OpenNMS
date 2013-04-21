@@ -1,0 +1,667 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>OpenNMS Developer Guide</title><link rel="stylesheet" href="common/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="keywords" content="OpenNMS, Develop, Program, Manual"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="opennms-devguide"></a>OpenNMS Developer Guide</h1></div><div><h2 class="subtitle">OpenNMS internals</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Christy</span> <span class="surname">Marshall</span></h3></div></div></div><div><p class="copyright">Copyright &copy; 1999, 2000, 2001 Oculan Corp.</p></div><div><p class="pubdate">2001</p></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="preface"><a href="#preface">Preface</a></span></dt><dt><span class="chapter"><a href="#chap1">1. Chapter 1</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap1sect1">1.1. What is OpenNMS?</a></span></dt><dt><span class="sect1"><a href="#chap1sect2">1.2. Why OpenNMS?</a></span></dt><dt><span class="sect1"><a href="#chap1sect3">1.3. Features</a></span></dt><dt><span class="sect1"><a href="#chap1sect4">1.4. Why Develop for OpenNMS?</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap2">2. Chapter 2</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap2sect1">2.1. Java 2</a></span></dt><dt><span class="sect1"><a href="#chap2sect2">2.2. XML/XSL</a></span></dt><dt><span class="sect1"><a href="#chap2sect3">2.3. Servlets</a></span></dt><dt><span class="sect1"><a href="#chap2sect4">2.4. JSPs</a></span></dt><dt><span class="sect1"><a href="#chap2sect5">2.5. RDBMS</a></span></dt><dt><span class="sect1"><a href="#chap2sect6">2.6. JMS</a></span></dt><dt><span class="sect1"><a href="#chap2sect7">2.7. Castor</a></span></dt><dt><span class="sect1"><a href="#chap2sect8">2.8. JoeSNMP</a></span></dt><dt><span class="sect1"><a href="#chap2sect9">2.9. RRDTool</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap3">3. Chapter 3</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap3sect1">3.1. Discovery</a></span></dt><dt><span class="sect1"><a href="#chap3sect2">3.2. CAPSD</a></span></dt><dt><span class="sect1"><a href="#chap3sect3">3.3. Eventd</a></span></dt><dt><span class="sect1"><a href="#chap3sect4">3.4. actiond</a></span></dt><dt><span class="sect1"><a href="#chap3sect5">3.5. notifd</a></span></dt><dt><span class="sect1"><a href="#chap3sect6">3.6. Scheduler</a></span></dt><dt><span class="sect1"><a href="#chap3sect7">3.7. Service Monitor (pollers)</a></span></dt><dt><span class="sect1"><a href="#chap3sect8">3.8. RTC</a></span></dt><dt><span class="sect1"><a href="#chap3sect9">3.9. Outage Manager</a></span></dt><dt><span class="sect1"><a href="#chap3sect10">3.10. Data Collection</a></span></dt><dt><span class="sect1"><a href="#chap3sect11">3.11. Reporting</a></span></dt><dd><dl><dt><span class="sect2"><a href="#chap3sect11sub1">3.11.1. Performance Reports</a></span></dt><dt><span class="sect2"><a href="#chap3sect11sub2">3.11.2. Availability Reports</a></span></dt></dl></dd><dt><span class="sect1"><a href="#chap3sect12">3.12. Web UI</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap4">4. Chapter 4</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap4sect1">4.1. Customizing SNMP Data Collection</a></span></dt><dt><span class="sect1"><a href="#chap4sect2">4.2. Adding Support for New Services</a></span></dt><dd><dl><dt><span class="sect2"><a href="#chap4sect2sub1">4.2.1. Introduction</a></span></dt><dt><span class="sect2"><a href="#chap4sect2sub2">4.2.2. Creating a Capabilities Daemon (Capsd) Plugin</a></span></dt><dt><span class="sect2"><a href="#chap4sect2sub3">4.2.3. Creating a Poller Plugin</a></span></dt></dl></dd><dt><span class="sect1"><a href="#chap4sect3">4.3. Web UI Design</a></span></dt><dd><dl><dt><span class="sect2"><a href="#chap4sect3sub1">4.3.1. Concepts You Will Need:</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub2">4.3.2. Overall Architecture</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub3">4.3.3. Servlet Forwards and Includes versus HTTP Redirects </a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub4">4.3.4. Internal URLs versus External URLs</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub5">4.3.5. Security Roles and Protected URLs</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub6">4.3.6. Internal Structure of a JSP</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub7">4.3.7. Internal Structure of a Servlet</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub8">4.3.8. Log4J Logging</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub9">4.3.9. Performance Reporting System</a></span></dt></dl></dd></dl></dd></dl></div>
+
+
+	
+	<div class="preface" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="preface"></a>Preface</h2></div></div></div><p>
+		OpenNMS is the creation of numerous people and organizations,
+		operating under the umbrella of the OpenNMS project. The original code
+		base was developed and published under the GPL by the Oculan Corporation
+		until 2002, when the project administration was passed on to Tarus
+		Balog.
+	</p><p>
+		The current corporate sponsor of OpenNMS is
+		<a class="ulink" href="http://www.opennms.com/" target="_top">The OpenNMS Group</a>,
+		which also owns the OpenNMS trademark.
+	</p><p>
+		OpenNMS is a derivative work, containing both original code,
+		included code and modified code that was published under the GNU General
+		Public License. Please see the source for detailed copyright notices,
+		but some notable copyright owners are listed below:
+	</p><div class="itemizedlist"><ul type="disc"><li><p>
+				<span class="trademark">Copyright </span>&copy; 2002-2013
+				<a class="ulink" href="http://www.opennms.com" target="_top">The OpenNMS Group, Inc.</a>
+			</p></li><li><p>
+				Original code base for OpenNMS version 1.0.0
+				<span class="trademark">Copyright </span>&copy; 1999-2001
+				<a class="ulink" href="http://www.oculan.com" target="_top">Oculan Corporation</a>.
+			</p></li><li><p>
+				Mapping code <span class="trademark">Copyright </span>&copy; 2003
+				<a class="ulink" href="http://www.nksi.com" target="_top">Networked Knowledge Systems, Inc.</a>
+			</p></li><li><p>
+				ScriptD code <span class="trademark">Copyright </span>&copy; 2003
+				<a class="ulink" href="http://www.tavve.com" target="_top">Tavve Software Company</a>.
+			</p></li></ul></div><p>
+		Please send any omissions or corrections to this document
+		to <a class="ulink" href="mailto:tarus@opennms.org" target="_top">Tarus Balog</a>.
+	</p></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap1"></a>Chapter&nbsp;1.&nbsp;Chapter 1</h2></div><div><h3 class="subtitle"><i>Introduction to OpenNMS</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap1sect1">1.1. What is OpenNMS?</a></span></dt><dt><span class="sect1"><a href="#chap1sect2">1.2. Why OpenNMS?</a></span></dt><dt><span class="sect1"><a href="#chap1sect3">1.3. Features</a></span></dt><dt><span class="sect1"><a href="#chap1sect4">1.4. Why Develop for OpenNMS?</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap1sect1"></a>What is OpenNMS?</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap1sect2"></a>Why OpenNMS?</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap1sect3"></a>Features</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap1sect4"></a>Why Develop for OpenNMS?</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap2"></a>Chapter&nbsp;2.&nbsp;Chapter 2</h2></div><div><h3 class="subtitle"><i>Technologies</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap2sect1">2.1. Java 2</a></span></dt><dt><span class="sect1"><a href="#chap2sect2">2.2. XML/XSL</a></span></dt><dt><span class="sect1"><a href="#chap2sect3">2.3. Servlets</a></span></dt><dt><span class="sect1"><a href="#chap2sect4">2.4. JSPs</a></span></dt><dt><span class="sect1"><a href="#chap2sect5">2.5. RDBMS</a></span></dt><dt><span class="sect1"><a href="#chap2sect6">2.6. JMS</a></span></dt><dt><span class="sect1"><a href="#chap2sect7">2.7. Castor</a></span></dt><dt><span class="sect1"><a href="#chap2sect8">2.8. JoeSNMP</a></span></dt><dt><span class="sect1"><a href="#chap2sect9">2.9. RRDTool</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect1"></a>Java 2</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect2"></a>XML/XSL</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect3"></a>Servlets</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect4"></a>JSPs</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect5"></a>RDBMS</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect6"></a>JMS</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect7"></a>Castor</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect8"></a>JoeSNMP</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect9"></a>RRDTool</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap3"></a>Chapter&nbsp;3.&nbsp;Chapter 3</h2></div><div><h3 class="subtitle"><i>Functional Product Description</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap3sect1">3.1. Discovery</a></span></dt><dt><span class="sect1"><a href="#chap3sect2">3.2. CAPSD</a></span></dt><dt><span class="sect1"><a href="#chap3sect3">3.3. Eventd</a></span></dt><dt><span class="sect1"><a href="#chap3sect4">3.4. actiond</a></span></dt><dt><span class="sect1"><a href="#chap3sect5">3.5. notifd</a></span></dt><dt><span class="sect1"><a href="#chap3sect6">3.6. Scheduler</a></span></dt><dt><span class="sect1"><a href="#chap3sect7">3.7. Service Monitor (pollers)</a></span></dt><dt><span class="sect1"><a href="#chap3sect8">3.8. RTC</a></span></dt><dt><span class="sect1"><a href="#chap3sect9">3.9. Outage Manager</a></span></dt><dt><span class="sect1"><a href="#chap3sect10">3.10. Data Collection</a></span></dt><dt><span class="sect1"><a href="#chap3sect11">3.11. Reporting</a></span></dt><dd><dl><dt><span class="sect2"><a href="#chap3sect11sub1">3.11.1. Performance Reports</a></span></dt><dt><span class="sect2"><a href="#chap3sect11sub2">3.11.2. Availability Reports</a></span></dt></dl></dd><dt><span class="sect1"><a href="#chap3sect12">3.12. Web UI</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect1"></a>Discovery</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect2"></a>CAPSD</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect3"></a>Eventd</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect4"></a>actiond</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect5"></a>notifd</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect6"></a>Scheduler</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect7"></a>Service Monitor (pollers)</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect8"></a>RTC</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect9"></a>Outage Manager</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect10"></a>Data Collection</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect11"></a>Reporting</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap3sect11sub1"></a>Performance Reports</h3></div></div></div><p>
+			&lt;insert text&gt;
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap3sect11sub2"></a>Availability Reports</h3></div></div></div><p>
+			&lt;insert text&gt;
+			</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect12"></a>Web UI</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap4"></a>Chapter&nbsp;4.&nbsp;Chapter 4</h2></div><div><h3 class="subtitle"><i>Extending OpenNMS</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap4sect1">4.1. Customizing SNMP Data Collection</a></span></dt><dt><span class="sect1"><a href="#chap4sect2">4.2. Adding Support for New Services</a></span></dt><dd><dl><dt><span class="sect2"><a href="#chap4sect2sub1">4.2.1. Introduction</a></span></dt><dt><span class="sect2"><a href="#chap4sect2sub2">4.2.2. Creating a Capabilities Daemon (Capsd) Plugin</a></span></dt><dt><span class="sect2"><a href="#chap4sect2sub3">4.2.3. Creating a Poller Plugin</a></span></dt></dl></dd><dt><span class="sect1"><a href="#chap4sect3">4.3. Web UI Design</a></span></dt><dd><dl><dt><span class="sect2"><a href="#chap4sect3sub1">4.3.1. Concepts You Will Need:</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub2">4.3.2. Overall Architecture</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub3">4.3.3. Servlet Forwards and Includes versus HTTP Redirects </a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub4">4.3.4. Internal URLs versus External URLs</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub5">4.3.5. Security Roles and Protected URLs</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub6">4.3.6. Internal Structure of a JSP</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub7">4.3.7. Internal Structure of a Servlet</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub8">4.3.8. Log4J Logging</a></span></dt><dt><span class="sect2"><a href="#chap4sect3sub9">4.3.9. Performance Reporting System</a></span></dt></dl></dd></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap4sect1"></a>Customizing SNMP Data Collection</h2></div></div></div><p>
+		&lt;insert text&gt;
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap4sect2"></a>Adding Support for New Services</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect2sub1"></a>Introduction</h3></div></div></div><p>
+				The capabilities daemon (capsd) is responsible for scanning network 
+				interfaces found by the discovery daemon for the services/protocols 
+				they support and updating the database accordingly.  Capsd will also
+				periodically rescan managed interfaces to determine if a managed 
+				interface has had any additional services enabled since the last 
+				capability check.
+			</p><p>
+				The poller daemon is responsible for checking the status of each 
+				service on each managed interface at a regularly configured interval.
+				If the status of the service has changed since the last poll an 
+				appropriate event is generated indicating the new status of the
+				service on that interface.
+			</p><p>
+				OpenNMS provides a straight forward framework for extending the default
+				set of services and protocols it can detecte and monitor.  In order
+				to extend OpenNMS to manage a custom service or protocol the following 
+				is required:
+			</p><pre class="programlisting">
+	* Code a Capsd plugin capable of testing whether or 
+	  not a network interface supports the desired protocol or service.
+	* Add a &lt;protocol plugin&gt; element defining the new service to the
+	  $BB_HOME/etc/capsd-configuration.xml config file.
+	* Code a Poller plugin capable of monitoring the current status
+	  of the desired protocol or service on a specified network interface.
+	* Add &lt;service&gt; and &lt;monitor&gt; elements defining the new service 
+	  to be polled to the $BB_HOME/etc/poller-configuration.xml config 
+	  file.
+	
+	  - $BB_HOME refers to the OpenNMS install directory.
+			</pre><p>
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect2sub2"></a>Creating a Capabilities Daemon (Capsd) Plugin</h3></div></div></div><p>
+				<span class="emphasis"><em>Writing the Plugin</em></span>
+			</p><p>
+				Capsd uses plugins to perform capability checks on a device.  A plugin is 
+				simply a Java class which implements the org.opennms.netmgt.capsd.Plugin
+				interface.  The following methods are defined in the interface and must be 
+				implemented:
+				</p><pre class="programlisting">
+	public String getProtocolName()
+	
+		Simply returns the name of the service or protocol tested for by the 
+		plugin.  In the case of the FTP plugin the string "FTP" is returned.
+	
+	public boolean isProtocolSupported(java.nnet.InetAddress address)
+	
+		Returns true if the device identified by the InetAddress parameter
+		supports the protocol being tested.
+	
+	public boolean isProtocolSupported(java.net.InetAddress address, 
+								java.util.Map properties)
+	
+		Returns true if the device identified by the InetAddress parameter 
+		supports the protocol being tested.  A second parameter, properties,
+		is of type java.util.Map and provides a mechanism for overriding 
+		default configuration options such as timeouts, retries and port
+		information.
+				</pre><p>
+				NOTE:  For an example plugin take a look at the FTP plugin in
+				src/services/org/opennms/netmgt/capsd/FtpPlugin.java.  
+			</p><p>
+				At runtime the capabilities daemon calls the isProtocolSupported() method 
+				of each loaded plugin passing it the java.net.InetAddress object of each
+				interface found by the discovery daemon.  Any services found to be supported on the
+				interface will cause an entry to be added to the 'ifservices' table
+				keyed by the interface's node identifier and IP address.
+			</p><p>
+				<span class="emphasis"><em>Plugin Integration</em></span>
+			</p><p>
+				During initialization, the capabilities daemon reads the capsd-configuration.xml
+				config file and inserts any new services into the 'services' table in the
+				database.  Further, during initialization, the capabilitiees daemon uses the plugin class 
+				name information defined in capsd-configuration.xml to load each of the 
+				plugins.
+			</p><p>
+				To add a new service edit capsd-configuration.xml and add a	new 
+				&lt;protocol plugin&gt; element.  Within the &lt;protocol plugin&gt; element is
+				defined the service name, plugin class name, and any plugin specific 
+				properties.  
+			</p><p>
+				Consider the following capsd-configuration.xml entry for the FTP service:
+			</p><p>
+				</p><pre class="programlisting">
+	&lt;protocol-plugin protocol="FTP"  class-name="org.opennms.netmgt.capsd.FtpPlugin" scan="on"&gt;
+		&lt;property key="userid" value="ftp"/&gt;
+		&lt;property key="password" value="anonymous@"/&gt;
+	&lt;/protocol-plugin&gt;
+				</pre><p>
+			</p><p>
+				The "userid,ftp" and "password,anonymous@" name-value pairs are passed
+				to the plugin via the java.util.Map parameter of the isProtocolSupported()
+				method described earlier.
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect2sub3"></a>Creating a Poller Plugin</h3></div></div></div><p>
+				<span class="emphasis"><em>Writing the Poller Plugin</em></span>
+			</p><p>
+				The poller daemon uses poller plugins for polling managed interfaces for
+				the current status of the services supported by the interface.  A poller 
+				plugin is a	Java class which implements the org.opennms.netmgt.poller.monitors.ServiceMonitor 
+				interface.  The interface defines the following methods which must be 
+				implemented in the plugin:
+				</p><pre class="programlisting">
+	public void initialize(java.util.Map parameters);
+	
+		Called by the poller daemon following instantiation of the
+		plugin during startup.  If during initialization the plugin detects
+		a critical error (such as a missing library) it can throw a
+		java.lang.RuntimException.  If the plugin throws an exception during
+		initialization the poller daemon will disable the plugin.   
+		
+	public void release();
+	
+		Called by the poller daemon during shutdown.  This provides a 
+		mechanism for the plugin to release any acquired resources. 
+	
+	public void initialize(org.opennms.netmgt.poller.monitors.NetworkInterface iface);
+	
+		Called by the poller daemon whenever the poller learns of a new
+		interface which supports the service polled by the plugin.  
+		If desired, configuration information can be associated with the 
+		interface at this time prior the poller actually scheduling 
+		the interface.  If the plugin throws an exception during interface
+		initialization the poller daemon will log an error and discard
+		the interface.  
+		
+	public void release(java.net.NetworkInterface iface);
+	
+		Called by the poller daemon whenever an interface is being removed 
+		from the scheduler. For example, if a service is determined as being
+		no longer supported by an interface then this method will be invoked
+		to cleanup any information associated with that interface. This 
+		gives the implementor of the interface the ability to serialize any 
+		data prior to the interface being discarded.  If an exception is 
+		thrown during the release the exception will be logged, but the 
+		interface will still be discarded for garbage collection.
+	
+	public int poll(java.net.NetworkInterface iface, 
+					org.opennms.netmgt.utils.EventProxy eproxy, 
+					java.util.Map parameters);
+	
+		Called by the poller daemon each time an interface requires a check 
+		to be performed as defined by the poller scheduler.  The poll()
+		method is passed the interface to check, a reference to an
+				</pre><p>
+			</p><p>
+				</p><pre class="programlisting">
+		required by the plugin aside from the standard available/unavailable
+		generated by the poller daemon.  Additionally, a java.util.Map 
+		is passed which may be used to access any service specific 
+		configuration values as defined in the poller-configuration.xml
+		config file.
+				</pre><p>
+			</p><p>
+				<span class="emphasis"><em>Poller Plugin Integration</em></span>
+			</p><p>
+				During initialization, the poller daemon reads the poller-configuration.xml
+				config file and uses the plugin class name information defined in &lt;monitor&gt;
+				element blocks to load each of the plugins.  The parameters associated with
+				each service as defined in &lt;service&gt; elements within the configuration file
+				are also read and used by the poller to determine how often a particular
+				service is to be polled for the services which fall within the enclosing
+				package.
+			</p><p>
+				To add a new service edit poller-configuration.xml and add a new 
+				&lt;service&gt; element to the desired package.  Within the &lt;service&gt; element 
+				define the service name, how often it should be scheduled (interval), and 
+				a list of any parameters needed by the plugin defined within &lt;parameter&gt; 
+				elements. The configured parameters will be passed to the plugin via the 
+				java.util.Map object parameter of the poll() method.  Typically such
+				things as the port on which to test the service as well as timeout and
+				retry information is defined here.
+			</p><p>
+				Consider the following poller-configuration.xml &lt;service&gt; entry for the 
+				FTP service:
+				</p><pre class="programlisting">
+	&lt;service name="FTP" interval="300000"&gt;
+		&lt;parameter key="timeout" value="3000"/&gt;
+		&lt;parameter key="port" value="21"/&gt;
+		&lt;parameter key="userid" value="ftp"/&gt;
+		&lt;parameter key="password" value="anonymous@"/&gt;
+	&lt;/service&gt;
+				</pre><p>
+				Next the class name of the poller plugin must be defined.  This is done by
+				adding a new &lt;monitor&gt; element to the poller-configuration.xml file.  Within
+				this element the name of the service and the class name of the poller plugin
+				are specified.
+			</p><p>
+				Consider the following poller-configuration.xml &lt;monitor&gt; entry for the
+				FTP service:	
+				</p><pre class="programlisting">
+	&lt;monitor service="FTP"  	class-name="org.opennms.netmgt.poller.monitors.FtpMonitor"/&gt;
+				</pre><p>
+			</p><p>
+				<span class="emphasis"><em>Configuration File Factories</em></span>
+			</p><p>
+				Accessing the OpenNMS Database
+			</p><p>
+				OpenNMS database configuration information is specified in the
+				$BB_HOME/etc/opennms-database.xml file.  Defined within this 
+				configuration file are the OpenNMS database name, userid,
+				and password.  If database access is a requirement for a poller the 
+				class org.opennms.netmgt.config.DatabaseConnectionFactory
+				may be used to get a database connection.  
+			</p><p>
+				The DatabaseConnectionFactory class is a singleton class used to 
+				load the database configuration information.  The class provides a
+				convenience method for retrieving a connection to the database.
+				The following code snippet illustrates how to use the
+				DatabaseConnectionFactory class to load the database config and 
+				retrieve a connection.			
+				</p><pre class="programlisting">
+		/********* Begin *********/
+		...
+		import java.sql.*;
+		import org.opennms.netmgt.config.DatabaseConfigFactory;
+		...
+		public void initialize(NetworkInterface iface)
+		{
+			// Get connection to the database so we can
+			// retrieve information pertaining to the 
+			// passed interface
+			//
+			try
+			{
+				DatabaseConnectionFactory.init();
+			}
+			catch (Throwable e)
+			{
+				// Log error
+				...
+				// Throw exception
+				throw new RuntimeException("Database connection factory
+						initialization failed, reason: " + e.getLocalizedMessage());
+			}
+			
+			try
+			{
+				java.sql.Connection dbConn = DatabaseConnectionFactory.getInstance().getConnection();
+			}
+			catch (SQLException sqlE)
+			{
+				// Log error
+				...
+				// Throw exception
+				throw new RuntimeException("Unable to get connection to the	database, 
+						reason: " + sqlE.getLocalizedMessage());
+			}
+			
+			// Do stuff with the database connection
+			...
+			
+			// Close the connection
+			try
+			{
+				dbConn.close();
+			}
+			catch (SQLException sqlE)
+			{
+				// Log the error
+				...
+			}
+			...
+		}
+		/******** End **********/			
+				</pre><p>
+				NOTE:  For additional example code which uses the DatabaseConnectionFactory 
+				take a look at the SNMP poller plugin:  
+				src/services/org/opennms/netmgt/poller/SnmpMonitor.java
+			</p><p>
+				Accessing SNMP Configuration Information
+			</p><p>
+				SNMP configuration information is specified in the 
+				$BB_HOME/etc/snmp-config.xml file.  Defined within this 
+				configuration file are read/write community strings, retries,
+				timeout, and SNMP version information specific to the OpenNMS 
+				installation.
+			</p><p>
+				If an SNMP-based poller is being written the class 
+				org.opennms.netmgt.config.SnmpPeerFactory may be used retrieve a
+				JoeSNMP org.opennms.protocols.snmp.SnmpPeer object for a particular
+				interface's IP address based on the content of the snmp-config.xml
+				file.  If a specific entry in snmp-config.xml cannot be found a 
+				default SnmpPeer object will be returned.  An SnmpPeer object
+				encapsulates the SNMP configuration information associated with
+				a particular IP address and is used to construct an SNMP session
+				(org.opennms.protocols.snmp.SnmpSession) with the remote node.
+				Refer to the JoeSNMP documentation for further information on 
+				SNMP peer objects and sessions.
+			</p><p>
+				The SnmpPeerFactory class is a singleton class used to 
+				load the SNMP configuration information.  The class provides a
+				convenience method for retrieving an SnmpPeer object for a 
+				provided network address.
+			</p><p>
+				The following code snippet illustrates how to use the
+				SnmpPeerFactory class to load the SNMP config and 
+				retrieve an SnmpPeer object for a specified network address.
+			</p><p>
+				</p><pre class="programlisting">
+		/********* Begin *********/
+		...
+		import org.opennms.protocols.snmp.SnmpPeer;
+		import org.opennms.protocols.snmp.SnmpSession;
+		import org.opennms.netmgt.config.SnmpPeerFactory;
+		...
+		public void initialize(NetworkInterface iface)
+		{
+			// Initialize the SNMP peer factory and use it
+			// to construct an SNMP peer object for the
+			// passed interface.
+			//
+			try
+			{
+				SnmpPeerFactory.init();
+			}
+			catch (Throwable e)
+			{
+				// Log error
+				...
+				// Throw exception
+				throw new RuntimeException("SNMP peer factory
+						initialization failed, reason: " + e.getLocalizedMessage());
+			}
+			
+			SnmpPeer peer = SnmpPeerFactory.getInstance().getPeer((InetAddress)iface.getAddress());
+			
+			// Use SnmpPeer object to initialize a JoeSNMP SNMP session
+			//
+			try
+			{
+				SnmpSession session = new SnmpSession(peer);
+			}
+			catch (SocketException sE)
+			{
+				// Error Handling
+				...
+			}
+			...
+			// Use SNMP session to query the remote node's MIB 
+			//
+			...
+			
+			// Close the session
+			try
+			{
+				session.close();
+			}
+			catch (Throwable E)
+			{
+				// Log the error
+				...
+			}
+			...
+		}
+		/******** End **********/
+				</pre><p>
+				NOTE:  For additional example code which uses the SnmpPeerFactory 
+				take a look at the SNMP poller plugin:  
+				src/services/org/opennms/netmgt/poller/SnmpMonitor.java			
+			</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap4sect3"></a>Web UI Design</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub1"></a>Concepts You Will Need:</h3></div></div></div><p>
+				To get the most from this document and the WebUI code, you will need to be 
+				familiar with the following subjects:
+				Java, Servlet, and JSP programming
+				HTML and XML
+				Servlet 2.3 and JSP 1.2 specifications
+				Tomcat 4.0 setup and configuration
+				HTTP methods, error codes, and headers
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub2"></a>Overall Architecture</h3></div></div></div><p>
+				The basic idea behind our architecture is to separate the logic from the 
+				presentation as much as possible.  This facilitates rapid feature addition, 
+				rapid feature redesign, and long-term maintenance.  
+			</p><p>
+				To meet this goal, we use three distinct tools, each described in more detail
+				below: 
+				</p><div class="itemizedlist"><ul type="disc"><li><p><b>models.&nbsp;</b>
+								non-visual objects for non-visual work like reading
+								and writing to the database
+							</p></li><li><p><b>JSPs.&nbsp;</b>
+								generate HTML or XML to display to the user based on 
+								information retrieved by the models
+							</p></li><li><p><b>servlets.&nbsp;</b>
+								use the models to make changes to the system and then
+								use the JSPs to display results to the user
+							</p></li></ul></div><p>
+			</p><p>
+				All logic for database activity and performance data querying are encapsulated 
+				in non-visual models.  Models allow reuse of the same code across several 
+				different user interface components. There are many good examples of this 
+				throughout the WebUI code.  A few are the PerformanceModel, the 
+				RealTimeDataModel, and the OutageModel.  Each of these models are used by three 
+				or more servlets or JSPs.  Models are not allowed to generate visual content; 
+				they are for non-visual work only.    
+			</p><p>
+				To create HTML or XML to display to the user, we use JSPs.  They make simple 
+				calls to the models (and thus the database) to retrieve data to plug into their 
+				HTML or XML to display to the user.  No HTML or XML is generated outside of 
+				a JSP, and a JSP is not allowed to make changes to the database or other data.
+				They are for display only.
+			</p><p>
+				To allow the user to make changes to data or other features, we write servlets
+				that respond to an HTTP POST.  The servlet code first takes the necessary action
+				(in most cases changing the database or sending an event) and then redirects 
+				the request (with the results of the action) to a JSP for HTML generation and 
+				display.  
+			</p><p>
+				An exception to the rule above is if a URL must return an output type other 
+				than HTML or XML (like an image or PDF), then we implement the URL as a servlet.  
+				In this context, the servlet acts like a JSP in the fact that it is purely used
+				for creation of content for display.  
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub3"></a>Servlet Forwards and Includes versus HTTP Redirects </h3></div></div></div><p>
+				Forwards and includes are servlet/JSP mechanisms that allow Tomcat (or any 
+				servlet container) to ferry requests around different servlets and JSPs to 
+				generate the correct content before returning it to the user.  Forwards and
+				includes can be nested as deep as necessary, and they do not leave the web 
+				server until the content is fully generated.  We often use forwards in servlets 
+				that handle only GET requests, and we often use includes in JSPs to standardize
+				the content.  For example, the header.jsp and footer.jsp are included in each
+				JSP.
+			</p><p>
+				HTTP Redirects are actually a two-request process.  The web browser makes the 
+				first request which is almost always a POST to a servlet.  Then the servlet does 
+				something (like writes to a database or sends an event) and then sends a 
+				redirect response (HTTP response code 301 or 307) back to the web browser with 
+				a new URL.  The second request is then made by the web browser to the URL in 
+				the redirect response.  This second request is usually a GET request to a JSP.
+				The first request does the work, and the second request displays the results. 
+			</p><p>
+				Redirects are useful after using a POST, because if the user uses the back 
+				button or the refresh button, they will not get a cryptic error from the web 
+				browser because it does not want to (or cannot) resend the POST.  This creates 
+				a much more seamless user experience, and is easier to code.  The logic is in
+				the servlet -- pure Java code, and the output is in the JSP -- almost pure HTML.
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub4"></a>Internal URLs versus External URLs</h3></div></div></div><p>
+				Internal URLs are used in forwards and includes by Tomcat.  They are relative 
+				to the webapp context URL.  In our case, they are relative to the /opennms URL.  
+				These URLs contain leading slashes.  If they do not, they are considered to be a 
+				sibling of the current URL and will not work.
+			</p><p>
+				External URLs are used as links to other pages by the web browser.  They are 
+				made relative to our URL base (see the org.opennms.web.Util.calculateBaseUrl 
+				method).  These URLs do not use leading slashes.  If they do, they are 
+				considered relative to the root URL and will not work.
+			</p><p>
+				You must follow the convention of setting up the HTML BASE tag in the HTML 
+				header on every page or the external URLs will not work.  This at the very least
+				will cause problems with loading images from included JSPs, and your page's 
+				header will display incorrectly.  At worst, however, many or all of your HTML 
+				links will not work either.
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub5"></a>Security Roles and Protected URLs</h3></div></div></div><p>
+				In the OpenNMS system, we use the BASIC HTTP authentication mechanism, and 
+				there are two major security roles.  The default security role is the 
+				"OpenNMS User" role, and all users belong to that role.  All URLs of the
+				OpenNMS WebUI are protected at least by this default role.  
+			</p><p>
+				Other security roles are configured in the WEB-INF/web.xml file and the 
+				/opt/OpenNMS/etc/magic-users.properties file.  The web.xml file defines which 
+				URLs are protected by a role, and the magic-user.properties file defines 
+				which users are authorized in each role.
+			</p><p>
+				Another important user role is the "OpenNMS Administrator" role.  All URLs under
+				/opennms/admin/* are protected by this role.  Currently only the special "admin"
+				user is allowed access to this role. 
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub6"></a>Internal Structure of a JSP</h3></div></div></div><p>
+				A good example to look at is the web/web/element/node.jsp.  One of the 
+				major goals in our JSP writing is to keep the Java code as far away as possible 
+				from the HTML content, and the format of our JSPs reflect this.
+			</p><p>
+				The JSP @page directive is first.  Followed by the declaration for any class 
+				variables and the init method (if required). This declaration section usually 
+				defines and initializes the JSP's model which handles all non-visual code.
+			</p><p>
+				The scriptlet for the data-gathering code is next.  This section is where all 
+				of your Java code that is not directly related to displaying HTML should go.  
+				It usually consists of a short check of the request parameters and then calling 
+				a model method or two.  Remember, keeping your Java code in one area keeps the 
+				code portable in case you need to move it into a non-visual object or servlet.  
+				It also helps you fight the temptation to add logic throughout the body of your
+				JSP.  We try to keep our JSPs short and dumb.
+			</p><p>
+				Next is the HTML header.  This section defines the page's title, base URL,
+				and includes our global stylesheet.  Please take notice of the HTML BASE tag, 
+				the org.opennms.web.Util.calculateBaseURL method, and the 
+				web/web/includes/styles.css stylesheet.  
+			</p><p>
+				After the header is the body tag and then an include of our header JSP.  This 
+				JSP include tag gives the header.jsp enough information to display itself 
+				properly, including the page's title, breadcrumbs to give the user an idea 
+				of where they are in the page hierarchy, and links to get back to earlier 
+				pages.
+			</p><p>
+				The body of our JSPs is a table that gives it a little indention on either 
+				side.  Notice the empty columns with only non-breaking spaces (&amp;nbsp;).  When 
+				we completely move over to Cascading Style Sheets in a future release, we will 
+				use CSS to create indention.  
+			</p><p>
+				In the body, use the data you collected in the main scriptlet to display here.  
+				Try to keep the Java code in this section to only JSP expressions, if 
+				conditionals, and for loops. 
+			</p><p>
+				After the body is the footer include, which mirrors much of the header include, 
+				but without the breadcrumb information.
+			</p><p>
+				Then at the bottom, below the HTML, if you need any convenience methods for 
+				display purposes (creating HTML or URLs, but not reading the database or any 
+				other sort of non-visual logic), then put a JSP declaration section that creates 
+				these convenience methods. 
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub7"></a>Internal Structure of a Servlet</h3></div></div></div><p>
+				A good example servlet is the org.opennms.web.nodelabel.NodeLabelChangeServlet.
+			</p><p>
+				Our servlet structure is actually very similar to Java portions of our JSPs.  
+				The servlet has a model class variable that is initialized in the init method.  
+				Then the doGet or doPost method checks the request parameters, does a database 
+				lookup or makes a database change through a model call, but then it breaks from 
+				the JSP structure by calling either a forward or a redirect instead of creating
+				its own results content. 
+			</p><p>
+				If the servlet is handling POST methods, it will use a redirect.  If the servlet
+				is using a GET method, it will use a forward.
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub8"></a>Log4J Logging</h3></div></div></div><p>
+				In the WebUI, we use a dual servlet-logging and Log4J-logging system.  Actually,
+				we are in the process of moving to a Log4J-based logging scheme, but it is 
+				likely that there will always be some amount of logs going through the servlet 
+				logging API into Log4J.
+			</p><p>
+				Logging to Log4J through the servlet API is acheived by the use of a  
+				Tomcat-specific logger class that wrappers a Log4J category.  Using the servlet 
+				API instead of Log4J may be more intuitive to servlet/JSP programmers who are 
+				not familiar with Log4J, but using Log4J gives us many more features.  Log4J
+				gives us control over what level of logging is used; whether a given log message
+				is a debug message, an informative message, a warning, or an error message; 
+				how often the log files should roll; and how large the log files should grow.  
+				Log4J can also send logs to other destinations other than text files.  It can 
+				also add various timestamps and log adornments through configuration files 
+				without changing code.
+			</p><p>
+				Currently the web logs end up in one of two log files, but the file count will
+				probably increase as we adopt Log4J throughout more of the WebUI and create 
+				finer-grained Web log categories.  Almost all WebUI logs today end up in the 
+				web.log file in the OpenNMS log directory (historically one of /var/log/opennms 
+				or /opt/OpenNMS/log).  The only exceptions are authentication logs messages 
+				which end up in the webauth.log file. 
+			</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="chap4sect3sub9"></a>Performance Reporting System</h3></div></div></div><p>
+				The SNMP polling system gathers information and stores it in round-robin 
+				databases (RRD files) which are named in a convention that uniquely identifies 
+				the interface from which the data was collected.  The WebUI then queries the 
+				RRD file directory to see which interfaces have data collected, and then 
+				presents that list to the user.  The user selects an interface from the list, 
+				and the corresponding RRD is queried to find out what information was collected.
+				Different types of network devices yield different types of performance data,
+				so our reporting system is designed to be flexible.  From the list of data 
+				collected, a list of prefabricated reports is created and presented to the user.  
+			</p><p>
+				The user then, having selected an RRD, a prefabricated report, and a date range,
+				requests the report.  The WebUI sends the report parameters to the 
+				RRDGraphServlet which executes a command-line program called rrdtool 
+				(see http://www.rrdtool.org). The rrdtool reads the RRD information and creates 
+				a graph in a PNG image.  That image is sent back to the user to view. 
+			</p><p>
+				The prefabricated reports are actually just command-line options to give to 
+				the rrdtool to create a graph.  They are read from the rrdtool-graph.properties 
+				file in the /opt/OpenNMS/etc directory.
+			</p><p>
+				The user is also able to create a "custom" or "ad hoc" performance report by
+				picking and choosing the data sources inside the RRD to query.  The user works
+				through a wizard that allows him to choose and name each data source, give the
+				graph a name, and even choose in which colors each data source should graph.
+				This uses some templates from the rrdtool-graph.properties file, but all the 
+				values are filled in the template from the users choices.  Then the same 
+				RRDGraphServlet serves up the resulting PNG graph image.
+			</p></div></div></div>
+</div></body></html>

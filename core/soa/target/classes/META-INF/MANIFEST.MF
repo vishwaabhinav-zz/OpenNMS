@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Export-Package: org.opennms.core.soa;version="1.10.8",org.opennms.core
+ .soa.filter;uses:="org.opennms.core.soa";version="1.10.8",org.opennms
+ .core.soa.support;uses:="org.springframework.aop.target,org.opennms.c
+ ore.soa.filter,org.springframework.aop,org.springframework.util,org.s
+ pringframework.beans,org.opennms.core.soa,org.springframework.aop.fra
+ mework,org.springframework.beans.factory";version="1.10.8",org.opennm
+ s.core.soa.config;uses:="org.springframework.beans.factory.support,or
+ g.springframework.util,org.opennms.core.soa.support,org.springframewo
+ rk.beans.factory.xml,org.springframework.beans.factory.config,org.spr
+ ingframework.util.xml,org.w3c.dom,org.springframework.beans.factory";
+ version="1.10.8"
+Built-By: anonymous
+Tool: Bnd-0.0.255
+Bundle-Name: OpenNMS Service Registry
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 1.10.8
+Build-Jdk: 1.6.0_27
+Bnd-LastModified: 1366543960836
+Bundle-ManifestVersion: 2
+Bundle-Description: OpenNMS is the world's first enterprise grade netw
+ ork management    platform developed under the open source model. It 
+ consists of a    community supported open-source project as well as a
+  commercial    services, training and support organization.
+Import-Package: org.opennms.core.soa;version="1.10.8",org.opennms.core
+ .soa.config;version="1.10.8",org.opennms.core.soa.filter;version="1.1
+ 0.8",org.opennms.core.soa.support;version="1.10.8",org.springframewor
+ k.aop,org.springframework.aop.framework,org.springframework.aop.targe
+ t,org.springframework.beans,org.springframework.beans.factory,org.spr
+ ingframework.beans.factory.config,org.springframework.beans.factory.s
+ upport,org.springframework.beans.factory.xml,org.springframework.util
+ ,org.springframework.util.xml,org.w3c.dom
+Bundle-SymbolicName: org.opennms.core.soa
+

@@ -1,0 +1,14 @@
+#Sun Apr 21 17:16:30 IST 2013
+org.opennms.netmgt.jasper.rrdtool.Xport=org.opennms.netmgt.jasper.rrdtool.descriptors.XportDescriptor
+org.opennms.netmgt.jasper.rrdtool.Entry=org.opennms.netmgt.jasper.rrdtool.descriptors.EntryDescriptor
+org.opennms.netmgt.jasper.rrdtool.Row=org.opennms.netmgt.jasper.rrdtool.descriptors.RowDescriptor
+org.opennms.netmgt.jasper.rrdtool.Step=org.opennms.netmgt.jasper.rrdtool.descriptors.StepDescriptor
+org.opennms.netmgt.jasper.rrdtool.Start=org.opennms.netmgt.jasper.rrdtool.descriptors.StartDescriptor
+org.opennms.netmgt.jasper.rrdtool.Data=org.opennms.netmgt.jasper.rrdtool.descriptors.DataDescriptor
+org.opennms.netmgt.jasper.rrdtool.End=org.opennms.netmgt.jasper.rrdtool.descriptors.EndDescriptor
+org.opennms.netmgt.jasper.rrdtool.Columns=org.opennms.netmgt.jasper.rrdtool.descriptors.ColumnsDescriptor
+org.opennms.netmgt.jasper.rrdtool.Legend=org.opennms.netmgt.jasper.rrdtool.descriptors.LegendDescriptor
+org.opennms.netmgt.jasper.rrdtool.V=org.opennms.netmgt.jasper.rrdtool.descriptors.VDescriptor
+org.opennms.netmgt.jasper.rrdtool.T=org.opennms.netmgt.jasper.rrdtool.descriptors.TDescriptor
+org.opennms.netmgt.jasper.rrdtool.Meta=org.opennms.netmgt.jasper.rrdtool.descriptors.MetaDescriptor
+org.opennms.netmgt.jasper.rrdtool.Rows=org.opennms.netmgt.jasper.rrdtool.descriptors.RowsDescriptor

@@ -1,0 +1,3895 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app id="opennms" version="2.4"
+		 xmlns="http://java.sun.com/xml/ns/j2ee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+  <jsp-config>
+    <jsp-property-group>
+        <url-pattern>*.jsp</url-pattern>
+        <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+  </jsp-config>
+		 
+  <display-name>opennms</display-name>
+
+  <!-- Uncomment this to set the webapp timeout to infinite.
+  <session-config>
+    <session-timeout>-1</session-timeout>
+  </session-config>
+  -->
+  
+  <context-param>
+    <param-name>dontBlameOpenNMS</param-name>
+    <param-value>false</param-value>
+  </context-param>
+  
+  <!--  This is used by the Spring Log4jConfigListener <listener> below -->
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>/WEB-INF/log4j.properties</param-value>
+  </context-param>
+
+  <!--  This is used by the Spring ContextLoaderListener <listener> below -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+        /WEB-INF/applicationContext-common.xml
+        classpath:/META-INF/opennms/applicationContext-commonConfigs.xml
+        classpath:/META-INF/opennms/applicationContext-reportingRepository.xml
+        classpath:/META-INF/opennms/applicationContext-reportingDao.xml
+        classpath:/org/opennms/web/svclayer/applicationContext-svclayer.xml
+        classpath*:/META-INF/opennms/component-service.xml
+        classpath:/META-INF/opennms/applicationContext-systemReport.xml
+        classpath:/META-INF/opennms/applicationContext-reportingCore.xml
+        classpath:/META-INF/opennms/applicationContext-reportingAvailability.xml
+        classpath:/META-INF/opennms/applicationContext-reportingJasperReports.xml
+
+        classpath:/META-INF/opennms/applicationContext-reporting.xml
+        /WEB-INF/applicationContext-spring-security.xml
+        /WEB-INF/applicationContext-jersey.xml
+        /WEB-INF/applicationContext-spring-webflow.xml
+        <!-- WARMERGE: insert contextConfigLocation -->
+    </param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>parentContextKey</param-name>
+    <param-value>daoContext</param-value>
+  </context-param>
+
+  <!-- WARMERGE: insert context-param -->  
+
+  <filter>
+    <!--  note the name of this filter is important and is used in the app contexts -->
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+
+  <filter>
+    <description>Allows "cross-site scripting" for the REST services.</description>
+    <filter-name>AccessControlAllowOrigin</filter-name>
+    <filter-class>org.opennms.web.AddAccessControlHeaderFilter</filter-class>
+    <!-- 
+    <init-param>
+      <description>This parameter specifies what origins to allow.</description>
+      <param-name>origin</param-name>
+      <param-value>*</param-value>
+    </init-param>
+    -->
+  </filter>
+
+  <filter>
+    <description>Adds the refresh HTTP header to a servlet's or JSP's output so it will be automatically reloaded.</description>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <filter-class>org.opennms.web.AddRefreshHeaderFilter</filter-class>
+    <init-param>
+      <description>This parameter specifies how often to refresh the page.</description>
+      <param-name>seconds</param-name>
+      <param-value>300</param-value>
+    </init-param>
+  </filter>
+
+  <filter>
+    <description>Adds the refresh HTTP header to a servlet's or JSP's output so it will be automatically reloaded.</description>
+    <filter-name>AddRefreshHeader-120</filter-name>
+    <filter-class>org.opennms.web.AddRefreshHeaderFilter</filter-class>
+    <init-param>
+      <description>This parameter specifies how often to refresh the page.</description>
+      <param-name>seconds</param-name>
+      <param-value>120</param-value>
+    </init-param>
+  </filter>
+  
+  <filter>
+    <description>Adds the refresh HTTP header to a servlet's or JSP's output so it will be automatically reloaded.</description>
+    <filter-name>AddRefreshHeader-30</filter-name>
+    <filter-class>org.opennms.web.AddRefreshHeaderFilter</filter-class>
+    <init-param>
+      <description>This parameter specifies how often to refresh the page.</description>
+      <param-name>seconds</param-name>
+      <param-value>30</param-value>
+    </init-param>
+  </filter>
+
+  
+  <filter>
+    <description>Stores HTTP request parameters in request attributes for later access</description>
+    <filter-name>StoreRequestProperties</filter-name>
+    <filter-class>org.opennms.web.StoreRequestPropertiesFilter</filter-class>
+    <init-param>
+      <description>Into which request attribute the value of HttpServletRequest.getServletPath() is stored</description>
+      <param-name>relativeServletPathAttribute</param-name>
+      <param-value>relativeRequestPath</param-value>
+    </init-param>
+  </filter>
+  
+  <filter>
+    <filter-name>openSessionInViewFilter</filter-name>
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+  </filter>
+  
+  <filter>
+    <filter-name>eXtremeExport</filter-name>
+    <filter-class>org.extremecomponents.table.filter.ExportFilter</filter-class>
+  </filter>
+  
+  <filter>
+    <filter-name>UrlRewriteFilter</filter-name>
+    <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+    <init-param>
+      <param-name>statusEnabled</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+  <!-- WARMERGE: insert filter -->
+
+  <filter-mapping>
+    <filter-name>openSessionInViewFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+    <filter-name>StoreRequestProperties</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>AccessControlAllowOrigin</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/index.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/rtc/category.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/element/node.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/element/linkednode.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/element/interface.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/element/service.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/outage/list.htm</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/graph/results.htm</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/KSC/customView.htm</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-120</filter-name>
+    <url-pattern>/event/list</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-30</filter-name>
+    <url-pattern>/alarm/list.htm</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AddRefreshHeader-300</filter-name>
+    <url-pattern>/alarm/detail.htm</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>eXtremeExport</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>UrlRewriteFilter</filter-name>
+    <url-pattern>*.jnlp</url-pattern>
+  </filter-mapping>
+
+  <!-- WARMERGE: insert filter-mapping -->
+
+  <listener>
+    <!-- This listener handles our custom startup/shutdown behavior. -->
+    <listener-class>org.opennms.web.InitializerServletContextListener</listener-class>
+  </listener>
+
+  <!--
+    Log4jConfigListener must come after InitializerServletContextListener
+    because the opennms.webapplogs.dir system property used in log4j.properties
+    is set by InitializerServletContextListener.
+
+    However, putting this after InitializerServletContextListener means you
+    won't see any of the log messages generated in contextInitialized() in
+    InitializerServletContextListener.
+
+    So, if you're getting a 'SEVERE: Error listenerStart' or similar error from
+    Tomcat, and the OpenNMS webapp logs don't appear to contain any errors, try
+    manually replacing ${opennms.webapplogs.dir} in log4j.properties, and moving
+    this listener above InitializerServletContextListener, so you can see the
+    messages generated by InitializerServletContextListener.
+  -->
+  <listener>
+    <listener-class>org.opennms.web.Log4jConfigListener</listener-class>
+  </listener>
+
+  <listener>
+    <!-- This listener handles our custom startup/shutdown behavior. -->
+    <listener-class>org.opennms.web.DependencyCheckingContextListener</listener-class>
+  </listener>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- WARMERGE: insert listener -->
+
+  <!-- ==================================================================== -->
+  <!-- The default servlet.                                                 -->
+  <!-- This servlet, normally mapped to /, provides the handling for static -->
+  <!-- content, OPTIONS and TRACE methods for the context.                  -->
+  <!-- The following initParameters are supported:                          -->
+  <!--  
+ *  acceptRanges      If true, range requests and responses are
+ *                    supported
+ *
+ *  dirAllowed        If true, directory listings are returned if no
+ *                    welcome file is found. Else 403 Forbidden.
+ *
+ *  welcomeServlets   If true, attempt to dispatch to welcome files
+ *                    that are servlets, but only after no matching static
+ *                    resources could be found. If false, then a welcome
+ *                    file must exist on disk. If "exact", then exact
+ *                    servlet matches are supported without an existing file.
+ *                    Default is true.
+ *
+ *                    This must be false if you want directory listings,
+ *                    but have index.jsp in your welcome file list.
+ *
+ *  redirectWelcome   If true, welcome files are redirected rather than
+ *                    forwarded to.
+ *
+ *  gzip              If set to true, then static content will be served as
+ *                    gzip content encoded if a matching resource is
+ *                    found ending with ".gz"
+ *
+ *  resourceBase      Set to replace the context resource base
+ *
+ *  resourceCache     If set, this is a context attribute name, which the servlet 
+ *                    will use to look for a shared ResourceCache instance. 
+ *                        
+ *  relativeResourceBase
+ *                    Set with a pathname relative to the base of the
+ *                    servlet context root. Useful for only serving static content out
+ *                    of only specific subdirectories.
+ *
+ *  aliases           If True, aliases of resources are allowed (eg. symbolic
+ *                    links and caps variations). May bypass security constraints.
+ *
+ *  maxCacheSize      The maximum total size of the cache or 0 for no cache.
+ *  maxCachedFileSize The maximum size of a file to cache
+ *  maxCachedFiles    The maximum number of files to cache
+ *
+ *  useFileMappedBuffer
+ *                    If set to true, it will use mapped file buffer to serve static content
+ *                    when using NIO connector. Setting this value to false means that
+ *                    a direct buffer will be used instead of a mapped file buffer.
+ *                    By default, this is set to true.
+ *
+ *  cacheControl      If set, all static content will have this value set as the cache-control
+ *                    header.
+ -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+  <servlet>
+    <servlet-name>default</servlet-name>
+    <servlet-class>org.eclipse.jetty.servlet.DefaultServlet</servlet-class>
+    <init-param>
+      <param-name>aliases</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>acceptRanges</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>dirAllowed</param-name>
+      <param-value>false</param-value> <!-- NMS-3475 -->
+    </init-param>
+    <init-param>
+      <param-name>welcomeServlets</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>redirectWelcome</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>maxCacheSize</param-name>
+      <param-value>256000000</param-value>
+    </init-param>
+    <init-param>
+      <param-name>maxCachedFileSize</param-name>
+      <param-value>200000000</param-value>
+    </init-param>
+    <init-param>
+      <param-name>maxCachedFiles</param-name>
+      <param-value>2048</param-value>
+    </init-param>
+    <init-param>
+      <param-name>gzip</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>useFileMappedBuffer</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>resourceCache</param-name>
+      <param-value>resourceCache</param-value>
+    </init-param>
+    <!--
+    <init-param>
+      <param-name>cacheControl</param-name>
+      <param-value>max-age=3600,public</param-value>
+    </init-param>
+    -->
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+
+  <!--  RESTful Web Services -->
+  <servlet>
+    <servlet-name>opennmsRestWebServices</servlet-name>
+    <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
+      <param-value>com.sun.jersey.api.core.PackagesResourceConfig</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>org.opennms.web.rest</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!--  servlet that gwt rpc requests get mapped to -->
+   <servlet>
+     <servlet-name>gwtDispatcher</servlet-name>
+     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+     <load-on-startup>1</load-on-startup>
+   </servlet>
+
+  <!--  servlet that map requests get mapped to -->
+   <servlet>
+     <servlet-name>mapDispatcher</servlet-name>
+     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+     <load-on-startup>2</load-on-startup>
+   </servlet>
+
+   <!-- Serves static resource content from .jar files such as spring-js.jar -->
+   <servlet>
+	<servlet-name>Resources Servlet</servlet-name>
+	<servlet-class>org.springframework.js.resource.ResourceServlet</servlet-class>
+	<load-on-startup>0</load-on-startup>
+   </servlet>
+	
+   <!-- Map all /resources requests to the Resource Servlet for handling -->
+   <servlet-mapping>
+		<servlet-name>Resources Servlet</servlet-name>
+		<url-pattern>/resources/*</url-pattern>
+   </servlet-mapping>
+
+  <!-- Servlet for modify Discovery configuration service -->
+  <servlet>
+    <servlet-name>actionDiscovery</servlet-name>
+    <servlet-class>org.opennms.web.admin.discovery.ActionDiscoveryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>modifyDiscoveryConfig</servlet-name>
+    <servlet-class>org.opennms.web.admin.discovery.ModifyDiscoveryConfigurationServlet</servlet-class>
+  </servlet>  
+  
+  <servlet>
+    <servlet-name>importAssets</servlet-name>
+    <servlet-class>org.opennms.web.asset.ImportAssetsServlet</servlet-class>
+    <init-param>
+      <description>Redirect to this sibling URL on success.</description>
+      <param-name>redirect.success</param-name>
+      <param-value>../../asset/nodelist.jsp?column=_allNonEmpty</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>exportAssets</servlet-name>
+    <servlet-class>org.opennms.web.asset.ExportAssetsServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>modifyAsset</servlet-name>
+    <servlet-class>org.opennms.web.asset.ModifyAssetServlet</servlet-class>
+    <init-param>
+      <description>Redirect to this sibling URL on success.</description>
+      <param-name>redirect.success</param-name>
+      <param-value>list</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>queryEvent</servlet-name>
+    <servlet-class>org.opennms.web.event.EventQueryServlet</servlet-class>
+    <init-param>
+      <description>Redirect to this sibling URL after changing the parameter set.</description>
+      <param-name>redirect.url</param-name>
+      <param-value>list</param-value>
+    </init-param>    
+  </servlet>
+  <servlet>
+    <servlet-name>queryAlarm</servlet-name>
+    <servlet-class>org.opennms.web.alarm.AlarmQueryServlet</servlet-class>
+    <init-param>
+      <description>Redirect to this sibling URL after changing the parameter set.</description>
+      <param-name>redirect.url</param-name>
+      <param-value>list.htm</param-value>
+    </init-param>    
+  </servlet>
+  <servlet>
+    <servlet-name>filterVulnerability</servlet-name>
+    <servlet-class>org.opennms.web.vulnerability.VulnerabilityFilterServlet</servlet-class>
+  </servlet>  
+  
+  
+  <!-- Servlet for updating the notification status -->
+  <servlet>
+    <servlet-name>updateNotificationStatus</servlet-name>
+    <servlet-class>org.opennms.web.admin.notification.UpdateNotifdStatusServlet</servlet-class>
+  </servlet>
+  
+  <!-- Servlet for building destination paths from a wizard -->
+  <servlet>
+    <servlet-name>destinationWizard</servlet-name>
+    <servlet-class>org.opennms.web.admin.notification.DestinationWizardServlet</servlet-class>
+  </servlet>
+  
+  <!-- Servlet for building notifications from a wizard -->
+  <servlet>
+    <servlet-name>notificationWizard</servlet-name>
+    <servlet-class>org.opennms.web.admin.notification.noticeWizard.NotificationWizardServlet</servlet-class>
+  </servlet>
+  
+  <!-- Servlets for configuration of users groups and views -->
+  <servlet>
+    <!-- servlet for passing parameters to the user modify jsp -->
+    <servlet-name>modifyUser</servlet-name>
+    <servlet-class>org.opennms.web.admin.users.ModifyUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for updating the local user info during modification-->
+    <servlet-name>updateUser</servlet-name>
+    <servlet-class>org.opennms.web.admin.users.UpdateUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for saving the local user info during modification-->
+    <servlet-name>saveUser</servlet-name>
+    <servlet-class>org.opennms.web.admin.users.SaveUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for renaming the local user info during modification-->
+    <servlet-name>renameUser</servlet-name>
+    <servlet-class>org.opennms.web.admin.users.RenameUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for adding a new user-->
+    <servlet-name>addNewUser</servlet-name>
+    <servlet-class>org.opennms.web.admin.users.AddNewUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for deleting a user-->
+    <servlet-name>deleteUser</servlet-name>
+    <servlet-class>org.opennms.web.admin.users.DeleteUserServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <!-- servlet for adding duty schedules to a user's notification info-->
+    <servlet-name>addDutySchedules</servlet-name>
+    <servlet-class>org.opennms.web.admin.users.AddDutySchedulesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for removing duty schedules from a user's notification info-->
+    <servlet-name>removeDutySchedules</servlet-name>
+    <servlet-class>org.opennms.web.admin.users.RemoveDutySchedulesServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>admin-roles</servlet-name>
+  	<servlet-class>org.opennms.web.admin.roles.AdminRoleServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>user-roles</servlet-name>
+  	<servlet-class>org.opennms.web.admin.roles.UserRoleServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <!-- servlet for passing parameters to the view modify jsp -->
+    <servlet-name>modifyView</servlet-name>
+    <servlet-class>org.opennms.web.admin.views.ModifyViewServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for updating the local view info during modification-->
+    <servlet-name>updateView</servlet-name>
+    <servlet-class>org.opennms.web.admin.views.UpdateViewServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for saving the local view info during modification-->
+    <servlet-name>saveView</servlet-name>
+    <servlet-class>org.opennms.web.admin.views.SaveViewServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for renaming the local view info during modification-->
+    <servlet-name>renameView</servlet-name>
+    <servlet-class>org.opennms.web.admin.views.RenameViewServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for adding a new view-->
+    <servlet-name>addNewView</servlet-name>
+    <servlet-class>org.opennms.web.admin.views.AddNewViewServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for deleting a view-->
+    <servlet-name>deleteView</servlet-name>
+    <servlet-class>org.opennms.web.admin.views.DeleteViewServlet</servlet-class>
+  </servlet>
+
+
+<!-- Servlets for user account self-service -->
+  <!-- servlet for self-service password change entry point-->
+  <servlet>
+    <servlet-name>newPasswordEntry</servlet-name>
+    <servlet-class>org.opennms.web.account.selfService.NewPasswordEntryServlet</servlet-class>
+  </servlet>
+   <!-- servlet for self-service password change action -->
+  <servlet>   
+    <servlet-name>newPasswordAction</servlet-name>
+    <servlet-class>org.opennms.web.account.selfService.NewPasswordActionServlet</servlet-class>
+  </servlet>
+
+  <!-- Servlet mappings for user account self-service -->
+  <servlet-mapping>
+    <servlet-name>newPasswordEntry</servlet-name>
+    <url-pattern>/account/selfService/newPasswordEntry</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>newPasswordAction</servlet-name>
+    <url-pattern>/account/selfService/newPasswordAction</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Servlet mappings for REST Services -->
+  <servlet-mapping>
+    <servlet-name>opennmsRestWebServices</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>nodeLabelChange</servlet-name>
+    <servlet-class>org.opennms.web.nodelabel.NodeLabelChangeServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <!-- servlet for setting critical path -->
+    <servlet-name>setCriticalPath</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.SetCriticalPathServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for grabbing node information -->
+    <servlet-name>deleteSelNodes</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.DeleteNodesServlet</servlet-class>
+  </servlet>
+  <servlet>
+     <servlet-name>deleteInterface</servlet-name>
+     <servlet-class>org.opennms.web.admin.nodeManagement.DeleteInterfaceServlet</servlet-class>
+  </servlet>
+  <servlet>
+     <servlet-name>deleteService</servlet-name>
+     <servlet-class>org.opennms.web.admin.nodeManagement.DeleteServiceServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for grabbing interfaces and services on a node -->
+    <servlet-name>getInterfaces</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.GetInterfacesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for adding a new interface -->
+    <servlet-name>addNewInterface</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.AddNewInterfaceServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for deleting nodes -->
+    <servlet-name>deleteNodes</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.DeleteGetNodesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for grabbing SNMP node information -->
+    <servlet-name>snmpGetNodes</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.SnmpGetNodesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for grabbing SNMP interface information -->
+    <servlet-name>snmpGetInterfaces</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.SnmpGetInterfacesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for grabbing node, interface and service information -->
+    <servlet-name>getNodes</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.GetNodesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for managing and unmanaging interfaces and services -->
+    <servlet-name>manageNodes</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.ManageNodesServlet</servlet-class>
+  </servlet>
+  <servlet>
+     <!-- servlet for managing/unmanaging interfaces and services for a single node -->
+     <servlet-name>manageNode</servlet-name>
+     <servlet-class>org.opennms.web.admin.nodeManagement.ManageNodeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for managing and unmanaging interfaces and services -->
+    <servlet-name>snmpManageNodes</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.SnmpManageNodesServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <!-- servlet for configuring SNMP parameters -->
+    <servlet-name>snmpConfig</servlet-name>
+    <servlet-class>org.opennms.web.admin.nodeManagement.SnmpConfigServlet</servlet-class>
+  </servlet>
+  
+  <!-- servlets for editing the poller configuration files -->
+  <servlet>
+    <servlet-name>pollerConfig</servlet-name>
+    <servlet-class>org.opennms.web.admin.pollerConfig.PollerConfigServlet</servlet-class>
+    <init-param>
+      <description>Redirect to this sibling URL on success.</description>
+      <param-name>redirect.success</param-name>
+      <param-value>finishPollerConfig.jsp</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>finishPollerConfig</servlet-name>
+    <servlet-class>org.opennms.web.admin.pollerConfig.FinishPollerConfigServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <!-- servlet for managing and unmanaging interfaces and services -->
+    <servlet-name>addPollerConfig</servlet-name>
+    <servlet-class>org.opennms.web.admin.pollerConfig.AddPollerConfigServlet</servlet-class>
+    <init-param>
+      <description>Redirect to this sibling URL on success.</description>
+      <param-name>redirect.success</param-name>
+      <param-value>index.jsp</param-value>
+    </init-param>
+  </servlet>
+
+  <!--servlet for updating the notify flag in the ifservices table -->
+  <servlet>
+        <servlet-name>updateServiceNotify</servlet-name>
+        <servlet-class>org.opennms.web.admin.notification.ServiceNoticeUpdateServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>rtcPost</servlet-name>
+    <servlet-class>org.opennms.web.category.RTCPostServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>rtcRaw</servlet-name>
+    <servlet-class>org.opennms.web.category.RTCDebugServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>sendMail</servlet-name>
+    <servlet-class>org.opennms.web.mail.MailerServlet</servlet-class>
+    <init-param>
+      <description>Redirect to this sibling URL on success.</description>
+      <param-name>redirect.success</param-name>
+      <param-value>../support/index.htm</param-value>
+    </init-param>
+    <init-param>
+      <description>Redirect to this sibling URL on success.</description>
+      <param-name>mail.program</param-name>
+      <param-value>/bin/mail</param-value>
+    </init-param>    
+  </servlet>
+
+  <servlet>
+    <servlet-name>nodeRescan</servlet-name>
+    <servlet-class>org.opennms.web.element.NodeRescanServlet</servlet-class>
+  </servlet>
+
+  <!-- Servlet to set snmp interface up or down -->
+  <servlet>
+     <servlet-name>ManageSnmpIntf</servlet-name>
+    <servlet-class>org.opennms.web.element.ManageSnmpIntfServlet</servlet-class>
+  </servlet>
+
+  <!--
+  <servlet>
+    <servlet-name>filterOutage</servlet-name>
+    <servlet-class>org.opennms.web.outage.OutageFilterServlet</servlet-class>
+  </servlet>
+  -->
+
+  <!-- servlet>
+    <servlet-name>invClogin</servlet-name>
+    <servlet-class>org.opennms.web.inventory.InvCloginServlet</servlet-class>
+  </servlet-->
+  
+  <servlet>
+  	<servlet-name>scheduleEditor</servlet-name>
+  	<servlet-class>org.opennms.web.admin.schedule.ScheduleEditorServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>purdyChart</servlet-name>
+  	<servlet-class>org.opennms.web.graph.PurdyChartServlet</servlet-class>
+  	<init-param>
+  		<param-name>chart-name</param-name>
+  		<param-value>sample-bar-chart</param-value>
+  	</init-param>
+  </servlet>
+
+ 
+  <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!-- desktop graph servlet mapping -->
+  <!-- desktop survey report servlet mapping -->  
+  
+  <servlet-mapping>
+  	<servlet-name>purdyChart</servlet-name>
+  	<url-pattern>/charts</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>scheduleEditor</servlet-name>
+  	<url-pattern>/admin/schedule/schedule-editor</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>queryEvent</servlet-name>
+    <url-pattern>/event/query</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>queryAlarm</servlet-name>
+    <url-pattern>/alarm/query</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>filterVulnerability</servlet-name>
+    <url-pattern>/vulnerability/list</url-pattern>
+  </servlet-mapping>    
+  
+  <!--servlet mapping for update notification status servlet -->
+  <servlet-mapping>
+    <servlet-name>updateNotificationStatus</servlet-name>
+    <url-pattern>/admin/updateNotificationStatus</url-pattern>
+  </servlet-mapping>
+  
+  <!-- servlet mapping for the destination wizard servlet -->
+  <servlet-mapping>
+    <servlet-name>destinationWizard</servlet-name>
+    <url-pattern>/admin/notification/destinationWizard</url-pattern>
+  </servlet-mapping>
+  
+  <!-- servlet mapping for the notification wizard servlet -->
+  <servlet-mapping>
+    <servlet-name>notificationWizard</servlet-name>
+    <url-pattern>/admin/notification/noticeWizard/notificationWizard</url-pattern>
+  </servlet-mapping>
+    
+  <!-- servlet mapping for configuring users groups and views -->
+  <!-- user configuration servlets -->
+  <!-- converted to Controller -->
+  <servlet-mapping>
+    <servlet-name>modifyUser</servlet-name>
+    <url-pattern>/admin/userGroupView/users/modifyUser</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>updateUser</servlet-name>
+    <url-pattern>/admin/userGroupView/users/updateUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>saveUser</servlet-name>
+    <url-pattern>/admin/userGroupView/users/saveUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>renameUser</servlet-name>
+    <url-pattern>/admin/userGroupView/users/renameUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addNewUser</servlet-name>
+    <url-pattern>/admin/userGroupView/users/addNewUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>deleteUser</servlet-name>
+    <url-pattern>/admin/userGroupView/users/deleteUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addDutySchedules</servlet-name>
+    <url-pattern>/admin/userGroupView/users/addDutySchedules</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>removeDutySchedules</servlet-name>
+    <url-pattern>/admin/userGroupView/users/removeDutySchedules</url-pattern>
+  </servlet-mapping>
+  <!-- end of user configuration servlets -->
+  
+  <!-- group configuration servlets -->
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/admin/userGroupView/groups/modifyGroup</url-pattern>
+  </servlet-mapping>
+  <!-- end of group configuration servlets -->
+  
+  <servlet-mapping>
+    <servlet-name>admin-roles</servlet-name>
+    <url-pattern>/admin/userGroupView/roles</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>user-roles</servlet-name>
+    <url-pattern>/roles</url-pattern>
+  </servlet-mapping>
+
+  <!-- view configuration servlets -->
+  <servlet-mapping>
+    <servlet-name>modifyView</servlet-name>
+    <url-pattern>/admin/userGroupView/views/modifyView</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>updateView</servlet-name>
+    <url-pattern>/admin/userGroupView/views/updateView</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>saveView</servlet-name>
+    <url-pattern>/admin/userGroupView/views/saveView</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>renameView</servlet-name>
+    <url-pattern>/admin/userGroupView/views/renameView</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addNewView</servlet-name>
+    <url-pattern>/admin/userGroupView/views/addNewView</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>deleteView</servlet-name>
+    <url-pattern>/admin/userGroupView/views/deleteView</url-pattern>
+  </servlet-mapping>
+  <!-- end of group configuration servlets -->
+  
+  <!-- end of user groups and views configuration servlets -->
+
+  <servlet-mapping>
+    <servlet-name>nodeLabelChange</servlet-name>
+    <url-pattern>/admin/nodeLabelChange</url-pattern>
+  </servlet-mapping>
+  
+    <!--servlet mapping for restart discovery servlet-->
+  <servlet-mapping>
+    <servlet-name>actionDiscovery</servlet-name>
+    <url-pattern>/admin/discovery/actionDiscovery</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>modifyDiscoveryConfig</servlet-name>
+    <url-pattern>/admin/discovery/modifyDiscoveryConfig</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>modifyAsset</servlet-name>
+    <url-pattern>/asset/modifyAsset</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>importAssets</servlet-name>
+    <url-pattern>/admin/asset/import/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>exportAssets</servlet-name>
+    <url-pattern>/admin/asset/assets.csv</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>getInterfaces</servlet-name>
+    <url-pattern>/admin/nodemanagement/getInterfaces</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addNewInterface</servlet-name>
+    <url-pattern>/admin/addNewInterface</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>setCriticalPath</servlet-name>
+    <url-pattern>/admin/setCriticalPath</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>deleteSelNodes</servlet-name>
+    <url-pattern>/admin/deleteSelNodes</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>deleteNodes</servlet-name>
+    <url-pattern>/admin/deleteNodes</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+     <servlet-name>deleteInterface</servlet-name>
+     <url-pattern>/admin/deleteInterface</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>deleteService</servlet-name>
+  	<url-pattern>/admin/deleteService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>snmpGetNodes</servlet-name>
+    <url-pattern>/admin/snmpGetNodes</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>snmpGetInterfaces</servlet-name>
+    <url-pattern>/admin/snmpGetInterfaces</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>getNodes</servlet-name>
+    <url-pattern>/admin/getNodes</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>manageNodes</servlet-name>
+    <url-pattern>/admin/manageNodes</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+     <servlet-name>manageNode</servlet-name>
+     <url-pattern>/admin/manageNode</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>snmpManageNodes</servlet-name>
+    <url-pattern>/admin/changeCollectStatus</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>snmpConfig</servlet-name>
+    <url-pattern>/admin/snmpConfig</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>pollerConfig</servlet-name>
+    <url-pattern>/admin/pollerConfig/pollerConfig</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>finishPollerConfig</servlet-name>
+    <url-pattern>/admin/pollerConfig/finishPollerConfig</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addPollerConfig</servlet-name>
+    <url-pattern>/admin/pollerConfig/addPollerConfig</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+        <servlet-name>updateServiceNotify</servlet-name>
+        <url-pattern>/admin/updateServiceNotify</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>rtcPost</servlet-name>
+    <url-pattern>/rtc/post/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>rtcRaw</servlet-name>
+    <url-pattern>/rtc/raw</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>sendMail</servlet-name>
+    <url-pattern>/mail/send</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>nodeRescan</servlet-name>
+    <url-pattern>/element/rescan</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+    <servlet-name>ManageSnmpIntf</servlet-name>
+    <url-pattern>/element/ManageSnmpIntf</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>gwtDispatcher</servlet-name>
+    <url-pattern>*.gwt</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mapDispatcher</servlet-name>
+    <url-pattern>*.map</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.htm</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/alarm/acknowledge</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/alarm/acknowledgeByFilter</url-pattern>
+  </servlet-mapping>  
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/alarm/changeSeverity</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/event/acknowledge</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/event/acknowledgeByFilter</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/event/list</url-pattern>
+  </servlet-mapping>    
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/event/detail.jsp</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/notification/browse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/notification/acknowledge</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/outage/list</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/outage/detail.jsp</url-pattern>
+  </servlet-mapping>
+
+  <!-- Although this will be matched by the above *.htm url-pattern,
+       this servlet-mapping needs to be here because wildcard url-pattern
+       elements don't seem to work as a welcome-page entry. -->
+  <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/frontPage.htm</url-pattern>
+  </servlet-mapping>
+    
+  <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/graph/graph.png</url-pattern>
+  </servlet-mapping>
+
+  <!-- WARMERGE: insert servlet -->  
+  <!-- WARMERGE: insert servlet-mapping -->  
+
+  <error-page>
+    <exception-type>org.opennms.web.category.CategoryNotFoundException</exception-type>
+    <location>/errors/categorynotfound.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.MissingParameterException</exception-type>
+    <location>/errors/missingparam.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.event.EventIdNotFoundException</exception-type>
+    <location>/errors/eventidnotfound.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.alarm.AlarmIdNotFoundException</exception-type>
+    <location>/errors/alarmidnotfound.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.element.ElementNotFoundException</exception-type>
+    <location>/errors/elementnotfound.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.element.ElementIdNotFoundException</exception-type>
+    <location>/errors/elementidnotfound.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.notification.NoticeIdNotFoundException</exception-type>
+    <location>/errors/noticeidnotfound.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.outage.OutageIdNotFoundException</exception-type>
+    <location>/errors/outageidnotfound.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.SecurityException</exception-type>
+    <location>/errors/sealingviolation.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.controller.statisticsReports.StatisticsReportIdNotFoundException</exception-type>
+    <location>/errors/statisticsreportidnotfound.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>org.opennms.web.vulnerability.VulnerabilityIdNotFoundException</exception-type>
+    <location>/errors/vulnerabilityidnotfound.jsp</location>
+  </error-page>  
+  <error-page>
+    <exception-type>org.opennms.netmgt.model.events.EventProxyException</exception-type>
+    <location>/errors/eventproxyexception.jsp</location>
+  </error-page>  
+  <error-page>
+    <exception-type>org.opennms.web.admin.nodeManagement.NoManagedInterfacesException</exception-type>
+    <location>/errors/nomanagedinterfaces.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/errors/unknownexception.jsp</location>
+  </error-page>  
+  
+  <!-- the welcome-file elements need to point at a file that exists or
+       a non-wildcard url-pattern in a servlet-mapping element. -->
+  <welcome-file-list>
+    <welcome-file>frontPage.jsp</welcome-file>
+  </welcome-file-list>
+  
+
+<!--
+Automatically created by JspC.
+Place this fragment in the web.xml before all icon, display-name,
+description, distributable, and context-param elements.
+-->
+
+    <servlet>
+        <servlet-name>jsp.frontPage_jsp</servlet-name>
+        <servlet-class>jsp.frontPage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.alarm.index_jsp</servlet-name>
+        <servlet-class>jsp.alarm.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.alarm.advsearch_jsp</servlet-name>
+        <servlet-class>jsp.alarm.advsearch_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.alarm.severity_jsp</servlet-name>
+        <servlet-class>jsp.alarm.severity_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.vulnerabilityidnotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.vulnerabilityidnotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.categorynotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.categorynotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.elementnotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.elementnotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.noticeidnotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.noticeidnotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.sealingviolation_jsp</servlet-name>
+        <servlet-class>jsp.errors.sealingviolation_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.alarmidnotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.alarmidnotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.outageidnotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.outageidnotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.unknownexception_jsp</servlet-name>
+        <servlet-class>jsp.errors.unknownexception_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.connectexception_jsp</servlet-name>
+        <servlet-class>jsp.errors.connectexception_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.elementidnotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.elementidnotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.nomanagedinterfaces_jsp</servlet-name>
+        <servlet-class>jsp.errors.nomanagedinterfaces_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.statisticsreportidnotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.statisticsreportidnotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.eventidnotfound_jsp</servlet-name>
+        <servlet-class>jsp.errors.eventidnotfound_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.missingparam_jsp</servlet-name>
+        <servlet-class>jsp.errors.missingparam_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.errors.eventproxyexception_jsp</servlet-name>
+        <servlet-class>jsp.errors.eventproxyexception_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.support.about_jsp</servlet-name>
+        <servlet-class>jsp.support.about_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.login_jsp</servlet-name>
+        <servlet-class>jsp.login_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.asset.modify_jsp</servlet-name>
+        <servlet-class>jsp.asset.modify_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.asset.index_jsp</servlet-name>
+        <servlet-class>jsp.asset.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.asset.nodelist_jsp</servlet-name>
+        <servlet-class>jsp.asset.nodelist_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.index_jsp</servlet-name>
+        <servlet-class>jsp.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.help.index_jsp</servlet-name>
+        <servlet-class>jsp.help.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.help.about_jsp</servlet-name>
+        <servlet-class>jsp.help.about_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.roles.list_jsp</servlet-name>
+        <servlet-class>jsp.roles.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.roles.view_jsp</servlet-name>
+        <servlet-class>jsp.roles.view_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.surveillance_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.surveillance_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.KSC.index_jsp</servlet-name>
+        <servlet-class>jsp.KSC.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.graph.adhoc4_jsp</servlet-name>
+        <servlet-class>jsp.graph.adhoc4_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.graph.index_jsp</servlet-name>
+        <servlet-class>jsp.graph.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.graph.adhoc3_jsp</servlet-name>
+        <servlet-class>jsp.graph.adhoc3_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.graph.adhoc2_jsp</servlet-name>
+        <servlet-class>jsp.graph.adhoc2_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.map.index_jsp</servlet-name>
+        <servlet-class>jsp.map.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.map.response.ipmitool_jsp</servlet-name>
+        <servlet-class>jsp.map.response.ipmitool_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.map.response.traceroutewithajax_jsp</servlet-name>
+        <servlet-class>jsp.map.response.traceroutewithajax_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.map.response.traceroute_jsp</servlet-name>
+        <servlet-class>jsp.map.response.traceroute_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.map.response.ping_jsp</servlet-name>
+        <servlet-class>jsp.map.response.ping_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.map.response.pingwithajax_jsp</servlet-name>
+        <servlet-class>jsp.map.response.pingwithajax_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.event.index_jsp</servlet-name>
+        <servlet-class>jsp.event.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.event.advsearch_jsp</servlet-name>
+        <servlet-class>jsp.event.advsearch_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.event.severity_jsp</servlet-name>
+        <servlet-class>jsp.event.severity_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.event.list_002dshort_jsp</servlet-name>
+        <servlet-class>jsp.event.list_002dshort_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.statisticsReports.index_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.statisticsReports.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.statisticsReports.report_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.statisticsReports.report_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.alarm.detail_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.alarm.detail_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.alarm.list_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.alarm.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.navBar_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.navBar_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.support.index_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.support.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributedStatusSummary_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.distributedStatusSummary_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.surveillanceView_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.surveillanceView_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributedStatusHistory_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.distributedStatusHistory_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.customGraphEditDetails_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.KSC.customGraphEditDetails_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.include_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.KSC.include_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.index_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.KSC.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.customGraphChooseResource_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.KSC.customGraphChooseResource_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.customReport_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.KSC.customReport_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.customView_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.KSC.customView_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.graph.results_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.graph.results_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.graph.chooseresource_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.graph.chooseresource_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.surveillanceViewError_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.surveillanceViewError_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.event.detail_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.event.detail_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.event.list_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.event.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.detail_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.detail_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.displayAllOutages_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.displayAllOutages_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.interfaceOutages_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.interfaceOutages_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.servicesdown_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.servicesdown_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.serviceOutages_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.serviceOutages_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.displayResolvedOutages_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.displayResolvedOutages_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.list_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.nodeOutages_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.nodeOutages_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.displaySuppressedOutages_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.outage.displaySuppressedOutages_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.progressBar_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.progressBar_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributedStatusSummaryError_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.distributedStatusSummaryError_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editCategory_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.editCategory_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.support.systemReportList_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.support.systemReportList_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.support.systemReport_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.support.systemReport_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editProvisioningGroup_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.editProvisioningGroup_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.rancid.rancidAdmin_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.rancid.rancidAdmin_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.thresholds.editExpression_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.thresholds.editExpression_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.thresholds.editGroup_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.thresholds.editGroup_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.thresholds.list_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.thresholds.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.thresholds.editThreshold_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.thresholds.editThreshold_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.node.add_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.node.add_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.showCategory_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.showCategory_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editServiceApplications_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.editServiceApplications_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.modifyGroup_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.modifyGroup_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.newGroup_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.newGroup_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.groupDetail_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.groupDetail_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.list_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editForeignSource_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.editForeignSource_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.provisioningGroups_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.provisioningGroups_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editNodeCategories_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.editNodeCategories_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.categories_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.categories_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.storage.storageAdmin_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.storage.storageAdmin_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editApplication_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.editApplication_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.showApplication_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.showApplication_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.applications_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.admin.applications_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.element.nodeList_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.element.nodeList_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.daemonstatus_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.daemonstatus_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributedStatusDetails_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.distributedStatusDetails_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.manage_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.report.database.manage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.index_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.report.database.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.onlineReport_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.report.database.onlineReport_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.manageSchedule_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.report.database.manageSchedule_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.onlineList_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.report.database.onlineList_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.reportList_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.report.database.reportList_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.batchList_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.report.database.batchList_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributed.error_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.distributed.error_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributed.locationMonitorDetails_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.distributed.locationMonitorDetails_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributed.locationMonitorList_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.distributed.locationMonitorList_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.includes.serviceApplication_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.includes.serviceApplication_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.includes.nodeCategory_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.includes.nodeCategory_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancidList_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.inventory.rancidList_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancid_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.inventory.rancid_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancidViewVc_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.inventory.rancidViewVc_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.invnode_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.inventory.invnode_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancidReport_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.inventory.rancidReport_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancidReportExec_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.inventory.rancidReportExec_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.siteStatusError_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.siteStatusError_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.siteStatus_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.siteStatus_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.displayCategoryStatus_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.displayCategoryStatus_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.rtc.category_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.rtc.category_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.jsp.notification.list_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.jsp.notification.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.deliveryOptions_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.flows.report.database.batchReport.deliveryOptions_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.reportParameters_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.flows.report.database.batchReport.reportParameters_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.reportRunning_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.flows.report.database.batchReport.reportRunning_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.reportScheduled_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.flows.report.database.batchReport.reportScheduled_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.reportError_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.flows.report.database.batchReport.reportError_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.cronExpression_jsp</servlet-name>
+        <servlet-class>jsp.WEB_002dINF.flows.report.database.batchReport.cronExpression_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.outage.index_jsp</servlet-name>
+        <servlet-class>jsp.outage.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.outage.current_jsp</servlet-name>
+        <servlet-class>jsp.outage.current_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.logoff_jsp</servlet-name>
+        <servlet-class>jsp.logoff_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.manage_jsp</servlet-name>
+        <servlet-class>jsp.admin.manage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.error_jsp</servlet-name>
+        <servlet-class>jsp.admin.error_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.asset.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.asset.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.asset.import_jsp</servlet-name>
+        <servlet-class>jsp.admin.asset.import_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.discovery.add_002dir_jsp</servlet-name>
+        <servlet-class>jsp.admin.discovery.add_002dir_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.discovery.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.discovery.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.discovery.add_002dspecific_jsp</servlet-name>
+        <servlet-class>jsp.admin.discovery.add_002dspecific_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.discovery.add_002der_jsp</servlet-name>
+        <servlet-class>jsp.admin.discovery.add_002der_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.discovery.edit_002dconfig_jsp</servlet-name>
+        <servlet-class>jsp.admin.discovery.edit_002dconfig_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.discovery.add_002durl_jsp</servlet-name>
+        <servlet-class>jsp.admin.discovery.add_002durl_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.schedule.editSchedule_jsp</servlet-name>
+        <servlet-class>jsp.admin.schedule.editSchedule_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.schedule.displaySchedules_jsp</servlet-name>
+        <servlet-class>jsp.admin.schedule.displaySchedules_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.nodelabelProvisioned_jsp</servlet-name>
+        <servlet-class>jsp.admin.nodelabelProvisioned_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.thresholds.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.thresholds.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.updateSnmp_jsp</servlet-name>
+        <servlet-class>jsp.admin.updateSnmp_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.deleteNodesFinish_jsp</servlet-name>
+        <servlet-class>jsp.admin.deleteNodesFinish_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.interfaceDeleted_jsp</servlet-name>
+        <servlet-class>jsp.admin.interfaceDeleted_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.snmpConfigured_jsp</servlet-name>
+        <servlet-class>jsp.admin.snmpConfigured_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.wait_jsp</servlet-name>
+        <servlet-class>jsp.admin.wait_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.manageNodesFinish_jsp</servlet-name>
+        <servlet-class>jsp.admin.manageNodesFinish_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.users.modifyUser_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.users.modifyUser_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.users.newPassword_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.users.newPassword_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.users.userDetail_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.users.userDetail_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.users.list_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.users.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.users.newUser_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.users.newUser_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.roles.editDetails_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.roles.editDetails_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.roles.editSpecific_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.roles.editSpecific_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.roles.list_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.roles.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.roles.view_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.roles.view_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.views.viewDetail_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.views.viewDetail_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.views.list_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.views.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.views.modifyView_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.views.modifyView_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.userGroupView.test_jsp</servlet-name>
+        <servlet-class>jsp.admin.userGroupView.test_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.serviceDeleted_jsp</servlet-name>
+        <servlet-class>jsp.admin.serviceDeleted_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.sysconfig_jsp</servlet-name>
+        <servlet-class>jsp.admin.sysconfig_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.newInterface_jsp</servlet-name>
+        <servlet-class>jsp.admin.newInterface_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.nodemanagement.setPathOutage_jsp</servlet-name>
+        <servlet-class>jsp.admin.nodemanagement.setPathOutage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.nodemanagement.instrumentationLogReader_jsp</servlet-name>
+        <servlet-class>jsp.admin.nodemanagement.instrumentationLogReader_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.nodemanagement.managenode_jsp</servlet-name>
+        <servlet-class>jsp.admin.nodemanagement.managenode_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.nodemanagement.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.nodemanagement.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.nodemanagement.deletenode_jsp</servlet-name>
+        <servlet-class>jsp.admin.nodemanagement.deletenode_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.interfaceAdded_jsp</servlet-name>
+        <servlet-class>jsp.admin.interfaceAdded_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.pollerConfig.addPollerConfig_jsp</servlet-name>
+        <servlet-class>jsp.admin.pollerConfig.addPollerConfig_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.pollerConfig.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.pollerConfig.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.pollerConfig.finishPollerConfig_jsp</servlet-name>
+        <servlet-class>jsp.admin.pollerConfig.finishPollerConfig_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.snmpConfig_jsp</servlet-name>
+        <servlet-class>jsp.admin.snmpConfig_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.snmpselect_jsp</servlet-name>
+        <servlet-class>jsp.admin.snmpselect_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.nodelabel_jsp</servlet-name>
+        <servlet-class>jsp.admin.nodelabel_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.snmpmanage_jsp</servlet-name>
+        <servlet-class>jsp.admin.snmpmanage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.delete_jsp</servlet-name>
+        <servlet-class>jsp.admin.delete_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.noticeWizard.choosePath_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.noticeWizard.choosePath_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.noticeWizard.buildPathOutage_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.noticeWizard.buildPathOutage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.noticeWizard.validateRule_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.noticeWizard.validateRule_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.noticeWizard.eventNotices_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.noticeWizard.eventNotices_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.noticeWizard.validatePathOutage_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.noticeWizard.validatePathOutage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.noticeWizard.notifsForUEI_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.noticeWizard.notifsForUEI_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.noticeWizard.buildRule_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.noticeWizard.buildRule_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.noticeWizard.chooseUeis_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.noticeWizard.chooseUeis_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.chooseTargets_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.chooseTargets_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.destinationPaths_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.destinationPaths_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.chooseCommands_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.chooseCommands_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.escalations_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.escalations_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.groupIntervals_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.groupIntervals_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.notification.pathOutline_jsp</servlet-name>
+        <servlet-class>jsp.admin.notification.pathOutline_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.sched_002doutages.editoutage_jsp</servlet-name>
+        <servlet-class>jsp.admin.sched_002doutages.editoutage_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.sched_002doutages.jsonNodes_jsp</servlet-name>
+        <servlet-class>jsp.admin.sched_002doutages.jsonNodes_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.sched_002doutages.index_jsp</servlet-name>
+        <servlet-class>jsp.admin.sched_002doutages.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.admin.sched_002doutages.jsonIpInterfaces_jsp</servlet-name>
+        <servlet-class>jsp.admin.sched_002doutages.jsonIpInterfaces_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.rescan_jsp</servlet-name>
+        <servlet-class>jsp.element.rescan_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.index_jsp</servlet-name>
+        <servlet-class>jsp.element.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.node_jsp</servlet-name>
+        <servlet-class>jsp.element.node_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.routeipnode_jsp</servlet-name>
+        <servlet-class>jsp.element.routeipnode_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.bridgenode_jsp</servlet-name>
+        <servlet-class>jsp.element.bridgenode_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.service_jsp</servlet-name>
+        <servlet-class>jsp.element.service_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.linkednode_jsp</servlet-name>
+        <servlet-class>jsp.element.linkednode_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.snmpinterface_jsp</servlet-name>
+        <servlet-class>jsp.element.snmpinterface_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.element.interface_jsp</servlet-name>
+        <servlet-class>jsp.element.interface_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.vulnerability.detail_jsp</servlet-name>
+        <servlet-class>jsp.vulnerability.detail_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.vulnerability.index_jsp</servlet-name>
+        <servlet-class>jsp.vulnerability.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.vulnerability.list_jsp</servlet-name>
+        <servlet-class>jsp.vulnerability.list_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.accessDenied_jsp</servlet-name>
+        <servlet-class>jsp.accessDenied_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.report.index_jsp</servlet-name>
+        <servlet-class>jsp.report.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.mobile_jsp</servlet-name>
+        <servlet-class>jsp.mobile_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.dateControl_jsp</servlet-name>
+        <servlet-class>jsp.includes.dateControl_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.bookmarkAll_jsp</servlet-name>
+        <servlet-class>jsp.includes.bookmarkAll_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.notification_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.notification_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.quicksearch_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.quicksearch_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.charts_jsp</servlet-name>
+        <servlet-class>jsp.includes.charts_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.search_002dconstraints_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.search_002dconstraints_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.alarm_002dquerypanel_jsp</servlet-name>
+        <servlet-class>jsp.includes.alarm_002dquerypanel_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.key_jsp</servlet-name>
+        <servlet-class>jsp.includes.key_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.categories_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.categories_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.resultsIndex_jsp</servlet-name>
+        <servlet-class>jsp.includes.resultsIndex_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.vulnerability_002dserach_002dconstraints_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.vulnerability_002dserach_002dconstraints_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.footnote1_jsp</servlet-name>
+        <servlet-class>jsp.includes.footnote1_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.distStatusLegend_jsp</servlet-name>
+        <servlet-class>jsp.includes.distStatusLegend_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.serviceAvailability_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.serviceAvailability_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.event_002dadvquerypanel_jsp</servlet-name>
+        <servlet-class>jsp.includes.event_002dadvquerypanel_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.surveillance_002dkey_jsp</servlet-name>
+        <servlet-class>jsp.includes.surveillance_002dkey_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.mobile_005fheader_jsp</servlet-name>
+        <servlet-class>jsp.includes.mobile_005fheader_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.header_jsp</servlet-name>
+        <servlet-class>jsp.includes.header_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.interfaceLink_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.interfaceLink_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.alarm_002dadvquerypanel_jsp</servlet-name>
+        <servlet-class>jsp.includes.alarm_002dadvquerypanel_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.bookmark_jsp</servlet-name>
+        <servlet-class>jsp.includes.bookmark_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.footer_jsp</servlet-name>
+        <servlet-class>jsp.includes.footer_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.resourceGraphs_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.resourceGraphs_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.nodeSTPint_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.nodeSTPint_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.security_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.security_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.legendInfo_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.legendInfo_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.nodeAvailability_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.nodeAvailability_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.nodeBridge_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.nodeBridge_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.interfaceSTP_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.interfaceSTP_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.timeControl_jsp</servlet-name>
+        <servlet-class>jsp.includes.timeControl_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.interfaceAvailability_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.interfaceAvailability_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.eventlist_jsp</servlet-name>
+        <servlet-class>jsp.includes.eventlist_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.event_002dquerypanel_jsp</servlet-name>
+        <servlet-class>jsp.includes.event_002dquerypanel_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.resultsIndexNoCount_jsp</servlet-name>
+        <servlet-class>jsp.includes.resultsIndexNoCount_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.includes.nodeRouteInfo_002dbox_jsp</servlet-name>
+        <servlet-class>jsp.includes.nodeRouteInfo_002dbox_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.security_jsp</servlet-name>
+        <servlet-class>jsp.security_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.charts.index_jsp</servlet-name>
+        <servlet-class>jsp.charts.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.dashboard_jsp</servlet-name>
+        <servlet-class>jsp.dashboard_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.pathOutage.index_jsp</servlet-name>
+        <servlet-class>jsp.pathOutage.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.pathOutage.showNodes_jsp</servlet-name>
+        <servlet-class>jsp.pathOutage.showNodes_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.jsps.completions_jsp</servlet-name>
+        <servlet-class>jsp.jsps.completions_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.account.selfService.passwordChanged_jsp</servlet-name>
+        <servlet-class>jsp.account.selfService.passwordChanged_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.account.selfService.newPassword_jsp</servlet-name>
+        <servlet-class>jsp.account.selfService.newPassword_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.account.selfService.index_jsp</servlet-name>
+        <servlet-class>jsp.account.selfService.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.rss_jsp</servlet-name>
+        <servlet-class>jsp.rss_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.test.testProgressBar_jsp</servlet-name>
+        <servlet-class>jsp.test.testProgressBar_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.rtc.index_jsp</servlet-name>
+        <servlet-class>jsp.rtc.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.rtc.category_jsp</servlet-name>
+        <servlet-class>jsp.rtc.category_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.notification.detail_jsp</servlet-name>
+        <servlet-class>jsp.notification.detail_jsp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>jsp.notification.index_jsp</servlet-name>
+        <servlet-class>jsp.notification.index_jsp</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>jsp.frontPage_jsp</servlet-name>
+        <url-pattern>/frontPage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.alarm.index_jsp</servlet-name>
+        <url-pattern>/alarm/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.alarm.advsearch_jsp</servlet-name>
+        <url-pattern>/alarm/advsearch.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.alarm.severity_jsp</servlet-name>
+        <url-pattern>/alarm/severity.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.vulnerabilityidnotfound_jsp</servlet-name>
+        <url-pattern>/errors/vulnerabilityidnotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.categorynotfound_jsp</servlet-name>
+        <url-pattern>/errors/categorynotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.elementnotfound_jsp</servlet-name>
+        <url-pattern>/errors/elementnotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.noticeidnotfound_jsp</servlet-name>
+        <url-pattern>/errors/noticeidnotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.sealingviolation_jsp</servlet-name>
+        <url-pattern>/errors/sealingviolation.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.alarmidnotfound_jsp</servlet-name>
+        <url-pattern>/errors/alarmidnotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.outageidnotfound_jsp</servlet-name>
+        <url-pattern>/errors/outageidnotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.unknownexception_jsp</servlet-name>
+        <url-pattern>/errors/unknownexception.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.connectexception_jsp</servlet-name>
+        <url-pattern>/errors/connectexception.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.elementidnotfound_jsp</servlet-name>
+        <url-pattern>/errors/elementidnotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.nomanagedinterfaces_jsp</servlet-name>
+        <url-pattern>/errors/nomanagedinterfaces.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.statisticsreportidnotfound_jsp</servlet-name>
+        <url-pattern>/errors/statisticsreportidnotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.eventidnotfound_jsp</servlet-name>
+        <url-pattern>/errors/eventidnotfound.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.missingparam_jsp</servlet-name>
+        <url-pattern>/errors/missingparam.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.errors.eventproxyexception_jsp</servlet-name>
+        <url-pattern>/errors/eventproxyexception.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.support.about_jsp</servlet-name>
+        <url-pattern>/support/about.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.login_jsp</servlet-name>
+        <url-pattern>/login.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.asset.modify_jsp</servlet-name>
+        <url-pattern>/asset/modify.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.asset.index_jsp</servlet-name>
+        <url-pattern>/asset/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.asset.nodelist_jsp</servlet-name>
+        <url-pattern>/asset/nodelist.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.index_jsp</servlet-name>
+        <url-pattern>/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.help.index_jsp</servlet-name>
+        <url-pattern>/help/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.help.about_jsp</servlet-name>
+        <url-pattern>/help/about.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.roles.list_jsp</servlet-name>
+        <url-pattern>/roles/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.roles.view_jsp</servlet-name>
+        <url-pattern>/roles/view.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.surveillance_002dbox_jsp</servlet-name>
+        <url-pattern>/surveillance-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.KSC.index_jsp</servlet-name>
+        <url-pattern>/KSC/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.graph.adhoc4_jsp</servlet-name>
+        <url-pattern>/graph/adhoc4.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.graph.index_jsp</servlet-name>
+        <url-pattern>/graph/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.graph.adhoc3_jsp</servlet-name>
+        <url-pattern>/graph/adhoc3.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.graph.adhoc2_jsp</servlet-name>
+        <url-pattern>/graph/adhoc2.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.map.index_jsp</servlet-name>
+        <url-pattern>/map/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.map.response.ipmitool_jsp</servlet-name>
+        <url-pattern>/map/response/ipmitool.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.map.response.traceroutewithajax_jsp</servlet-name>
+        <url-pattern>/map/response/traceroutewithajax.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.map.response.traceroute_jsp</servlet-name>
+        <url-pattern>/map/response/traceroute.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.map.response.ping_jsp</servlet-name>
+        <url-pattern>/map/response/ping.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.map.response.pingwithajax_jsp</servlet-name>
+        <url-pattern>/map/response/pingwithajax.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.event.index_jsp</servlet-name>
+        <url-pattern>/event/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.event.advsearch_jsp</servlet-name>
+        <url-pattern>/event/advsearch.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.event.severity_jsp</servlet-name>
+        <url-pattern>/event/severity.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.event.list_002dshort_jsp</servlet-name>
+        <url-pattern>/event/list-short.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.statisticsReports.index_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/statisticsReports/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.statisticsReports.report_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/statisticsReports/report.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.alarm.detail_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/alarm/detail.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.alarm.list_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/alarm/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.navBar_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/navBar.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.support.index_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/support/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributedStatusSummary_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/distributedStatusSummary.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.surveillanceView_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/surveillanceView.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributedStatusHistory_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/distributedStatusHistory.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.customGraphEditDetails_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/KSC/customGraphEditDetails.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.include_002dbox_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/KSC/include-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.index_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/KSC/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.customGraphChooseResource_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/KSC/customGraphChooseResource.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.customReport_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/KSC/customReport.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.KSC.customView_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/KSC/customView.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.graph.results_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/graph/results.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.graph.chooseresource_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/graph/chooseresource.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.surveillanceViewError_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/surveillanceViewError.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.event.detail_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/event/detail.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.event.list_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/event/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.detail_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/detail.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.displayAllOutages_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/displayAllOutages.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.interfaceOutages_002dbox_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/interfaceOutages-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.servicesdown_002dbox_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/servicesdown-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.serviceOutages_002dbox_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/serviceOutages-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.displayResolvedOutages_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/displayResolvedOutages.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.list_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.nodeOutages_002dbox_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/nodeOutages-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.outage.displaySuppressedOutages_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/outage/displaySuppressedOutages.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.progressBar_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/progressBar.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributedStatusSummaryError_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/distributedStatusSummaryError.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editCategory_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/editCategory.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.support.systemReportList_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/support/systemReportList.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.support.systemReport_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/support/systemReport.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editProvisioningGroup_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/editProvisioningGroup.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.rancid.rancidAdmin_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/rancid/rancidAdmin.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.thresholds.editExpression_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/thresholds/editExpression.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.thresholds.editGroup_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/thresholds/editGroup.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.thresholds.list_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/thresholds/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.thresholds.editThreshold_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/thresholds/editThreshold.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.node.add_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/node/add.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.showCategory_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/showCategory.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editServiceApplications_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/editServiceApplications.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.modifyGroup_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/userGroupView/groups/modifyGroup.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.newGroup_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/userGroupView/groups/newGroup.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.groupDetail_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/userGroupView/groups/groupDetail.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.userGroupView.groups.list_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/userGroupView/groups/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editForeignSource_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/editForeignSource.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.provisioningGroups_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/provisioningGroups.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editNodeCategories_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/editNodeCategories.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.categories_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/categories.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.storage.storageAdmin_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/storage/storageAdmin.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.editApplication_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/editApplication.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.showApplication_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/showApplication.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.admin.applications_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/admin/applications.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.element.nodeList_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/element/nodeList.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.daemonstatus_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/daemonstatus.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributedStatusDetails_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/distributedStatusDetails.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.manage_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/report/database/manage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.index_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/report/database/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.onlineReport_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/report/database/onlineReport.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.manageSchedule_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/report/database/manageSchedule.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.onlineList_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/report/database/onlineList.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.reportList_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/report/database/reportList.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.report.database.batchList_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/report/database/batchList.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributed.error_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/distributed/error.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributed.locationMonitorDetails_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/distributed/locationMonitorDetails.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.distributed.locationMonitorList_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/distributed/locationMonitorList.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.includes.serviceApplication_002dbox_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/includes/serviceApplication-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.includes.nodeCategory_002dbox_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/includes/nodeCategory-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancidList_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/inventory/rancidList.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancid_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/inventory/rancid.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancidViewVc_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/inventory/rancidViewVc.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.invnode_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/inventory/invnode.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancidReport_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/inventory/rancidReport.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.inventory.rancidReportExec_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/inventory/rancidReportExec.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.siteStatusError_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/siteStatusError.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.siteStatus_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/siteStatus.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.displayCategoryStatus_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/displayCategoryStatus.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.rtc.category_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/rtc/category.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.jsp.notification.list_jsp</servlet-name>
+        <url-pattern>/WEB-INF/jsp/notification/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.deliveryOptions_jsp</servlet-name>
+        <url-pattern>/WEB-INF/flows/report/database/batchReport/deliveryOptions.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.reportParameters_jsp</servlet-name>
+        <url-pattern>/WEB-INF/flows/report/database/batchReport/reportParameters.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.reportRunning_jsp</servlet-name>
+        <url-pattern>/WEB-INF/flows/report/database/batchReport/reportRunning.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.reportScheduled_jsp</servlet-name>
+        <url-pattern>/WEB-INF/flows/report/database/batchReport/reportScheduled.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.reportError_jsp</servlet-name>
+        <url-pattern>/WEB-INF/flows/report/database/batchReport/reportError.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.WEB_002dINF.flows.report.database.batchReport.cronExpression_jsp</servlet-name>
+        <url-pattern>/WEB-INF/flows/report/database/batchReport/cronExpression.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.outage.index_jsp</servlet-name>
+        <url-pattern>/outage/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.outage.current_jsp</servlet-name>
+        <url-pattern>/outage/current.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.logoff_jsp</servlet-name>
+        <url-pattern>/logoff.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.manage_jsp</servlet-name>
+        <url-pattern>/admin/manage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.error_jsp</servlet-name>
+        <url-pattern>/admin/error.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.asset.index_jsp</servlet-name>
+        <url-pattern>/admin/asset/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.asset.import_jsp</servlet-name>
+        <url-pattern>/admin/asset/import.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.discovery.add_002dir_jsp</servlet-name>
+        <url-pattern>/admin/discovery/add-ir.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.discovery.index_jsp</servlet-name>
+        <url-pattern>/admin/discovery/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.discovery.add_002dspecific_jsp</servlet-name>
+        <url-pattern>/admin/discovery/add-specific.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.discovery.add_002der_jsp</servlet-name>
+        <url-pattern>/admin/discovery/add-er.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.discovery.edit_002dconfig_jsp</servlet-name>
+        <url-pattern>/admin/discovery/edit-config.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.discovery.add_002durl_jsp</servlet-name>
+        <url-pattern>/admin/discovery/add-url.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.schedule.editSchedule_jsp</servlet-name>
+        <url-pattern>/admin/schedule/editSchedule.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.schedule.displaySchedules_jsp</servlet-name>
+        <url-pattern>/admin/schedule/displaySchedules.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.index_jsp</servlet-name>
+        <url-pattern>/admin/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.nodelabelProvisioned_jsp</servlet-name>
+        <url-pattern>/admin/nodelabelProvisioned.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.thresholds.index_jsp</servlet-name>
+        <url-pattern>/admin/thresholds/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.updateSnmp_jsp</servlet-name>
+        <url-pattern>/admin/updateSnmp.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.deleteNodesFinish_jsp</servlet-name>
+        <url-pattern>/admin/deleteNodesFinish.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.interfaceDeleted_jsp</servlet-name>
+        <url-pattern>/admin/interfaceDeleted.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.snmpConfigured_jsp</servlet-name>
+        <url-pattern>/admin/snmpConfigured.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.wait_jsp</servlet-name>
+        <url-pattern>/admin/wait.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.manageNodesFinish_jsp</servlet-name>
+        <url-pattern>/admin/manageNodesFinish.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.users.modifyUser_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/users/modifyUser.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.users.newPassword_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/users/newPassword.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.users.userDetail_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/users/userDetail.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.users.list_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/users/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.users.newUser_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/users/newUser.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.index_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.roles.editDetails_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/roles/editDetails.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.roles.editSpecific_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/roles/editSpecific.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.roles.list_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/roles/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.roles.view_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/roles/view.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.views.viewDetail_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/views/viewDetail.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.views.list_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/views/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.views.modifyView_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/views/modifyView.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.userGroupView.test_jsp</servlet-name>
+        <url-pattern>/admin/userGroupView/test.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.serviceDeleted_jsp</servlet-name>
+        <url-pattern>/admin/serviceDeleted.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.sysconfig_jsp</servlet-name>
+        <url-pattern>/admin/sysconfig.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.newInterface_jsp</servlet-name>
+        <url-pattern>/admin/newInterface.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.nodemanagement.setPathOutage_jsp</servlet-name>
+        <url-pattern>/admin/nodemanagement/setPathOutage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.nodemanagement.instrumentationLogReader_jsp</servlet-name>
+        <url-pattern>/admin/nodemanagement/instrumentationLogReader.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.nodemanagement.managenode_jsp</servlet-name>
+        <url-pattern>/admin/nodemanagement/managenode.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.nodemanagement.index_jsp</servlet-name>
+        <url-pattern>/admin/nodemanagement/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.nodemanagement.deletenode_jsp</servlet-name>
+        <url-pattern>/admin/nodemanagement/deletenode.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.interfaceAdded_jsp</servlet-name>
+        <url-pattern>/admin/interfaceAdded.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.pollerConfig.addPollerConfig_jsp</servlet-name>
+        <url-pattern>/admin/pollerConfig/addPollerConfig.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.pollerConfig.index_jsp</servlet-name>
+        <url-pattern>/admin/pollerConfig/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.pollerConfig.finishPollerConfig_jsp</servlet-name>
+        <url-pattern>/admin/pollerConfig/finishPollerConfig.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.snmpConfig_jsp</servlet-name>
+        <url-pattern>/admin/snmpConfig.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.snmpselect_jsp</servlet-name>
+        <url-pattern>/admin/snmpselect.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.nodelabel_jsp</servlet-name>
+        <url-pattern>/admin/nodelabel.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.snmpmanage_jsp</servlet-name>
+        <url-pattern>/admin/snmpmanage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.delete_jsp</servlet-name>
+        <url-pattern>/admin/delete.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.index_jsp</servlet-name>
+        <url-pattern>/admin/notification/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.noticeWizard.choosePath_jsp</servlet-name>
+        <url-pattern>/admin/notification/noticeWizard/choosePath.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.noticeWizard.buildPathOutage_jsp</servlet-name>
+        <url-pattern>/admin/notification/noticeWizard/buildPathOutage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.noticeWizard.validateRule_jsp</servlet-name>
+        <url-pattern>/admin/notification/noticeWizard/validateRule.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.noticeWizard.eventNotices_jsp</servlet-name>
+        <url-pattern>/admin/notification/noticeWizard/eventNotices.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.noticeWizard.validatePathOutage_jsp</servlet-name>
+        <url-pattern>/admin/notification/noticeWizard/validatePathOutage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.noticeWizard.notifsForUEI_jsp</servlet-name>
+        <url-pattern>/admin/notification/noticeWizard/notifsForUEI.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.noticeWizard.buildRule_jsp</servlet-name>
+        <url-pattern>/admin/notification/noticeWizard/buildRule.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.noticeWizard.chooseUeis_jsp</servlet-name>
+        <url-pattern>/admin/notification/noticeWizard/chooseUeis.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.chooseTargets_jsp</servlet-name>
+        <url-pattern>/admin/notification/chooseTargets.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.destinationPaths_jsp</servlet-name>
+        <url-pattern>/admin/notification/destinationPaths.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.chooseCommands_jsp</servlet-name>
+        <url-pattern>/admin/notification/chooseCommands.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.escalations_jsp</servlet-name>
+        <url-pattern>/admin/notification/escalations.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.groupIntervals_jsp</servlet-name>
+        <url-pattern>/admin/notification/groupIntervals.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.notification.pathOutline_jsp</servlet-name>
+        <url-pattern>/admin/notification/pathOutline.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.sched_002doutages.editoutage_jsp</servlet-name>
+        <url-pattern>/admin/sched-outages/editoutage.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.sched_002doutages.jsonNodes_jsp</servlet-name>
+        <url-pattern>/admin/sched-outages/jsonNodes.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.sched_002doutages.index_jsp</servlet-name>
+        <url-pattern>/admin/sched-outages/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.admin.sched_002doutages.jsonIpInterfaces_jsp</servlet-name>
+        <url-pattern>/admin/sched-outages/jsonIpInterfaces.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.rescan_jsp</servlet-name>
+        <url-pattern>/element/rescan.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.index_jsp</servlet-name>
+        <url-pattern>/element/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.node_jsp</servlet-name>
+        <url-pattern>/element/node.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.routeipnode_jsp</servlet-name>
+        <url-pattern>/element/routeipnode.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.bridgenode_jsp</servlet-name>
+        <url-pattern>/element/bridgenode.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.service_jsp</servlet-name>
+        <url-pattern>/element/service.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.linkednode_jsp</servlet-name>
+        <url-pattern>/element/linkednode.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.snmpinterface_jsp</servlet-name>
+        <url-pattern>/element/snmpinterface.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.element.interface_jsp</servlet-name>
+        <url-pattern>/element/interface.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.vulnerability.detail_jsp</servlet-name>
+        <url-pattern>/vulnerability/detail.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.vulnerability.index_jsp</servlet-name>
+        <url-pattern>/vulnerability/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.vulnerability.list_jsp</servlet-name>
+        <url-pattern>/vulnerability/list.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.accessDenied_jsp</servlet-name>
+        <url-pattern>/accessDenied.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.report.index_jsp</servlet-name>
+        <url-pattern>/report/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.mobile_jsp</servlet-name>
+        <url-pattern>/mobile.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.dateControl_jsp</servlet-name>
+        <url-pattern>/includes/dateControl.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.bookmarkAll_jsp</servlet-name>
+        <url-pattern>/includes/bookmarkAll.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.notification_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/notification-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.quicksearch_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/quicksearch-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.charts_jsp</servlet-name>
+        <url-pattern>/includes/charts.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.search_002dconstraints_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/search-constraints-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.alarm_002dquerypanel_jsp</servlet-name>
+        <url-pattern>/includes/alarm-querypanel.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.key_jsp</servlet-name>
+        <url-pattern>/includes/key.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.categories_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/categories-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.resultsIndex_jsp</servlet-name>
+        <url-pattern>/includes/resultsIndex.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.vulnerability_002dserach_002dconstraints_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/vulnerability-serach-constraints-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.footnote1_jsp</servlet-name>
+        <url-pattern>/includes/footnote1.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.distStatusLegend_jsp</servlet-name>
+        <url-pattern>/includes/distStatusLegend.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.serviceAvailability_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/serviceAvailability-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.event_002dadvquerypanel_jsp</servlet-name>
+        <url-pattern>/includes/event-advquerypanel.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.surveillance_002dkey_jsp</servlet-name>
+        <url-pattern>/includes/surveillance-key.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.mobile_005fheader_jsp</servlet-name>
+        <url-pattern>/includes/mobile_header.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.header_jsp</servlet-name>
+        <url-pattern>/includes/header.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.interfaceLink_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/interfaceLink-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.alarm_002dadvquerypanel_jsp</servlet-name>
+        <url-pattern>/includes/alarm-advquerypanel.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.bookmark_jsp</servlet-name>
+        <url-pattern>/includes/bookmark.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.footer_jsp</servlet-name>
+        <url-pattern>/includes/footer.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.resourceGraphs_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/resourceGraphs-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.nodeSTPint_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/nodeSTPint-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.security_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/security-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.legendInfo_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/legendInfo-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.nodeAvailability_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/nodeAvailability-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.nodeBridge_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/nodeBridge-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.interfaceSTP_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/interfaceSTP-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.timeControl_jsp</servlet-name>
+        <url-pattern>/includes/timeControl.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.interfaceAvailability_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/interfaceAvailability-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.eventlist_jsp</servlet-name>
+        <url-pattern>/includes/eventlist.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.event_002dquerypanel_jsp</servlet-name>
+        <url-pattern>/includes/event-querypanel.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.resultsIndexNoCount_jsp</servlet-name>
+        <url-pattern>/includes/resultsIndexNoCount.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.includes.nodeRouteInfo_002dbox_jsp</servlet-name>
+        <url-pattern>/includes/nodeRouteInfo-box.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.security_jsp</servlet-name>
+        <url-pattern>/security.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.charts.index_jsp</servlet-name>
+        <url-pattern>/charts/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.dashboard_jsp</servlet-name>
+        <url-pattern>/dashboard.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.pathOutage.index_jsp</servlet-name>
+        <url-pattern>/pathOutage/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.pathOutage.showNodes_jsp</servlet-name>
+        <url-pattern>/pathOutage/showNodes.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.jsps.completions_jsp</servlet-name>
+        <url-pattern>/jsps/completions.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.account.selfService.passwordChanged_jsp</servlet-name>
+        <url-pattern>/account/selfService/passwordChanged.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.account.selfService.newPassword_jsp</servlet-name>
+        <url-pattern>/account/selfService/newPassword.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.account.selfService.index_jsp</servlet-name>
+        <url-pattern>/account/selfService/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.rss_jsp</servlet-name>
+        <url-pattern>/rss.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.test.testProgressBar_jsp</servlet-name>
+        <url-pattern>/test/testProgressBar.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.rtc.index_jsp</servlet-name>
+        <url-pattern>/rtc/index.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.rtc.category_jsp</servlet-name>
+        <url-pattern>/rtc/category.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.notification.detail_jsp</servlet-name>
+        <url-pattern>/notification/detail.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>jsp.notification.index_jsp</servlet-name>
+        <url-pattern>/notification/index.jsp</url-pattern>
+    </servlet-mapping>
+
+<!--
+All session-config, mime-mapping, welcome-file-list, error-page, taglib,
+resource-ref, security-constraint, login-config, security-role,
+env-entry, and ejb-ref elements should follow this fragment.
+-->
+</web-app>
+

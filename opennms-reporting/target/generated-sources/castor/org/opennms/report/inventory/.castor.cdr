@@ -1,0 +1,8 @@
+#Sun Apr 21 17:21:50 IST 2013
+org.opennms.report.inventory.TupleRP=org.opennms.report.inventory.descriptors.TupleRPDescriptor
+org.opennms.report.inventory.InventorySoftwareRP=org.opennms.report.inventory.descriptors.InventorySoftwareRPDescriptor
+org.opennms.report.inventory.GroupSet=org.opennms.report.inventory.descriptors.GroupSetDescriptor
+org.opennms.report.inventory.InventoryElement2RP=org.opennms.report.inventory.descriptors.InventoryElement2RPDescriptor
+org.opennms.report.inventory.RwsNbinventoryreport=org.opennms.report.inventory.descriptors.RwsNbinventoryreportDescriptor
+org.opennms.report.inventory.InventoryMemoryRP=org.opennms.report.inventory.descriptors.InventoryMemoryRPDescriptor
+org.opennms.report.inventory.Nbisinglenode=org.opennms.report.inventory.descriptors.NbisinglenodeDescriptor

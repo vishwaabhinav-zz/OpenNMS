@@ -1,0 +1,17 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.charts.JdbcDataSet=org.opennms.netmgt.config.charts.descriptors.JdbcDataSetDescriptor
+org.opennms.netmgt.config.charts.Rgb=org.opennms.netmgt.config.charts.descriptors.RgbDescriptor
+org.opennms.netmgt.config.charts.SeriesDef=org.opennms.netmgt.config.charts.descriptors.SeriesDefDescriptor
+org.opennms.netmgt.config.charts.Blue=org.opennms.netmgt.config.charts.descriptors.BlueDescriptor
+org.opennms.netmgt.config.charts.Green=org.opennms.netmgt.config.charts.descriptors.GreenDescriptor
+org.opennms.netmgt.config.charts.BarChart=org.opennms.netmgt.config.charts.descriptors.BarChartDescriptor
+org.opennms.netmgt.config.charts.SubTitle=org.opennms.netmgt.config.charts.descriptors.SubTitleDescriptor
+org.opennms.netmgt.config.charts.PlotBackgroundColor=org.opennms.netmgt.config.charts.descriptors.PlotBackgroundColorDescriptor
+org.opennms.netmgt.config.charts.VtSize=org.opennms.netmgt.config.charts.descriptors.VtSizeDescriptor
+org.opennms.netmgt.config.charts.GridLines=org.opennms.netmgt.config.charts.descriptors.GridLinesDescriptor
+org.opennms.netmgt.config.charts.Red=org.opennms.netmgt.config.charts.descriptors.RedDescriptor
+org.opennms.netmgt.config.charts.ChartBackgroundColor=org.opennms.netmgt.config.charts.descriptors.ChartBackgroundColorDescriptor
+org.opennms.netmgt.config.charts.ChartConfiguration=org.opennms.netmgt.config.charts.descriptors.ChartConfigurationDescriptor
+org.opennms.netmgt.config.charts.Title=org.opennms.netmgt.config.charts.descriptors.TitleDescriptor
+org.opennms.netmgt.config.charts.ImageSize=org.opennms.netmgt.config.charts.descriptors.ImageSizeDescriptor
+org.opennms.netmgt.config.charts.HzSize=org.opennms.netmgt.config.charts.descriptors.HzSizeDescriptor

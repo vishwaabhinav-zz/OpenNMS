@@ -1,0 +1,1084 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>OpenNMS&reg; Installation Guide</title><link rel="stylesheet" href="common/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="opennms-installguide"></a>OpenNMS Install Guide</h1></div><div><h2 class="subtitle">Getting from Point "A" to Point "Woot"!</h2></div><div><div class="authorgroup">
+			<h3 class="corpauthor">OpenNMS Development Team</h3>
+
+			<div class="author"><h3 class="author"><span class="firstname">Tarus</span> <span class="surname">Balog</span></h3><code class="email">&lt;<a class="email" href="mailto:tarus@opennms.org">tarus@opennms.org</a>&gt;</code></div>
+
+			<div class="author"><h3 class="author"><span class="firstname">DJ</span> <span class="surname">Gregor</span></h3><code class="email">&lt;<a class="email" href="mailto:dj@opennms.org">dj@opennms.org</a>&gt;</code></div>
+
+			<div class="author"><h3 class="author"><span class="firstname">Benjamin</span> <span class="surname">Reed</span></h3><code class="email">&lt;<a class="email" href="mailto:ranger@opennms.org">ranger@opennms.org</a>&gt;</code></div>
+		</div></div><div><p class="copyright">Copyright &copy; 2004-2013 The OpenNMS Group, Inc.</p></div><div><div class="legalnotice"><a name="d1457e24"></a><p>
+    Permission is granted to copy, distribute and/or modify this
+    document under the terms of the GNU Free Documentation License, Version
+    1.1 or any later version published by the Free Software Foundation; with
+    no Invariant Sections, with no Front-Cover Texts and with no Back-Cover
+    Texts. A copy of the license is available at 
+    <a class="ulink" href="http://www.gnu.org/copyleft/fdl.html" target="_top">http://www.gnu.org/copyleft/fdl.html</a>
+  </p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="preface"><a href="#preface">Preface</a></span></dt><dt><span class="chapter"><a href="#overview">1. Overview</a></span></dt><dd><dl><dt><span class="section"><a href="#about-opennms">About OpenNMS</a></span></dt><dt><span class="section"><a href="#how-to-use">How to Use This Document</a></span></dt><dt><span class="section"><a href="#minimum-requirements">Minimum Requirements</a></span></dt></dl></dd><dt><span class="chapter"><a href="#preparing-for-install">2. Preparing for install</a></span></dt><dd><dl><dt><span class="section"><a href="#before-you-begin">Before You Begin</a></span></dt><dd><dl><dt><span class="section"><a href="#yum">Configure RPM-based Distributions with Yum</a></span></dt><dt><span class="section"><a href="#urpmi">Configure RPM-based Distributions with URPMI (Mandriva)</a></span></dt><dt><span class="section"><a href="#debian">Configure Debian-Based Distributions</a></span></dt></dl></dd><dt><span class="section"><a href="#java">Prerequisite Package: Java</a></span></dt><dd><dl><dt><span class="section"><a href="#java-yum">Installing Java on RPM-based Distributions Using Yum</a></span></dt><dt><span class="section"><a href="#java-urpmi">Installing Java on RPM-based Distributions Using URPMI</a></span></dt><dt><span class="section"><a href="#java-debian">Installing Java on Debian or Ubuntu</a></span></dt><dt><span class="section"><a href="#java-other">Installing Java on Other Platforms</a></span></dt></dl></dd><dt><span class="section"><a href="#postgresql">Prerequisite Package: PostgreSQL</a></span></dt><dd><dl><dt><span class="section"><a href="#postgresql-yum">Installing PostgreSQL on RPM-Based Distributions Using Yum</a></span></dt><dt><span class="section"><a href="#postgresql-urpmi">Installing PostgreSQL on RPM-Based Distributions Using URPMI</a></span></dt><dt><span class="section"><a href="#postgresql-debian">Installing PostgreSQL on Debian-Based Distributions</a></span></dt><dt><span class="section"><a href="#postgresql-windows">Installing PostgreSQL on Windows</a></span></dt><dt><span class="section"><a href="#postgresql-configure">Configure PostgreSQL</a></span></dt></dl></dd><dt><span class="section"><a href="#installing-jicmp">Prerequisite Package: JICMP</a></span></dt><dd><dl><dt><span class="section"><a href="#installing-jicmp-yum">Installing JICMP on RPM-Based Distributions Using Yum</a></span></dt><dt><span class="section"><a href="#installing-jicmp-urpmi">Installing JICMP on RPM-Based Distributions Using URPMI</a></span></dt><dt><span class="section"><a href="#installing-jicmp-rpm">Installing JICMP on RPM-Based Distributions from Source</a></span></dt><dt><span class="section"><a href="#installing-jicmp-debian">Installing JICMP on Debian-Based Distributions</a></span></dt><dt><span class="section"><a href="#installing-jicmp-source">Installing JICMP from Source</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#installing">3. Installing OpenNMS</a></span></dt><dd><dl><dt><span class="section"><a href="#installing-data-locations">Where to Find OpenNMS Data</a></span></dt><dt><span class="section"><a href="#installing-fresh">Performing a Fresh Install</a></span></dt><dd><dl><dt><span class="section"><a href="#installing-rpm">Installing on RPM-Based Distributions</a></span></dt><dt><span class="section"><a href="#installing-solaris">Installing on Solaris</a></span></dt><dt><span class="section"><a href="#installing-macosx">Installing on Mac OS X</a></span></dt><dt><span class="section"><a href="#installing-windows">Installing on Windows</a></span></dt></dl></dd><dt><span class="section"><a href="#upgrading">Upgrading an Existing Installation</a></span></dt><dd><dl><dt><span class="section"><a href="#upgrading-preparation">Upgrading: Preparation</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-yum">Upgrading RPM-Based Distributions Using Yum</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-urpmi">Upgrading RPM-Based Distributions Using URPMI</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-rpm-manual">Upgrading RPM-Based Distributions Manually</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-debian">Upgrading Debian-Based Distributions</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-windows">Upgrading Windows</a></span></dt></dl></dd><dt><span class="section"><a href="#installing-java-configure">Configure Java for OpenNMS</a></span></dt><dd><dl><dt><span class="section"><a href="#installing-java-search">Search for a JRE (suggested)</a></span></dt><dt><span class="section"><a href="#installing-java-specify">Configure a specific JRE</a></span></dt></dl></dd><dt><span class="section"><a href="#installing-opennms-install">Run the OpenNMS Installer Application</a></span></dt></dl></dd><dt><span class="chapter"><a href="#getting-started">4. Getting Started with OpenNMS</a></span></dt><dd><dl><dt><span class="section"><a href="#getting-started-discovery">Configuring Discovery</a></span></dt><dt><span class="section"><a href="#getting-started-login">Login to the Web Application</a></span></dt><dt><span class="section"><a href="#getting-started-boot-startup">Configure OpenNMS to Start Automatically at Boot Time</a></span></dt><dd><dl><dt><span class="section"><a href="#getting-started-boot-startup-rpm">Configuring Automatic Startup on RPM-based Linux Distributions</a></span></dt><dt><span class="section"><a href="#getting-started-boot-startup-solaris">Configuring Automatic Startup on Solaris</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#performance-tuning">5. Performance Tuning</a></span></dt><dd><dl><dt><span class="section"><a href="#performance-dos">Performance "Do"s</a></span></dt><dd><dl><dt><span class="section"><a href="#performance-ram">Lots of RAM</a></span></dt><dt><span class="section"><a href="#battery-backed-write-cache">Battery-Backed Write Cache</a></span></dt><dt><span class="section"><a href="#multiple-spindles">Multiple Spindles</a></span></dt><dt><span class="section"><a href="#performance-noatime">Use <code class="varname">noatime</code> on OpenNMS Data Spindles on Linux and Solaris</a></span></dt><dt><span class="section"><a href="#performance-raid">RAID Drives</a></span></dt><dt><span class="section"><a href="#performance-postgresql">PostgreSQL Performance Tuning</a></span></dt></dl></dd><dt><span class="section"><a href="#performance-donts">Performance "Don't"s</a></span></dt></dl></dd><dt><span class="chapter"><a href="#build-from-source">6. Building From Source</a></span></dt><dd><dl><dt><span class="section"><a href="#build-from-source-are-you-sure">Are you sure you want to do this?</a></span></dt></dl></dd><dt><span class="chapter"><a href="#troubleshooting">7. Troubleshooting an OpenNMS Installation</a></span></dt><dd><dl><dt><span class="section"><a href="#common-installation-issues">Common Installation Issues</a></span></dt><dd><dl><dt><span class="section"><a href="#dependency-problems">Dependency Problems</a></span></dt><dt><span class="section"><a href="#not-finished-starting-up">Error: "Started OpenNMS, but it has not finished starting
+      up"</a></span></dt><dt><span class="section"><a href="#dhcp-poller-wont-start">DHCP Poller Won't Start</a></span></dt><dt><span class="section"><a href="#runjava-could-not-find-jre">Error: "runjava: Could not find an appropriate JRE"</a></span></dt><dt><span class="section"><a href="#database-errors-not-in-english">Error: "The database server's error messages are not in English
+      ..."</a></span></dt><dt><span class="section"><a href="#not-null-constraint-error">Error: "Column X in new table has NOT NULL constraint
+      ..."</a></span></dt><dt><span class="section"><a href="#backup-tables-still-exists">Error: "One or more backup tables from a previous install still
+      exists"</a></span></dt><dt><span class="section"><a href="#table-violates-new-constraint">Error: "Table X contains N rows (out of M) that violate new
+      constraint Y"</a></span></dt><dt><span class="section"><a href="#iplike-permission-denied">Error: "- adding iplike database function... &lt;snip&gt;
+      org.postgresql.util.PSQLException: ERROR: could not access file
+      '&lt;snip&gt;/lib/iplike.so': Permission denied"</a></span></dt><dt><span class="section"><a href="#iplike-coult-not-load-library">Error: "- adding iplike database function... &lt;snip&gt;
+      org.postgresql.util.PSQLException: ERROR: could not load library
+      ..."</a></span></dt><dt><span class="section"><a href="#relation-pg_user-does-not-exist">Error: "Exception in thread "main"
+      org.postgresql.util.PSQLException: ERROR: relation "pg_user" does not
+      exist" when running installer.</a></span></dt><dt><span class="section"><a href="#filenotfound-exception-permission-denied">Error: java.io.FileNotFoundException: ... (Permission
+      denied)</a></span></dt></dl></dd><dt><span class="section"><a href="#where-to-get-help">Where to Get Help</a></span></dt><dd><dl><dt><span class="section"><a href="#release-notes">The Release Notes</a></span></dt><dt><span class="section"><a href="#opennms-web-site">The OpenNMS Web Site</a></span></dt><dt><span class="section"><a href="#mailing-lists">The OpenNMS Mailing Lists</a></span></dt><dt><span class="section"><a href="#commercial-support">Commercial Support</a></span></dt></dl></dd></dl></dd></dl></div>
+
+	
+
+	
+
+	<div class="preface" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="preface"></a>Preface</h2></div></div></div><p>
+		OpenNMS is the creation of numerous people and organizations,
+		operating under the umbrella of the OpenNMS project. The original code
+		base was developed and published under the GPL by the Oculan Corporation
+		until 2002, when the project administration was passed on to Tarus
+		Balog.
+	</p><p>
+		The current corporate sponsor of OpenNMS is
+		<a class="ulink" href="http://www.opennms.com/" target="_top">The OpenNMS Group</a>,
+		which also owns the OpenNMS trademark.
+	</p><p>
+		OpenNMS is a derivative work, containing both original code,
+		included code and modified code that was published under the GNU General
+		Public License. Please see the source for detailed copyright notices,
+		but some notable copyright owners are listed below:
+	</p><div class="itemizedlist"><ul type="disc"><li><p>
+				<span class="trademark">Copyright </span>&copy; 2002-2013
+				<a class="ulink" href="http://www.opennms.com" target="_top">The OpenNMS Group, Inc.</a>
+			</p></li><li><p>
+				Original code base for OpenNMS version 1.0.0
+				<span class="trademark">Copyright </span>&copy; 1999-2001
+				<a class="ulink" href="http://www.oculan.com" target="_top">Oculan Corporation</a>.
+			</p></li><li><p>
+				Mapping code <span class="trademark">Copyright </span>&copy; 2003
+				<a class="ulink" href="http://www.nksi.com" target="_top">Networked Knowledge Systems, Inc.</a>
+			</p></li><li><p>
+				ScriptD code <span class="trademark">Copyright </span>&copy; 2003
+				<a class="ulink" href="http://www.tavve.com" target="_top">Tavve Software Company</a>.
+			</p></li></ul></div><p>
+		Please send any omissions or corrections to this document
+		to <a class="ulink" href="mailto:tarus@opennms.org" target="_top">Tarus Balog</a>.
+	</p></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="overview"></a>Chapter&nbsp;1.&nbsp;Overview</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#about-opennms">About OpenNMS</a></span></dt><dt><span class="section"><a href="#how-to-use">How to Use This Document</a></span></dt><dt><span class="section"><a href="#minimum-requirements">Minimum Requirements</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="about-opennms"></a>About OpenNMS</h2></div></div></div><p>
+			OpenNMS is the world's first enterprise-grade network management
+			system developed under the open source model. As with any complex and
+			powerful system, getting it installed and configured can take a
+			little effort. It is the purpose of this document to explain what is
+			required to get OpenNMS installed.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="how-to-use"></a>How to Use This Document</h2></div></div></div><p>So, how should you use this document? It is arranged in the
+			following sections:</p><div class="itemizedlist"><ul type="disc"><li><p>This overview</p></li><li><p>
+					The programs on which OpenNMS depends, and how they need to
+					be modified
+				</p></li><li><p>
+					Installation and upgrade instructions, including details for
+					specific operating systems and distributions
+				</p></li><li><p>
+					Getting started with OpenNMS, including initial configuration
+					and logging into the web interface
+				</p></li><li><p>Building OpenNMS from source</p></li><li><p>Troubleshooting and Where to Get Help</p></li></ul></div><p>
+			This installation guide relies strongly on the idea of "packages."
+			Most modern operating systems and distributions have a system where
+			software can be installed and managed through the use of packages
+			that group the files belonging to a given application together (as well as
+			managing changes to those files, removal, upgrades, etc.).
+		</p><p>
+			Please see the latest
+			<a class="ulink" href="https://sourceforge.net/docman/?group_id=4141" target="_top">release notes</a>
+			to see if your operating system is supported.  Currently, OpenNMS runs
+			on many Linux distributions, Solaris, Mac OS X and Windows.
+		</p><p>
+			This guide assumes that if you use packages, you do so consistently.
+			This is because OpenNMS will attempt to determine if the software it
+			requires is installed by using the operating system's built in
+			package management system. If you've installed, say, Java, but not via packages,
+			OpenNMS will be unable to determine that Java is installed and it
+			will fail.
+		</p><p>
+			To get back to the original question of "how should you use this
+			document," first go through the second section to insure that you have all
+			of the prerequisite applications properly installed and configured. Use
+			the third section to help get those packages installed for your
+			particular operating system, as well as the OpenNMS software. Finally, use
+			the last section to help correct any errors your might encounter.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="minimum-requirements"></a>Minimum Requirements</h2></div></div></div><p>
+			While it is impossible to exactly size OpenNMS for a particular environment,
+			the following represents the minimum requirements for installation, assuming a
+			network of about 200 devices. Note that OpenNMS can monitor more than 100 times
+			that given the proper hardware.
+		</p><div class="glosslist"><dl><dt>Processor</dt><dd><p>A 1 GHz Pentium III (or equivalent processor) or better.
+						OpenNMS can also take advantage of multiple processors.</p></dd><dt>Memory</dt><dd><p>
+						A minimum of 256 MB of RAM, although 512 MB is strongly
+						recommended. The OpenNMS Java Virtual Machine benefits from large
+						amounts of memory, up to 2 GB, and more if using a 64-bit processor.
+					</p><p>
+						Given a budget choice between more RAM and a faster CPU, choose
+						more RAM.
+					</p></dd><dt>Disk Space</dt><dd><p>
+						OpenNMS requires about 200 MB of disk space for the program
+						files. In addition, each data variable collected requires, by
+						default, a little under 300 KB of disk space.  It is safe to assume
+						that each interface being managed will require around 2 MB of disk
+						space, so for 200 interfaces you are looking at 400 MB (conservatively).
+						Depending on the number of events stored, you can assume 100 MB to
+						200 MB are required for the database. Finally, the OpenNMS logs
+						can grow quite large, especially in debug mode.
+					</p><p>
+						Edit the <code class="filename">log4j.properties</code> file in the OpenNMS
+						configuration directory (usually <code class="filename">/opt/opennms/etc</code>
+						or <code class="filename">/etc/opennms</code>) to change those settings.  By
+						default, the Log4J file rotation is configured to use 100MB per log
+						file, which ends up using a little under 2 GB.
+					</p><p>
+						<span class="bold"><strong>Note</strong></span>: Due to the write-heavy nature of
+						time-series data and the database, it is recommended that you do not use
+						RAID-5 with OpenNMS. RAID-1 or RAID-1+0 is recommended if using RAID.
+						In addition, LVM adds a small but appreciable amount of overhead and it
+						is recommended that you do not use it.
+					</p></dd></dl></div></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="preparing-for-install"></a>Chapter&nbsp;2.&nbsp;Preparing for install</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#before-you-begin">Before You Begin</a></span></dt><dd><dl><dt><span class="section"><a href="#yum">Configure RPM-based Distributions with Yum</a></span></dt><dt><span class="section"><a href="#urpmi">Configure RPM-based Distributions with URPMI (Mandriva)</a></span></dt><dt><span class="section"><a href="#debian">Configure Debian-Based Distributions</a></span></dt></dl></dd><dt><span class="section"><a href="#java">Prerequisite Package: Java</a></span></dt><dd><dl><dt><span class="section"><a href="#java-yum">Installing Java on RPM-based Distributions Using Yum</a></span></dt><dt><span class="section"><a href="#java-urpmi">Installing Java on RPM-based Distributions Using URPMI</a></span></dt><dt><span class="section"><a href="#java-debian">Installing Java on Debian or Ubuntu</a></span></dt><dt><span class="section"><a href="#java-other">Installing Java on Other Platforms</a></span></dt></dl></dd><dt><span class="section"><a href="#postgresql">Prerequisite Package: PostgreSQL</a></span></dt><dd><dl><dt><span class="section"><a href="#postgresql-yum">Installing PostgreSQL on RPM-Based Distributions Using Yum</a></span></dt><dt><span class="section"><a href="#postgresql-urpmi">Installing PostgreSQL on RPM-Based Distributions Using URPMI</a></span></dt><dt><span class="section"><a href="#postgresql-debian">Installing PostgreSQL on Debian-Based Distributions</a></span></dt><dt><span class="section"><a href="#postgresql-windows">Installing PostgreSQL on Windows</a></span></dt><dt><span class="section"><a href="#postgresql-configure">Configure PostgreSQL</a></span></dt></dl></dd><dt><span class="section"><a href="#installing-jicmp">Prerequisite Package: JICMP</a></span></dt><dd><dl><dt><span class="section"><a href="#installing-jicmp-yum">Installing JICMP on RPM-Based Distributions Using Yum</a></span></dt><dt><span class="section"><a href="#installing-jicmp-urpmi">Installing JICMP on RPM-Based Distributions Using URPMI</a></span></dt><dt><span class="section"><a href="#installing-jicmp-rpm">Installing JICMP on RPM-Based Distributions from Source</a></span></dt><dt><span class="section"><a href="#installing-jicmp-debian">Installing JICMP on Debian-Based Distributions</a></span></dt><dt><span class="section"><a href="#installing-jicmp-source">Installing JICMP from Source</a></span></dt></dl></dd></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="before-you-begin"></a>Before You Begin</h2></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="yum"></a>Configure RPM-based Distributions with Yum</h3></div></div></div><p>
+				Before you begin installing, you will want to set up Yum to install from
+				the OpenNMS repositories.  This covers most RPM-based distributions, including
+				<a class="ulink" href="http://www.redhat.com/rhel/" target="_top">Red Hat Enterprise Linux</a>,
+				<a class="ulink" href="http://fedoraproject.org/" target="_top">Fedora</a>, and
+				<a class="ulink" href="http://www.centos.org/" target="_top">CentOS</a>.
+			</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="yum-fastestmirror"></a>Preparation: Yum Fastest Mirror Plugin</h4></div></div></div><p>
+					Before you start, you may want to install the yum-fastestmirror RPM if your distro
+					supports it.  This can often speed up downloads of large packages.  See the
+					<a class="ulink" href="http://wiki.centos.org/PackageManagement/Yum/FastestMirror" target="_top">CentOS Wiki</a>
+					for more details.  This step is not strictly necessary, but can make your overall
+					yum experience better.
+				</p><p>
+					</p><pre class="programlisting">[user@localhost]$ sudo yum install yum-fastestmirror
+ Setting up Install Process
+ ...
+ Running Transaction
+   Installing: yum-fastestmirror            ######################### [1/1] 
+ 
+ Installed: yum-fastestmirror.noarch 0:1.1.9-2.fc8
+ Complete!</pre><p>
+ 				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="choose-a-release"></a>Preparation: Determine Which Release to Install</h4></div></div></div><p>There are 4 types of releases available through yum.</p><div class="itemizedlist"><ul type="disc"><li><p><a name="stable"></a>
+							<span class="emphasis"><em>stable:</em></span>
+							the latest officially released stable version of OpenNMS
+						</p></li><li><p><a name="unstable"></a>
+							<span class="emphasis"><em>unstable:</em></span>
+							the latest officially released development version of OpenNMS
+						</p></li><li><p><a name="testing"></a>
+							<span class="emphasis"><em>testing:</em></span>
+							a nightly build of the code that will be part of the next stable version of OpenNMS
+						</p></li><li><p><a name="snapshot"></a>
+							<span class="emphasis"><em>snapshot:</em></span>
+							a nightly build of the very latest development version of OpenNMS
+						</p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="install-repository-rpm"></a>Install the OpenNMS Repository RPM</h4></div></div></div><p>
+					To simplify installation through Yum, we've created an RPM that contains the configuration
+					necessary for Yum to be able to find the other OpenNMS packages.  Based on the release you
+					chose in the section above, choose the approprate RPM from the <a class="ulink" href="http://yum.opennms.org/" target="_top">OpenNMS Yum Repository</a>.
+				</p><p>
+					For example, to install the latest snapshot release on Fedora 7, you would run:
+					</p><pre class="programlisting">rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-snapshot-fc7.noarch.rpm</pre><p>
+				</p><p>
+					Or, to install the latest unstable release on CentOS or RHEL 5, you would run:
+					</p><pre class="programlisting">rpm -Uvh http://yum.opennms.org/repofiles/opennms-repo-unstable-rhel5.noarch.rpm</pre><p>
+				</p><p>
+					Now you should see OpenNMS packages available when you get a list of yum packages:
+					</p><pre class="programlisting"> [user@localhost]$ sudo yum list opennms
+ ...
+ Available Packages
+ opennms.noarch                           1.5.96-1               opennms-unstable</pre><p>
+ 				</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+ 						If you are using older yum-based distributions (like CentOS 3, for example), you may
+ 						need to append the yum configuration to <code class="filename">/etc/yum.conf</code>.  Older
+ 						versions of yum don't recognize <code class="filename">/etc/yum.repos.d/</code> as a valid
+ 						location for yum configuration.  You can fix this by using <code class="filename">cat</code>
+ 						to append the repository configurations to <code class="filename">/etc/yum.conf</code>:
+ 						</p><pre class="programlisting">[root@localhost]# cat /etc/yum.repos.d/* &gt;&gt; /etc/yum.conf</pre><p>
+ 					</p></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="urpmi"></a>Configure RPM-based Distributions with URPMI (Mandriva)</h3></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="urpmi-official"></a>Enable the Primary Mandriva Repositories</h4></div></div></div><p>
+					First, you'll want to enable the primary Mandriva URPMI repositories.  The
+					easiest way to do so is to follow the instructions at <a class="ulink" href="http://easyurpmi.zarb.org/" target="_top">EasyURPMI</a>.  For example, on Mandriva
+					Linux 2007, you would end up running something like this:
+					</p><pre class="programlisting">urpmi.addmedia main ftp://mirrors.usc.edu/pub/linux/distributions/mandrakelinux/official/2007.1/i586/media/main/release with media_info/hdlist.cz 
+ urpmi.addmedia --update main_updates ftp://mirrors.usc.edu/pub/linux/distributions/mandrakelinux/official/2007.1/i586/media/main/updates with media_info/hdlist.cz</pre><p>
+ 				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="urpmi-opennms"></a>Enable the OpenNMS Mandriva Repositories</h4></div></div></div><p>
+					Now, you'll need to enable the OpenNMS Mandriva repositories.  First, add
+					the OpenNMS stable repository (replace mandriva2007 with your release):
+					</p><pre class="programlisting">urpmi.addmedia --probe-hdlist opennms-stable http://yum.opennms.org/stable/mandriva2007</pre><p>
+				</p><p>
+					If you want OpenNMS stable snapshots, add the testing repository next
+					(replace mandriva2007 with your release):
+					</p><pre class="programlisting">urpmi.addmedia --probe-hdlist opennms-testing http://yum.opennms.org/testing/mandriva2007</pre><p>
+				</p><p>
+					If you want the latest unstable version, add the unstable as well
+					(replace mandriva2007 with your release):
+					</p><pre class="programlisting">urpmi.addmedia --probe-hdlist opennms-unstable http://yum.opennms.org/unstable/mandriva2007</pre><p>
+				</p><p>
+					And if you want to install nightly snapshots, then add the snapshot one
+					(replace mandriva2007 with your release):
+					</p><pre class="programlisting">urpmi.addmedia --probe-hdlist opennms-snapshot http://yum.opennms.org/snapshot/mandriva2007</pre><p>
+				</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="debian"></a>Configure Debian-Based Distributions</h3></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="debian-sources-lst"></a>Add the OpenNMS Repository to Your <code class="filename">sources.list</code></h4></div></div></div><p>
+					First, you need to tell apt-get how to find OpenNMS. Add the following
+					contents to your <code class="filename">/etc/apt/sources.lists</code> file:
+					</p><pre class="programlisting">deb http://debian.opennms.org stable main
+deb-src http://debian.opennms.org stable main</pre><p>
+				</p><p>
+					If you wish to use the latest development version of OpenNMS, add
+					unstable instead:
+					</p><pre class="programlisting">deb http://debian.opennms.org unstable main
+deb-src http://debian.opennms.org unstable main</pre><p>
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="debian-pgp"></a>Add the OpenNMS PGP Key to APT</h4></div></div></div><p>
+					The OpenNMS Debian repository is signed with a PGP key (fingerprint
+					<code class="code">22EE DDA6 8698 B02F B2EC 50B7 062B 8A68 4C4C BBD9</code>).
+					You will need to tell APT about the key:
+					</p><pre class="programlisting">wget -O - http://debian.opennms.org/OPENNMS-GPG-KEY | sudo apt-key add -</pre><p>
+				</p></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="java"></a>Prerequisite Package: Java</h2></div></div></div><p>
+			OpenNMS is written mainly in Java, although there are a few JNI
+			calls to some C code in order to implement things such as ICMP. and so it
+			follows that Java would need to be installed.
+ 		</p><p>
+			OpenNMS requires Java SE 5.0 or higher (JDK 1.5). It is recommended that the
+			JDK from Sun is used with OpenNMS. If OpenNMS is to be run on a 64-bit system,
+			be sure to install the 64-bit JDK.
+		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="java-yum"></a>Installing Java on RPM-based Distributions Using Yum</h3></div></div></div><p>
+				The Sun JDK is available in our Yum repository.  If you have configured Yum
+				as specified above, you just need to run:
+				</p><pre class="programlisting">yum install jdk</pre><p>
+			</p><p>
+				Because of a bug in the 64-bit RPM signing, if you are on x86_64, you will
+				need to disable GPG checking.  You can do so with the <code class="code">--nogpgcheck</code>
+				option to yum:
+				</p><pre class="programlisting">yum --nogpgcheck install jdk</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="java-urpmi"></a>Installing Java on RPM-based Distributions Using URPMI</h3></div></div></div><p>
+				The Sun JDK is available in our URPMI repository.  If you have configured
+				URPMI as specified above, you just need to run:
+				</p><pre class="programlisting">urpmi --auto jdk</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="java-debian"></a>Installing Java on Debian or Ubuntu</h3></div></div></div><p>Sun's Java can now be installed using "apt" on Debian Etch or higher.</p><p>
+				</p><pre class="programlisting">apt-get install sun-java5-jdk</pre><p>
+			</p><p>
+				This should also work on Ubuntu 6.10 (Edgy Eft) or higher.  Alternatively,
+				you could install sun-java6-jdk, which has performance improvements over
+				the java5 version.
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="java-other"></a>Installing Java on Other Platforms</h3></div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+					It is important to install the JDK instead of the JRE, as the web UI
+					will need to compile JSPs into Java code.
+				</p></div><p>
+				You will need to use Sun's Java SE, version 5 (1.5) or later. You can
+				<a class="ulink" href="http://java.sun.com/javase/downloads/index_jdk5.jsp" target="_top">download
+				it</a> from Sun's <a class="ulink" href="http://java.sun.com/" target="_top">Java</a>
+				website. Step through the licensing process and then download the
+				proper version of Java for your operating system.
+			</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="postgresql"></a>Prerequisite Package: PostgreSQL</h2></div></div></div><p>
+			<a class="ulink" href="http://www.postgresql.org/" target="_top">PostgreSQL</a>
+			(or "Postgres") is a relational database that OpenNMS uses to store
+			information about devices on the network, as well as information about
+			events, notifications and outages.
+		</p><p>
+			When installing OpenNMS, two things must happen. First, OpenNMS has
+			to be able to contact the database over TCP/IP (even on localhost) and
+			second, the installation process must be able to create the
+			database.
+		</p><p>OpenNMS requires version 7.4 or later of PostgreSQL,
+			although 8.1 or higher is recommended for performance reasons.</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="postgresql-yum"></a>Installing PostgreSQL on RPM-Based Distributions Using Yum</h3></div></div></div><p>
+				On modern versions of Red Hat Enterprise Linux, CentOS, and Fedora,
+				you should just need to install the <code class="filename">postgresql-server</code>
+				RPM:
+				</p><pre class="programlisting">[user@localhost]$ sudo yum -y install postgresql-server
+Setting up Install Process
+...
+Running Transaction
+  Installing: postgresql-server            ######################### [1/1] 
+
+Installed: postgresql-server.x86_64 0:8.2.5-1.fc8
+Complete!</pre><p>
+			</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+					Red Hat Enterprise Linux 3 and CentOS 3 call their PostgreSQL
+					packages "rhdb" for the "Red Hat DataBase" so if you are on one of
+					these older distributions, you will have to substitute "rhdb" for
+					"postgresql" when installing:
+					</p><pre class="programlisting">sudo yum -y install rhdb-server</pre><p>
+				</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="postgresql-urpmi"></a>Installing PostgreSQL on RPM-Based Distributions Using URPMI</h3></div></div></div><p>
+				On Mandriva, you use URPMI to install the PostgreSQL server:
+				</p><pre class="programlisting">sudo urpmi --auto postgresql-server</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="postgresql-debian"></a>Installing PostgreSQL on Debian-Based Distributions</h3></div></div></div><p>
+				On Debian or Ubuntu, use apt to install the PostgreSQL server:
+				</p><pre class="programlisting">sudo apt-get update
+sudo apt-get install postgresql-8.1</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="postgresql-windows"></a>Installing PostgreSQL on Windows</h3></div></div></div><p>
+				On Windows, all you should need to do is get the latest Windows installer
+				from <a class="ulink" href="http://www.postgresql.org/download/" target="_top">PostgreSQL.org</a>.
+			</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+					If you are running on a FAT32 filesystem, see the <a class="ulink" href="http://www.opennms.org/index.php/Installation:Windows" target="_top">detailed
+					installation instructions on the wiki</a>.
+				</p></div><p>
+				First, unpack the installer.  The installer does not run properly from
+				inside a zipped folder, so you will need to extract the ZIP file.  You
+				should be able to just copy the postgresql-X.X.msi and
+				postgresql-X.X-int.msi files to your desktop and run them from there.
+			</p><p>
+				Then, run the postgresql-X.X.msi and follow the instructions.   For the most
+				part, the defaults should be just fine, although if you're allowing the
+				installer to initialize your database, make sure the encoding is set
+				to "UTF-8".
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="postgresql-configure"></a>Configure PostgreSQL</h3></div></div></div><p>
+				Once you have installed PostgreSQL, you will need to make two changes
+				to Postgres configuration files:
+				<code class="filename">postgresql.conf</code> and <code class="filename">pg_hba.conf</code>.
+			</p><p>
+				These files are only created once PostgreSQL has been started, so if
+				your installation method for Postgres did not start the database, do
+				so before continuing.  Usually, startup scripts will be placed in
+				<code class="filename">/etc/init.d</code>.
+			</p><p>Locate the Postgres "data" directory. Often this is <code class="filename">/var/lib/pgsql/data</code>.
+			You should then find the two files we need to modify in that directory.</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="postgresql.conf"></a>The <code class="filename">postgresql.conf</code> File</h4></div></div></div><p>
+					This file controls some basic parameters of PostgreSQL.  We need to
+					change three of these parameters.
+				</p><div class="orderedlist"><ol type="1"><li><p>
+							First we need to make sure PostgreSQL is listening on an IP socket, and not
+							just a local unix socket.
+						</p><p>
+							For PostgreSQL 7.4 and 8.0, make sure the following
+							line is set and uncommented:
+							</p><pre class="programlisting">tcpip_socket = true</pre><p>
+						</p><p>
+							On PostgreSQL 8.1 and up, use this instead:
+							</p><pre class="programlisting">listen_addresses = 'localhost'</pre><p>
+						</p></li><li><p>
+							Next, find the line in the file that contains
+							<code class="varname">max_connections</code>. It needs to be at least:
+						</p><p>
+							</p><pre class="programlisting">max_connections = 256</pre><p>
+						</p></li><li><p>
+							Find the line that contains <code class="varname">shared_buffers</code>.
+							It needs to be at least:
+							</p><pre class="programlisting">shared_buffers = 1024</pre><p>
+						</p></li></ol></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="pg_hba.conf"></a>Customizing the <code class="filename">pg_hba.conf</code> File</h4></div></div></div><p>
+					The <code class="filename">pg_hba.conf</code> file controls which machines
+					and users can access the database on a given machine via TCP/IP.
+				</p><p>
+					Since that is how OpenNMS accesses the database (via <code class="code">localhost</code>)
+					it is necessary to modify this file to allow OpenNMS to work.  The easiest
+					thing to do is to just allow anyone from the localhost to access the database
+					(do not add the last line if your system does not support IPv6):
+				</p><p>
+					</p><pre class="programlisting"># TYPE DATABASE USER IP-ADDRESS IP-MASK METHOD
+local all all trust
+host all all 127.0.0.1 255.255.255.255 trust
+host all all ::1 ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff trust</pre><p>
+				</p><p>
+					Make sure that no other lines are uncommented in this file.
+				</p><p>
+					You will need to stop and restart Postgres after making these changes.
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="postgresql-create"></a>Creating the PostgreSQL Database</h4></div></div></div><p>
+					Most distributions will automatically initialize the default database
+					on first startup, but if yours doesn't (for example, on Solaris), you
+					will need to do so manually.
+				</p><p>
+					As the <code class="code">postgres</code> user, go to the
+					<code class="filename">/usr/local/pgsql/bin</code> directory (or wherever your PostgreSQL
+					binaries are installed), and run:
+					</p><pre class="programlisting">./initdb -D /usr/local/pgsql/data -E "UNICODE"</pre><p>
+				</p><p>
+					Then you'll need to start the database:
+					</p><pre class="programlisting">./pg_ctl -D /usr/local/pgsql/data start</pre><p>
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="postgresql-iplike"></a>Adding the iplike function</h4></div></div></div><p>
+					OpenNMS makes heavy use of a stored procedure called "iplike".  Since it is
+					written in C, it has been removed from the main OpenNMS code and placed
+					in its own project.
+				</p><p>
+					If a C-based iplike is not installed, the OpenNMS installer will
+					add a version written in the PostgreSQL command language. It will work,
+					but not as quickly as the compiled iplike will.
+				</p><p>
+					To install iplike, simply download the proper package for your
+					distribution. There should be a package for PostgreSQL versions 7.4-8.1,
+					and one for 8.2+. In addition, there will be separate 32-bit and 64-bit
+					versions. It is also possible to download a tarball from the <a class="ulink" href="https://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=235604" target="_top">OpenNMS
+					SourceForge project page</a>, and do the usual "./configure", "make", and "make
+					install".  Once installed it should not be required to update it on every
+					OpenNMS upgrade.
+				</p></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="installing-jicmp"></a>Prerequisite Package: JICMP</h2></div></div></div><p>
+			Java has never had a really good API for ICMP. Since ICMP is the basis for
+			the "ping" command, it is rather imperative that any Java-based network
+			management platform address the need for ICMP.  OpenNMS does this by using
+			some code written in C, and accessing it using the Java Native Interface
+			(JNI).
+		</p><p>
+			As of OpenNMS 1.3.6, the ICMP code has been moved to it's own library
+			outside of OpenNMS.  This makes the main OpenNMS application pure Java, and
+			as such it only has to be built once, instead of for each platform.
+		</p><p>
+			Packages for JICMP are available for most distributions.  If your
+			distribution does not have packages available, you can download the
+			source from <a class="ulink" href="http://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=240236" target="_top">the
+			SourceForge download page for JICMP</a>.
+		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-jicmp-yum"></a>Installing JICMP on RPM-Based Distributions Using Yum</h3></div></div></div><p>
+				On most RPM-Based Distributions, all you should need to run is:
+				</p><pre class="programlisting">yum install jicmp</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-jicmp-urpmi"></a>Installing JICMP on RPM-Based Distributions Using URPMI</h3></div></div></div><p>
+				On Mandriva, you can install JICMP with the command:
+				</p><pre class="programlisting">urpmi --auto jicmp</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-jicmp-rpm"></a>Installing JICMP on RPM-Based Distributions from Source</h3></div></div></div><p>
+				If JICMP has not already been compiled on your RPM-based platform, you
+				can build a native RPM from the <a class="ulink" href="http://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=240236" target="_top">source
+				tarball</a> like so:
+				</p><pre class="programlisting">rpmbuild -tb <code class="filename">jicmp-X.X.X.tar.gz</code></pre><p>
+			</p><p>
+				If you are on a 64-bit platform, you can build a 64-bit RPM instead
+				like so:
+				</p><pre class="programlisting">rpmbuild --target=x86_64 <code class="filename">jicmp-X.X.X.tar.gz</code></pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-jicmp-debian"></a>Installing JICMP on Debian-Based Distributions</h3></div></div></div><p>
+				On Debian or Ubuntu, you can install JICMP through apt:
+				</p><pre class="programlisting">sudo apt-get install libicmp-jni</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-jicmp-source"></a>Installing JICMP from Source</h3></div></div></div><p>
+				To build from source, download the <a class="ulink" href="http://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=240236" target="_top">latest
+				source tarball from SourceForge</a>, unpack it, and run the usual:
+				</p><pre class="programlisting">./configure
+make
+make install</pre><p>
+			</p></div></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="installing"></a>Chapter&nbsp;3.&nbsp;Installing OpenNMS</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#installing-data-locations">Where to Find OpenNMS Data</a></span></dt><dt><span class="section"><a href="#installing-fresh">Performing a Fresh Install</a></span></dt><dd><dl><dt><span class="section"><a href="#installing-rpm">Installing on RPM-Based Distributions</a></span></dt><dt><span class="section"><a href="#installing-solaris">Installing on Solaris</a></span></dt><dt><span class="section"><a href="#installing-macosx">Installing on Mac OS X</a></span></dt><dt><span class="section"><a href="#installing-windows">Installing on Windows</a></span></dt></dl></dd><dt><span class="section"><a href="#upgrading">Upgrading an Existing Installation</a></span></dt><dd><dl><dt><span class="section"><a href="#upgrading-preparation">Upgrading: Preparation</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-yum">Upgrading RPM-Based Distributions Using Yum</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-urpmi">Upgrading RPM-Based Distributions Using URPMI</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-rpm-manual">Upgrading RPM-Based Distributions Manually</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-debian">Upgrading Debian-Based Distributions</a></span></dt><dt><span class="section"><a href="#upgrading-to-latest-windows">Upgrading Windows</a></span></dt></dl></dd><dt><span class="section"><a href="#installing-java-configure">Configure Java for OpenNMS</a></span></dt><dd><dl><dt><span class="section"><a href="#installing-java-search">Search for a JRE (suggested)</a></span></dt><dt><span class="section"><a href="#installing-java-specify">Configure a specific JRE</a></span></dt></dl></dd><dt><span class="section"><a href="#installing-opennms-install">Run the OpenNMS Installer Application</a></span></dt></dl></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+			You need to be root when running most of the commands in this chapter.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="installing-data-locations"></a>Where to Find OpenNMS Data</h2></div></div></div><p>OpenNMS stores data in a number of locations:</p><div class="glosslist"><dl><dt>
+					<code class="filename">$OPENNMS_HOME/etc/</code>
+				</dt><dd><p>OpenNMS configuration files.</p><p>
+						On some distributions, upstream changes in files in this directory
+						are detected and means are provided for migrating those changes to
+						the new release.
+					</p><p>
+						On RPM-based distributions, if an OpenNMS configuration file has changed,
+						RPM will create a "<code class="filename">.rpmnew</code>" file which contains the
+						version of that configuration file that shipped with the new version of
+						OpenNMS. You will need to look at the changes between your file
+						and the new one and merge them manually, at the moment. The command
+						"<code class="code">diff -u &lt;old file&gt; &lt;new file&gt; | less</code>" can
+						assist you in seeing what has changed.
+					</p><p>
+						On Debian-based distributions, dpkg will automatically prompt you when
+						a configuration file has changed upstream between versions, and will offer
+						you a set of options to deal with it.
+					</p></dd><dt><code class="filename">$OPENNMS_HOME/share/rrd/</code></dt><dd><p>
+						RRD data files that store response time data and performance data collected
+						from SNMP (and elsewhere).  The installer should not touch the RRD files in
+						<code class="filename">$OPENNMS_HOME/share/rrd</code>.  Unless you are migrating from
+						RRDTool to jRobin, you should not have to worry about them.
+					</p></dd><dt>
+					<code class="filename">$OPENNMS_HOME/jetty-webapps/opennms/</code>
+				</dt><dd><p>
+						The OpenNMS web application. While data is not stored here, some users may
+						customize the web interface and these customizations should be saved before
+						upgrading OpenNMS.
+					</p></dd><dt><code class="filename">$PGDATA/</code></dt><dd><p>
+						Data about nodes, services, events, notifications, etc., are stored in the
+						<code class="code">opennms</code> table in PostgreSQL.
+					</p></dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="installing-fresh"></a>Performing a Fresh Install</h2></div></div></div><p>
+			Follow the instructions in this section appropriate for your operating
+			system if you are performing a fresh install.  If you are upgrading an
+			existing installation of OpenNMS, see the next section.
+		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-rpm"></a>Installing on RPM-Based Distributions</h3></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="installing-rpm-determine"></a>Determine What to Install</h4></div></div></div><p>
+					As of version 1.6, OpenNMS is packaged in a modular fashion.  The
+					following packages are available for installation:
+				</p><div class="itemizedlist"><ul type="disc"><li><p>
+							<span class="emphasis"><em>opennms-core</em></span>: The core OpenNMS code,
+							responsible for network discovery, polling, data collection,
+							notification, and more.
+						</p></li><li><p>
+							<span class="emphasis"><em>opennms-docs</em></span>: Documentation.
+						</p></li><li><p>
+							<span class="emphasis"><em>opennms-webapp-jetty</em></span>: The OpenNMS web
+							UI, designed to be started by the opennms-core engine.
+						</p></li><li><p>
+							<span class="emphasis"><em>opennms</em></span>: A convenience package which
+							installs everything you need for a functional OpenNMS
+							installation on a single system.
+						</p></li><li><p>
+							<span class="emphasis"><em>opennms-remote-poller</em></span>: The standalone
+							remote poller, which can report back to an OpenNMS instance.
+						</p></li><li><p>
+							<span class="emphasis"><em>opennms-plugin-ticketer-centric</em></span>: The
+							<a class="ulink" href="http://www.concursive.com/" target="_top">CentricCRM/Concursive</a>
+							ticketer plugin.
+						</p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="installing-rpm-yum"></a>Installing on RPM-Based Distributions Using Yum</h4></div></div></div><p>
+					As long as Yum is configured to point at the OpenNMS repository,
+					all you should need to run is:
+					</p><pre class="programlisting">sudo yum install <code class="varname">[packages]</code></pre><p>
+					...where <code class="varname">[packages]</code> is the list of packages above
+					that you wish to install.
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="installing-rpm-urpmi"></a>Installing on RPM-Based Distributions Using URPMI</h4></div></div></div><p>
+					If URPMI is configured to point at the OpenNMS repository, you can install
+					by running:
+					</p><pre class="programlisting">sudo urpmi --auto <code class="varname">[packages]</code></pre><p>
+					...where <code class="varname">[packages]</code> is the list of packages above
+					that you wish to install.
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="installing-rpm-manual"></a>Installing on RPM-Based Distributions Manually</h4></div></div></div><p>
+					Download the packages you wish to install from the <a class="ulink" href="http://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=4151" target="_top">SourceForge
+					download page for OpenNMS</a>.
+				</p><p>
+					Then, use <code class="code">rpm -i</code> to install the packages:
+					</p><pre class="programlisting">rpm -ivh opennms*.rpm</pre><p>
+				</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+						As of OpenNMS 1.3.10, you can use the <code class="code">--relocate</code> flag to RPM
+						if you wish to put the logs and collection data in an alternate location:
+						</p><pre class="programlisting">rpm -ivh --relocate /var/opennms=/mnt/netapp/opennms-data /var/log/opennms=/mnt/netapp/opennms-logs opennms*.rpm</pre><p>
+					</p></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-solaris"></a>Installing on Solaris</h3></div></div></div><p>
+				Download the appropriate package for your Solaris version from the <a class="ulink" href="http://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=4151" target="_top">SourceForge
+				download page for OpenNMS</a>.
+			</p><p>
+				Then, install the package using <code class="code">pkgadd</code>:
+				</p><pre class="programlisting"><code class="computeroutput"># </code><span class="command"><strong>cd /usr/local</strong></span>
+<code class="computeroutput"># </code><span class="command"><strong>gzip -d opennms-*-local.gz</strong></span>
+<code class="computeroutput"># </code><span class="command"><strong>pkgadd -d `pwd`/opennms-*-local</strong></span></pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-macosx"></a>Installing on Mac OS X</h3></div></div></div><p>
+				OpenNMS is supported on Mac OS X via the <a class="ulink" href="http://www.finkproject.org/" target="_top">Fink</a> project.
+			</p><p>
+				Once you've installed Fink, you should be able to install OpenNMS by running:
+				</p><pre class="programlisting">fink install opennms</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-windows"></a>Installing on Windows</h3></div></div></div><p>
+				OpenNMS is supported on Windows as well, although the lack
+				of true package management makes it a bit more work to maintain.
+			</p><p>
+				To install on Windows, download the latest
+				<code class="filename">standalone-opennms-installer-X.X.X.jar</code>
+				file from <a class="ulink" href="http://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=4151" target="_top">the
+				OpenNMS SourceForge download page</a>.
+			</p><p>
+				You should be able to then just double-click the jar file in
+				Explorer, and follow the instructions in the install wizard.
+			</p><p>
+				Once you're done, you may want to make a pristine copy of the
+				<code class="filename"><code class="varname">$OPENNMS_HOME</code>/etc</code> directory
+				so it's easy to tell what's changed in later releases later.
+			</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="upgrading"></a>Upgrading an Existing Installation</h2></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="upgrading-preparation"></a>Upgrading: Preparation</h3></div></div></div><p>
+				There are a number of things you can do that can help ease the transition
+				when doing upgrades.
+			</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="upgrading-preparation-prune-events"></a>Prune Unneeded Events</h4></div></div></div><p>
+					Should you not be doing this already, either using vacuumd or
+					cron, prune away any unneeded events.  The events table will most
+					probably be the largest, and there's no point backing up data that
+					you don't need.
+				</p><p>
+					For example, to delete any events older than 6 weeks that have no
+					associated outages, you can run, from the <code class="filename">psql</code>
+					command-line:
+					</p><pre class="programlisting">--# this deletes any events that are not associated with outages
+DELETE FROM events WHERE NOT EXISTS 
+  (SELECT svclosteventid FROM outages WHERE svclosteventid = events.eventid  
+UNION 
+  SELECT svcregainedeventid FROM outages WHERE svcregainedeventid = events.eventid 
+UNION 
+  SELECT eventid FROM notifications WHERE eventid = events.eventid) 
+AND eventtime &lt; now() - interval '6 weeks';</pre><p>
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="upgrading-preparation-backup-database"></a>Back Up Your Database</h4></div></div></div><p>
+					Depending on the version you are upgrading <span class="emphasis"><em>from</em></span> and the
+					version you are upgrading <span class="emphasis"><em>to</em></span>, you may run into issues with
+					the database upgrade.  It is <span class="emphasis"><em>strongly recommended</em></span> that
+					you back up the database.
+					</p><pre class="programlisting">pg_dump -U postgres -Fc -C -f opennms-database-backup.pg opennms</pre><p>
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="upgrading-preparation-backup-etc"></a>Back Up Your OpenNMS <code class="filename">etc</code> Directory</h4></div></div></div><p>
+					Back up your <code class="filename">$OPENNMS_HOME/etc</code> directory before doing any
+					upgrades, so you can go back to your previous version if something goes wrong, and
+					so you have a reference of your previous configuration when adapting config file
+					changes to the new version.
+					</p><pre class="programlisting">tar -C $OPENNMS_HOME -cvzf /tmp/opennms-etc-backup.tar.gz etc</pre><p>
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="upgrading-preparation-determine-memory"></a>Assess the Events Table Size</h4></div></div></div><p>
+					If you have a large number of events, you may need to increase the amount
+					of memory passed to the OpenNMS <code class="filename">install</code> tool.  For example,
+					if you have 250k events, you will need almost 600MB of heap.  When the time comes
+					to run the <code class="filename">install</code> tool, assuming you have enough available
+					memory, it's probably safe to just use a very large value to pass to
+					<code class="filename">install</code>, like:
+					</p><pre class="programlisting">install -Xms1024m -Xmx2048m -dis</pre><p>
+				</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="upgrading-to-latest-yum"></a>Upgrading RPM-Based Distributions Using Yum</h3></div></div></div><p>
+				If you have the OpenNMS Yum repositories configured, all you should need
+				to do to get the new release is run:
+				</p><pre class="programlisting">sudo yum upgrade opennms</pre><p>
+			</p><p>
+				If you are comfortable letting your distribution give you OS updates along
+				with OpenNMS, you can just run:
+				</p><pre class="programlisting">sudo yum upgrade</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="upgrading-to-latest-urpmi"></a>Upgrading RPM-Based Distributions Using URPMI</h3></div></div></div><p>
+				If you have the OpenNMS URPMI repositories configured, you can upgrade by
+				running:
+				</p><pre class="programlisting">sudo urpmi --auto opennms</pre><p>
+			</p><p>
+				As with Yum, if you are comfortable letting URPMI give OS updates along with
+				OpenNMS, you can run:
+				</p><pre class="programlisting">sudo urpmi --auto --auto-select opennms</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="upgrading-to-latest-rpm-manual"></a>Upgrading RPM-Based Distributions Manually</h3></div></div></div><p>
+				You can upgrade RPM systems manually by downloading the <a class="ulink" href="http://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=4151" target="_top">RPM
+				packages from SourceForge</a> and upgrade them by running:
+				</p><pre class="programlisting">sudo rpm -Uvh opennms*.rpm</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="upgrading-to-latest-debian"></a>Upgrading Debian-Based Distributions</h3></div></div></div><p>
+				If your Debian or Ubuntu system is configured with the OpenNMS Apt
+				repository, you should just need to run:
+				</p><pre class="programlisting">sudo apt-get update
+sudo apt-get -u install opennms</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="upgrading-to-latest-windows"></a>Upgrading Windows</h3></div></div></div><p>
+				Since there is no automated installation/upgrade procedure for
+				Windows, you will have to do some preparation before installing
+				the latest version.
+			</p><div class="itemizedlist"><ul type="disc"><li><p>Back up and then remove <code class="filename"><code class="varname">$OPENNMS_HOME</code>/etc</code>.</p></li><li><p>Remove <code class="filename"><code class="varname">$OPENNMS_HOME</code>/lib</code>,
+					<code class="filename"><code class="varname">$OPENNMS_HOME</code>/jetty-webapps/opennms/WEB-INF/lib</code>.</p></li></ul></div><p>
+				Once you've cleaned up the etc and lib directories, the next
+				step is to download the latest <code class="filename">standalone-opennms-installer-X.X.X.jar</code> from <a class="ulink" href="http://sourceforge.net/project/showfiles.php?group_id=4141&amp;package_id=4151" target="_top">the
+				OpenNMS SourceForge download page</a>.
+			</p><p>
+				Next, run the installer jar, and install over your existing OpenNMS location.
+			</p><p>
+				If you backed up the pristine <code class="code">etc</code> directory on your
+				previous installation, you can compare it to the current one to see
+				if there are any configuration changes you wish to integrate into
+				your new install.
+			</p><p>
+				Copy your backed up <code class="code">etc</code> directory back into the
+				<code class="filename"><code class="varname">$OPENNMS_HOME</code>/etc</code> directory.
+			</p><p>
+				You should now be able to run your upgraded OpenNMS.
+			</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="installing-java-configure"></a>Configure Java for OpenNMS</h2></div></div></div><p>
+			Before you can run the post-install, OpenNMS needs to be configured
+			to use an appropriate Java Runtime Environment (JRE).  The OpenNMS tool
+			<code class="filename">runjava</code> is used to set this up, and it can either
+			search for a suitable JRE or you can tell it exactly which JRE to use.
+		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-java-search"></a>Search for a JRE (suggested)</h3></div></div></div><p>
+				Execute <code class="filename">runjava</code> with the "<code class="code">-s</code>"
+				option to search for a JRE:
+			</p><pre class="programlisting"><code class="computeroutput"># </code><span class="command"><strong>$OPENNMS_HOME/bin/runjava -s</strong></span></pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="installing-java-specify"></a>Configure a specific JRE</h3></div></div></div><p>
+				Execute runjava with the "<code class="code">-S &lt;path to JRE&gt;</code>"
+				option to specify the exact JRE you want OpenNMS to use:
+				</p><pre class="programlisting"><code class="computeroutput"># </code><span class="command"><strong>$OPENNMS_HOME/bin/runjava -S &lt;path to JRE's java executable&gt;</strong></span></pre><p>
+			</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="installing-opennms-install"></a>Run the OpenNMS Installer Application</h2></div></div></div><p>
+			No matter which installation method above you choose, and whether
+			you are performing a fresh install or an upgrade, you still need to run
+			the OpenNMS installer.  This tool will setup the <code class="code">opennms</code> database
+			within PostgreSQL among other things.
+		</p><pre class="programlisting"><code class="computeroutput"># </code><span class="command"><strong>$OPENNMS_HOME/bin/install -l /usr/local/lib -dis</strong></span></pre><p>
+			The "-l" parameter will look for the jicmp and/or jrrd libraries
+			in the location specified. The "-dis" will initialize and check the
+			database.  Note at the end of the output from the installer it will
+			indicate if iplike has been installed properly.
+		</p><p>
+			For a full list of options the installer accepts, run
+			"<code class="code">$OPENNMS_HOME/bin/install -h</code>".
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="getting-started"></a>Chapter&nbsp;4.&nbsp;Getting Started with OpenNMS</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#getting-started-discovery">Configuring Discovery</a></span></dt><dt><span class="section"><a href="#getting-started-login">Login to the Web Application</a></span></dt><dt><span class="section"><a href="#getting-started-boot-startup">Configure OpenNMS to Start Automatically at Boot Time</a></span></dt><dd><dl><dt><span class="section"><a href="#getting-started-boot-startup-rpm">Configuring Automatic Startup on RPM-based Linux Distributions</a></span></dt><dt><span class="section"><a href="#getting-started-boot-startup-solaris">Configuring Automatic Startup on Solaris</a></span></dt></dl></dd></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="getting-started-discovery"></a>Configuring Discovery</h2></div></div></div><p>
+			By default, OpenNMS will not discover hosts until you configure it to do
+			so, or explicitly add them in the Admin UI.  You will most likely want to
+			tell OpenNMS where to look to discover hosts on your network.
+		</p><p>
+			Edit <code class="filename">$OPENNMS_HOME/etc/discovery-configuration.xml</code>.  You
+			should see an example &lt;include-range&gt; tag with a &lt;begin&gt; and an
+			&lt;end&gt; which is commented out.
+		</p><p>
+			You will most likely want to uncomment it and change the beginning and end
+			ranges (within the <code class="code">&lt;begin&gt;</code> and <code class="code">&lt;end&gt;</code>
+			tags, respectively).  Additionally, you can add as many
+			<code class="code">&lt;include-range&gt;</code>es as you'd like.
+		</p><p>
+			If you would rather list the individual host that you want to have
+			discovered, you can insert <code class="code">&lt;specific&gt;</code> tags above the
+			<code class="code">&lt;include-range&gt;</code> tag.
+		</p><p>
+			Lastly, if you prefer to use the web interface to add individual hosts for
+			OpenNMS to monitor, you leave the contents of this file commented out.
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="getting-started-login"></a>Login to the Web Application</h2></div></div></div><p>
+			By default, OpenNMS's built-in web server listens on port 8980, so point
+			your browser at <code class="filename">http://&lt;host&gt;:8980/opennms/</code>
+			(where &lt;host&gt; is the host you're running OpenNMS on).  The initial
+			user name is "<code class="code">admin</code>" and the password is
+			"<code class="code">admin</code>".
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="getting-started-boot-startup"></a>Configure OpenNMS to Start Automatically at Boot Time</h2></div></div></div><p>
+			If everything looks good, you can configure OpenNMS to start automatically
+			at boot time.  By default on most platforms OpenNMS does not start
+			automatically until you configure it to do so.
+		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="getting-started-boot-startup-rpm"></a>Configuring Automatic Startup on RPM-based Linux Distributions</h3></div></div></div><p>
+				The OpenNMS packages add an init script in <code class="filename">/etc</code>
+				(usually <code class="filename">/etc/init.d</code>), however you need to execute
+				<code class="filename">chkconfig</code> to enable the service to start
+				automatically:
+				</p><pre class="programlisting"><code class="computeroutput"># </code><span class="command"><strong>/sbin/chkconfig --add opennms</strong></span></pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="getting-started-boot-startup-solaris"></a>Configuring Automatic Startup on Solaris</h3></div></div></div><pre class="programlisting"><code class="computeroutput"># </code><span class="command"><strong>ln -s $OPENNMS_HOME/bin/opennms /etc/init.d/opennms</strong></span>
+<code class="computeroutput"># </code><span class="command"><strong>ln -s ../init.d/opennms /etc/rc3.d/S99opennms</strong></span>
+<code class="computeroutput"># </code><span class="command"><strong>ln -s ../init.d/opennms /etc/rc3.d/K01opennms</strong></span></pre></div></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="performance-tuning"></a>Chapter&nbsp;5.&nbsp;Performance Tuning</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#performance-dos">Performance "Do"s</a></span></dt><dd><dl><dt><span class="section"><a href="#performance-ram">Lots of RAM</a></span></dt><dt><span class="section"><a href="#battery-backed-write-cache">Battery-Backed Write Cache</a></span></dt><dt><span class="section"><a href="#multiple-spindles">Multiple Spindles</a></span></dt><dt><span class="section"><a href="#performance-noatime">Use <code class="varname">noatime</code> on OpenNMS Data Spindles on Linux and Solaris</a></span></dt><dt><span class="section"><a href="#performance-raid">RAID Drives</a></span></dt><dt><span class="section"><a href="#performance-postgresql">PostgreSQL Performance Tuning</a></span></dt></dl></dd><dt><span class="section"><a href="#performance-donts">Performance "Don't"s</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-dos"></a>Performance "Do"s</h2></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-ram"></a>Lots of RAM</h3></div></div></div><p>
+				OpenNMS is not terribly heavy on CPU usage, but is <span class="emphasis"><em>extremely</em></span>
+				I/O-bound, and will also take advantage of as much RAM as you can give it.
+				OpenNMS itself doesn't use a huge amount of RAM per-node, but allowing the OS to
+				cache filesystem interaction makes a very large performance difference.
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="battery-backed-write-cache"></a>Battery-Backed Write Cache</h3></div></div></div><p>
+				If you are running on hardware RAID, it is strongly recommended that you
+				have a battery-backed write cache.  For example, one user reported that on
+				an HP DL380 G4, the I/O wait of the server dropped from 15% to essentially
+				nothing, using a 128MB battery-backed write cache.
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="multiple-spindles"></a>Multiple Spindles</h3></div></div></div><p>
+				You will get the most out of OpenNMS if you spread your I/O out into multiple
+				spindles and/or separate disks/channels.
+			</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="multiple-spindles-postgresql"></a>PostgreSQL</h4></div></div></div><p>
+					PostgreSQL writes primarly to 2 classes of files and directories.
+				</p><div class="glosslist"><dl><dt>the database</dt><dd><p>
+								The main PostgreSQL database is in <code class="filename"><code class="varname">$PGDATA</code>/base</code>
+								(<code class="varname">$PGDATA</code> is usually something like
+								<code class="filename">/var/lib/pgsql/data</code>).
+							</p></dd><dt>the journal</dt><dd><p>
+								PostgreSQL keeps a journal of transactions, in
+								<code class="filename"><code class="varname">$PGDATA</code>/pg_xlog</code>.
+							</p></dd></dl></div><p>
+					If you can separate the pg_xlog directory onto another spindle or mount
+					point, you will increase your PostgreSQL performance considerably.  To do
+					so, you should be able to just shut down PostgreSQL, move that directory,
+					symlink it to the old location, and start it back up.
+					</p><pre class="programlisting">sudo /etc/init.d/postgresql stop
+sudo mv /var/lib/pgsql/data/pg_xlog /mnt/xlogspindle/pg_xlog
+sudo ln -s /mnt/xlogspindle/pg_xlog /var/lib/pgsql/data/pg_xlog
+sudo /etc/init.d/postgresql start</pre><p>
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="multiple-spindles-rrd"></a>Round-Robin (Collection and Performance) Data</h4></div></div></div><p>
+					The RRD data is the single heaviest source of I/O in most OpenNMS
+					installations.  Making sure that it is on a different spindle from
+					PostgreSQL makes a huge difference.
+				</p><div class="itemizedlist"><ul type="disc"><li><p>RRD data storage causes a large number of small random
+						disk writes, usually a few writes for each update.</p></li><li><p>By default, OpenNMS stores each collected variable in its
+						own file, unless the store by group feature is enabled.</p></li><li><p>Normally, there will be 2-3 writes for each update: one for
+						the file header, one for the previous RRA, one for the next RRA.</p></li><li><p>When multiple samples are consolidated into a single stored
+						data point in the RRA, there will be additional writes.  By
+						default, such consolidations happen hourly and daily on the GMT
+						day boundary.  This will cause higher than normal amount of
+						writes after the top of the hour and after the GMT day boundary.</p></li></ul></div><p>
+					The OpenNMS RRDs live, by default, in <code class="filename"><code class="varname">$OPENNMS_HOME</code>/share</code>.
+					If you are using the RPMs, this will be <code class="filename">/var/opennms</code> instead.
+					</p><pre class="programlisting">sudo mv /var/opennms /mnt/rrdspindle/opennms
+sudo rm -f /opt/opennms/share
+sudo ln -s /mnt/rrdspindle/opennms /opt/opennms/share</pre><p>
+				</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-noatime"></a>Use <code class="varname">noatime</code> on OpenNMS Data Spindles on Linux and Solaris</h3></div></div></div><p>
+				If you are dedicating spindles or drives to OpenNMS, you can mount them
+				with the <code class="varname">noatime</code> option on Linux or Solaris for an
+				additional performance boost.  This will keep the OS from updating the
+				file access time on individual RRD and database files every time they
+				are used.
+			</p><p>
+				On Linux, you do so by editing <code class="filename">/etc/fstab</code> and adding
+				<code class="varname">noatime</code> to the options section of the filesystem.  For example:
+				</p><pre class="programlisting">LABEL=/                           /                           ext3    defaults         1 1
+LABEL=/var/opennms                /var/opennms                ext3    defaults,noatime 1 2
+LABEL=/var/lib/pgsql              /var/lib/pgsql              ext3    defaults,noatime 1 2
+LABEL=/var/lib/pgsql/data/pg_xlog /var/lib/pgsql/data/pg_xlog ext3    defaults,noatime 1 2</pre><p>
+			</p><p>
+				On Solaris, you edit <code class="filename">/etc/vfstab</code> and add
+				<code class="varname">noatime</code> as an option at the end of the mountpoint
+				information, like so:
+				</p><pre class="programlisting">/dev/dsk/c1d0s0 /dev/rdsk/c1d0s0 /                            ufs 1 no
+/dev/dsk/c1d1s0 /dev/rdsk/c1d1s0 /opt/opennms/share            ufs 2 no noatime
+/dev/dsk/c1d2s0 /dev/rdsk/c1d2s0 /usr/local/pgsql/data         ufs 2 no noatime
+/dev/dsk/c1d3s0 /dev/rdsk/c1d3s0 /usr/local/pgsql/data/pg_xlog ufs 2 no noatime</pre><p>
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-raid"></a>RAID Drives</h3></div></div></div><p>
+				Use a mirrored stripe (RAID-10), with enough disks to handle the amount of data
+				you need to collect.  A single disk, a pair of mirrored disks (RAID-1), or a
+				RAID-5 is only appropriate for an installation doing a small amount of data
+				collection.
+			</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-postgresql"></a>PostgreSQL Performance Tuning</h3></div></div></div><p>
+				There are a number of other things you can do to tune PostgreSQL.  For a good
+				writeup on PostgreSQL performance tuning, see <a class="ulink" href="http://revsys.com/writings/postgresql-performance.html" target="_top">this page at revsys.com</a>.
+			</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="performance-postgresql-8.1"></a>PostgreSQL 8.1-specific Recommendations</h4></div></div></div><p>
+					If you have a reasonable amount of RAM (2GB+), the following settings should
+					give much better performance than the defaults that come with the PostgreSQL
+					configuration:
+					</p><pre class="programlisting">shared_buffers = 20000
+work_mem = 16348
+maintenance_work_mem = 65536
+vacuum_cost_delay = 50
+checkpoint_segments = 20
+checkpoint_timeout = 900
+wal_buffers = 64
+stats_start_collector = on
+stats_row_level = on
+autovacuum = on</pre><p>
+				</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="performance-postgresql-8.2"></a>PostgreSQL 8.2+ Recommendations</h4></div></div></div><p>
+					On systems with 4GB or more of RAM, we've found that changing the
+					max_fsm_pages and max_fsm_releations, as well as work_mem and
+					maintenance_work_mem improves performance dramatically:
+					</p><pre class="programlisting">work_mem = 100MB
+maintenance_work_mem = 128MB
+
+#max_fsm_pages = 204800		# min max_fsm_relations*16, 6 bytes each
+max_fsm_pages = 2048000
+#max_fsm_relations = 1000		# min 100, ~70 bytes each
+max_fsm_relations = 10000</pre><p>
+				</p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+					If you increase memory settings for PostgreSQL, you will probably need
+					to increase the maximum shared-memory settings in your OS.  On Linux,
+					you can do this by editing <code class="filename">/etc/sysctl</code> and adding
+					the line:
+					<code class="code">kernel.shmmax=170639360</code>
+				</p><p>
+					Depending on how many shared memory segments you need, you may need to
+					adjust that value.
+				</p></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-donts"></a>Performance "Don't"s</h2></div></div></div><p>
+			Because of OpenNMS's high-I/O profile, there are a number of things that will
+			cause performance issues on reasonably large installs.
+		</p><div class="itemizedlist"><ul type="disc"><li><p>Don't run in a VM (although some pseudo-VMs like <a class="ulink" href="http://www.xen.org/" target="_top">Xen</a> are not as hard on I/O as things like
+				<a class="ulink" href="http://www.vmware.com/" target="_top">VMware</a>).
+				</p></li><li><p>Don't put the database or RRD data on file systems managed by LVM.</p></li><li><p>Don't put DB or RRD data on file systems on RAID-5.</p></li><li><p>Don't use older kernels.  Linux 2.6 and Solaris 10 perform much
+				better than older releases.</p></li></ul></div></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="build-from-source"></a>Chapter&nbsp;6.&nbsp;Building From Source</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#build-from-source-are-you-sure">Are you sure you want to do this?</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="build-from-source-are-you-sure"></a>Are you sure you want to do this?</h2></div></div></div><p>
+			OpenNMS is a complex software product, and it does not (yet) have a
+			simple "<code class="code">./configure &amp;&amp; make &amp;&amp; make install</code>"
+			build process like many other tools. If there is a packaged release for
+			your operating system, we highly suggest you use that instead. If you have
+			problems with a packaged release, please see the troubleshooting section
+			for assistance.
+		</p><p>
+			The best place to find out how to build OpenNMS is from the <a class="ulink" href="http://www.opennms.org/index.php/Development" target="_top">developer's</a>
+			page on the wiki.  You will need to <a class="ulink" href="http://www.opennms.org/index.php/Checking_out_the_Source_Code" target="_top">check
+			out</a> the code and then <a class="ulink" href="http://www.opennms.org/index.php/Building_OpenNMS" target="_top">build</a> it.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="troubleshooting"></a>Chapter&nbsp;7.&nbsp;Troubleshooting an OpenNMS Installation</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#common-installation-issues">Common Installation Issues</a></span></dt><dd><dl><dt><span class="section"><a href="#dependency-problems">Dependency Problems</a></span></dt><dt><span class="section"><a href="#not-finished-starting-up">Error: "Started OpenNMS, but it has not finished starting
+      up"</a></span></dt><dt><span class="section"><a href="#dhcp-poller-wont-start">DHCP Poller Won't Start</a></span></dt><dt><span class="section"><a href="#runjava-could-not-find-jre">Error: "runjava: Could not find an appropriate JRE"</a></span></dt><dt><span class="section"><a href="#database-errors-not-in-english">Error: "The database server's error messages are not in English
+      ..."</a></span></dt><dt><span class="section"><a href="#not-null-constraint-error">Error: "Column X in new table has NOT NULL constraint
+      ..."</a></span></dt><dt><span class="section"><a href="#backup-tables-still-exists">Error: "One or more backup tables from a previous install still
+      exists"</a></span></dt><dt><span class="section"><a href="#table-violates-new-constraint">Error: "Table X contains N rows (out of M) that violate new
+      constraint Y"</a></span></dt><dt><span class="section"><a href="#iplike-permission-denied">Error: "- adding iplike database function... &lt;snip&gt;
+      org.postgresql.util.PSQLException: ERROR: could not access file
+      '&lt;snip&gt;/lib/iplike.so': Permission denied"</a></span></dt><dt><span class="section"><a href="#iplike-coult-not-load-library">Error: "- adding iplike database function... &lt;snip&gt;
+      org.postgresql.util.PSQLException: ERROR: could not load library
+      ..."</a></span></dt><dt><span class="section"><a href="#relation-pg_user-does-not-exist">Error: "Exception in thread "main"
+      org.postgresql.util.PSQLException: ERROR: relation "pg_user" does not
+      exist" when running installer.</a></span></dt><dt><span class="section"><a href="#filenotfound-exception-permission-denied">Error: java.io.FileNotFoundException: ... (Permission
+      denied)</a></span></dt></dl></dd><dt><span class="section"><a href="#where-to-get-help">Where to Get Help</a></span></dt><dd><dl><dt><span class="section"><a href="#release-notes">The Release Notes</a></span></dt><dt><span class="section"><a href="#opennms-web-site">The OpenNMS Web Site</a></span></dt><dt><span class="section"><a href="#mailing-lists">The OpenNMS Mailing Lists</a></span></dt><dt><span class="section"><a href="#commercial-support">Commercial Support</a></span></dt></dl></dd></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="common-installation-issues"></a>Common Installation Issues</h2></div></div></div><p>The following section contains advice for overcoming common
+    installation issues. If your issue is not addressed below, please see the
+    section on where to get help.</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="dependency-problems"></a>Dependency Problems</h3></div></div></div><p>To assist with code management, the easiest way to install OpenNMS
+      is via packages. Every effort has been made to insure that the packages
+      OpenNMS depends on are required before the OpenNMS package can be
+      installed. You should be able to find those packages on the distribution
+      CDs that came with your system. For some of the more obscure packages,
+      you can visit the OpenNMS <a class="ulink" href="ftp://ftp.opennms.org" target="_top">FTP</a>
+      site and check in the <code class="filename">/pub/dependencies</code> directory.
+      In addition, sites like <a class="ulink" href="http://distro.ibiblio.org/" target="_top">Ibiblio</a> and <a class="ulink" href="http://www.freshrpms.net" target="_top">FreshRPMs</a> are also good
+      sources.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="not-finished-starting-up"></a>Error: "Started OpenNMS, but it has not finished starting
+      up"</h3></div></div></div><p>This can happen for a a number of reasons. You can run
+      "<code class="code">opennms -v status</code>" a few times after getting this error to
+      see if OpenNMS eventually starts itself completely and if not, to see
+      which daemons never start up completely. Here are some of the likely
+      causes of this problem:</p><div class="orderedlist"><ol type="1"><li><p>OpenNMS takes a while to startup. This can happen on larger
+          installations and when this happens "<code class="code">opennms -v status</code>"
+          will eventually show that all services have started up. By default,
+          the startup script will try 10 times to see if OpenNMS has started
+          and will wait 5 seconds between each try. You can increase the
+          number of times by creating
+          <code class="filename">$OPENNMS_HOME/etc/opennms.conf</code> and adding a
+          line like "<code class="code">START_TIMEOUT=20</code>" to double the number of
+          times it tests. You can set the value to <code class="code">0</code> to have the
+          startup script not wait for OpenNMS to start.</p></li><li><p>Database is not running. If only about half or less of the
+          daemons are shown as running, you can check for this condition by
+          looking for <code class="code">FATAL</code> errors in the log files. You'll see
+          something like "<code class="code">Error accessing database</code>" in the
+          logs.</p></li><li><p>Dhcpd doesn't start. See the item in the next section.</p></li><li><p>JNI library problem. OpenNMS uses a few native C libraries
+          that are accessed using JNI (Java Native Interface). Normally they
+          just work, except users have started seeing problems when running
+          Linux in native AMD64 mode where they end up using a 32-bit (x86)
+          version of Java and a 64-bit (AMD64) version of the JNI libraries,
+          or vice-versa. If you have this problem, you might want to try
+          switching your version of Java from 32-bit to 64-bit or in the other
+          direction.</p></li><li><p>Other. If the OpenNMS is installed, and the packages were not
+          forced in using options like "<code class="code">--nodeps</code>", the
+          application should run just fine. If not, OpenNMS has a robust
+          logging facility. Change to the logs directory (usually
+          <code class="filename">/var/log/opennms</code>) and search the logs, using
+          <code class="filename">grep</code> or your tool of choice, for words like
+          <code class="code">FATAL</code> and <code class="code">ERROR</code> (the two highest log
+          severities). Those events should give you clues as to why OpenNMS is
+          not working.</p></li></ol></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="dhcp-poller-wont-start"></a>DHCP Poller Won't Start</h3></div></div></div><p>The OpenNMS DHCP poller will fail to start most operating systems
+      (Linux, in particular) if you are running a DHCP client on the OpenNMS
+      server. You'll see this by running "<code class="code">opennms -v status</code>" and
+      seeing everything in the <code class="code">running</code> state, except for
+      <code class="code">Dhcpd</code>. The solution is to edit
+      <code class="filename">$OPENNMS_HOME/etc/service-configuration.xml</code> and
+      comment-out the "<code class="code">&lt;service&gt;...&lt;/service&gt;</code>" stanza
+      for <code class="code">Dhcpd</code>. For example, this is what the section would look
+      like after modification to disable <code class="code">Dhcpd</code>:</p><pre class="programlisting">        &lt;!-- Commented out since we have a DHCP client on this server
+        &lt;service&gt;
+                &lt;name&gt;OpenNMS:Name=Dhcpd&lt;/name&gt;
+                &lt;class-name&gt;org.opennms.netmgt.dhcpd.jmx.Dhcpd&lt;/class-name&gt;
+                &lt;invoke pass="1" method="start"/&gt;
+                &lt;invoke at="status" pass="0" method="status"/&gt;
+                &lt;invoke at="stop" pass="0" method="stop"/&gt;
+        &lt;/service&gt;
+        --&gt;</pre><p>We discourage the running of OpenNMS on a server that is a DHCP
+      client, both because OpenNMS may not be able to monitor DHCP servers on
+      the network, and it is important that the monitoring server have a
+      static IP address for receiving traps and to be reliant on as few
+      network services as possible.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="runjava-could-not-find-jre"></a>Error: "runjava: Could not find an appropriate JRE"</h3></div></div></div><p>The <code class="code"><code class="filename">runjava</code></code> program is used to
+      locate a suitable JRE for OpenNMS at install time that will be used for
+      the installer and also for running OpenNMS after installation. See the
+      section earlier in this manual on installing Java for OpenNMS. If you
+      installed Java in a location that <code class="code">runjava</code> cannot find, you
+      can use its "<code class="code">-f</code>" option to specify the JRE you want OpenNMS
+      to use.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="database-errors-not-in-english"></a>Error: "The database server's error messages are not in English
+      ..."</h3></div></div></div><p>You either need to set "<code class="code">lc_messages = 'C'</code>" in your
+      postgresql.conf file and restart PostgreSQL or upgrade to PostgreSQL 7.4
+      or later.</p><p>The installer does not always verify that an operation will
+      succeed before executing the operation (e.g.: dropping database
+      functions). In this case, it catches the exceptions returned from the
+      database and checks the exception to see if it is an "okay" exception
+      that should be ignored (e.g.: if the database function does not exist
+      when attempting to drop a function).</p><p>In PostgreSQL 7.4 and later, a new client/server protocol is used
+      (version 3, to be specific) that provides specific error codes intended
+      for programmatic evaluation and we use these error codes if the server
+      provides them. However for PostgreSQL versions before 7.4, we require
+      that the database server error language be in English (the
+      '<code class="code">C</code>' locale) so that we can parse the text error messages.
+      If you are not running PostgreSQL 7.4 or newer, the installer executes a
+      bogus query against the database and checks for an expected result in
+      English.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="not-null-constraint-error"></a>Error: "Column X in new table has NOT NULL constraint
+      ..."</h3></div></div></div><p>This is a warning that the installer might not update tables
+      successfully. Make sure that your database is backed up, and run the
+      installer again with the "-N" option to ignore this check.</p><p>As an attempt to ensure that the install will complete
+      successfully, a check is done to see if there might be any rows with
+      NULL columns that might be inserted into a column in an upgrade table
+      with a NOT NULL constraint. This usually happens when a previous run of
+      the installer failed, or might be due to modifications to the database
+      schema or a really old version of the schema.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="backup-tables-still-exists"></a>Error: "One or more backup tables from a previous install still
+      exists"</h3></div></div></div><p>When the installer runs to upgrade the OpenNMS database from a
+      previous install, it often updates table schemas. When it does this, it
+      copies the data in a table to a temporary table (e.g.: the contents of
+      <code class="filename">node</code> are copied into
+      <code class="filename">node_old_11033991291234</code>). The original table is
+      deleted, the new version of the table is created, the data in the
+      temporary table is translated into the new table, and finally the
+      temporary table is deleted.</p><p>Unfortunately, the installer cannot check for all problems that
+      might break translation, so sometimes the translation step fails. In
+      this case, the installer "reverts" the table it was processing by
+      dropping the new table and moving the temporary table into its
+      place.</p><p>Reverting the table in case of a problem is all good and well, but
+      sometimes even it does not work properly, especially with older versions
+      of the Java installer. If this happens, the temporary table (the one
+      with "_old_" in it) is left with all of the old data. Until OpenNMS
+      1.1.5, this problem would not be caught the next time you ran the
+      installer. The installer would see that you did not have the
+      <code class="filename">node</code> table, for example, and happily continue to
+      create a new one for you. This is bad, especially since you probably
+      still have data that you care about that is now in the "old"
+      table.</p><p>If you get this error, you will want to get rid of the table(s)
+      containing "_old_", however you want to first check if they contain
+      data. For example, if you have a single table,
+      <code class="filename">node_old_11033991291234</code>, no other
+      <code class="filename">node_old_*</code> tables, and no <code class="filename">node</code>
+      table, you can simply rename the table:</p><pre class="programlisting"># <span class="command"><strong>psql -h localhost -U opennms opennms</strong></span>
+<code class="computeroutput">Welcome to psql 7.4.6, the PostgreSQL interactive terminal.
+
+Type:  \copyright for distribution terms
+       \h for help with SQL commands
+       \? for help on internal slash commands
+       \g or terminate with semicolon to execute query
+       \q to quit
+
+opennms=# </code><span class="command"><strong>ALTER TABLE node_old_11033991291234 RENAME TO node;</strong></span></pre><p>You can use the "\d" command within <code class="filename">psql</code> to
+      see what other tables exist in your database. You can use "<code class="code">SELECT
+      count(*) from table;</code>" (fill in the table name for "table") to get
+      a count of rows in any table. If you have empty tables, you can just
+      drop them. If you have multiple tables with data, you will have to
+      decide which table of data you want to keep or merge them. This is left
+      as a (not so simple) exercise for the reader.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="table-violates-new-constraint"></a>Error: "Table X contains N rows (out of M) that violate new
+      constraint Y"</h3></div></div></div><p>Over time OpenNMS extends its database schema to improve
+      functionality. This error can happen because of the way certain
+      administrative functions in older versions of OpenNMS functioned or if
+      the database was modified outside of OpenNMS (the latter is common for
+      larger sites). Over time OpenNMS has introduced additional foreign key
+      constraints on its database. These are used to ensure internal database
+      consistency when data in two tables are tied together by a shared key.
+      For example, each event can have a pointer to the node that it is
+      related to; there is a foreign key constraint that requires that an
+      event <span class="emphasis"><em>must not</em></span> point at a node that does not
+      exist.</p><p>Starting with 1.1.5, when we upgrade the database schema, we first
+      check for rows that violate any new foreign key constraints that might
+      be added. There are three options to to fix these errors:</p><div class="orderedlist"><ol type="1"><li><p>Remove the offending rows. This is suggested if the number of
+          rows that violate the constraint is small in comparison to the total
+          number of rows in the affected table and if you don't need the data.
+          Use "<code class="code">$OPENNMS_HOME/bin/install -C &lt;constraint&gt;
+          -X</code>" to delete the offending rows.</p></li><li><p>Mark the key in the offending rows to NULL. This is suggested
+          if you need to keep the data around or are not yet sure about what
+          to do with it. Use "<code class="code">$OPENNMS_HOME/bin/install -C
+          &lt;constraint&gt;</code>" to mark the key column to NULL in the
+          offending rows.</p></li><li><p>Fix the key in the offending rows. This is for advanced users
+          and requires a good amount of effort. This is left as an exercise
+          for the reader.</p></li></ol></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="iplike-permission-denied"></a>Error: "- adding iplike database function... &lt;snip&gt;
+      org.postgresql.util.PSQLException: ERROR: could not access file
+      '&lt;snip&gt;/lib/iplike.so': Permission denied"</h3></div></div></div><p>The PostgreSQL server cannot access the iplike.so file. This could
+      be due to the file itself not having appropriate permissions for the
+      user that PostgreSQL runs as and/or one or more of the parent
+      directories of the iplike.so not having appropriate permissions.</p><p>This error is seen even when running the installer as root because
+      it is not OpenNMS nor the installer that cannot access the iplike.so
+      file, but the PostgreSQL database. The installer instructs the
+      PostgreSQL database to load the iplike.so and the PostgreSQL database
+      server usually runs as a non-root user, so it is subject to filesystem
+      access control checks like any other normal user. This is commonly seen
+      when people install OpenNMS into a home directory for root or another
+      user and the permissions on that home directory do not allow users other
+      than the owner of the directory access.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="iplike-coult-not-load-library"></a>Error: "- adding iplike database function... &lt;snip&gt;
+      org.postgresql.util.PSQLException: ERROR: could not load library
+      ..."</h3></div></div></div><p>The latter part of the error could be something like
+      "<code class="code">&lt;path&gt;/iplike.so: cannot open shared object file: No such
+      file or directory</code>" or "<code class="code">ld.so.1: postgres: fatal:
+      &lt;path&gt;/iplike.so: wrong ELF class: ELFCLASS32</code>".</p><p>The PostgreSQL server cannot load the <code class="code">iplike.so</code> file.
+      This is almost always caused by the PostgreSQL server and the iplike.so
+      file being compiled for different processor instruction sets. This is
+      commonly seen when the PostgreSQL server is compiled to use a 64-bit
+      instruction set but the OpenNMS <code class="code">iplike.so</code> shared object is
+      compiled for a 32-bit instruction set, although the opposite is
+      possible, as well. You can use the "<code class="code">file</code>" command on
+      <code class="code">iplike.so</code> and the <code class="code">postmaster</code> binary with
+      PostgreSQL to check their instruction sets.</p><p>The easiest solution is to see if there is a packaged version of
+      OpenNMS compiled for the same instruction set (32- or 64-bit) as your
+      PostgreSQL server. The next easiest method for most users is to switch
+      the PostgreSQL server to match the instruction set that the
+      <code class="code">iplike.so</code> file was compiled for. For advanced users, you
+      can compile OpenNMS yourself to fit the processor set that you need. See
+      <a class="ulink" href="http://sourceforge.net/mailarchive/message.php?msg_id=9531580" target="_top">this
+      post to the discuss list</a> for some pointers.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="relation-pg_user-does-not-exist"></a>Error: "Exception in thread "main"
+      org.postgresql.util.PSQLException: ERROR: relation "pg_user" does not
+      exist" when running installer.</h3></div></div></div><p>This error means the database was not created properly. Since the
+      installer script is supposed to create the database, one might assume it
+      is a problem with OpenNMS, but instead it is an issue with the SELinux
+      portions of Red Hat 4 (and CentOS 4). Basically, the postgres init_db
+      command is not able to write to /dev/null, and it fails without a useful
+      error message.</p><p>To get around this, run the following commands:</p><div class="orderedlist"><ol type="1"><li><p>stop postgres</p></li><li><p>rm -rf /var/lib/pgsql/data</p></li><li><p>/usr/sbin/setenforce 0</p></li><li><p>start postgres</p></li></ol></div><p>Note that step 2 will delete any changes you made to the
+      postgresql configuration files and you'll need to redo them.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="filenotfound-exception-permission-denied"></a>Error: java.io.FileNotFoundException: ... (Permission
+      denied)</h3></div></div></div><p>An exact example of this error is:
+      "<code class="code">java.io.FileNotFoundException: /opt/opennms/etc/users.xml
+      (Permission denied)</code>".</p><p>If the above error happens when using admin functions through
+      the web interface, such as managing users, notifications, and adding
+      nodes, then the Tomcat web server is running as a non-root user but
+      you haven't changed the permissions on the configuration files so
+      the Tomcat user can access them.  Go back and follow the instructions
+      earlier in the install guide on setting up Tomcat to run as a non-root
+      user.</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="where-to-get-help"></a>Where to Get Help</h2></div></div></div><p>OpenNMS is a community supported project. Please keep that in mind
+    when seeking help on the program, as no one gets paid to work on the
+    project (unless it is through a commercial support contract).</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="release-notes"></a>The Release Notes</h3></div></div></div><p>Check the release notes for this release.  They are in the <a class="ulink" href="http://sourceforge.net/docman/?group_id=4141" target="_top">Documentation</a>
+      section of the OpenNMS project page at SourceForge.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="opennms-web-site"></a>The OpenNMS Web Site</h3></div></div></div><p>The main OpenNMS <a class="ulink" href="http://www.opennms.org" target="_top">site</a>
+      is a Wiki. As a community project, there is a lot of good advice and
+      information available there. In particular, we suggest checking the
+      above-mentioned release notes, the <a class="ulink" href="http://www.opennms.org/index.php/FAQ" target="_top">FAQ entries on the wiki</a>,
+      the <a class="ulink" href="http://bugzilla.opennms.org/" target="_top">bug database</a> and,
+      of course, <a class="ulink" href="http://www.google.com/" target="_top">Google</a>,
+      before posting to a mailing list.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mailing-lists"></a>The OpenNMS Mailing Lists</h3></div></div></div><p>OpenNMS maintains a number of active mailing lists <a class="ulink" href="http://sourceforge.net/mail/?group_id=4141" target="_top">on SourceForge</a>:</p><div class="glosslist"><dl><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-announce" target="_top">opennms-announce</a></dt><dd><p>A low traffic, moderated mailing list for OpenNMS
+            announcements.  All posts to this list are duplicated on the
+            <em class="glossterm">opennms-discuss</em> list.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-cvs" target="_top">opennms-cvs</a></dt><dd><p>This is a fairly high traffic list of all updates to the Subversion
+            repositories on SourceForge.  Moderated.  Only SVN updates are posted here
+            (no discussion).</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-devel" target="_top">opennms-devel</a></dt><dd><p>This list is for discussion of development of the OpenNMS codebase.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-discuss" target="_top">opennms-discuss</a></dt><dd><p>This is the main OpenNMS discuss list. It's pretty friendly, and
+            reasonably high-volume.  It tends to focus on configuration issues and
+            general discussion of network management, but pretty much anything goes
+            here.  However, it is suggested that installation-related issues go to
+            the <em class="glossterm">opennms-install</em> list instead.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-install" target="_top">opennms-install</a></dt><dd><p>This is a great list for new users to OpenNMS.  The main
+            focus is installation issues (cleared up by this great documentation,
+            right?) but most "newbie" questions are welcome here.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-maps" target="_top">opennms-maps</a></dt><dd><p>OpenNMS has a network map feature, which includes code for
+            automatically determining relationships between hosts (Linkd).  This
+            is the appropriate list for discussion of maps and the underlying
+            Linkd code.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-windows" target="_top">opennms-windows</a></dt><dd><p>A discussion list for people running OpenNMS on Windows.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-francais" target="_top">opennms-francais</a></dt><dd><p>A list for discussion of OpenNMS in French.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-italia" target="_top">opennms-italia</a></dt><dd><p>A list for discussion of OpenNMS in Italian.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-ug-tokyo" target="_top">opennms-ug-tokyo</a></dt><dd><p>A list for discussion of OpenNMS in Japanese, as well as
+            general discussion among the Tokyo OpenNMS Users Group.</p></dd><dt><a class="ulink" href="http://lists.sourceforge.net/mailman/listinfo/opennms-ug-uk" target="_top">opennms-ug-uk</a></dt><dd><p>A list for discussion of OpenNMS in UK English for those 
+            who don't speak American English (OK, just kidding).  Actually,
+            a discussion list for the UK OpenNMS Users Group.  ;)</p></dd></dl></div><p>The OpenNMS mailing lists are also archived at <a class="ulink" href="http://search.gmane.org" target="_top">gmane.org</a>.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="commercial-support"></a>Commercial Support</h3></div></div></div><p>If you are using OpenNMS in a production environment, or are
+      considering it, you might be interested in commercial support. The
+      <a class="ulink" href="http://www.opennms.com/" target="_top">OpenNMS Group</a>
+      maintains the OpenNMS project, and we also offer support, training,
+      consulting services and custom development.</p></div></div></div>
+
+</div></body></html>

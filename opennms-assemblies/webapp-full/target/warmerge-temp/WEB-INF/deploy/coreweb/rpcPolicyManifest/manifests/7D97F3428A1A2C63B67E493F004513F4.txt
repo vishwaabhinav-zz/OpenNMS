@@ -1,0 +1,2 @@
+serviceClass: org.opennms.gwt.web.ui.asset.client.AssetService
+path: 0F142C5E5124C43E0CA8548543AF35BB.gwt.rpc

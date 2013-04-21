@@ -1,0 +1,4 @@
+# Module RemotePollerMap
+# RPC service class, partial path of RPC policy file
+de.novanic.eventservice.client.event.service.EventService, E75B4FCB00BB6BF9025A1ED865E6C66C.gwt.rpc
+org.opennms.features.poller.remote.gwt.client.LocationStatusService, AB05F651EAAAFB76920B7351C146695F.gwt.rpc

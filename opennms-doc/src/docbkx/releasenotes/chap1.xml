@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="introduction">
+	<title>Introduction</title>
+
+	<subtitle>About This Release</subtitle>
+
+	<!-- Start 1.10 -->
+
+	<section id="introduction-1.10.8">
+		<title>Release 1.10.8</title>
+
+		<para>
+			Release 1.10.8 is the latest in the stable series of OpenNMS releases.
+			It contains a number of bugfixes and enhancements.
+		</para>
+		<para>
+			The codename for 1.10.8 is <emphasis>Trikiti</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.10.7">
+		<title>Release 1.10.7</title>
+
+		<para>
+			Release 1.10.7 is the latest in the stable series of OpenNMS releases.
+			It contains a number of bugfixes and enhancements.
+		</para>
+		<para>
+			The codename for 1.10.7 is <emphasis>Buccina</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.10.6">
+		<title>Release 1.10.6</title>
+
+		<para>
+			Release 1.10.6 is the latest in the stable series of OpenNMS releases.
+			It contains a number of bugfixes and enhancements.
+		</para>
+		<para>
+			The codename for 1.10.6 is <emphasis>Cornamuse</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.10.5">
+		<title>Release 1.10.5</title>
+
+		<para>
+			Release 1.10.5 is the latest in the stable series of OpenNMS releases.
+			It contains a few minor bugfixes and enhancements.
+		</para>
+		<para>
+			The codename for 1.10.5 is <emphasis>Tromboon</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.10.4">
+		<title>Release 1.10.4</title>
+
+		<para>
+			Release 1.10.4 is the latest in the stable series of OpenNMS releases.
+			It contains a few minor bugfixes and enhancements.
+		</para>
+		<para>
+			The codename for 1.10.4 is <emphasis>Archlute</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.10.3">
+		<title>Release 1.10.3</title>
+
+		<para>
+			Release 1.10.3 is the latest in the stable series of OpenNMS releases.
+			It contains a few bugfixes, most notably an important deadlock fix when
+			using provisiond.
+		</para>
+		<para>
+			The codename for 1.10.3 is <emphasis>Fiscorn</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.10.2">
+		<title>Release 1.10.2</title>
+
+		<para>
+			Release 1.10.2 is the latest in the stable series of OpenNMS releases.
+			It contains bugfixes, including a fix for a filehandle leak regression,
+         Windows installer fixes, and some minor enhancements.
+		</para>
+		<para>
+			The codename for 1.10.2 is <emphasis>Charango</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.10.1">
+		<title>Release 1.10.1</title>
+
+		<para>
+			Release 1.10.1 is the second in the latest series of stable releases.
+			It contains plenty of bugfixes, as well as a few minor enhancements.
+		</para>
+		<para>
+			The codename for 1.10.1 is <emphasis>Hurdy Gurdy</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.10.0">
+		<title>Release 1.10.0</title>
+
+		<para>
+			Release 1.10.0 is the first in the latest series of stable releases.
+		</para>
+		<para>
+			The codename for 1.10.0 is <emphasis>Alboka</emphasis>
+		</para>
+	</section>
+
+	<!-- Start 1.9 -->
+
+	<section id="introduction-1.9.93">
+		<title>Release 1.9.93</title>
+
+		<para>
+			Release 1.9.93 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is blessed as the
+			next stable release.
+		</para>
+		<para>
+			The codename for 1.9.93 is <emphasis>Kora</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.92">
+		<title>Release 1.9.92</title>
+
+		<para>
+			Release 1.9.92 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is blessed as the
+			next stable release.
+		</para>
+		<para>
+			The codename for 1.9.92 is <emphasis>Superbone</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.91">
+		<title>Release 1.9.91</title>
+
+		<para>
+			Release 1.9.91 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is blessed as the
+			next stable release.
+		</para>
+		<para>
+			The codename for 1.9.91 is <emphasis>Crumhorn</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.90">
+		<title>Release 1.9.90</title>
+
+		<para>
+			Release 1.9.90 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is blessed as the
+			next stable release.
+		</para>
+		<para>
+			The codename for 1.9.90 is <emphasis>Balafon</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.8">
+		<title>Release 1.9.8</title>
+
+		<para>
+			Release 1.9.8 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			The codename for 1.9.8 is <emphasis>Pulalu</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.7">
+		<title>Release 1.9.7</title>
+
+		<para>
+			Release 1.9.7 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			The codename for 1.9.7 is <emphasis>Naqara</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.6">
+		<title>Release 1.9.6</title>
+
+		<para>
+			Release 1.9.6 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			The codename for 1.9.6 is <emphasis>Barbat</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.5">
+		<title>Release 1.9.5</title>
+
+		<para>
+			Release 1.9.5 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			The codename for 1.9.5 is <emphasis>Canjo</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.4">
+		<title>Release 1.9.4</title>
+
+		<para>
+			Release 1.9.4 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			The codename for 1.9.4 is <emphasis>Guzheng</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.3">
+		<title>Release 1.9.3</title>
+
+		<para>
+			Release 1.9.3 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			The codename for 1.9.3 is <emphasis>Recorder</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.2">
+		<title>Release 1.9.2</title>
+
+		<para>
+			Release 1.9.2 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			The codename for 1.9.2 is <emphasis>Psaltery</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.1">
+		<title>Release 1.9.1</title>
+
+		<para>
+			Release 1.9.1 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			Since 1.9.0, <ulink url="http://bugzilla.opennms.org/buglist.cgi?target_milestone=1.9.1">a few new
+			features</ulink> were added.
+		</para>
+		<para>
+			The codename for 1.9.1 is <emphasis>Oboe</emphasis>
+		</para>
+	</section>
+
+	<section id="introduction-1.9.0">
+		<title>Release 1.9.0</title>
+
+		<para>
+			Release 1.9.0 is the latest in a series of development releases of OpenNMS.  This
+			represents what will eventually become OpenNMS 1.10.0 when it is declared
+			feature-complete and stable.
+		</para>
+		<para>
+			Since 1.8, <ulink url="http://bugzilla.opennms.org/buglist.cgi?target_milestone=1.9.0">a few new
+			features</ulink> were added.
+		</para>
+		<para>
+			The codename for 1.9.0 is <emphasis>Timple</emphasis>
+		</para>
+	</section>
+
+</chapter>

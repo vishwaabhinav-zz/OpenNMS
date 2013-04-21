@@ -1,0 +1,4 @@
+#!/bin/sh -
+
+JROBIN_JAR=`ls -1 "/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/jrobin-*.jar | head -n 1`
+exec /home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/bin/runjava -r -- -cp "$JROBIN_JAR" org.jrobin.inspector.RrdInspector "$@"

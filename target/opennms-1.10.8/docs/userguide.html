@@ -1,0 +1,276 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>OpenNMS User Guide</title><link rel="stylesheet" href="common/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><meta name="keywords" content="OpenNMS, User, Administrator, Manual"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="opennms-userguide"></a>OpenNMS User Guide</h1></div><div><h2 class="subtitle">A Guide for New Users</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Steve</span> <span class="surname">Giles</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Tarus</span> <span class="surname">Balog</span></h3></div></div></div><div><p class="copyright">Copyright &copy; 1999, 2000, 2001 Oculan Corp.</p></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="preface"><a href="#preface">Preface</a></span></dt><dt><span class="chapter"><a href="#chap1">1. Chapter 1</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap1sect1">1.1. This guide</a></span></dt><dt><span class="sect1"><a href="#chap1sect2">1.2. Terms used in this document</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap2">2. Chapter 2</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap2sect1">2.1. Outage table</a></span></dt><dt><span class="sect1"><a href="#chap2sect2">2.2. Availability</a></span></dt><dt><span class="sect1"><a href="#chap2sect3">2.3. Performance and Notification</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap3">3. Chapter 3</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap3sect1">3.1. Viewing Events</a></span></dt><dt><span class="sect1"><a href="#chap3sect2">3.2. Managing Events</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap4">4. Chapter 4</a></span></dt><dt><span class="chapter"><a href="#chap5">5. Chapter 5</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap5sect1">5.1. Searching for Nodes</a></span></dt><dt><span class="sect1"><a href="#chap5sect2">5.2. Searching Asset Information</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap6">6. Chapter 6</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap6sect1">6.1. Performance Reports</a></span></dt><dt><span class="sect1"><a href="#chap6sect2">6.2. Custom Performance Reports</a></span></dt><dt><span class="sect1"><a href="#chap6sect3">6.3. Availability Reports</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap7">7. Chapter 7</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap7sect1">7.1. Turning Notifications on</a></span></dt><dt><span class="sect1"><a href="#chap7sect2">7.2. Check and Acknowledge Notifications</a></span></dt><dt><span class="sect1"><a href="#chap7sect3">7.3. Managing Notifications</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap8">8. Chapter 8</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap8sect1">8.1. Adding Asset information</a></span></dt><dt><span class="sect1"><a href="#chap8sect2">8.2. Search Nodes based on Asset Information</a></span></dt><dt><span class="sect1"><a href="#chap8sect3">8.3. Exporting Asset Information</a></span></dt><dt><span class="sect1"><a href="#chap8sect4">8.4. Importing Asset Information</a></span></dt></dl></dd><dt><span class="chapter"><a href="#chap9">9. Chapter 9</a></span></dt><dd><dl><dt><span class="sect1"><a href="#chap9sect1">9.1. Documentation</a></span></dt><dt><span class="sect1"><a href="#chap9sect2">9.2. Web Site</a></span></dt><dt><span class="sect1"><a href="#chap9sect3">9.3. Email</a></span></dt><dt><span class="sect1"><a href="#chap9sect4">9.4. Usenet News</a></span></dt></dl></dd></dl></div>
+
+	
+	<div class="preface" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="preface"></a>Preface</h2></div></div></div><p>
+		OpenNMS is the creation of numerous people and organizations,
+		operating under the umbrella of the OpenNMS project. The original code
+		base was developed and published under the GPL by the Oculan Corporation
+		until 2002, when the project administration was passed on to Tarus
+		Balog.
+	</p><p>
+		The current corporate sponsor of OpenNMS is
+		<a class="ulink" href="http://www.opennms.com/" target="_top">The OpenNMS Group</a>,
+		which also owns the OpenNMS trademark.
+	</p><p>
+		OpenNMS is a derivative work, containing both original code,
+		included code and modified code that was published under the GNU General
+		Public License. Please see the source for detailed copyright notices,
+		but some notable copyright owners are listed below:
+	</p><div class="itemizedlist"><ul type="disc"><li><p>
+				<span class="trademark">Copyright </span>&copy; 2002-2013
+				<a class="ulink" href="http://www.opennms.com" target="_top">The OpenNMS Group, Inc.</a>
+			</p></li><li><p>
+				Original code base for OpenNMS version 1.0.0
+				<span class="trademark">Copyright </span>&copy; 1999-2001
+				<a class="ulink" href="http://www.oculan.com" target="_top">Oculan Corporation</a>.
+			</p></li><li><p>
+				Mapping code <span class="trademark">Copyright </span>&copy; 2003
+				<a class="ulink" href="http://www.nksi.com" target="_top">Networked Knowledge Systems, Inc.</a>
+			</p></li><li><p>
+				ScriptD code <span class="trademark">Copyright </span>&copy; 2003
+				<a class="ulink" href="http://www.tavve.com" target="_top">Tavve Software Company</a>.
+			</p></li></ul></div><p>
+		Please send any omissions or corrections to this document
+		to <a class="ulink" href="mailto:tarus@opennms.org" target="_top">Tarus Balog</a>.
+	</p></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap1"></a>Chapter&nbsp;1.&nbsp;Chapter 1</h2></div><div><h3 class="subtitle"><i>OpenNMS Basics</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap1sect1">1.1. This guide</a></span></dt><dt><span class="sect1"><a href="#chap1sect2">1.2. Terms used in this document</a></span></dt></dl></div><p>
+		Warning: This document is deprecated and refers to old code. 
+		A new document is being developed, but for now the best source 
+		of information can be found on 
+		<a class="ulink" href="http://www.opennms.org/" target="_top">The OpenNMS Wiki</a>.
+		This document may be wrong on a number of important issues, and it
+		will definitely waste your time.
+	</p><p>
+		<span class="emphasis"><em>OpenNMS is a service and network management platform
+		for automatic node discovery, network services monitoring, operator
+		notification of problems, events consolidation, automatic action
+		launching and service level performance monitoring.
+		</em></span>
+	</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap1sect1"></a>This guide</h2></div></div></div><p>
+		This guide covers the use of the web UI on an already configured 
+		management station.  It covers, finding information, 
+		recognizing and acknowledging events and notices, as well as 
+		reporting features, and asset management.  This guide is intended 
+		for end users to be able to understand the current state of the managed 
+		network, as well as research historical data, and make the most of 
+		all the information available through the web interface.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap1sect2"></a>Terms used in this document</h2></div></div></div><p>
+		The following is a list of terms relevant to this document.  Some of 
+		these terms are used rather loosely within the industry, but are 
+		defined here as they specifically apply to OpenNMS.
+		</p><p><b>Interface.&nbsp;</b>Any logical IP address bound to a device that responds 
+		to network requests, OR, anything reported via SNMP as being an interface.
+		</p><p><b>Service.&nbsp;</b>Any single, predefined network service that is bound to an interface.
+		</p><p><b>Node.&nbsp;</b>Any physical device with one or more interfaces.  A node may have multiple 
+		interfaces, and may also have multiple services per interface.  (Whether or not 
+		a specific interface "belongs" to a node can be determined using several different 
+		methods i.e. SNMP or NetBIOS Names.  However, if no parenting information is 
+		available for a given interface, it will be represented as a separate node.)
+		</p><p><b>Event.&nbsp;</b>Any occurrence or happening.
+		</p><p><b>Alarm.&nbsp;</b>Any <span class="emphasis"><em>significant</em></span> occurrence or happening.  Alarms are based on one or more
+		occurrences of events.
+		</p><p><b>Outage.&nbsp;</b>A temporary suspension of operation, signified by an inability to 
+		communicate with a managed service. (A failed poll.)
+		</p><p><b>Notice.&nbsp;</b>A notice is generated when specific events occur.  The notification process 
+		usually consists of making users, or groups of users aware of these events via 
+		email, pagers or other means, or in some cases initiating corrective actions.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap2"></a>Chapter&nbsp;2.&nbsp;Chapter 2</h2></div><div><h3 class="subtitle"><i>Main page</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap2sect1">2.1. Outage table</a></span></dt><dt><span class="sect1"><a href="#chap2sect2">2.2. Availability</a></span></dt><dt><span class="sect1"><a href="#chap2sect3">2.3. Performance and Notification</a></span></dt></dl></div><p>
+	The web interface is accessed, using a web browser on port 8980 in the opennms sub-directory.
+	</p><pre class="programlisting">
+	http://127.0.0.1:8980/opennms/
+	</pre><p>
+	From this centralized view, a quick overview of the current health of the network can be found.  
+	Notice in the upper right hand corner is information about the time and date on 
+	the management station, as well as the currently logged in user, and whether or not notices are 
+	currently turned on.
+	</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect1"></a>Outage table</h2></div></div></div><p>
+		To the left of the screen is the outage table, labeled "Nodes with Outages."  This is 
+		a list of nodes that currently have service outages.  Clicking on a node in this list 
+		will present more specific information about the node, it's services, and 
+		current, as well as historic, outages.  From this page, information can be found regarding 
+		times that any outages occurred as well as when service was restored.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect2"></a>Availability</h2></div></div></div><p>
+		In the center of the display are categories of services.  For each category, there is 
+		listed the number of current outages as well as availability for the last 24 hours.
+		</p><p>
+		The outage, and availability sections of this table are colored green, yellow, or red 
+		based on threshold values set by the administrator when the system was installed.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap2sect3"></a>Performance and Notification</h2></div></div></div><p>
+		On the right side of the display there are links to notifications and a portal to 
+		performance graphs.  This section is used to create graphs from data 
+		collected via SNMP.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap3"></a>Chapter&nbsp;3.&nbsp;Chapter 3</h2></div><div><h3 class="subtitle"><i>Events</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap3sect1">3.1. Viewing Events</a></span></dt><dt><span class="sect1"><a href="#chap3sect2">3.2. Managing Events</a></span></dt></dl></div><p>
+	When an event occurs on the management station, it is stored in the database.  These 
+	entries can be viewed on the events page which is accessed by clicking "Events" on 
+	the menu bar near the top of the main page.
+	</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect1"></a>Viewing Events</h2></div></div></div><p>
+		From this page, start by choosing the type of events to view.  
+		Options are "outstanding events" (events that have not yet been acknowledged) 
+		and "acknowledged events."  After selecting the type of events, 
+		an unfiltered list of events is presented in a table format.  Each event 
+		has been assigned a severity and is colored appropriately.   The legend  
+		can be viewed by pressing the button labeled "Severity Legend".
+		</p><p>
+		More information about any event can be reached by clicking on the link in the ID column.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap3sect2"></a>Managing Events</h2></div></div></div><p>
+		From the main Events page there is a link to acknowledge or unacknowledge 
+		all events.  In addition, filters can be applied to the event list by clicking 
+		on the "+" or "-" next to the item.  
+		</p><p> 
+		Clicking the "-" will exclude any item where the specific field that matches that value.
+		</p><p>
+		Clicking the "+" will exclude any item that does not match that value for the specific field.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap4"></a>Chapter&nbsp;4.&nbsp;Chapter 4</h2></div><div><h3 class="subtitle"><i>Outages</i></h3></div></div></div><p>
+	Access the outage page by clicking on the "Outages" link in the main menu.  
+	On this page there is a table that contains information about all current 
+	outages for all managed devices.  On this page, there is information regarding 
+	the type of outages, affected nodes and interfaces as well as the times of the 
+	outages.  Clicking links in this table will provide additional information 
+	such as availability, events, and historical outages.
+	</p></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap5"></a>Chapter&nbsp;5.&nbsp;Chapter 5</h2></div><div><h3 class="subtitle"><i>Search</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap5sect1">5.1. Searching for Nodes</a></span></dt><dt><span class="sect1"><a href="#chap5sect2">5.2. Searching Asset Information</a></span></dt></dl></div><p>
+	Clicking on the "Search" link in the main menu takes us to the search page.  
+	From here we can search for nodes using various criteria.  Once a search is 
+	initiated we recieve a list of nodes and their interfaces that match 
+	the search criteria.  Each of these will be a link to the main node, or interface 
+	pages.  These pages contain a very complete set of information about each 
+	device.  Below is more detail on some of the different types of searches 
+	that can be done.
+	</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap5sect1"></a>Searching for Nodes</h2></div></div></div><p>
+		Generate lists of nodes that match any of a number of criteria 
+		including ip addresses, services, and machine names.  Ranges of addresses 
+		can be entered for example, to provide a list of nodes that have ip 
+		addresses in that range.  There are examples on this page, as well as 
+		some syntax rules to help refine searches.  If all else fails 
+		there is also a link to "list all nodes"
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap5sect2"></a>Searching Asset Information</h2></div></div></div><p>
+		If asset information has been entered for devices on the network, a search can 
+		can be created based on that information.  Searches can be initiated based on 
+		category, information in any given field, or again there is a link to all nodes 
+		containing asset information.
+		</p><p>
+		If no asset information has been entered for the devices, 
+		these searches will not return any matches.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap6"></a>Chapter&nbsp;6.&nbsp;Chapter 6</h2></div><div><h3 class="subtitle"><i>Reporting</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap6sect1">6.1. Performance Reports</a></span></dt><dt><span class="sect1"><a href="#chap6sect2">6.2. Custom Performance Reports</a></span></dt><dt><span class="sect1"><a href="#chap6sect3">6.3. Availability Reports</a></span></dt></dl></div><p>
+	Access the main reporting page by clicking "reporting" in the 
+	main menu.  From this point there are 3 options, performance reports, 
+	custom performance reports and availability reports.  In this section 
+	we will look at each type of report, and how to generate and interpret 
+	the graphs and information provided.
+	</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap6sect1"></a>Performance Reports</h2></div></div></div><p>
+		Clicking on "Performance Reports" will display a list of options 
+		for generating the standard performance reports.
+		</p><p>
+		In the leftmost select box, choose an interface to generate a report 
+		on.  Select any one SNMP capable interface.  Next, 
+		choose what information to report on.  Select 
+		any number of options in the second column.  Select at least
+		one option in each of the first 2 columns.  Lastly, choose 
+		the timeframe to report on.
+		</p><p>
+		After selecting the options, press the "Submit" button to be taken to 
+		a bookmarkable page containing the resulting reports.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap6sect2"></a>Custom Performance Reports</h2></div></div></div><p>
+		After selecting "Reports" from the main menu select "Custom Performance Report".  
+		At this point, you will be guided through a series of questions about 
+		the report you would like to create.  First choose the interface on which 
+		you would like to report.  Next you need to select between 1 and 4 data 
+		sources to report on.  For each data source you can choose a title, color, 
+		line style and the type of value.  Finally choose a title for you graph as 
+		well as a time period to report on.  From this point, selecting next should 
+		display a bookmarkable graph.  The complete address of this graph can be 
+		sent to another user via email, or instant message.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap6sect3"></a>Availability Reports</h2></div></div></div><p>
+		After selecting "Reports" from the main menu select "Availability Report".  
+		From this point simply select the type of report you would like to create, 
+		and the category you would like to report on.  Pressing the "Get Report" button 
+		will open the requested report in a new browser window.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap7"></a>Chapter&nbsp;7.&nbsp;Chapter 7</h2></div><div><h3 class="subtitle"><i>Notification</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap7sect1">7.1. Turning Notifications on</a></span></dt><dt><span class="sect1"><a href="#chap7sect2">7.2. Check and Acknowledge Notifications</a></span></dt><dt><span class="sect1"><a href="#chap7sect3">7.3. Managing Notifications</a></span></dt></dl></div><p>
+	Notifications Notify you of events.
+	</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap7sect1"></a>Turning Notifications on</h2></div></div></div><p>
+		From the admin page, select Notification Status ON, then simply click "Update Status".  
+		This will turn notifications on/off for the entire system en masse.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap7sect2"></a>Check and Acknowledge Notifications</h2></div></div></div><p>
+		From the notifications page select the catagory that best describes the type of notifications 
+		in which you are interested.  From here you will get a list of notifications that you can 
+		browse through and acknowledge, if needed.  Unacknowledged notifications will continue to 
+		escalate as perscribed, until acknowledged.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap7sect3"></a>Managing Notifications</h2></div></div></div><p>
+		From the admin page and click "Turn On/Off Notices by Service".  Follow instructions on 
+		this page to control notifications on a per service basis.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap8"></a>Chapter&nbsp;8.&nbsp;Chapter 8</h2></div><div><h3 class="subtitle"><i>Assets</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap8sect1">8.1. Adding Asset information</a></span></dt><dt><span class="sect1"><a href="#chap8sect2">8.2. Search Nodes based on Asset Information</a></span></dt><dt><span class="sect1"><a href="#chap8sect3">8.3. Exporting Asset Information</a></span></dt><dt><span class="sect1"><a href="#chap8sect4">8.4. Importing Asset Information</a></span></dt></dl></div><p>
+	!!!Important!!!: Please read this entire section, before you enter any asset information.
+	</p><p>
+	Asset information helps you keep track of information about your managed devices.  
+	It can be used as search criteria, and is very handy in troubleshooting when 
+	you need a phone number for a vendor, or wish to document peculiar behavior for 
+	the next person that may access this information.
+	</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap8sect1"></a>Adding Asset information</h2></div></div></div><p>
+		Use the search page to find the node you would like to add asset 
+		information to, and click it.  Then click "Asset Info".  Fill out 
+		whatever fields you think you need.  Click submit.  When entering 
+		asset information, be very careful not to use any commas in any 
+		fields if you plan to export or import your data.  THERE IS CURRENTLY 
+		NO WAY TO ESCAPE COMMAS IN THE CURRENT VERSION.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap8sect2"></a>Search Nodes based on Asset Information</h2></div></div></div><p>
+		Go to the search page or asset page and enter the criterium, and search.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap8sect3"></a>Exporting Asset Information</h2></div></div></div><p>
+                Exporting your asset information will give you a list of comma separated 
+		values.  The first line of which will be the field names, and each subsequent 
+		line a device.
+                </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap8sect4"></a>Importing Asset Information</h2></div></div></div><p>
+                This feature, by itself, is basically useless in it's current state.  The node id 
+		must match for each device, and because of that, this information can not be passed 
+		from one management station to another, nor could it even be used across installations, 
+		unless you remapped the node ids.  Information could be exported from a management 
+		station, imported into a spread sheet, then modified, exported back to a comma 
+		separated list, and then re-imported back into the same management station from which 
+		it was initially exported.  Or alternately the exported list could be modified by 
+		an external script and then re-imported if for instance you would need to duplicate 
+		information such as addresses for a large number of devices.
+                </p><p>
+		Note that when re-importing information, the field names (the first line) should be left 
+		out.  That is, if you export and save the resultant .csv file, pasting this file in the 
+		import field would cause an error in the first line.  The field names are only there for 
+		the sake of another spreadsheet/database program that could read them as field names.
+		</p></div></div>
+	<div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="chap9"></a>Chapter&nbsp;9.&nbsp;Chapter 9</h2></div><div><h3 class="subtitle"><i>Summary</i></h3></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#chap9sect1">9.1. Documentation</a></span></dt><dt><span class="sect1"><a href="#chap9sect2">9.2. Web Site</a></span></dt><dt><span class="sect1"><a href="#chap9sect3">9.3. Email</a></span></dt><dt><span class="sect1"><a href="#chap9sect4">9.4. Usenet News</a></span></dt></dl></div><p>
+	This project is always under development.  Features and functionality are 
+	constantly being added or improved.  Some items in this documentation may from 
+	time to time be out dated, or even refer to features that are not in the current 
+	release of the software, and may only exist in the unstable branch of the CVS 
+	reporitory.  There are a number of places to get help and information about 
+	OpenNMS.  You may also wish to contribute code to the project.  In the following 
+	section I will point out some resources that may be of use.
+	</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap9sect1"></a>Documentation</h2></div></div></div><p>
+		In addition to this document there are also guides that cover installation, 
+		and administration of OpenNMS.  The latest versions of these guides are usually 
+		available from CVS.  While it is nearly impossible to document every aspect 
+		of the project this way it is a very good place to start.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap9sect2"></a>Web Site</h2></div></div></div><p>
+		The OpenNMS web site is available at
+		</p><pre class="programlisting">
+		http://www.opennms.org/
+		</pre><p>
+		From here you can gain access to the software, documentation, bug information, 
+		mailing list archives, and CVS, as well as a number of other resources.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap9sect3"></a>Email</h2></div></div></div><p>
+                OpenNMS currently supports a number of mailing lists.  For more information 
+		on specific lists and how to join, please visit
+                </p><pre class="programlisting">
+                http://www.opennms.org/index.php/Mailing_lists
+                </pre><p>
+                </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="chap9sect4"></a>Usenet News</h2></div></div></div><p>
+                While as of the writing of this document OpenNMS does not host a specific 
+		news group, you can often find information scattered around various other 
+		news groups.
+                </p></div></div>
+</div></body></html>

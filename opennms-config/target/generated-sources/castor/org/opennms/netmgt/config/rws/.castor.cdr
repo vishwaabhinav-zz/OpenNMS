@@ -1,0 +1,4 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.rws.StandbyUrl=org.opennms.netmgt.config.rws.descriptors.StandbyUrlDescriptor
+org.opennms.netmgt.config.rws.RwsConfiguration=org.opennms.netmgt.config.rws.descriptors.RwsConfigurationDescriptor
+org.opennms.netmgt.config.rws.BaseUrl=org.opennms.netmgt.config.rws.descriptors.BaseUrlDescriptor

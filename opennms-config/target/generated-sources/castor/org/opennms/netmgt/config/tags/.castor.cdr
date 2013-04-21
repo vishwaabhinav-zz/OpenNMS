@@ -1,0 +1,3 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.tags.Tags=org.opennms.netmgt.config.tags.descriptors.TagsDescriptor
+org.opennms.netmgt.config.tags.Tag=org.opennms.netmgt.config.tags.descriptors.TagDescriptor

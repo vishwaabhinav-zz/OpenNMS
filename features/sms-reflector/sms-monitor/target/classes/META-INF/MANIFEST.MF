@@ -1,0 +1,36 @@
+Manifest-Version: 1.0
+Export-Package: org.opennms.sms.monitor.session;version="1.10.8",org.o
+ pennms.sms.monitor;uses:="org.opennms.core.tasks,org.opennms.sms.phon
+ ebook,org.apache.log4j,org.springframework.util,org.springframework.c
+ ontext.support,org.opennms.netmgt.poller.monitors,org.opennms.sms.pin
+ g,org.opennms.sms.reflector.smsservice,org.opennms.core.utils,org.sms
+ lib,org.opennms.netmgt.poller,org.opennms.netmgt.model";version="1.10
+ .8"
+Private-Package: org.opennms.sms.monitor.internal,org.opennms.sms.moni
+ tor.internal.config
+Ignore-Package: org.opennms.sms.monitor.internal.config,org.opennms.sm
+ s.monitor.internal
+Built-By: anonymous
+Tool: Bnd-0.0.255
+Bundle-Name: org.opennms.features.sms-reflector.sms-monitor [org.openn
+ ms.sms.monitor]
+Created-By: Apache Maven Bundle Plugin
+Require-Bundle: com.springsource.com.sun.xml.bind
+Build-Jdk: 1.6.0_27
+Bundle-Version: 1.10.8
+Bnd-LastModified: 1366544153159
+Bundle-ManifestVersion: 2
+Bundle-Description: Generated using Pax-Construct
+Import-Package: com.sun.xml.bind.marshaller,javax.xml.bind,javax.xml.b
+ ind.annotation,javax.xml.bind.helpers,javax.xml.validation,org.apache
+ .commons.io;version="1.4",org.apache.commons.lang.builder,org.apache.
+ log4j,org.opennms.core.tasks,org.opennms.core.utils;version="1.10",or
+ g.opennms.netmgt.model;version="1.10",org.opennms.netmgt.poller,org.o
+ pennms.netmgt.poller.monitors,org.opennms.sms.monitor;version="1.10.8
+ ",org.opennms.sms.monitor.session;version="1.10.8",org.opennms.sms.ph
+ onebook;version="1.10",org.opennms.sms.ping,org.opennms.sms.reflector
+ .smsservice,org.smslib,org.smslib.test,org.springframework.context.su
+ pport;version="3.0.2.RELEASE",org.springframework.util;version="3.0.2
+ .RELEASE"
+Bundle-SymbolicName: org.opennms.features.sms-reflector.sms-monitor
+

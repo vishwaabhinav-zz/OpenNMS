@@ -1,0 +1,12 @@
+#Sun Apr 21 17:01:55 IST 2013
+org.opennms.netmgt.config.javamail.SendmailProtocol=org.opennms.netmgt.config.javamail.descriptors.SendmailProtocolDescriptor
+org.opennms.netmgt.config.javamail.End2endMailConfig=org.opennms.netmgt.config.javamail.descriptors.End2endMailConfigDescriptor
+org.opennms.netmgt.config.javamail.ReadmailConfig=org.opennms.netmgt.config.javamail.descriptors.ReadmailConfigDescriptor
+org.opennms.netmgt.config.javamail.JavamailConfiguration=org.opennms.netmgt.config.javamail.descriptors.JavamailConfigurationDescriptor
+org.opennms.netmgt.config.javamail.JavamailProperty=org.opennms.netmgt.config.javamail.descriptors.JavamailPropertyDescriptor
+org.opennms.netmgt.config.javamail.ReadmailHost=org.opennms.netmgt.config.javamail.descriptors.ReadmailHostDescriptor
+org.opennms.netmgt.config.javamail.ReadmailProtocol=org.opennms.netmgt.config.javamail.descriptors.ReadmailProtocolDescriptor
+org.opennms.netmgt.config.javamail.SendmailConfig=org.opennms.netmgt.config.javamail.descriptors.SendmailConfigDescriptor
+org.opennms.netmgt.config.javamail.SendmailHost=org.opennms.netmgt.config.javamail.descriptors.SendmailHostDescriptor
+org.opennms.netmgt.config.javamail.UserAuth=org.opennms.netmgt.config.javamail.descriptors.UserAuthDescriptor
+org.opennms.netmgt.config.javamail.SendmailMessage=org.opennms.netmgt.config.javamail.descriptors.SendmailMessageDescriptor

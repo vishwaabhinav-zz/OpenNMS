@@ -1,0 +1,12 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.httpdatacollection.HttpDatacollectionConfig=org.opennms.netmgt.config.httpdatacollection.descriptors.HttpDatacollectionConfigDescriptor
+org.opennms.netmgt.config.httpdatacollection.Url=org.opennms.netmgt.config.httpdatacollection.descriptors.UrlDescriptor
+org.opennms.netmgt.config.httpdatacollection.Uri=org.opennms.netmgt.config.httpdatacollection.descriptors.UriDescriptor
+org.opennms.netmgt.config.httpdatacollection.HttpCollection=org.opennms.netmgt.config.httpdatacollection.descriptors.HttpCollectionDescriptor
+org.opennms.netmgt.config.httpdatacollection.Attributes=org.opennms.netmgt.config.httpdatacollection.descriptors.AttributesDescriptor
+org.opennms.netmgt.config.httpdatacollection.Attrib=org.opennms.netmgt.config.httpdatacollection.descriptors.AttribDescriptor
+org.opennms.netmgt.config.httpdatacollection.Uris=org.opennms.netmgt.config.httpdatacollection.descriptors.UrisDescriptor
+org.opennms.netmgt.config.httpdatacollection.Post=org.opennms.netmgt.config.httpdatacollection.descriptors.PostDescriptor
+org.opennms.netmgt.config.httpdatacollection.Parameter=org.opennms.netmgt.config.httpdatacollection.descriptors.ParameterDescriptor
+org.opennms.netmgt.config.httpdatacollection.Rrd=org.opennms.netmgt.config.httpdatacollection.descriptors.RrdDescriptor
+org.opennms.netmgt.config.httpdatacollection.Parameters=org.opennms.netmgt.config.httpdatacollection.descriptors.ParametersDescriptor

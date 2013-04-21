@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: anonymous
+Build-Jdk: 1.6.0_27
+Class-Path: WEB-INF/lib/commons-codec/commons-codec-1.4.jar WEB-INF/li
+ b/commons-logging/commons-logging-1.1.1.jar WEB-INF/lib/net/simon04/j
+ elementtree/jelementtree-20100506.jar WEB-INF/lib/geoGoogle/geoGoogle
+ -1.5.1-20110518onms1.jar WEB-INF/lib/org/apache/httpcomponents/httpcl
+ ient-4.1.1.jar WEB-INF/lib/org/apache/httpcomponents/httpcore-4.1.jar
+

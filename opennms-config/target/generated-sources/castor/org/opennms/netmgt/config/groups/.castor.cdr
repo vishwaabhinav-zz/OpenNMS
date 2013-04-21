@@ -1,0 +1,10 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.groups.Header=org.opennms.netmgt.config.groups.descriptors.HeaderDescriptor
+org.opennms.netmgt.config.groups.Role=org.opennms.netmgt.config.groups.descriptors.RoleDescriptor
+org.opennms.netmgt.config.groups.Schedule=org.opennms.netmgt.config.groups.descriptors.ScheduleDescriptor
+org.opennms.netmgt.config.groups.Roles=org.opennms.netmgt.config.groups.descriptors.RolesDescriptor
+org.opennms.netmgt.config.groups.BasicSchedule=org.opennms.netmgt.config.groups.descriptors.BasicScheduleDescriptor
+org.opennms.netmgt.config.groups.Groupinfo=org.opennms.netmgt.config.groups.descriptors.GroupinfoDescriptor
+org.opennms.netmgt.config.groups.Group=org.opennms.netmgt.config.groups.descriptors.GroupDescriptor
+org.opennms.netmgt.config.groups.Groups=org.opennms.netmgt.config.groups.descriptors.GroupsDescriptor
+org.opennms.netmgt.config.groups.Time=org.opennms.netmgt.config.groups.descriptors.TimeDescriptor

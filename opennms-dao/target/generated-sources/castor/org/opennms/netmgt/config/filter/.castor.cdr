@@ -1,0 +1,7 @@
+#Sun Apr 21 17:03:13 IST 2013
+org.opennms.netmgt.config.filter.Constraint=org.opennms.netmgt.config.filter.descriptors.ConstraintDescriptor
+org.opennms.netmgt.config.filter.Join=org.opennms.netmgt.config.filter.descriptors.JoinDescriptor
+org.opennms.netmgt.config.filter.Column=org.opennms.netmgt.config.filter.descriptors.ColumnDescriptor
+org.opennms.netmgt.config.filter.DatabaseSchema=org.opennms.netmgt.config.filter.descriptors.DatabaseSchemaDescriptor
+org.opennms.netmgt.config.filter.Alias=org.opennms.netmgt.config.filter.descriptors.AliasDescriptor
+org.opennms.netmgt.config.filter.Table=org.opennms.netmgt.config.filter.descriptors.TableDescriptor

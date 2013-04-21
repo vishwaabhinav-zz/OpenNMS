@@ -1,0 +1,13 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.syslogd.SyslogdConfigurationGroup=org.opennms.netmgt.config.syslogd.descriptors.SyslogdConfigurationGroupDescriptor
+org.opennms.netmgt.config.syslogd.UeiList=org.opennms.netmgt.config.syslogd.descriptors.UeiListDescriptor
+org.opennms.netmgt.config.syslogd.SyslogdConfiguration=org.opennms.netmgt.config.syslogd.descriptors.SyslogdConfigurationDescriptor
+org.opennms.netmgt.config.syslogd.Match=org.opennms.netmgt.config.syslogd.descriptors.MatchDescriptor
+org.opennms.netmgt.config.syslogd.UeiMatch=org.opennms.netmgt.config.syslogd.descriptors.UeiMatchDescriptor
+org.opennms.netmgt.config.syslogd.HideMessage=org.opennms.netmgt.config.syslogd.descriptors.HideMessageDescriptor
+org.opennms.netmgt.config.syslogd.ProcessMatch=org.opennms.netmgt.config.syslogd.descriptors.ProcessMatchDescriptor
+org.opennms.netmgt.config.syslogd.HideMatch=org.opennms.netmgt.config.syslogd.descriptors.HideMatchDescriptor
+org.opennms.netmgt.config.syslogd.HostaddrMatch=org.opennms.netmgt.config.syslogd.descriptors.HostaddrMatchDescriptor
+org.opennms.netmgt.config.syslogd.Configuration=org.opennms.netmgt.config.syslogd.descriptors.ConfigurationDescriptor
+org.opennms.netmgt.config.syslogd.HostnameMatch=org.opennms.netmgt.config.syslogd.descriptors.HostnameMatchDescriptor
+org.opennms.netmgt.config.syslogd.ParameterAssignment=org.opennms.netmgt.config.syslogd.descriptors.ParameterAssignmentDescriptor

@@ -1,0 +1,10 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.wmi.WmiCollection=org.opennms.netmgt.config.wmi.descriptors.WmiCollectionDescriptor
+org.opennms.netmgt.config.wmi.Range=org.opennms.netmgt.config.wmi.descriptors.RangeDescriptor
+org.opennms.netmgt.config.wmi.Wpm=org.opennms.netmgt.config.wmi.descriptors.WpmDescriptor
+org.opennms.netmgt.config.wmi.Definition=org.opennms.netmgt.config.wmi.descriptors.DefinitionDescriptor
+org.opennms.netmgt.config.wmi.Wpms=org.opennms.netmgt.config.wmi.descriptors.WpmsDescriptor
+org.opennms.netmgt.config.wmi.WmiConfig=org.opennms.netmgt.config.wmi.descriptors.WmiConfigDescriptor
+org.opennms.netmgt.config.wmi.WmiDatacollectionConfig=org.opennms.netmgt.config.wmi.descriptors.WmiDatacollectionConfigDescriptor
+org.opennms.netmgt.config.wmi.Attrib=org.opennms.netmgt.config.wmi.descriptors.AttribDescriptor
+org.opennms.netmgt.config.wmi.Rrd=org.opennms.netmgt.config.wmi.descriptors.RrdDescriptor

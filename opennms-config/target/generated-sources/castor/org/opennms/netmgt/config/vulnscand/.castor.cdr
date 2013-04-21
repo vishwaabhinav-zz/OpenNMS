@@ -1,0 +1,6 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.vulnscand.Range=org.opennms.netmgt.config.vulnscand.descriptors.RangeDescriptor
+org.opennms.netmgt.config.vulnscand.ManagedInterfaces=org.opennms.netmgt.config.vulnscand.descriptors.ManagedInterfacesDescriptor
+org.opennms.netmgt.config.vulnscand.ScanLevel=org.opennms.netmgt.config.vulnscand.descriptors.ScanLevelDescriptor
+org.opennms.netmgt.config.vulnscand.Excludes=org.opennms.netmgt.config.vulnscand.descriptors.ExcludesDescriptor
+org.opennms.netmgt.config.vulnscand.VulnscandConfiguration=org.opennms.netmgt.config.vulnscand.descriptors.VulnscandConfigurationDescriptor

@@ -1,0 +1,9 @@
+#!/bin/sh -
+
+opennms_home="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
+app_class=org.opennms.netmgt.config.tester.ConfigTester 
+
+exec $opennms_home/bin/runjava -r -- \
+    -Dopennms.manager.class=$app_class \
+    -jar $opennms_home/lib/opennms_bootstrap.jar \
+     "$@"

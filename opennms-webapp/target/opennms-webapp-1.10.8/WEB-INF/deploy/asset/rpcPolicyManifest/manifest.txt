@@ -1,0 +1,3 @@
+# Module asset
+# RPC service class, partial path of RPC policy file
+org.opennms.gwt.web.ui.asset.client.AssetService, 89089F835346D353E80176BB4AED5A35.gwt.rpc

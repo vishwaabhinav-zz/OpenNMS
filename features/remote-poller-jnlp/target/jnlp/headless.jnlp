@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.5+" codebase="$$codebase" href="$$name">
+  <information>
+    <title>OpenNMS Remote Poller (Headless)</title>
+    <vendor>The OpenNMS Group</vendor>
+    <homepage>http://www.opennms.org/</homepage>
+    <shortcut online="false">
+      <desktop/>
+      <menu submenu="OpenNMS"/>
+    </shortcut>
+  </information>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.5+" java-vm-args="-Xmx384m" />
+    
+<jar href="org.opennms.features.remote-poller.jar" version="1.10.8" main="true"/>
+<jar href="commons-cli.jar" version="1.2"/>
+<jar href="opennms-model.jar" version="1.10.8"/>
+<jar href="castor.jar" version="1.1.2.1"/>
+<jar href="commons-logging.jar" version="1.1.1"/>
+<jar href="xercesImpl.jar" version="2.9.1"/>
+<jar href="xml-apis.jar" version="1.3.04"/>
+<jar href="oro.jar" version="2.0.8"/>
+<jar href="ejb3-persistence.jar" version="1.0.2.GA"/>
+<jar href="hibernate-annotations.jar" version="3.4.0.GA"/>
+<jar href="dom4j.jar" version="1.6.1"/>
+<jar href="hibernate-commons-annotations.jar" version="3.1.0.GA"/>
+<jar href="hibernate-core.jar" version="3.3.1.GA"/>
+<jar href="antlr.jar" version="2.7.6"/>
+<jar href="commons-collections.jar" version="3.2"/>
+<jar href="jta.jar" version="1.1"/>
+<jar href="slf4j-api.jar" version="1.6.2"/>
+<jar href="hibernate-entitymanager.jar" version="3.4.0.GA"/>
+<jar href="javassist.jar" version="3.4.GA"/>
+<jar href="slf4j-log4j12.jar" version="1.6.2"/>
+<jar href="log4j.jar" version="1.2.15"/>
+<jar href="com.springsource.javax.xml.bind.jar" version="2.1.7"/>
+<jar href="com.springsource.com.sun.xml.bind.jar" version="2.1.7"/>
+<jar href="com.springsource.com.sun.xml.fastinfoset.jar" version="1.2.2"/>
+<jar href="com.springsource.org.jvnet.staxex.jar" version="1.0.0"/>
+<jar href="com.springsource.javax.xml.stream.jar" version="1.0.1"/>
+<jar href="org.opennms.core.snmp.api.jar" version="1.10.8"/>
+<jar href="spring-instrument.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-aop.jar" version="3.0.5.RELEASE"/>
+<jar href="aopalliance.jar" version="1.0"/>
+<jar href="spring-asm.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-beans.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-core.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-aspects.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-context.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-expression.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-context-support.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-test.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-oxm.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-jdbc.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-tx.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-jms.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-orm.jar" version="3.0.5.RELEASE"/>
+<jar href="aspectjrt.jar" version="1.6.8"/>
+<jar href="aspectjweaver.jar" version="1.6.8"/>
+<jar href="jsr250-api.jar" version="1.0"/>
+<jar href="c3p0.jar" version="0.9.1.2"/>
+<jar href="cglib-nodep.jar" version="2.1_3"/>
+<jar href="org.opennms.core.lib.jar" version="1.10.8"/>
+<jar href="org.opennms.core.api.jar" version="1.10.8"/>
+<jar href="persistence-api.jar" version="1.0"/>
+<jar href="commons-io.jar" version="1.4"/>
+<jar href="opennms-util.jar" version="1.10.8"/>
+<jar href="dnsjava.jar" version="2.1.1"/>
+<jar href="junit.jar" version="4.8.2"/>
+<jar href="commons-lang.jar" version="2.5"/>
+<jar href="org.opennms.core.snmp.implementations.joesnmp.jar" version="1.10.8"/>
+<jar href="org.opennms.core.snmp.joesnmp.jar" version="1.10.8"/>
+<jar href="org.opennms.core.snmp.implementations.snmp4j.jar" version="1.10.8"/>
+<jar href="snmp4j.jar" version="1.11.1"/>
+<jar href="spring-ldap.jar" version="1.2.1"/>
+<jar href="spring-security-core-tiger.jar" version="2.0.7.RELEASE"/>
+<jar href="spring-security-core.jar" version="2.0.7.RELEASE"/>
+<jar href="commons-codec.jar" version="1.4"/>
+<jar href="spring-security-acl.jar" version="2.0.7.RELEASE"/>
+<jar href="spring-security-taglibs.jar" version="2.0.7.RELEASE"/>
+<jar href="org.opennms.core.xml.jar" version="1.10.8"/>
+<jar href="opennms-services.jar" version="1.10.8"/>
+<jar href="opennms-config.jar" version="1.10.8"/>
+<jar href="opennms-config-utils.jar" version="1.10.8"/>
+<jar href="opennms-dao.jar" version="1.10.8"/>
+<jar href="dbpool.jar" version="5.0"/>
+<jar href="jdbc-pool.jar" version="1.1.0.1"/>
+<jar href="juli.jar" version="6.0.29"/>
+<jar href="org.opennms.core.soa.jar" version="1.10.8"/>
+<jar href="org.opennms.core.criteria.jar" version="1.10.8"/>
+<jar href="opennms-rrd-api.jar" version="1.10.8"/>
+<jar href="commons-dbcp.jar" version="1.2"/>
+<jar href="commons-pool.jar" version="1.2"/>
+<jar href="postgresql.jar" version="9.0-801.jdbc3"/>
+<jar href="opennms-daemon.jar" version="1.10.8"/>
+<jar href="opennms-icmp-jni.jar" version="1.10.8"/>
+<jar href="opennms-icmp-api.jar" version="1.10.8"/>
+<jar href="org.opennms.lib.tracker.jar" version="0.6"/>
+<jar href="jicmp-api.jar" version="1.0.10"/>
+<jar href="mx4j-tools.jar" version="3.0.1"/>
+<jar href="opennms-javamail-api.jar" version="1.10.8"/>
+<jar href="mail.jar" version="1.4.1"/>
+<jar href="activation.jar" version="1.1"/>
+<jar href="spring-web.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-webmvc.jar" version="3.0.5.RELEASE"/>
+<jar href="spring-struts.jar" version="3.0.5.RELEASE"/>
+<jar href="struts.jar" version="1.2.9"/>
+<jar href="commons-digester.jar" version="1.6"/>
+<jar href="commons-fileupload.jar" version="1.0"/>
+<jar href="commons-validator.jar" version="1.3.1"/>
+<jar href="xalan.jar" version="2.7.1"/>
+<jar href="spring-binding.jar" version="2.0.9.RELEASE"/>
+<jar href="spring-js.jar" version="2.0.9.RELEASE"/>
+<jar href="spring-webflow.jar" version="2.0.9.RELEASE"/>
+<jar href="commons-beanutils.jar" version="1.8.3"/>
+<jar href="serializer.jar" version="2.7.1"/>
+<jar href="org.opennms.features.phonebook.jar" version="1.10.8"/>
+<jar href="org.opennms.features.poller.api.jar" version="1.10.8"/>
+<jar href="org.opennms.features.ticketing.api.jar" version="1.10.8"/>
+<jar href="jsch.jar" version="0.1.42"/>
+<jar href="httpcore.jar" version="4.1"/>
+<jar href="httpclient.jar" version="4.1.1"/>
+<jar href="smack.jar" version="3.0.4"/>
+<jar href="smackx.jar" version="3.0.4"/>
+<jar href="jakarta-regexp.jar" version="1.4"/>
+<jar href="xmlrpc.jar" version="2.0.1"/>
+<jar href="servlet-api.jar" version="2.5"/>
+<jar href="bsf.jar" version="2.4.0"/>
+<jar href="bsh.jar" version="1.3.0"/>
+<jar href="hessian.jar" version="3.1.5"/>
+<jar href="jfreechart.jar" version="1.0.13"/>
+<jar href="jcommon.jar" version="1.0.16"/>
+<jar href="jldap.jar" version="4.3"/>
+<jar href="jcifs.jar" version="1.3.14"/>
+<jar href="commons-jexl.jar" version="2.0.1"/>
+<jar href="quartz.jar" version="1.6.5"/>
+<jar href="rancid-api.jar" version="1.0.1"/>
+<jar href="org.restlet.jar" version="1.1.10"/>
+<jar href="com.noelios.restlet.jar" version="1.1.10"/>
+<jar href="com.noelios.restlet.ext.simple.jar" version="1.1.10"/>
+<jar href="org.simpleframework.jar" version="3.1.3"/>
+<jar href="twitter4j.jar" version="2.0.10"/>
+<jar href="opennms-wmi.jar" version="1.10.8"/>
+<jar href="j-interop.jar" version="2.0.8"/>
+<jar href="j-interopdeps.jar" version="2.0.8"/>
+<jar href="opennms-provision-api.jar" version="1.10.8"/>
+<jar href="mina-core.jar" version="2.0.4"/>
+<jar href="netty.jar" version="3.4.0.Final"/>
+<jar href="groovy-all.jar" version="1.7.5"/>
+<jar href="org.opennms.core.icmp-jna.jar" version="1.10.8"/>
+<jar href="jna.jar" version="3.2.7"/>
+<jar href="platform.jar" version="3.2.7"/>
+<jar href="opennms-icmp-jna.jar" version="1.10.8"/>
+<jar href="opennms-icmp-jni6.jar" version="1.10.8"/>
+<jar href="jicmp6-api.jar" version="1.0"/>
+
+  </resources>
+  <application-desc main-class="org.opennms.poller.remote.Main">
+    <argument>--url</argument>
+    <argument>$$context</argument>
+  </application-desc>
+</jnlp> 

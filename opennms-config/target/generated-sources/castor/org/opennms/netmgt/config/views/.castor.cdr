@@ -1,0 +1,10 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.views.Views=org.opennms.netmgt.config.views.descriptors.ViewsDescriptor
+org.opennms.netmgt.config.views.Viewinfo=org.opennms.netmgt.config.views.descriptors.ViewinfoDescriptor
+org.opennms.netmgt.config.views.View=org.opennms.netmgt.config.views.descriptors.ViewDescriptor
+org.opennms.netmgt.config.views.Membership=org.opennms.netmgt.config.views.descriptors.MembershipDescriptor
+org.opennms.netmgt.config.views.Categories=org.opennms.netmgt.config.views.descriptors.CategoriesDescriptor
+org.opennms.netmgt.config.views.Header=org.opennms.netmgt.config.views.descriptors.HeaderDescriptor
+org.opennms.netmgt.config.views.Common=org.opennms.netmgt.config.views.descriptors.CommonDescriptor
+org.opennms.netmgt.config.views.Category=org.opennms.netmgt.config.views.descriptors.CategoryDescriptor
+org.opennms.netmgt.config.views.Member=org.opennms.netmgt.config.views.descriptors.MemberDescriptor

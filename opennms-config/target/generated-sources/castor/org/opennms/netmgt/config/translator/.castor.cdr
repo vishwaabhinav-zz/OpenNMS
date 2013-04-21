@@ -1,0 +1,8 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.translator.EventTranslatorConfiguration=org.opennms.netmgt.config.translator.descriptors.EventTranslatorConfigurationDescriptor
+org.opennms.netmgt.config.translator.Mappings=org.opennms.netmgt.config.translator.descriptors.MappingsDescriptor
+org.opennms.netmgt.config.translator.Assignment=org.opennms.netmgt.config.translator.descriptors.AssignmentDescriptor
+org.opennms.netmgt.config.translator.Translation=org.opennms.netmgt.config.translator.descriptors.TranslationDescriptor
+org.opennms.netmgt.config.translator.Value=org.opennms.netmgt.config.translator.descriptors.ValueDescriptor
+org.opennms.netmgt.config.translator.Mapping=org.opennms.netmgt.config.translator.descriptors.MappingDescriptor
+org.opennms.netmgt.config.translator.EventTranslationSpec=org.opennms.netmgt.config.translator.descriptors.EventTranslationSpecDescriptor

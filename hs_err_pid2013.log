@@ -1,0 +1,691 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 999952 bytes for Chunk::new
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:317), pid=2013, tid=350321472
+#
+# JRE version: 6.0_27-b27
+# Java VM: OpenJDK Server VM (20.0-b12 mixed mode linux-x86 )
+# Derivative: IcedTea6 1.12.3
+# Distribution: Ubuntu 12.04 LTS, package 6b27-1.12.3-0ubuntu1~12.04.1
+
+---------------  T H R E A D  ---------------
+
+Current thread (0xb66a0400):  JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=2032, stack(0x14d97000,0x14e18000)]
+
+Stack: [0x14d97000,0x14e18000]
+
+Current CompileTask:
+C2: 124556 2380  !   org.sonatype.aether.impl.internal.DefaultDependencyCollector.process(Lorg/sonatype/aether/RepositorySystemSession;Lorg/sonatype/aether/RequestTrace;Lorg/sonatype/aether/collection/CollectResult;Ljava/util/LinkedList;Ljava/util/List;Ljava/util/List;Lorg/sonatype/aether/collection/DependencySelector;Lorg/sonatype/aether/collection/DependencyManager;Lorg/sonatype/aether/collection/DependencyTraverser;Lorg/sonatype/aether/impl/internal/DataPool;)Z (1197 bytes)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x097f9c00 JavaThread "resolver-5" daemon [_thread_blocked, id=2536, stack(0x10501000,0x10552000)]
+  0x14739000 JavaThread "resolver-4" daemon [_thread_blocked, id=2535, stack(0x10552000,0x105a3000)]
+  0x102c3c00 JavaThread "resolver-3" daemon [_thread_blocked, id=2534, stack(0x105a3000,0x105f4000)]
+  0x10486800 JavaThread "resolver-2" daemon [_thread_blocked, id=2533, stack(0x1450c000,0x1455d000)]
+  0x1021a800 JavaThread "resolver-1" daemon [_thread_blocked, id=2532, stack(0x14a5e000,0x14aaf000)]
+  0x14b5f000 JavaThread "com.google.inject.internal.util.$Finalizer" daemon [_thread_blocked, id=2036, stack(0x14aaf000,0x14b00000)]
+  0xb66a4400 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=2034, stack(0x14cc5000,0x14d16000)]
+  0xb66a2400 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=2033, stack(0x14d16000,0x14d97000)]
+=>0xb66a0400 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=2032, stack(0x14d97000,0x14e18000)]
+  0xb669f000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=2031, stack(0x1542e000,0x1547f000)]
+  0xb668f800 JavaThread "Finalizer" daemon [_thread_blocked, id=2030, stack(0x15018000,0x15069000)]
+  0xb668e000 JavaThread "Reference Handler" daemon [_thread_blocked, id=2029, stack(0x15069000,0x150ba000)]
+  0xb6605800 JavaThread "main" [_thread_in_vm, id=2025, stack(0xb6788000,0xb67d9000)]
+
+Other Threads:
+  0xb668b400 VMThread [stack: 0x150ba000,0x1513b000] [id=2028]
+  0xb66a6400 WatcherThread [stack: 0x14c44000,0x14cc5000] [id=2035]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 244928K, used 90882K [0x808b0000, 0x95e00000, 0x95e00000)
+  eden space 155584K, 10% used [0x808b0000,0x8186f7d0,0x8a0a0000)
+  from space 89344K, 83% used [0x906c0000,0x94fc1258,0x95e00000)
+  to   space 96960K, 0% used [0x8a0a0000,0x8a0a0000,0x8ff50000)
+ PSOldGen        total 140160K, used 97208K [0x55e00000, 0x5e6e0000, 0x808b0000)
+  object space 140160K, 69% used [0x55e00000,0x5bcee320,0x5e6e0000)
+ PSPermGen       total 524288K, used 70440K [0x15e00000, 0x35e00000, 0x55e00000)
+  object space 524288K, 13% used [0x15e00000,0x1a2ca2a0,0x35e00000)
+
+Code Cache  [0x96600000, 0x96d78000, 0xb6600000)
+ total_blobs=2556 nmethods=2187 adapters=322 free_code_cache=529393088 largest_free_block=82624
+
+Dynamic libraries:
+0001d000-0002d000 rw-p 00000000 00:00 0 
+00037000-00200000 rw-p 00000000 00:00 0 
+00200000-002fe000 rw-p 00000000 00:00 0 
+002fe000-00300000 ---p 00000000 00:00 0 
+00300000-00b00000 rw-p 00000000 00:00 0 
+00b00000-00bfe000 rw-p 00000000 00:00 0 
+00bfe000-00c00000 ---p 00000000 00:00 0 
+00c00000-01100000 rw-p 00000000 00:00 0 
+01100000-01200000 rw-p 00000000 00:00 0 
+01200000-01900000 rw-p 00000000 00:00 0 
+01900000-019fc000 rw-p 00000000 00:00 0 
+019fc000-01a00000 ---p 00000000 00:00 0 
+01a00000-01afc000 rw-p 00000000 00:00 0 
+01afc000-01b00000 ---p 00000000 00:00 0 
+01b00000-01bf8000 rw-p 00000000 00:00 0 
+01bf8000-01c00000 ---p 00000000 00:00 0 
+01c00000-01d00000 rw-p 00000000 00:00 0 
+01d00000-01e00000 rw-p 00000000 00:00 0 
+01e00000-01efa000 rw-p 00000000 00:00 0 
+01efa000-01f00000 ---p 00000000 00:00 0 
+01f00000-01ff9000 rw-p 00000000 00:00 0 
+01ff9000-02000000 ---p 00000000 00:00 0 
+02000000-02100000 rw-p 00000000 00:00 0 
+02100000-021f9000 rw-p 00000000 00:00 0 
+021f9000-02200000 ---p 00000000 00:00 0 
+02200000-022f9000 rw-p 00000000 00:00 0 
+022f9000-02300000 ---p 00000000 00:00 0 
+02300000-023f1000 rw-p 00000000 00:00 0 
+023f1000-02400000 ---p 00000000 00:00 0 
+02400000-024f1000 rw-p 00000000 00:00 0 
+024f1000-02500000 ---p 00000000 00:00 0 
+02500000-025f1000 rw-p 00000000 00:00 0 
+025f1000-02600000 ---p 00000000 00:00 0 
+02600000-026f1000 rw-p 00000000 00:00 0 
+026f1000-02700000 ---p 00000000 00:00 0 
+02700000-027f1000 rw-p 00000000 00:00 0 
+027f1000-02800000 ---p 00000000 00:00 0 
+02800000-028f9000 rw-p 00000000 00:00 0 
+028f9000-02900000 ---p 00000000 00:00 0 
+02900000-029f9000 rw-p 00000000 00:00 0 
+029f9000-02a00000 ---p 00000000 00:00 0 
+02a00000-02af1000 rw-p 00000000 00:00 0 
+02af1000-02b00000 ---p 00000000 00:00 0 
+02b00000-02bf9000 rw-p 00000000 00:00 0 
+02bf9000-02c00000 ---p 00000000 00:00 0 
+02c00000-02cf1000 rw-p 00000000 00:00 0 
+02cf1000-02d00000 ---p 00000000 00:00 0 
+02d00000-02df1000 rw-p 00000000 00:00 0 
+02df1000-02e00000 ---p 00000000 00:00 0 
+02e00000-02ef1000 rw-p 00000000 00:00 0 
+02ef1000-02f00000 ---p 00000000 00:00 0 
+02f00000-02ff9000 rw-p 00000000 00:00 0 
+02ff9000-03000000 ---p 00000000 00:00 0 
+03000000-030f1000 rw-p 00000000 00:00 0 
+030f1000-03100000 ---p 00000000 00:00 0 
+03100000-031f1000 rw-p 00000000 00:00 0 
+031f1000-03200000 ---p 00000000 00:00 0 
+03200000-032f1000 rw-p 00000000 00:00 0 
+032f1000-03300000 ---p 00000000 00:00 0 
+03300000-033f1000 rw-p 00000000 00:00 0 
+033f1000-03400000 ---p 00000000 00:00 0 
+03400000-034f1000 rw-p 00000000 00:00 0 
+034f1000-03500000 ---p 00000000 00:00 0 
+03500000-035f9000 rw-p 00000000 00:00 0 
+035f9000-03600000 ---p 00000000 00:00 0 
+03600000-036f1000 rw-p 00000000 00:00 0 
+036f1000-03700000 ---p 00000000 00:00 0 
+03700000-037f1000 rw-p 00000000 00:00 0 
+037f1000-03800000 ---p 00000000 00:00 0 
+03800000-038f1000 rw-p 00000000 00:00 0 
+038f1000-03900000 ---p 00000000 00:00 0 
+03900000-039f9000 rw-p 00000000 00:00 0 
+039f9000-03a00000 ---p 00000000 00:00 0 
+03a00000-03af1000 rw-p 00000000 00:00 0 
+03af1000-03b00000 ---p 00000000 00:00 0 
+03b00000-03bf9000 rw-p 00000000 00:00 0 
+03bf9000-03c00000 ---p 00000000 00:00 0 
+03c00000-03cf1000 rw-p 00000000 00:00 0 
+03cf1000-03d00000 ---p 00000000 00:00 0 
+03d00000-03df9000 rw-p 00000000 00:00 0 
+03df9000-03e00000 ---p 00000000 00:00 0 
+03e00000-03ef9000 rw-p 00000000 00:00 0 
+03ef9000-03f00000 ---p 00000000 00:00 0 
+03f00000-03ff9000 rw-p 00000000 00:00 0 
+03ff9000-04000000 ---p 00000000 00:00 0 
+04000000-040f9000 rw-p 00000000 00:00 0 
+040f9000-04100000 ---p 00000000 00:00 0 
+04100000-041f9000 rw-p 00000000 00:00 0 
+041f9000-04200000 ---p 00000000 00:00 0 
+04200000-042f1000 rw-p 00000000 00:00 0 
+042f1000-04300000 ---p 00000000 00:00 0 
+04300000-043f1000 rw-p 00000000 00:00 0 
+043f1000-04400000 ---p 00000000 00:00 0 
+04400000-044f9000 rw-p 00000000 00:00 0 
+044f9000-04500000 ---p 00000000 00:00 0 
+04500000-045f1000 rw-p 00000000 00:00 0 
+045f1000-04600000 ---p 00000000 00:00 0 
+04600000-046f1000 rw-p 00000000 00:00 0 
+046f1000-04700000 ---p 00000000 00:00 0 
+04700000-047f1000 rw-p 00000000 00:00 0 
+047f1000-04800000 ---p 00000000 00:00 0 
+04800000-048f9000 rw-p 00000000 00:00 0 
+048f9000-04900000 ---p 00000000 00:00 0 
+04900000-049f1000 rw-p 00000000 00:00 0 
+049f1000-04a00000 ---p 00000000 00:00 0 
+04a00000-04af1000 rw-p 00000000 00:00 0 
+04af1000-04b00000 ---p 00000000 00:00 0 
+04b00000-04bf1000 rw-p 00000000 00:00 0 
+04bf1000-04c00000 ---p 00000000 00:00 0 
+04c00000-04cf1000 rw-p 00000000 00:00 0 
+04cf1000-04d00000 ---p 00000000 00:00 0 
+04d00000-04df1000 rw-p 00000000 00:00 0 
+04df1000-04e00000 ---p 00000000 00:00 0 
+04e00000-04ef1000 rw-p 00000000 00:00 0 
+04ef1000-04f00000 ---p 00000000 00:00 0 
+04f00000-04ff1000 rw-p 00000000 00:00 0 
+04ff1000-05000000 ---p 00000000 00:00 0 
+05000000-050f1000 rw-p 00000000 00:00 0 
+050f1000-05100000 ---p 00000000 00:00 0 
+05100000-051f1000 rw-p 00000000 00:00 0 
+051f1000-05200000 ---p 00000000 00:00 0 
+05200000-052f1000 rw-p 00000000 00:00 0 
+052f1000-05300000 ---p 00000000 00:00 0 
+05300000-053f1000 rw-p 00000000 00:00 0 
+053f1000-05400000 ---p 00000000 00:00 0 
+05400000-054f1000 rw-p 00000000 00:00 0 
+054f1000-05500000 ---p 00000000 00:00 0 
+05500000-055f1000 rw-p 00000000 00:00 0 
+055f1000-05600000 ---p 00000000 00:00 0 
+05600000-056f1000 rw-p 00000000 00:00 0 
+056f1000-05700000 ---p 00000000 00:00 0 
+05700000-057f1000 rw-p 00000000 00:00 0 
+057f1000-05800000 ---p 00000000 00:00 0 
+05800000-058f1000 rw-p 00000000 00:00 0 
+058f1000-05900000 ---p 00000000 00:00 0 
+05900000-059f9000 rw-p 00000000 00:00 0 
+059f9000-05a00000 ---p 00000000 00:00 0 
+05a00000-05af9000 rw-p 00000000 00:00 0 
+05af9000-05b00000 ---p 00000000 00:00 0 
+05b00000-05bf9000 rw-p 00000000 00:00 0 
+05bf9000-05c00000 ---p 00000000 00:00 0 
+05c00000-05cf9000 rw-p 00000000 00:00 0 
+05cf9000-05d00000 ---p 00000000 00:00 0 
+05d00000-05df1000 rw-p 00000000 00:00 0 
+05df1000-05e00000 ---p 00000000 00:00 0 
+05e00000-05ef1000 rw-p 00000000 00:00 0 
+05ef1000-05f00000 ---p 00000000 00:00 0 
+05f00000-05ff1000 rw-p 00000000 00:00 0 
+05ff1000-06000000 ---p 00000000 00:00 0 
+06000000-060f1000 rw-p 00000000 00:00 0 
+060f1000-06100000 ---p 00000000 00:00 0 
+06100000-061f1000 rw-p 00000000 00:00 0 
+061f1000-06200000 ---p 00000000 00:00 0 
+06200000-062f1000 rw-p 00000000 00:00 0 
+062f1000-06300000 ---p 00000000 00:00 0 
+06300000-063f1000 rw-p 00000000 00:00 0 
+063f1000-06400000 ---p 00000000 00:00 0 
+06400000-064f1000 rw-p 00000000 00:00 0 
+064f1000-06500000 ---p 00000000 00:00 0 
+06500000-065f1000 rw-p 00000000 00:00 0 
+065f1000-06600000 ---p 00000000 00:00 0 
+06600000-066f1000 rw-p 00000000 00:00 0 
+066f1000-06700000 ---p 00000000 00:00 0 
+06700000-067f1000 rw-p 00000000 00:00 0 
+067f1000-06800000 ---p 00000000 00:00 0 
+06800000-068f1000 rw-p 00000000 00:00 0 
+068f1000-06900000 ---p 00000000 00:00 0 
+06900000-069f1000 rw-p 00000000 00:00 0 
+069f1000-06a00000 ---p 00000000 00:00 0 
+06a00000-06af1000 rw-p 00000000 00:00 0 
+06af1000-06b00000 ---p 00000000 00:00 0 
+06b00000-06bf9000 rw-p 00000000 00:00 0 
+06bf9000-06c00000 ---p 00000000 00:00 0 
+06c00000-06cf1000 rw-p 00000000 00:00 0 
+06cf1000-06d00000 ---p 00000000 00:00 0 
+06d00000-06df9000 rw-p 00000000 00:00 0 
+06df9000-06e00000 ---p 00000000 00:00 0 
+06e00000-06ef9000 rw-p 00000000 00:00 0 
+06ef9000-06f00000 ---p 00000000 00:00 0 
+06f00000-06ff9000 rw-p 00000000 00:00 0 
+06ff9000-07000000 ---p 00000000 00:00 0 
+07000000-070f9000 rw-p 00000000 00:00 0 
+070f9000-07100000 ---p 00000000 00:00 0 
+07100000-071f1000 rw-p 00000000 00:00 0 
+071f1000-07200000 ---p 00000000 00:00 0 
+07200000-072f9000 rw-p 00000000 00:00 0 
+072f9000-07300000 ---p 00000000 00:00 0 
+07300000-073f1000 rw-p 00000000 00:00 0 
+073f1000-07400000 ---p 00000000 00:00 0 
+07400000-074f1000 rw-p 00000000 00:00 0 
+074f1000-07500000 ---p 00000000 00:00 0 
+07500000-075f1000 rw-p 00000000 00:00 0 
+075f1000-07600000 ---p 00000000 00:00 0 
+07600000-076f1000 rw-p 00000000 00:00 0 
+076f1000-07700000 ---p 00000000 00:00 0 
+07700000-077f1000 rw-p 00000000 00:00 0 
+077f1000-07800000 ---p 00000000 00:00 0 
+07800000-078f9000 rw-p 00000000 00:00 0 
+078f9000-07900000 ---p 00000000 00:00 0 
+07900000-079f9000 rw-p 00000000 00:00 0 
+079f9000-07a00000 ---p 00000000 00:00 0 
+07a00000-07af1000 rw-p 00000000 00:00 0 
+07af1000-07b00000 ---p 00000000 00:00 0 
+07b00000-07bf9000 rw-p 00000000 00:00 0 
+07bf9000-07c00000 ---p 00000000 00:00 0 
+07c00000-07cf1000 rw-p 00000000 00:00 0 
+07cf1000-07d00000 ---p 00000000 00:00 0 
+07d00000-07df1000 rw-p 00000000 00:00 0 
+07df1000-07e00000 ---p 00000000 00:00 0 
+07e00000-07ef1000 rw-p 00000000 00:00 0 
+07ef1000-07f00000 ---p 00000000 00:00 0 
+07f00000-07ff1000 rw-p 00000000 00:00 0 
+07ff1000-08000000 ---p 00000000 00:00 0 
+08003000-08048000 rw-p 00000000 00:00 0 
+08048000-08051000 r-xp 00000000 08:09 535778     /usr/lib/jvm/java-6-openjdk-i386/jre/bin/java
+08051000-08052000 r--p 00008000 08:09 535778     /usr/lib/jvm/java-6-openjdk-i386/jre/bin/java
+08052000-08053000 rw-p 00009000 08:09 535778     /usr/lib/jvm/java-6-openjdk-i386/jre/bin/java
+08058000-08100000 rw-p 00000000 00:00 0 
+08100000-081f1000 rw-p 00000000 00:00 0 
+081f1000-08200000 ---p 00000000 00:00 0 
+08200000-082f9000 rw-p 00000000 00:00 0 
+082f9000-08300000 ---p 00000000 00:00 0 
+08300000-083f1000 rw-p 00000000 00:00 0 
+083f1000-08400000 ---p 00000000 00:00 0 
+08400000-084f1000 rw-p 00000000 00:00 0 
+084f1000-08500000 ---p 00000000 00:00 0 
+08500000-085f1000 rw-p 00000000 00:00 0 
+085f1000-08600000 ---p 00000000 00:00 0 
+08600000-086f1000 rw-p 00000000 00:00 0 
+086f1000-08700000 ---p 00000000 00:00 0 
+08700000-087f1000 rw-p 00000000 00:00 0 
+087f1000-08800000 ---p 00000000 00:00 0 
+08800000-088f9000 rw-p 00000000 00:00 0 
+088f9000-08900000 ---p 00000000 00:00 0 
+08900000-089f1000 rw-p 00000000 00:00 0 
+089f1000-08a00000 ---p 00000000 00:00 0 
+08a00000-08af1000 rw-p 00000000 00:00 0 
+08af1000-08b00000 ---p 00000000 00:00 0 
+08b00000-08bf1000 rw-p 00000000 00:00 0 
+08bf1000-08c00000 ---p 00000000 00:00 0 
+08c00000-08cf9000 rw-p 00000000 00:00 0 
+08cf9000-08d00000 ---p 00000000 00:00 0 
+08d00000-08df1000 rw-p 00000000 00:00 0 
+08df1000-08e00000 ---p 00000000 00:00 0 
+08e00000-08ef1000 rw-p 00000000 00:00 0 
+08ef1000-08f00000 ---p 00000000 00:00 0 
+08f00000-08ff1000 rw-p 00000000 00:00 0 
+08ff1000-09000000 ---p 00000000 00:00 0 
+09000000-090f9000 rw-p 00000000 00:00 0 
+090f9000-09100000 ---p 00000000 00:00 0 
+09100000-091f1000 rw-p 00000000 00:00 0 
+091f1000-09200000 ---p 00000000 00:00 0 
+09200000-092f1000 rw-p 00000000 00:00 0 
+092f1000-09300000 ---p 00000000 00:00 0 
+09300000-093f9000 rw-p 00000000 00:00 0 
+093f9000-09400000 ---p 00000000 00:00 0 
+09400000-094f9000 rw-p 00000000 00:00 0 
+094f9000-09500000 ---p 00000000 00:00 0 
+09500000-095f1000 rw-p 00000000 00:00 0 
+095f1000-09600000 ---p 00000000 00:00 0 
+09600000-096f1000 rw-p 00000000 00:00 0 
+096f1000-09700000 ---p 00000000 00:00 0 
+09700000-097fc000 rw-p 00000000 00:00 0 
+097fc000-09800000 ---p 00000000 00:00 0 
+09802000-0c0e4000 rw-p 00000000 00:00 0          [heap]
+0c0e8000-0c100000 rw-p 00000000 00:00 0 
+0c100000-0c1f9000 rw-p 00000000 00:00 0 
+0c1f9000-0c200000 ---p 00000000 00:00 0 
+0c200000-0c2f1000 rw-p 00000000 00:00 0 
+0c2f1000-0c300000 ---p 00000000 00:00 0 
+0c300000-0c3f1000 rw-p 00000000 00:00 0 
+0c3f1000-0c400000 ---p 00000000 00:00 0 
+0c400000-0c4f1000 rw-p 00000000 00:00 0 
+0c4f1000-0c500000 ---p 00000000 00:00 0 
+0c500000-0c5f1000 rw-p 00000000 00:00 0 
+0c5f1000-0c600000 ---p 00000000 00:00 0 
+0c600000-0c6f1000 rw-p 00000000 00:00 0 
+0c6f1000-0c700000 ---p 00000000 00:00 0 
+0c700000-0c7f1000 rw-p 00000000 00:00 0 
+0c7f1000-0c800000 ---p 00000000 00:00 0 
+0c800000-0c8f1000 rw-p 00000000 00:00 0 
+0c8f1000-0c900000 ---p 00000000 00:00 0 
+0c900000-0c9f1000 rw-p 00000000 00:00 0 
+0c9f1000-0ca00000 ---p 00000000 00:00 0 
+0ca00000-0caf1000 rw-p 00000000 00:00 0 
+0caf1000-0cb00000 ---p 00000000 00:00 0 
+0cb00000-0cbf1000 rw-p 00000000 00:00 0 
+0cbf1000-0cc00000 ---p 00000000 00:00 0 
+0cc00000-0ccf1000 rw-p 00000000 00:00 0 
+0ccf1000-0cd00000 ---p 00000000 00:00 0 
+0cd00000-0cdf1000 rw-p 00000000 00:00 0 
+0cdf1000-0ce00000 ---p 00000000 00:00 0 
+0ce00000-0cef1000 rw-p 00000000 00:00 0 
+0cef1000-0cf00000 ---p 00000000 00:00 0 
+0cf00000-0cff1000 rw-p 00000000 00:00 0 
+0cff1000-0d000000 ---p 00000000 00:00 0 
+0d000000-0d0f1000 rw-p 00000000 00:00 0 
+0d0f1000-0d100000 ---p 00000000 00:00 0 
+0d100000-0d1f1000 rw-p 00000000 00:00 0 
+0d1f1000-0d200000 ---p 00000000 00:00 0 
+0d200000-0d2f1000 rw-p 00000000 00:00 0 
+0d2f1000-0d300000 ---p 00000000 00:00 0 
+0d300000-0d3f1000 rw-p 00000000 00:00 0 
+0d3f1000-0d400000 ---p 00000000 00:00 0 
+0d400000-0d4f1000 rw-p 00000000 00:00 0 
+0d4f1000-0d500000 ---p 00000000 00:00 0 
+0d500000-0d5f1000 rw-p 00000000 00:00 0 
+0d5f1000-0d600000 ---p 00000000 00:00 0 
+0d600000-0d6f1000 rw-p 00000000 00:00 0 
+0d6f1000-0d700000 ---p 00000000 00:00 0 
+0d700000-0d7f1000 rw-p 00000000 00:00 0 
+0d7f1000-0d800000 ---p 00000000 00:00 0 
+0d800000-0d8f1000 rw-p 00000000 00:00 0 
+0d8f1000-0d900000 ---p 00000000 00:00 0 
+0d900000-0d9f1000 rw-p 00000000 00:00 0 
+0d9f1000-0da00000 ---p 00000000 00:00 0 
+0da00000-0daf1000 rw-p 00000000 00:00 0 
+0daf1000-0db00000 ---p 00000000 00:00 0 
+0db00000-0dbf1000 rw-p 00000000 00:00 0 
+0dbf1000-0dc00000 ---p 00000000 00:00 0 
+0dc00000-0dcf1000 rw-p 00000000 00:00 0 
+0dcf1000-0dd00000 ---p 00000000 00:00 0 
+0dd00000-0ddf1000 rw-p 00000000 00:00 0 
+0ddf1000-0de00000 ---p 00000000 00:00 0 
+0de00000-0def1000 rw-p 00000000 00:00 0 
+0def1000-0df00000 ---p 00000000 00:00 0 
+0df00000-0dff1000 rw-p 00000000 00:00 0 
+0dff1000-0e000000 ---p 00000000 00:00 0 
+0e000000-0e0f1000 rw-p 00000000 00:00 0 
+0e0f1000-0e100000 ---p 00000000 00:00 0 
+0e100000-0e1f1000 rw-p 00000000 00:00 0 
+0e1f1000-0e200000 ---p 00000000 00:00 0 
+0e200000-0e2f1000 rw-p 00000000 00:00 0 
+0e2f1000-0e300000 ---p 00000000 00:00 0 
+0e300000-0e3f9000 rw-p 00000000 00:00 0 
+0e3f9000-0e400000 ---p 00000000 00:00 0 
+0e400000-0e4f9000 rw-p 00000000 00:00 0 
+0e4f9000-0e500000 ---p 00000000 00:00 0 
+0e500000-0e5f9000 rw-p 00000000 00:00 0 
+0e5f9000-0e600000 ---p 00000000 00:00 0 
+0e600000-0e6f9000 rw-p 00000000 00:00 0 
+0e6f9000-0e700000 ---p 00000000 00:00 0 
+0e700000-0e7f9000 rw-p 00000000 00:00 0 
+0e7f9000-0e800000 ---p 00000000 00:00 0 
+0e800000-0e8f9000 rw-p 00000000 00:00 0 
+0e8f9000-0e900000 ---p 00000000 00:00 0 
+0e900000-0e9f9000 rw-p 00000000 00:00 0 
+0e9f9000-0ea00000 ---p 00000000 00:00 0 
+0ea00000-0eaf1000 rw-p 00000000 00:00 0 
+0eaf1000-0eb00000 ---p 00000000 00:00 0 
+0eb00000-0ebf9000 rw-p 00000000 00:00 0 
+0ebf9000-0ec00000 ---p 00000000 00:00 0 
+0ec00000-0ecf9000 rw-p 00000000 00:00 0 
+0ecf9000-0ed00000 ---p 00000000 00:00 0 
+0ed00000-0ee00000 rw-p 00000000 00:00 0 
+0ee00000-0eef9000 rw-p 00000000 00:00 0 
+0eef9000-0ef00000 ---p 00000000 00:00 0 
+0ef00000-0eff1000 rw-p 00000000 00:00 0 
+0eff1000-0f000000 ---p 00000000 00:00 0 
+0f000000-0f0f1000 rw-p 00000000 00:00 0 
+0f0f1000-0f100000 ---p 00000000 00:00 0 
+0f100000-0f1f9000 rw-p 00000000 00:00 0 
+0f1f9000-0f200000 ---p 00000000 00:00 0 
+0f200000-0f2f9000 rw-p 00000000 00:00 0 
+0f2f9000-0f300000 ---p 00000000 00:00 0 
+0f300000-0f3f9000 rw-p 00000000 00:00 0 
+0f3f9000-0f400000 ---p 00000000 00:00 0 
+0f407000-0f437000 rw-p 00000000 00:00 0 
+0f437000-0f43a000 r--s 000cf000 08:0a 399393     /home/anonymous/.m2/repository/net/java/dev/jna/jna/3.2.2/jna-3.2.2.jar
+0f43a000-0f43f000 r--s 00068000 08:0a 140514     /home/anonymous/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar
+0f43f000-0f442000 r--s 00027000 08:0a 399390     /home/anonymous/.m2/repository/org/antlr/stringtemplate/3.2/stringtemplate-3.2.jar
+0f442000-0f445000 r--s 00022000 08:0a 399389     /home/anonymous/.m2/repository/org/antlr/antlr-runtime/3.1.3/antlr-runtime-3.1.3.jar
+0f445000-0f454000 r--s 000a7000 08:0a 399388     /home/anonymous/.m2/repository/org/tmatesoft/sqljet/sqljet/1.0.4/sqljet-1.0.4.jar
+0f454000-0f459000 r--s 00039000 08:0a 399387     /home/anonymous/.m2/repository/org/tmatesoft/svnkit/trilead-ssh2/build213-svnkit-1.3-patch/trilead-ssh2-build213-svnkit-1.3-patch.jar
+0f459000-0f46f000 r--s 001b8000 08:0a 399386     /home/anonymous/.m2/repository/org/tmatesoft/svnkit/svnkit/1.3.5/svnkit-1.3.5.jar
+0f46f000-0f471000 r--s 0000b000 08:0a 11627      /home/anonymous/.m2/repository/com/google/code/maven-scm-provider-svnjava/maven-scm-provider-svnjava/1.13/maven-scm-provider-svnjava-1.13.jar
+0f471000-0f473000 r--s 0000e000 08:0a 11626      /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-hg/1.5/maven-scm-provider-hg-1.5.jar
+0f473000-0f475000 r--s 00012000 08:0a 11625      /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-perforce/1.5/maven-scm-provider-perforce-1.5.jar
+0f475000-0f478000 r--s 0000f000 08:0a 11624      /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-clearcase/1.5/maven-scm-provider-clearcase-1.5.jar
+0f478000-0f47b000 r--s 00010000 08:0a 399380     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-starteam/1.5/maven-scm-provider-starteam-1.5.jar
+0f47b000-0f47e000 r--s 00011000 08:0a 399379     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-cvs-commons/1.5/maven-scm-provider-cvs-commons-1.5.jar
+0f47e000-0f480000 r--s 00006000 08:0a 399376     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-cvsexe/1.5/maven-scm-provider-cvsexe-1.5.jar
+0f480000-0f482000 r--s 00008000 08:0a 399374     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-svn-commons/1.5/maven-scm-provider-svn-commons-1.5.jar
+0f482000-0f484000 r--s 00008000 08:0a 399373     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-git-commons/1.5/maven-scm-provider-git-commons-1.5.jar
+0f484000-0f486000 r--s 0000c000 08:0a 399371     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-gitexe/1.5/maven-scm-provider-gitexe-1.5.jar
+0f486000-0f489000 r--s 0000f000 08:0a 399368     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-svnexe/1.5/maven-scm-provider-svnexe-1.5.jar
+0f489000-0f48b000 r--s 00005000 08:0a 399365     /home/anonymous/.m2/repository/regexp/regexp/1.3/regexp-1.3.jar
+0f48b000-0f48e000 r--s 0000b000 08:0a 399364     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-provider-bazaar/1.5/maven-scm-provider-bazaar-1.5.jar
+0f48e000-0f48f000 r--s 00002000 08:0a 399367     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-manager-plexus/1.5/maven-scm-manager-plexus-1.5.jar
+0f48f000-0f492000 r--s 00015000 08:0a 399366     /home/anonymous/.m2/repository/org/apache/maven/scm/maven-scm-api/1.5/maven-scm-api-1.5.jar
+0f492000-0f494000 r--s 00005000 08:0a 399249     /home/anonymous/.m2/repository/org/codehaus/mojo/buildnumber-maven-plugin/1.0/buildnumber-maven-plugin-1.0.jar
+0f494000-0f497000 r--s 00010000 08:0a 135153     /home/anonymous/.m2/repository/org/codehaus/groovy/maven/support/slf4j-gossip/1.0/slf4j-gossip-1.0.jar
+0f497000-0f49b000 r--s 0003c000 08:0a 135152     /home/anonymous/.m2/repository/commons-lang/commons-lang/2.4/commons-lang-2.4.jar
+0f49b000-0f49d000 r--s 00004000 08:0a 396161     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-module-xhtml/1.0-alpha-10/doxia-module-xhtml-1.0-alpha-10.jar
+0f49d000-0f49e000 r--s 00006000 08:0a 396159     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-module-xdoc/1.0-alpha-10/doxia-module-xdoc-1.0-alpha-10.jar
+0f49e000-0f4a0000 r--s 00003000 08:0a 396157     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-module-fml/1.0-alpha-10/doxia-module-fml-1.0-alpha-10.jar
+0f4a0000-0f4a2000 r--s 0000a000 08:0a 396155     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-module-apt/1.0-alpha-10/doxia-module-apt-1.0-alpha-10.jar
+0f4a2000-0f4a4000 r--s 0000b000 08:0a 396153     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-decoration-model/1.0-alpha-10/doxia-decoration-model-1.0-alpha-10.jar
+0f4a4000-0f4ac000 r--s 00058000 08:0a 7175       /home/anonymous/.m2/repository/org/apache/velocity/velocity/1.5/velocity-1.5.jar
+0f4ac000-0f4ad000 r--s 00001000 08:0a 7173       /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-velocity/1.1.7/plexus-velocity-1.1.7.jar
+0f4ad000-0f4ae000 r--s 00002000 08:0a 7172       /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-i18n/1.0-beta-7/plexus-i18n-1.0-beta-7.jar
+0f4ae000-0f4b0000 r--s 0000a000 08:0a 396150     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-site-renderer/1.0-alpha-10/doxia-site-renderer-1.0-alpha-10.jar
+0f4b0000-0f4b2000 r--s 00000000 08:0a 7170       /home/anonymous/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.4/maven-reporting-api-2.0.4.jar
+0f4b2000-0f4b5000 r--s 0000b000 08:0a 396147     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-core/1.0-alpha-10/doxia-core-1.0-alpha-10.jar
+0f4b5000-0f4ba000 r--s 00016000 08:0a 135148     /home/anonymous/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar
+0f4ba000-0f4bc000 r--s 0000e000 08:0a 135146     /home/anonymous/.m2/repository/oro/oro/2.0.8/oro-2.0.8.jar
+0f4bc000-0f4be000 r--s 00008000 08:0a 135144     /home/anonymous/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar
+0f4be000-0f4c2000 r--s 00026000 08:0a 135142     /home/anonymous/.m2/repository/commons-digester/commons-digester/1.6/commons-digester-1.6.jar
+0f4c2000-0f4c7000 r--s 0002a000 08:0a 135140     /home/anonymous/.m2/repository/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar
+0f4c7000-0f4ca000 r--s 00014000 08:0a 135139     /home/anonymous/.m2/repository/commons-validator/commons-validator/1.2.0/commons-validator-1.2.0.jar
+0f4ca000-0f4cb000 r--s 00004000 08:0a 396145     /home/anonymous/.m2/repository/org/apache/maven/reporting/maven-reporting-impl/2.0.4.1/maven-reporting-impl-2.0.4.1.jar
+0f4cb000-0f4cd000 r--s 00008000 08:0a 7167       /home/anonymous/.m2/repository/org/apache/maven/shared/file-management/1.2.1/file-management-1.2.1.jar
+0f4cd000-0f4ce000 r--s 00003000 08:0a 135136     /home/anonymous/.m2/repository/org/codehaus/groovy/maven/gmaven-common/1.0/gmaven-common-1.0.jar
+0f4ce000-0f4d1000 r--s 00024000 08:0a 135135     /home/anonymous/.m2/repository/com/thoughtworks/qdox/qdox/1.8/qdox-1.8.jar
+0f4d1000-0f4d6000 r--s 00039000 08:0a 7165       /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.5/plexus-utils-1.5.5.jar
+0f4d6000-0f4d9000 r--s 00011000 08:0a 7163       /home/anonymous/.m2/repository/org/codehaus/groovy/maven/runtime/gmaven-runtime-support/1.0/gmaven-runtime-support-1.0.jar
+0f4d9000-0f4db000 r--s 00005000 08:0a 135133     /home/anonymous/.m2/repository/org/codehaus/groovy/maven/runtime/gmaven-runtime-loader/1.0/gmaven-runtime-loader-1.0.jar
+0f4db000-0f4dd000 r--s 00003000 08:0a 7161       /home/anonymous/.m2/repository/org/codehaus/groovy/maven/feature/gmaven-feature-api/1.0/gmaven-feature-api-1.0.jar
+0f4dd000-0f4df000 r--s 00004000 08:0a 7159       /home/anonymous/.m2/repository/org/codehaus/groovy/maven/runtime/gmaven-runtime-api/1.0/gmaven-runtime-api-1.0.jar
+0f4df000-0f4e1000 r--s 00002000 08:0a 6570       /home/anonymous/.m2/repository/org/apache/ant/ant-launcher/1.8.1/ant-launcher-1.8.1.jar
+0f4e1000-0f4f8000 r--s 0015b000 08:0a 6569       /home/anonymous/.m2/repository/org/apache/ant/ant/1.8.1/ant-1.8.1.jar
+0f4f8000-0f54a000 r--s 004e9000 08:0a 396142     /home/anonymous/.m2/repository/org/codehaus/groovy/groovy-all/1.7.5/groovy-all-1.7.5.jar
+0f54a000-0f54d000 r--s 0001b000 08:0a 396143     /home/anonymous/.m2/repository/junit/junit/3.8.2/junit-3.8.2.jar
+0f54d000-0f54f000 r--s 00014000 08:0a 135128     /home/anonymous/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar
+0f54f000-0f551000 r--s 00002000 08:0a 7156       /home/anonymous/.m2/repository/org/codehaus/groovy/maven/feature/gmaven-feature-support/1.0/gmaven-feature-support-1.0.jar
+0f551000-0f553000 r--s 00009000 08:0a 7158       /home/anonymous/.m2/repository/org/codehaus/groovy/maven/runtime/gmaven-runtime-1.6/1.0/gmaven-runtime-1.6-1.0.jar
+0f553000-0f55d000 r--s 00066000 08:0a 396029     /home/anonymous/.m2/repository/org/snmp4j/snmp4j-agent/1.4.1/snmp4j-agent-1.4.1.jar
+0f55d000-0f562000 r--s 0004e000 08:0a 396030     /home/anonymous/.m2/repository/org/snmp4j/snmp4j/1.11.1/snmp4j-1.11.1.jar
+0f562000-0f564000 r--s 00009000 08:0a 11935      /home/anonymous/workspace/opennms-1.10.8-1/core/snmp/impl-snmp4j/target/org.opennms.core.snmp.implementations.snmp4j-1.10.8.jar
+0f564000-0f567000 r--s 00012000 08:0a 11870      /home/anonymous/workspace/opennms-1.10.8-1/core/snmp/joesnmp/target/org.opennms.core.snmp.joesnmp-1.10.8.jar
+0f567000-0f569000 r--s 00006000 08:0a 11899      /home/anonymous/workspace/opennms-1.10.8-1/core/snmp/impl-joesnmp/target/org.opennms.core.snmp.implementations.joesnmp-1.10.8.jar
+0f569000-0f56e000 r--s 00040000 08:0a 140470     /home/anonymous/.m2/repository/commons-lang/commons-lang/2.5/commons-lang-2.5.jar
+0f56e000-0f570000 r--s 0000e000 08:0a 11740      /home/anonymous/workspace/opennms-1.10.8-1/core/snmp/api/target/org.opennms.core.snmp.api-1.10.8.jar
+0f570000-0f576000 r--s 00034000 08:0a 399190     /home/anonymous/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar
+0f576000-0f57d000 r--s 00065000 08:0a 134539     /home/anonymous/.m2/repository/dnsjava/dnsjava/2.1.1/dnsjava-2.1.1.jar
+0f57d000-0f582000 r--s 00043000 08:0a 11511      /home/anonymous/.m2/repository/com/sun/xml/com.springsource.com.sun.xml.fastinfoset/1.2.2/com.springsource.com.sun.xml.fastinfoset-1.2.2.jar
+0f582000-0f594000 r--s 000c2000 08:0a 11510      /home/anonymous/.m2/repository/com/sun/xml/com.springsource.com.sun.xml.bind/2.1.7/com.springsource.com.sun.xml.bind-2.1.7.jar
+0f594000-0f597000 r--s 00014000 08:0a 140358     /home/anonymous/.m2/repository/javax/xml/bind/com.springsource.javax.xml.bind/2.1.7/com.springsource.javax.xml.bind-2.1.7.jar
+0f598000-0f59a000 r--s 00010000 08:0a 6390       /home/anonymous/.m2/repository/org/codehaus/groovy/maven/gmaven-plugin/1.0/gmaven-plugin-1.0.jar
+0f59a000-0f59b000 r--s 00001000 08:0a 11553      /home/anonymous/workspace/opennms-1.10.8-1/core/api/target/org.opennms.core.api-1.10.8.jar
+0f59b000-0f59c000 r--s 00005000 08:0a 11662      /home/anonymous/workspace/opennms-1.10.8-1/core/lib/target/org.opennms.core.lib-1.10.8.jar
+0f59c000-0f59f000 r--s 00016000 08:0a 140577     /home/anonymous/workspace/opennms-1.10.8-1/opennms-util/target/opennms-util-1.10.8.jar
+0f59f000-0f5a6000 r--s 00059000 08:0a 140339     /home/anonymous/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15.jar
+0f5a6000-0f5c9000 r--s 00209000 08:0a 6799       /home/anonymous/.m2/repository/org/hibernate/hibernate-core/3.3.1.GA/hibernate-core-3.3.1.GA.jar
+0f5c9000-0f5ce000 r--s 00029000 08:0a 11486      /home/anonymous/.m2/repository/org/springframework/spring-jms/3.0.5.RELEASE/spring-jms-3.0.5.RELEASE.jar
+0f5ce000-0f5d5000 r--s 00032000 08:0a 11487      /home/anonymous/.m2/repository/org/springframework/spring-tx/3.0.5.RELEASE/spring-tx-3.0.5.RELEASE.jar
+0f5d5000-0f5df000 r--s 00055000 08:0a 140334     /home/anonymous/.m2/repository/org/springframework/spring-jdbc/3.0.5.RELEASE/spring-jdbc-3.0.5.RELEASE.jar
+0f5df000-0f5e1000 r--s 0000d000 08:0a 140332     /home/anonymous/.m2/repository/org/springframework/spring-oxm/3.0.5.RELEASE/spring-oxm-3.0.5.RELEASE.jar
+0f5e1000-0f5e7000 r--s 0002d000 08:0a 140330     /home/anonymous/.m2/repository/org/springframework/spring-test/3.0.5.RELEASE/spring-test-3.0.5.RELEASE.jar
+0f5e7000-0f5ea000 r--s 00016000 08:0a 11483      /home/anonymous/.m2/repository/org/springframework/spring-context-support/3.0.5.RELEASE/spring-context-support-3.0.5.RELEASE.jar
+0f5ea000-0f5ee000 r--s 00026000 08:0a 11482      /home/anonymous/.m2/repository/org/springframework/spring-expression/3.0.5.RELEASE/spring-expression-3.0.5.RELEASE.jar
+0f5ee000-0f600000 r--s 00092000 08:0a 11481      /home/anonymous/.m2/repository/org/springframework/spring-context/3.0.5.RELEASE/spring-context-3.0.5.RELEASE.jar
+0f600000-0f700000 rw-p 00000000 00:00 0 
+0f701000-0f70e000 r--s 0007f000 08:0a 135151     /home/anonymous/.m2/repository/commons-collections/commons-collections/3.2/commons-collections-3.2.jar
+0f70e000-0f717000 r--s 00055000 08:0a 399158     /home/anonymous/.m2/repository/org/springframework/spring-core/3.0.5.RELEASE/spring-core-3.0.5.RELEASE.jar
+0f717000-0f723000 r--s 0007c000 08:0a 399155     /home/anonymous/.m2/repository/org/springframework/spring-beans/3.0.5.RELEASE/spring-beans-3.0.5.RELEASE.jar
+0f723000-0f724000 r--s 0000c000 08:0a 399153     /home/anonymous/.m2/repository/org/springframework/spring-asm/3.0.5.RELEASE/spring-asm-3.0.5.RELEASE.jar
+0f724000-0f726000 r--s 00000000 08:0a 134433     /home/anonymous/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar
+0f726000-0f72f000 r--s 00046000 08:0a 399152     /home/anonymous/.m2/repository/org/springframework/spring-aop/3.0.5.RELEASE/spring-aop-3.0.5.RELEASE.jar
+0f72f000-0f730000 r--s 00000000 08:0a 399150     /home/anonymous/.m2/repository/org/springframework/spring-instrument/3.0.5.RELEASE/spring-instrument-3.0.5.RELEASE.jar
+0f730000-0f733000 r--s 00018000 08:0a 135497     /home/anonymous/.m2/repository/commons-io/commons-io/1.4/commons-io-1.4.jar
+0f734000-0f73a000 r--s 0006d000 08:0a 134465     /home/anonymous/.m2/repository/javassist/javassist/3.4.GA/javassist-3.4.GA.jar
+0f73a000-0f73d000 r--s 0001b000 08:0a 6800       /home/anonymous/.m2/repository/org/hibernate/hibernate-entitymanager/3.4.0.GA/hibernate-entitymanager-3.4.0.GA.jar
+0f73d000-0f743000 r--s 00067000 08:0a 134459     /home/anonymous/.m2/repository/antlr/antlr/2.7.6/antlr-2.7.6.jar
+0f743000-0f746000 r--s 0000e000 08:0a 395951     /home/anonymous/.m2/repository/org/hibernate/hibernate-commons-annotations/3.1.0.GA/hibernate-commons-annotations-3.1.0.GA.jar
+0f746000-0f74e000 r--s 00028000 08:0a 140338     /home/anonymous/.m2/repository/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar
+0f74e000-0f753000 r--s 00048000 08:0a 134456     /home/anonymous/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar
+0f753000-0f758000 r--s 00040000 08:0a 395948     /home/anonymous/.m2/repository/org/hibernate/hibernate-annotations/3.4.0.GA/hibernate-annotations-3.4.0.GA.jar
+0f758000-0f75b000 r--s 0000a000 08:0a 395947     /home/anonymous/.m2/repository/org/hibernate/ejb3-persistence/1.0.2.GA/ejb3-persistence-1.0.2.GA.jar
+0f75b000-0f762000 r--s 00049000 08:0a 140336     /home/anonymous/.m2/repository/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3.jar
+0f762000-0f778000 r--s 00178000 08:0a 395944     /home/anonymous/.m2/repository/org/aspectj/aspectjweaver/1.6.8/aspectjweaver-1.6.8.jar
+0f778000-0f77b000 ---p 00000000 00:00 0 
+0f77b000-0f7c9000 rw-p 00000000 00:00 0 
+0f7c9000-0f7dc000 r-xp 00000000 08:09 393550     /lib/i386-linux-gnu/libresolv-2.15.so
+0f7dc000-0f7dd000 ---p 00013000 08:09 393550     /lib/i386-linux-gnu/libresolv-2.15.so
+0f7dd000-0f7de000 r--p 00013000 08:09 393550     /lib/i386-linux-gnu/libresolv-2.15.so
+0f7de000-0f7df000 rw-p 00014000 08:09 393550     /lib/i386-linux-gnu/libresolv-2.15.so
+0f7df000-0f7e1000 rw-p 00000000 00:00 0 
+0f7e1000-0f7e6000 r-xp 00000000 08:09 393515     /lib/i386-linux-gnu/libnss_dns-2.15.so
+0f7e6000-0f7e7000 r--p 00004000 08:09 393515     /lib/i386-linux-gnu/libnss_dns-2.15.so
+0f7e7000-0f7e8000 rw-p 00005000 08:09 393515     /lib/i386-linux-gnu/libnss_dns-2.15.so
+0f7e8000-0f7ea000 r-xp 00000000 08:09 392689     /lib/libnss_mdns4_minimal.so.2
+0f7ea000-0f7eb000 r--p 00001000 08:09 392689     /lib/libnss_mdns4_minimal.so.2
+0f7eb000-0f7ec000 rw-p 00002000 08:09 392689     /lib/libnss_mdns4_minimal.so.2
+0f7ec000-0f7ee000 r--s 00007000 08:0a 399154     /home/anonymous/.m2/repository/org/springframework/spring-aspects/3.0.5.RELEASE/spring-aspects-3.0.5.RELEASE.jar
+0f7ee000-0f7f0000 r--s 00005000 08:0a 140359     /home/anonymous/.m2/repository/javax/xml/stream/com.springsource.javax.xml.stream/1.0.1/com.springsource.javax.xml.stream-1.0.1.jar
+0f7f0000-0f7fb000 r--s 0008b000 08:0a 134453     /home/anonymous/.m2/repository/c3p0/c3p0/0.9.1.2/c3p0-0.9.1.2.jar
+0f7fb000-0f800000 r--s 00018000 08:0a 395943     /home/anonymous/.m2/repository/org/aspectj/aspectjrt/1.6.8/aspectjrt-1.6.8.jar
+0f800000-0f8f9000 rw-p 00000000 00:00 0 
+0f8f9000-0f900000 ---p 00000000 00:00 0 
+0f900000-0fa00000 rw-p 00000000 00:00 0 
+0fa00000-0fafc000 rw-p 00000000 00:00 0 
+0fafc000-0fb00000 ---p 00000000 00:00 0 
+0fb00000-0fbfa000 rw-p 00000000 00:00 0 
+0fbfa000-0fc00000 ---p 00000000 00:00 0 
+0fc00000-0fcfb000 rw-p 00000000 00:00 0 
+0fcfb000-0fd00000 ---p 00000000 00:00 0 
+0fd00000-0fdfb000 rw-p 00000000 00:00 0 
+0fdfb000-0fe00000 ---p 00000000 00:00 0 
+0fe00000-0fff4000 rw-p 00000000 00:00 0 
+0fff4000-10000000 ---p 00000000 00:00 0 
+10000000-10100000 rw-p 00000000 00:00 0 
+10100000-10101000 r--s 00007000 08:0a 140655     /home/anonymous/workspace/opennms-1.10.8-1/tests/mock-snmp-agent/target/mock-snmp-agent-1.10.8.jar
+10101000-10103000 r--s 0000d000 08:0a 134439     /home/anonymous/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar
+10103000-10105000 r--s 00005000 08:0a 399162     /home/anonymous/.m2/repository/org/slf4j/slf4j-api/1.6.2/slf4j-api-1.6.2.jar
+10105000-1010d000 r--s 0004a000 08:0a 140335     /home/anonymous/.m2/repository/org/springframework/spring-orm/3.0.5.RELEASE/spring-orm-3.0.5.RELEASE.jar
+1010d000-10110000 ---p 00000000 00:00 0 
+10110000-1015e000 rw-p 00000000 00:00 0 
+1015e000-10161000 ---p 00000000 00:00 0 
+10161000-101af000 rw-p 00000000 00:00 0 
+101af000-101b2000 ---p 00000000 00:00 0 
+101b2000-10200000 rw-p 00000000 00:00 0 
+10200000-102ff000 rw-p 00000000 00:00 0 
+102ff000-10300000 ---p 00000000 00:00 0 
+10300000-10400000 rw-p 00000000 00:00 0 
+10400000-10500000 rw-p 00000000 00:00 0 
+10500000-10501000 r--s 00003000 08:0a 399201     /home/anonymous/.m2/repository/org/jvnet/staxex/com.springsource.org.jvnet.staxex/1.0.0/com.springsource.org.jvnet.staxex-1.0.0.jar
+10501000-10504000 ---p 00000000 00:00 0 
+10504000-10552000 rw-p 00000000 00:00 0          [stack:2536]
+10552000-10555000 ---p 00000000 00:00 0 
+10555000-105a3000 rw-p 00000000 00:00 0          [stack:2535]
+105a3000-105a6000 ---p 00000000 00:00 0 
+105a6000-105f4000 rw-p 00000000 00:00 0          [stack:2534]
+105f4000-105f5000 r--s 00005000 08:0a 6296       /home/anonymous/.m2/repository/org/apache/maven/shared/maven-repository-builder/1.0-alpha-2/maven-repository-builder-1.0-alpha-2.jar
+105f5000-105f9000 r--s 00033000 08:0a 395722     /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.5/plexus-utils-2.0.5.jar
+105f9000-105fa000 r--s 00004000 08:0a 395420     /home/anonymous/.m2/repository/org/apache/maven/maven-archiver/2.4.1/maven-archiver-2.4.1.jar
+105fa000-105fd000 r--s 0000a000 08:0a 6294       /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-io/1.0.1/plexus-io-1.0.1.jar
+105fd000-105fe000 r--s 00001000 08:0a 6292       /home/anonymous/.m2/repository/org/sonatype/plexus/plexus-build-api/0.0.4/plexus-build-api-0.0.4.jar
+105fe000-10600000 r--s 00007000 08:0a 11400      /home/anonymous/.m2/repository/org/apache/maven/shared/maven-filtering/1.0-beta-4/maven-filtering-1.0-beta-4.jar
+10600000-106f0000 rw-p 00000000 00:00 0 
+106f0000-10700000 ---p 00000000 00:00 0 
+10700000-107f9000 rw-p 00000000 00:00 0 
+107f9000-10800000 ---p 00000000 00:00 0 
+10800000-108ea000 rw-p 00000000 00:00 0 
+108ea000-10900000 ---p 00000000 00:00 0 
+10900000-10a00000 rw-p 00000000 00:00 0 
+10a00000-10aea000 rw-p 00000000 00:00 0 
+10aea000-10b00000 ---p 00000000 00:00 0 
+10b00000-10bf8000 rw-p 00000000 00:00 0 
+10bf8000-10c00000 ---p 00000000 00:00 0 
+10c00000-10cfa000 rw-p 00000000 00:00 0 
+10cfa000-10d00000 ---p 00000000 00:00 0 
+10d00000-10dfb000 rw-p 00000000 00:00 0 
+10dfb000-10e00000 ---p 00000000 00:00 0 
+10e00000-10ed4000 rw-p 00000000 00:00 0 
+10ed4000-10f00000 ---p 00000000 00:00 0 
+10f00000-10ff7000 rw-p 00000000 00:00 0 
+10ff7000-11000000 ---p 00000000 00:00 0 
+11000000-110fa000 rw-p 00000000 00:00 0 
+110fa000-11100000 ---p 00000000 00:00 0 
+11100000-111f1000 rw-p 00000000 00:00 0 
+111f1000-11200000 ---p 00000000 00:00 0 
+11200000-112e2000 rw-p 00000000 00:00 0 
+112e2000-11300000 ---p 00000000 00:00 0 
+11300000-113fc000 rw-p 00000000 00:00 0 
+113fc000-11400000 ---p 00000000 00:00 0 
+11400000-115e8000 rw-p 00000000 00:00 0 
+115e8000-11600000 ---p 00000000 00:00 0 
+11600000-11800000 rw-p 00000000 00:00 0 
+11800000-11a00000 rw-p 00000000 00:00 0 
+11a00000-11c00000 rw-p 00000000 00:00 0 
+11c00000-11e00000 rw-p 00000000 00:00 0 
+11e00000-12000000 rw-p 00000000 00:00 0 
+12000000-12200000 rw-p 00000000 00:00 0 
+12200000-12400000 rw-p 00000000 00:00 0 
+12400000-12600000 rw-p 00000000 00:00 0 
+12600000-12800000 rw-p 00000000 00:00 0 
+12800000-12a00000 rw-p 00000000 00:00 0 
+12a00000-12c00000 rw-p 00000000 00:00 0 
+12c00000-12e00000 rw-p 00000000 00:00 0 
+12e00000-13000000 rw-p 00000000 00:00 0 
+13000000-13200000 rw-p 00000000 00:00 0 
+13200000-13400000 rw-p 00000000 00:00 0 
+13400000-13600000 rw-p 00000000 00:00 0 
+13600000-13800000 rw-p 00000000 00:00 0 
+13800000-13a00000 rw-p 00000000 00:00 0 
+13a00000-13c00000 rw-p 00000000 00:00 0 
+13c00000-13e00000 rw-p 00000000 00:00 0 
+13e00000-14000000 rw-p 00000000 00:00 0 
+14000000-140f9000 rw-p 00000000 00:00 0 
+140f9000-14100000 ---p 00000000 00:00 0 
+14100000-14200000 rw-p 00000000 00:00 0 
+14200000-142fa000 rw-p 00000000 00:00 0 
+142fa000-14300000 ---p 00000000 00:00 0 
+14300000-143f1000 rw-p 00000000 00:00 0 
+143f1000-14400000 ---p 00000000 00:00 0 
+14400000-144e5000 rw-p 00000000 00:00 0 
+144e5000-14500000 ---p 00000000 00:00 0 
+14500000-14501000 r--s 00002000 08:0a 11490      /home/anonymous/.m2/repository/org/slf4j/slf4j-log4j12/1.6.2/slf4j-log4j12-1.6.2.jar
+14501000-14502000 r--s 00003000 08:0a 134463     /home/anonymous/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar
+14502000-14503000 r--s 00001000 08:0a 134451     /home/anonymous/.m2/repository/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar
+14503000-14507000 r--s 0002f000 08:0a 135164     /home/anonymous/.m2/repository/commons-lang/commons-lang/2.1/commons-lang-2.1.jar
+14507000-14508000 r--s 00007000 08:0a 6376       /home/anonymous/.m2/repository/org/apache/maven/plugins/maven-jar-plugin/2.3.1/maven-jar-plugin-2.3.1.jar
+14508000-1450c000 r--s 00035000 08:0a 6900       /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.5/plexus-utils-3.0.5.jar
+1450c000-1450f000 ---p 00000000 00:00 0 
+1450f000-1455d000 rw-p 00000000 00:00 0          [stack:2533]
+1455d000-1455e000 r--s 00002000 08:0a 396148     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-10/doxia-sink-api-1.0-alpha-10.jar
+1455e000-1455f000 r--s 00002000 08:0a 6882       /home/anonymous/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.9/maven-reporting-api-2.0.9.jar
+1455f000-14564000 r--s 0003d000 08:0a 399180     /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-utils/1.5.9/plexus-utils-1.5.9.jar
+14564000-1456f000 r--s 00081000 08:0a 399181     /home/anonymous/.m2/repository/org/apache/maven/surefire/surefire-api/2.5/surefire-api-2.5.jar
+1456f000-14576000 r--s 00048000 08:0a 399179     /home/anonymous/.m2/repository/org/apache/maven/surefire/surefire-booter/2.5/surefire-booter-2.5.jar
+14576000-14578000 r--s 00007000 08:0a 11447      /home/anonymous/.m2/repository/org/apache/maven/plugins/maven-surefire-plugin/2.5/maven-surefire-plugin-2.5.jar
+14578000-145d8000 r--s 00d92000 08:09 563242     /usr/lib/jvm/java-6-openjdk-i386/lib/tools.jar
+145d8000-145da000 r--s 00002000 08:0a 6847       /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-compiler-javac/1.8.1/plexus-compiler-javac-1.8.1.jar
+145da000-145dc000 r--s 00000000 08:0a 6846       /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-compiler-manager/1.8.1/plexus-compiler-manager-1.8.1.jar
+145dc000-145dd000 r--s 00004000 08:0a 6845       /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-compiler-api/1.8.1/plexus-compiler-api-1.8.1.jar
+145dd000-145df000 r--s 00006000 08:0a 6724       /home/anonymous/.m2/repository/org/apache/maven/plugins/maven-compiler-plugin/2.3.2/maven-compiler-plugin-2.3.2.jar
+145df000-145e1000 r--s 00009000 08:0a 6290       /home/anonymous/.m2/repository/org/apache/maven/shared/maven-filtering/1.0/maven-filtering-1.0.jar
+145e1000-145e3000 r--s 00006000 08:0a 395416     /home/anonymous/.m2/repository/commons-cli/commons-cli/1.0/commons-cli-1.0.jar
+145e3000-145e4000 r--s 00001000 08:0a 395412     /home/anonymous/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.jar
+145e4000-145e5000 r--s 00002000 08:0a 395959     /home/anonymous/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.jar
+145e5000-145e7000 r--s 00005000 08:0a 6715       /home/anonymous/.m2/repository/org/apache/maven/plugins/maven-resources-plugin/2.5/maven-resources-plugin-2.5.jar
+145e7000-145e8000 r--s 00002000 08:0a 395806     /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-digest/1.0/plexus-digest-1.0.jar
+145e8000-145e9000 r--s 00005000 08:0a 6467       /home/anonymous/.m2/repository/org/apache/maven/plugins/maven-install-plugin/2.3.1/maven-install-plugin-2.3.1.jar
+145e9000-145ec000 r--s 0000a000 08:0a 395423     /home/anonymous/.m2/repository/org/codehaus/plexus/plexus-io/1.0/plexus-io-1.0.jar
+145ec000-14600000 r--s 0012f000 08:0a 140252     /home/anonymous/.m2/repository/org/apache/ant/ant/1.7.1/ant-1.7.1.jar
+14600000-14700000 rw-p 00000000 00:00 0 
+14700000-14800000 rw-p 00000000 

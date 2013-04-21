@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.458" errors="12" skipped="0" tests="12" name="org.opennms.netmgt.capsd.plugins.SnmpPluginTest">
+  <properties>
+    <property name="mock.db.driver" value="org.postgresql.Driver"/>
+    <property name="mock.rundbtests" value="true"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="mock.logLevel" value="WARN"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386"/>
+    <property name="java.vm.version" value="20.0-b12"/>
+    <property name="mock.snmpHost" value="localhost"/>
+    <property name="mock.db.url" value="jdbc:postgresql://localhost:5432/"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="mock.debug" value="false"/>
+    <property name="java.vm.name" value="OpenJDK Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/anonymous/workspace/opennms-1.10.8-1/opennms-services"/>
+    <property name="java.runtime.version" value="1.6.0_27-b27"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="basedir" value="/home/anonymous/workspace/opennms-1.10.8-1/opennms-services"/>
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/endorsed"/>
+    <property name="os.arch" value="i386"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="opennms.home" value="/home/anonymous/workspace/opennms-1.10.8-1/opennms-services/target/test-classes"/>
+    <property name="java.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386/server:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386:/usr/lib/jvm/java-6-openjdk-i386/jre/../lib/i386:/usr/java/packages/lib/i386:/usr/lib/i386-linux-gnu/jni:/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
+    <property name="os.version" value="3.5.0-27-generic"/>
+    <property name="user.home" value="/home/anonymous"/>
+    <property name="user.timezone" value="Asia/Kolkata"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="mock.db.adminUser" value="postgres"/>
+    <property name="user.name" value="anonymous"/>
+    <property name="java.class.path" value="/tmp/surefirebooter3854824440799040220.jar"/>
+    <property name="mock.leaveDatabase" value="false"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="/usr/lib/jvm/java-6-openjdk-i386/jre"/>
+    <property name="sun.java.command" value="/tmp/surefirebooter3854824440799040220.jar /tmp/surefire430229611732532253tmp /tmp/surefire863365654070002048tmp"/>
+    <property name="install.rrdtool.bin" value="/usr/bin/rrdtool"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_27"/>
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/resources.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/rt.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/jsse.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/jce.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/charsets.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/netx.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/plugin.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/rhino.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/modules/jdk.boot.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="runMailTests" value="true"/>
+    <property name="localRepository" value="/home/anonymous/.m2/repository"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="mock.runSnmpTests" value="false"/>
+    <property name="mock.leaveDatabaseOnFailure" value="false"/>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="org.opennms.snmp.strategyClass" value="org.opennms.netmgt.snmp.snmp4j.Snmp4JStrategy"/>
+  </properties>
+  <testcase time="0.237" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsForcedV1ProtocolSupported">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.004" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsExpectedValue">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.007" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsProtocolSupportedInetAddress">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.008" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsV3ProtocolSupported">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.004" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsV3ForcedToV1Supported">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.004" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testDoNothing">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.053" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsForcedV1ProtocolSupported">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.006" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsExpectedValue">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.004" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsProtocolSupportedInetAddress">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.005" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsV3ProtocolSupported">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.005" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testIsV3ForcedToV1Supported">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+  <testcase time="0.004" classname="org.opennms.netmgt.capsd.plugins.SnmpPluginTest" name="testDoNothing">
+    <error message="FATAL: password authentication failed for user &quot;postgres&quot;" type="org.postgresql.util.PSQLException">org.postgresql.util.PSQLException: FATAL: password authentication failed for user &quot;postgres&quot;
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:291)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:108)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+	at org.postgresql.jdbc2.AbstractJdbc2Connection.&lt;init&gt;(AbstractJdbc2Connection.java:125)
+	at org.postgresql.jdbc3.AbstractJdbc3Connection.&lt;init&gt;(AbstractJdbc3Connection.java:30)
+	at org.postgresql.jdbc3.Jdbc3Connection.&lt;init&gt;(Jdbc3Connection.java:24)
+	at org.postgresql.Driver.makeConnection(Driver.java:393)
+	at org.postgresql.Driver.connect(Driver.java:267)
+	at java.sql.DriverManager.getConnection(DriverManager.java:620)
+	at java.sql.DriverManager.getConnection(DriverManager.java:169)
+	at org.opennms.netmgt.dao.db.SimpleDataSource.getConnection(SimpleDataSource.java:90)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.createTestDatabase(TemporaryDatabase.java:289)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.setupDatabase(TemporaryDatabase.java:277)
+	at org.opennms.netmgt.dao.db.TemporaryDatabase.create(TemporaryDatabase.java:133)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:76)
+	at org.opennms.netmgt.mock.MockDatabase.&lt;init&gt;(MockDatabase.java:61)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.populateDatabase(OpenNMSTestCase.java:234)
+	at org.opennms.netmgt.mock.OpenNMSTestCase.setUp(OpenNMSTestCase.java:146)
+	at org.opennms.netmgt.capsd.plugins.SnmpPluginTest.setUp(SnmpPluginTest.java:69)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at org.opennms.test.PropertySettingTestSuite.runTest(PropertySettingTestSuite.java:102)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:59)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.executeTestSet(AbstractDirectoryTestSuite.java:115)
+	at org.apache.maven.surefire.suite.AbstractDirectoryTestSuite.execute(AbstractDirectoryTestSuite.java:140)
+	at org.apache.maven.surefire.Surefire.run(Surefire.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.booter.SurefireBooter.runSuitesInProcess(SurefireBooter.java:290)
+	at org.apache.maven.surefire.booter.SurefireBooter.main(SurefireBooter.java:1017)
+</error>
+  </testcase>
+</testsuite>

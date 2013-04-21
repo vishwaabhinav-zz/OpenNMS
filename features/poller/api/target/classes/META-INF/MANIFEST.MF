@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Export-Package: org.opennms.netmgt.poller.monitors;uses:="org.opennms.
+ core.utils,org.apache.log4j,org.springframework.util,org.opennms.netm
+ gt.poller,org.opennms.netmgt.model";version="1.10.8",org.opennms.netm
+ gt.poller;uses:="org.opennms.netmgt.model";version="1.10.8"
+Built-By: anonymous
+Tool: Bnd-0.0.255
+Bundle-Name: OpenNMS Poller API
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 1.10.8
+Build-Jdk: 1.6.0_27
+Bnd-LastModified: 1366544091031
+Bundle-ManifestVersion: 2
+Bundle-Description: OpenNMS is the world's first enterprise grade netw
+ ork management    platform developed under the open source model. It 
+ consists of a    community supported open-source project as well as a
+  commercial    services, training and support organization.
+Import-Package: org.apache.log4j,org.opennms.core.utils;version="1.10"
+ ,org.opennms.netmgt.model;version="1.10",org.opennms.netmgt.poller;ve
+ rsion="1.10.8",org.opennms.netmgt.poller.monitors;version="1.10.8",or
+ g.springframework.util;version="3.0.5.RELEASE"
+Bundle-SymbolicName: org.opennms.features.poller.api
+

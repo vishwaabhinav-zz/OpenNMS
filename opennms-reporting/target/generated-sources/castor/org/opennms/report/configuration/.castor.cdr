@@ -1,0 +1,4 @@
+#Sun Apr 21 17:21:50 IST 2013
+org.opennms.report.configuration.RwsRancidlistreport=org.opennms.report.configuration.descriptors.RwsRancidlistreportDescriptor
+org.opennms.report.configuration.NodeSet=org.opennms.report.configuration.descriptors.NodeSetDescriptor
+org.opennms.report.configuration.GroupXSet=org.opennms.report.configuration.descriptors.GroupXSetDescriptor

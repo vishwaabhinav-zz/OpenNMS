@@ -1,0 +1,9 @@
+#Sun Apr 21 17:01:55 IST 2013
+org.opennms.netmgt.config.linkd.IncludeRange=org.opennms.netmgt.config.linkd.descriptors.IncludeRangeDescriptor
+org.opennms.netmgt.config.linkd.Vlans=org.opennms.netmgt.config.linkd.descriptors.VlansDescriptor
+org.opennms.netmgt.config.linkd.Vendor=org.opennms.netmgt.config.linkd.descriptors.VendorDescriptor
+org.opennms.netmgt.config.linkd.Iproutes=org.opennms.netmgt.config.linkd.descriptors.IproutesDescriptor
+org.opennms.netmgt.config.linkd.LinkdConfiguration=org.opennms.netmgt.config.linkd.descriptors.LinkdConfigurationDescriptor
+org.opennms.netmgt.config.linkd.ExcludeRange=org.opennms.netmgt.config.linkd.descriptors.ExcludeRangeDescriptor
+org.opennms.netmgt.config.linkd.Filter=org.opennms.netmgt.config.linkd.descriptors.FilterDescriptor
+org.opennms.netmgt.config.linkd.Package=org.opennms.netmgt.config.linkd.descriptors.PackageDescriptor

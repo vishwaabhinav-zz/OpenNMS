@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Private-Package: org.opennms.sms.reflector.commands.internal
+Ignore-Package: org.opennms.sms.reflector.commands.internal
+Built-By: anonymous
+Tool: Bnd-0.0.255
+Bundle-Name: org.opennms.features.sms.reflector.commands [org.opennms.
+ sms.reflector.commands]
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_27
+Bundle-Version: 1.10.8
+Bnd-LastModified: 1366544142747
+Bundle-ManifestVersion: 2
+Bundle-Description: Generated using Pax-Construct
+Import-Package: org.apache.commons.lang.builder,org.apache.felix.shell
+ ,org.eclipse.osgi.framework.console,org.opennms.core.utils,org.opennm
+ s.sms.ping,org.opennms.sms.reflector.smsservice,org.osgi.framework,or
+ g.osgi.service.cm,org.smslib,org.smslib.helper,org.smslib.modem,org.s
+ pringframework.osgi.context
+Bundle-SymbolicName: org.opennms.features.sms.reflector.commands
+

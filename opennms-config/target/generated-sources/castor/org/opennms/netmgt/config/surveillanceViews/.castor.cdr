@@ -1,0 +1,9 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.surveillanceViews.Columns=org.opennms.netmgt.config.surveillanceViews.descriptors.ColumnsDescriptor
+org.opennms.netmgt.config.surveillanceViews.ColumnDef=org.opennms.netmgt.config.surveillanceViews.descriptors.ColumnDefDescriptor
+org.opennms.netmgt.config.surveillanceViews.RowDef=org.opennms.netmgt.config.surveillanceViews.descriptors.RowDefDescriptor
+org.opennms.netmgt.config.surveillanceViews.Rows=org.opennms.netmgt.config.surveillanceViews.descriptors.RowsDescriptor
+org.opennms.netmgt.config.surveillanceViews.Category=org.opennms.netmgt.config.surveillanceViews.descriptors.CategoryDescriptor
+org.opennms.netmgt.config.surveillanceViews.Views=org.opennms.netmgt.config.surveillanceViews.descriptors.ViewsDescriptor
+org.opennms.netmgt.config.surveillanceViews.SurveillanceViewConfiguration=org.opennms.netmgt.config.surveillanceViews.descriptors.SurveillanceViewConfigurationDescriptor
+org.opennms.netmgt.config.surveillanceViews.View=org.opennms.netmgt.config.surveillanceViews.descriptors.ViewDescriptor

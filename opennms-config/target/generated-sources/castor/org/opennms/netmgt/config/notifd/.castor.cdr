@@ -1,0 +1,6 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.notifd.HandlerClass=org.opennms.netmgt.config.notifd.descriptors.HandlerClassDescriptor
+org.opennms.netmgt.config.notifd.NotifdConfiguration=org.opennms.netmgt.config.notifd.descriptors.NotifdConfigurationDescriptor
+org.opennms.netmgt.config.notifd.InitParams=org.opennms.netmgt.config.notifd.descriptors.InitParamsDescriptor
+org.opennms.netmgt.config.notifd.Queue=org.opennms.netmgt.config.notifd.descriptors.QueueDescriptor
+org.opennms.netmgt.config.notifd.AutoAcknowledge=org.opennms.netmgt.config.notifd.descriptors.AutoAcknowledgeDescriptor

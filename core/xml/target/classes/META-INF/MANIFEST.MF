@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Export-Package: org.opennms.core.xml;uses:="org.springframework.core.i
+ o,org.exolab.castor.xml,org.xml.sax,org.opennms.core.utils,javax.xml.
+ transform,javax.xml.bind.annotation,javax.xml.transform.stream,javax.
+ xml.validation,org.apache.commons.io,javax.xml.transform.sax,org.spri
+ ngframework.dao,javax.xml.bind,org.xml.sax.helpers";version="1.10.8"
+Built-By: anonymous
+Tool: Bnd-0.0.255
+Bundle-Name: OpenNMS Core Library (XML)
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 1.10.8
+Build-Jdk: 1.6.0_27
+Bnd-LastModified: 1366543908068
+Bundle-ManifestVersion: 2
+Bundle-Description: OpenNMS is the world's first enterprise grade netw
+ ork management    platform developed under the open source model. It 
+ consists of a    community supported open-source project as well as a
+  commercial    services, training and support organization.
+Import-Package: javax.xml.bind;version="2.1",javax.xml.bind.annotation
+ ;version="2.1",javax.xml.transform,javax.xml.transform.sax,javax.xml.
+ transform.stream,javax.xml.validation,org.apache.commons.io;version="
+ 1.4",org.exolab.castor.xml,org.opennms.core.utils;version="1.10",org.
+ opennms.core.xml;version="1.10.8",org.springframework.core.io;version
+ ="3.0.5.RELEASE",org.springframework.dao;version="3.0.5.RELEASE",org.
+ xml.sax,org.xml.sax.helpers
+Bundle-SymbolicName: org.opennms.core.xml
+

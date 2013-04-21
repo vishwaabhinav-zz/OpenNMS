@@ -1,0 +1,5 @@
+#Sun Apr 21 17:01:56 IST 2013
+org.opennms.netmgt.config.opennmsDataSources.JdbcDataSource=org.opennms.netmgt.config.opennmsDataSources.descriptors.JdbcDataSourceDescriptor
+org.opennms.netmgt.config.opennmsDataSources.DataSourceConfiguration=org.opennms.netmgt.config.opennmsDataSources.descriptors.DataSourceConfigurationDescriptor
+org.opennms.netmgt.config.opennmsDataSources.ConnectionPool=org.opennms.netmgt.config.opennmsDataSources.descriptors.ConnectionPoolDescriptor
+org.opennms.netmgt.config.opennmsDataSources.Param=org.opennms.netmgt.config.opennmsDataSources.descriptors.ParamDescriptor

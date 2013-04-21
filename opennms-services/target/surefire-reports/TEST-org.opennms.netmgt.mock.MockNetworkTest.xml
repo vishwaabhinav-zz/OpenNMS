@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="6.061" errors="0" skipped="0" tests="18" name="org.opennms.netmgt.mock.MockNetworkTest">
+  <properties>
+    <property name="mock.db.driver" value="org.postgresql.Driver"/>
+    <property name="mock.rundbtests" value="true"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="mock.logLevel" value="WARN"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386"/>
+    <property name="java.vm.version" value="20.0-b12"/>
+    <property name="mock.snmpHost" value="localhost"/>
+    <property name="mock.db.url" value="jdbc:postgresql://localhost:5432/"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="mock.debug" value="false"/>
+    <property name="java.vm.name" value="OpenJDK Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/anonymous/workspace/opennms-1.10.8-1/opennms-services"/>
+    <property name="java.runtime.version" value="1.6.0_27-b27"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="basedir" value="/home/anonymous/workspace/opennms-1.10.8-1/opennms-services"/>
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/endorsed"/>
+    <property name="os.arch" value="i386"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="opennms.home" value="/home/anonymous/workspace/opennms-1.10.8-1/opennms-services/target/test-classes"/>
+    <property name="java.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386/server:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386:/usr/lib/jvm/java-6-openjdk-i386/jre/../lib/i386:/usr/java/packages/lib/i386:/usr/lib/i386-linux-gnu/jni:/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
+    <property name="os.version" value="3.5.0-27-generic"/>
+    <property name="user.home" value="/home/anonymous"/>
+    <property name="user.timezone" value="Asia/Kolkata"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="mock.db.adminUser" value="postgres"/>
+    <property name="user.name" value="anonymous"/>
+    <property name="java.class.path" value="/tmp/surefirebooter3287418513442373819.jar"/>
+    <property name="mock.leaveDatabase" value="false"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="/usr/lib/jvm/java-6-openjdk-i386/jre"/>
+    <property name="sun.java.command" value="/tmp/surefirebooter3287418513442373819.jar /tmp/surefire4145544151572902227tmp /tmp/surefire599697671804738398tmp"/>
+    <property name="install.rrdtool.bin" value="/usr/bin/rrdtool"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_27"/>
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/resources.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/rt.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/jsse.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/jce.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/charsets.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/netx.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/plugin.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/rhino.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/lib/modules/jdk.boot.jar:/usr/lib/jvm/java-6-openjdk-i386/jre/classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="runMailTests" value="true"/>
+    <property name="localRepository" value="/home/anonymous/.m2/repository"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="mock.runSnmpTests" value="false"/>
+    <property name="mock.leaveDatabaseOnFailure" value="false"/>
+    <property name="sun.desktop" value="gnome"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="1.278" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testPollerConfig"/>
+  <testcase time="0.015" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testCreateInterfaces"/>
+  <testcase time="0.019" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testCreateNodes"/>
+  <testcase time="0.062" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testCreateServices"/>
+  <testcase time="0.089" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testEventListeners"/>
+  <testcase time="0.008" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testEventMgr"/>
+  <testcase time="0.123" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testEventProcessing"/>
+  <testcase time="0.011" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testInvalidPoll"/>
+  <testcase time="0.029" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testLookupNotThere"/>
+  <testcase time="0.025" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testPollOutageConfig"/>
+  <testcase time="0.009" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testPollStatus"/>
+  <testcase time="0.104" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testQueryManager"/>
+  <testcase time="0.013" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testRemove"/>
+  <testcase time="1.023" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testScheduledOutages"/>
+  <testcase time="0.031" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testSetPollStatus"/>
+  <testcase time="0.027" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testVisitor"/>
+  <testcase time="2.015" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testWaitForEvent"/>
+  <testcase time="1.045" classname="org.opennms.netmgt.mock.MockNetworkTest" name="testWaitForPoll"/>
+</testsuite>

@@ -1,0 +1,2 @@
+#Sun Apr 21 17:01:55 IST 2013
+org.opennms.netmgt.config.outage.OutageConfiguration=org.opennms.netmgt.config.outage.descriptors.OutageConfigurationDescriptor

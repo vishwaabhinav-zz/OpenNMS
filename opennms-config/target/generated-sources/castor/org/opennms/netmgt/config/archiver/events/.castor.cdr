@@ -1,0 +1,2 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.archiver.events.EventsArchiverConfiguration=org.opennms.netmgt.config.archiver.events.descriptors.EventsArchiverConfigurationDescriptor

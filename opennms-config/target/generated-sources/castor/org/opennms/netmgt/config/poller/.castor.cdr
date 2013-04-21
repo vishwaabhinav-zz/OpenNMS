@@ -1,0 +1,13 @@
+#Sun Apr 21 17:01:55 IST 2013
+org.opennms.netmgt.config.poller.Service=org.opennms.netmgt.config.poller.descriptors.ServiceDescriptor
+org.opennms.netmgt.config.poller.Downtime=org.opennms.netmgt.config.poller.descriptors.DowntimeDescriptor
+org.opennms.netmgt.config.poller.CriticalService=org.opennms.netmgt.config.poller.descriptors.CriticalServiceDescriptor
+org.opennms.netmgt.config.poller.Filter=org.opennms.netmgt.config.poller.descriptors.FilterDescriptor
+org.opennms.netmgt.config.poller.PollerConfiguration=org.opennms.netmgt.config.poller.descriptors.PollerConfigurationDescriptor
+org.opennms.netmgt.config.poller.Package=org.opennms.netmgt.config.poller.descriptors.PackageDescriptor
+org.opennms.netmgt.config.poller.Monitor=org.opennms.netmgt.config.poller.descriptors.MonitorDescriptor
+org.opennms.netmgt.config.poller.NodeOutage=org.opennms.netmgt.config.poller.descriptors.NodeOutageDescriptor
+org.opennms.netmgt.config.poller.Rrd=org.opennms.netmgt.config.poller.descriptors.RrdDescriptor
+org.opennms.netmgt.config.poller.ExcludeRange=org.opennms.netmgt.config.poller.descriptors.ExcludeRangeDescriptor
+org.opennms.netmgt.config.poller.IncludeRange=org.opennms.netmgt.config.poller.descriptors.IncludeRangeDescriptor
+org.opennms.netmgt.config.poller.Parameter=org.opennms.netmgt.config.poller.descriptors.ParameterDescriptor

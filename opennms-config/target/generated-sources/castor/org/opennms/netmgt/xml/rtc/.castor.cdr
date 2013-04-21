@@ -1,0 +1,5 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.xml.rtc.EuiLevel=org.opennms.netmgt.xml.rtc.descriptors.EuiLevelDescriptor
+org.opennms.netmgt.xml.rtc.Header=org.opennms.netmgt.xml.rtc.descriptors.HeaderDescriptor
+org.opennms.netmgt.xml.rtc.Category=org.opennms.netmgt.xml.rtc.descriptors.CategoryDescriptor
+org.opennms.netmgt.xml.rtc.Node=org.opennms.netmgt.xml.rtc.descriptors.NodeDescriptor

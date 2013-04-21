@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Export-Package: org.opennms.sms.reflector.smsservice;uses:="org.opennm
+ s.core.tasks,org.smslib.crypto,org.smslib.balancing,org.opennms.core.
+ utils,org.smslib,org.apache.commons.lang.builder,org.smslib.queues,or
+ g.springframework.core.style,org.opennms.protocols.rt,org.smslib.rout
+ ing,org.springframework.beans.factory"
+Private-Package: org.opennms.sms.reflector.smsservice.internal
+Built-By: anonymous
+Tool: Bnd-0.0.255
+Bundle-Name: org.opennms.features.sms-reflector.sms-service [org.openn
+ ms.sms.reflector.smsservice]
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_27
+Bundle-Version: 1.10.8
+Bnd-LastModified: 1366544131802
+Bundle-ManifestVersion: 2
+Bundle-Description: Generated using Pax-Construct
+Import-Package: org.apache.commons.lang.builder,org.apache.log4j,org.o
+ pennms.core.soa,org.opennms.core.tasks,org.opennms.core.utils,org.ope
+ nnms.protocols.rt,org.opennms.sms.phonebook,org.opennms.sms.reflector
+ .smsservice,org.osgi.framework,org.slf4j;version="1.5",org.smslib,org
+ .smslib.balancing,org.smslib.crypto,org.smslib.queues,org.smslib.rout
+ ing,org.smslib.test,org.springframework.beans,org.springframework.bea
+ ns.factory,org.springframework.context,org.springframework.core.style
+ ,org.springframework.osgi.context,org.springframework.util
+Bundle-SymbolicName: sms-service
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>opennms</artifactId>
+    <groupId>org.opennms</groupId>
+    <version>1.10.8</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>dependencies</artifactId>
+  <packaging>pom</packaging>
+  <name>OpenNMS Complex Dependencies</name>
+  <modules>
+    <module>asterisk</module>
+    <module>castor</module>
+    <module>dbpool</module>
+    <module>dnsjava</module>
+    <module>drools</module>
+    <module>gwt</module>
+    <module>hibernate</module>
+    <module>jasper</module>
+    <module>javamail</module>
+    <module>jaxb</module>
+    <module>jcifs</module>
+    <module>jdbc-pool</module>
+    <module>jersey</module>
+    <module>jfreechart</module>
+    <module>jinterop</module>
+    <module>jmdns</module>
+    <module>jna</module>
+    <module>jnlp</module>
+    <module>jradius</module>
+    <module>jrobin</module>
+    <module>jrrd</module>
+    <module>liquibase</module>
+    <module>mina</module>
+    <module>netty</module>
+    <module>quartz</module>
+    <module>rancid</module>
+    <!-- <module>rrd4j</module> -->
+    <module>rxtx</module>
+    <module>servlet</module>
+    <module>snmp4j</module>
+    <module>snmp</module>
+    <module>snmp-agent</module>
+    <module>snmp-test</module>
+    <module>spring</module>
+    <module>spring-security</module>
+    <module>spring-test</module>
+    <module>spring-web</module>
+    <module>tracker</module>
+    <module>twitter4j</module>
+  </modules>
+  <properties>
+    <springVersion>3.0.5.RELEASE</springVersion>
+    <!-- ALWAYS change aspectj to match the version referenced in the spring poms -->
+    <aspectjVersion>1.6.8</aspectjVersion>
+    <springWebFlowVersion>2.0.9.RELEASE</springWebFlowVersion>
+    <springSecurityVersion>2.0.7.RELEASE</springSecurityVersion>
+    <springLdapVersion>1.2.1</springLdapVersion>
+  </properties>
+</project>

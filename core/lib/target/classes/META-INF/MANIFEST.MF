@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Export-Package: org.opennms.core.utils;uses:="org.apache.log4j,org.spr
+ ingframework.context.access,org.springframework.beans.factory.access,
+ org.apache.commons.io,org.slf4j,org.springframework.beans.factory";ve
+ rsion="1.10.8"
+Built-By: anonymous
+Tool: Bnd-0.0.255
+Bundle-Name: OpenNMS Core Library
+Created-By: Apache Maven Bundle Plugin
+Bundle-Version: 1.10.8
+Build-Jdk: 1.6.0_27
+Bnd-LastModified: 1366543810798
+Bundle-ManifestVersion: 2
+Bundle-Description: OpenNMS is the world's first enterprise grade netw
+ ork management    platform developed under the open source model. It 
+ consists of a    community supported open-source project as well as a
+  commercial    services, training and support organization.
+Import-Package: org.apache.commons.io;version="1.4",org.apache.log4j,o
+ rg.opennms.core.utils;version="1.10.8",org.slf4j;version="1.6",org.sp
+ ringframework.beans.factory;version="3.0.5.RELEASE",org.springframewo
+ rk.beans.factory.access;version="3.0.5.RELEASE",org.springframework.c
+ ontext.access;version="3.0.5.RELEASE"
+Bundle-SymbolicName: org.opennms.core.lib
+

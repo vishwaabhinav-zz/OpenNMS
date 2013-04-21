@@ -1,0 +1,3 @@
+# Module dashboard
+# RPC service class, partial path of RPC policy file
+org.opennms.dashboard.client.SurveillanceService, 923817AFE1B364A0C7C44D9EB8FDDE25.gwt.rpc

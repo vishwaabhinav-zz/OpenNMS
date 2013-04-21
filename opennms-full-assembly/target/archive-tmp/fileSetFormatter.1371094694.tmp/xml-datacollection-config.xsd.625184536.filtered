@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://xmlns.opennms.org/xsd/config/xml-datacollection" xmlns:tns="http://xmlns.opennms.org/xsd/config/xml-datacollection" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="resource-key" type="tns:xmlResourceKey"/>
+
+  <xs:element name="rrd" type="tns:xmlRrd"/>
+
+  <xs:element name="xml-datacollection-config" type="tns:xmlDataCollectionConfig"/>
+
+  <xs:element name="xml-object" type="tns:xmlObject"/>
+
+  <xs:complexType name="xml-collection">
+    <xs:sequence>
+      <xs:element ref="tns:rrd" minOccurs="0"/>
+      <xs:element name="xml-source" type="tns:xmlSource" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="xmlRrd">
+    <xs:sequence>
+      <xs:element name="rra" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="step" type="xs:int"/>
+  </xs:complexType>
+
+  <xs:complexType name="xmlSource">
+    <xs:complexContent>
+      <xs:extension base="tns:xmlGroups">
+        <xs:sequence>
+          <xs:element name="import-groups" type="xs:string" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="url" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="xmlGroups">
+    <xs:sequence>
+      <xs:element name="xml-group" type="tns:xmlGroup" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="xmlGroup">
+    <xs:sequence>
+      <xs:element ref="tns:xml-object" maxOccurs="unbounded"/>
+      <xs:element ref="tns:resource-key" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="resource-type" type="xs:string" use="required"/>
+    <xs:attribute name="resource-xpath" type="xs:string" use="required"/>
+    <xs:attribute name="key-xpath" type="xs:string"/>
+    <xs:attribute name="timestamp-xpath" type="xs:string"/>
+    <xs:attribute name="timestamp-format" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="xmlObject">
+    <xs:sequence/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="xpath" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="xmlResourceKey">
+    <xs:sequence>
+      <xs:element name="key-xpath" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="xmlDataCollectionConfig">
+    <xs:sequence>
+      <xs:element name="xml-collection" type="tns:xml-collection" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="rrdRepository" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>
+

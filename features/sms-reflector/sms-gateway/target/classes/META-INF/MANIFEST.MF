@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Private-Package: org.opennms.sms.gateways.internal
+Ignore-Package: org.opennms.sms.gateways.internal
+Built-By: anonymous
+Tool: Bnd-0.0.255
+Bundle-Name: org.opennms.features.sms-reflector.sms-gateway [org.openn
+ ms.sms.gateways]
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_27
+Bundle-Version: 1.10.8
+Bnd-LastModified: 1366544162983
+Bundle-ManifestVersion: 2
+Bundle-Description: Generated using Pax-Construct
+Import-Package: org.opennms.core.soa,org.opennms.core.utils,org.opennm
+ s.sms.reflector.smsservice,org.osgi.framework,org.slf4j;version="1.5"
+ ,org.smslib,org.smslib.modem,org.springframework.beans.factory,org.sp
+ ringframework.osgi.context,org.springframework.util
+Bundle-SymbolicName: org.opennms.features.sms-reflector.sms-gateway
+

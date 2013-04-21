@@ -1,0 +1,7 @@
+#Sun Apr 21 17:18:40 IST 2013
+org.opennms.netmgt.importer.config.Asset=org.opennms.netmgt.importer.config.descriptors.AssetDescriptor
+org.opennms.netmgt.importer.config.ModelImport=org.opennms.netmgt.importer.config.descriptors.ModelImportDescriptor
+org.opennms.netmgt.importer.config.Category=org.opennms.netmgt.importer.config.descriptors.CategoryDescriptor
+org.opennms.netmgt.importer.config.Interface=org.opennms.netmgt.importer.config.descriptors.InterfaceDescriptor
+org.opennms.netmgt.importer.config.MonitoredService=org.opennms.netmgt.importer.config.descriptors.MonitoredServiceDescriptor
+org.opennms.netmgt.importer.config.Node=org.opennms.netmgt.importer.config.descriptors.NodeDescriptor

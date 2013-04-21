@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Export-Package: gnu.io;version="2.2.0.pre2"
+Private-Package: lib.linux32,lib.linux64,lib.mac,lib.win32,lib.win64
+Ignore-Package: lib.win64,lib.win32,lib.linux32,lib.mac,lib.linux64
+Built-By: brozow
+Tool: Bnd-0.0.255
+Bundle-Name: RXTX OSGi
+Created-By: Apache Maven Bundle Plugin
+Bundle-NativeCode: lib/mac/librxtxSerial.jnilib;osname=macos;osname=Ma
+ cOSX,lib/linux64/librxtxSerial.so;osname=Linux;processor=x86-64,lib/w
+ in64/rxtxSerial.dll;osname=WinXP;osname=WinVista;processor=x86-64,lib
+ /linux32/librxtxParallel.so;lib/linux32/librxtxSerial.so;osname=Linux
+ ;processor=x86,lib/win32/rxtxSerial.dll;osname=Win32;processor=x86
+Build-Jdk: 1.6.0_13
+Bundle-Version: 2.2.0.pre2
+Bnd-LastModified: 1250180128976
+Bundle-ManifestVersion: 2
+Bundle-License: http://users.frii.com/jarvi/rxtx/license.html
+Bundle-Description: RXTX is an open source implementation of the javax
+ .comm apis and the gnu.io.comm apis.
+Bundle-SymbolicName: org.rxtx
+Import-Package: gnu.io;version="2.2.0.pre2"
+

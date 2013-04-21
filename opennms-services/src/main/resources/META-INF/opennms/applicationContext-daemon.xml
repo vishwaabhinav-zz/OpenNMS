@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+  <bean id="localHostAddress" class="org.opennms.netmgt.daemon.DaemonUtils" factory-method="getLocalHostAddress"/>
+  
+  <bean id="localHostName" class="org.opennms.netmgt.daemon.DaemonUtils" factory-method="getLocalHostName"/>
+  
+  <!--  Instead of doing all of the work to create an EventIpcManagerDefaultImpl class
+        here including all of its dependencies, we create a late-initializing proxy here
+        and let eventd do the setup for the EventIpcManagerDefaultImpl and initialize
+        the proxy with a pointer to the "real" eventIpcManager. -->
+  <bean id="eventIpcManager" name="eventSubscriptionService, eventForwarder" class="org.opennms.netmgt.eventd.EventIpcManagerProxy">
+  	<qualifier value="standard" />
+  </bean>
+
+  <bean id="eventIpcManagerFactory-setInstance" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="staticMethod"><value>org.opennms.netmgt.eventd.EventIpcManagerFactory.setIpcManager</value></property>
+    <property name="arguments">
+      <list>
+        <ref bean="eventIpcManager"/>
+      </list>
+    </property>
+  </bean>
+</beans>

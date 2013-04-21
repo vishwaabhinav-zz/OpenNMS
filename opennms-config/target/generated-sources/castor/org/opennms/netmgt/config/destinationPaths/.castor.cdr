@@ -1,0 +1,6 @@
+#Sun Apr 21 17:01:57 IST 2013
+org.opennms.netmgt.config.destinationPaths.Path=org.opennms.netmgt.config.destinationPaths.descriptors.PathDescriptor
+org.opennms.netmgt.config.destinationPaths.DestinationPaths=org.opennms.netmgt.config.destinationPaths.descriptors.DestinationPathsDescriptor
+org.opennms.netmgt.config.destinationPaths.Target=org.opennms.netmgt.config.destinationPaths.descriptors.TargetDescriptor
+org.opennms.netmgt.config.destinationPaths.Escalate=org.opennms.netmgt.config.destinationPaths.descriptors.EscalateDescriptor
+org.opennms.netmgt.config.destinationPaths.Header=org.opennms.netmgt.config.destinationPaths.descriptors.HeaderDescriptor
