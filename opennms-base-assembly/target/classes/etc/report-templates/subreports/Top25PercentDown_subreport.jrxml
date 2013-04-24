@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<template><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/styles/defaultStyles.jrtx"]]></template>
+	<template><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/styles/defaultStyles.jrtx"]]></template>
 	<parameter name="START_TIME" class="java.util.Date">
 		<defaultValueExpression><![CDATA[new java.util.Date(new java.util.Date().getTime() - (86400 * 7 * 1000))]]></defaultValueExpression>
 	</parameter>

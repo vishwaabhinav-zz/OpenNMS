@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:55 IST 2013
+#Mon Apr 22 10:57:36 IST 2013
 org.opennms.netmgt.config.javamail.SendmailProtocol=org.opennms.netmgt.config.javamail.descriptors.SendmailProtocolDescriptor
 org.opennms.netmgt.config.javamail.End2endMailConfig=org.opennms.netmgt.config.javamail.descriptors.End2endMailConfigDescriptor
 org.opennms.netmgt.config.javamail.ReadmailConfig=org.opennms.netmgt.config.javamail.descriptors.ReadmailConfigDescriptor

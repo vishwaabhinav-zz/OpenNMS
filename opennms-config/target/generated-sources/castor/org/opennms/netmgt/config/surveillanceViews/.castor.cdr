@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:57 IST 2013
+#Mon Apr 22 10:57:33 IST 2013
 org.opennms.netmgt.config.surveillanceViews.Columns=org.opennms.netmgt.config.surveillanceViews.descriptors.ColumnsDescriptor
 org.opennms.netmgt.config.surveillanceViews.ColumnDef=org.opennms.netmgt.config.surveillanceViews.descriptors.ColumnDefDescriptor
 org.opennms.netmgt.config.surveillanceViews.RowDef=org.opennms.netmgt.config.surveillanceViews.descriptors.RowDefDescriptor

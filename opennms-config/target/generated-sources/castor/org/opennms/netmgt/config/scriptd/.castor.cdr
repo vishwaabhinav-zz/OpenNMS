@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:57 IST 2013
+#Mon Apr 22 10:57:34 IST 2013
 org.opennms.netmgt.config.scriptd.EventScript=org.opennms.netmgt.config.scriptd.descriptors.EventScriptDescriptor
 org.opennms.netmgt.config.scriptd.Uei=org.opennms.netmgt.config.scriptd.descriptors.UeiDescriptor
 org.opennms.netmgt.config.scriptd.ReloadScript=org.opennms.netmgt.config.scriptd.descriptors.ReloadScriptDescriptor

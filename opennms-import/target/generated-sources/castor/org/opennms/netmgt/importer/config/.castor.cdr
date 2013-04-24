@@ -1,4 +1,4 @@
-#Sun Apr 21 17:18:40 IST 2013
+#Mon Apr 22 11:45:36 IST 2013
 org.opennms.netmgt.importer.config.Asset=org.opennms.netmgt.importer.config.descriptors.AssetDescriptor
 org.opennms.netmgt.importer.config.ModelImport=org.opennms.netmgt.importer.config.descriptors.ModelImportDescriptor
 org.opennms.netmgt.importer.config.Category=org.opennms.netmgt.importer.config.descriptors.CategoryDescriptor

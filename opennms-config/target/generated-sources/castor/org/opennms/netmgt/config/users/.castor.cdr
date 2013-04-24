@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:57 IST 2013
+#Mon Apr 22 10:57:31 IST 2013
 org.opennms.netmgt.config.users.Userinfo=org.opennms.netmgt.config.users.descriptors.UserinfoDescriptor
 org.opennms.netmgt.config.users.Contact=org.opennms.netmgt.config.users.descriptors.ContactDescriptor
 org.opennms.netmgt.config.users.User=org.opennms.netmgt.config.users.descriptors.UserDescriptor

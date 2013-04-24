@@ -7,7 +7,7 @@ Bundle-Name: OpenNMS Core API
 Created-By: Apache Maven Bundle Plugin
 Bundle-Version: 1.10.8
 Build-Jdk: 1.6.0_27
-Bnd-LastModified: 1366543805003
+Bnd-LastModified: 1366606399079
 Bundle-ManifestVersion: 2
 Bundle-Description: OpenNMS is the world's first enterprise grade netw
  ork management    platform developed under the open source model. It 

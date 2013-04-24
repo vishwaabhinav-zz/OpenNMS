@@ -26,7 +26,7 @@ NAME="opennms-remote-poller"
 DESC="OpenNMS Remote Poller"
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 PIDFILE="/var/run/$NAME.pid"
-OPENNMS_HOME="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
+OPENNMS_HOME="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
 JVM_ARGS="-Dpoller.logfile=/var/log/opennms-remote-poller.log"
 EXTRA_ARGS=""
 URI="http://localhost:8980/opennms-remoting"

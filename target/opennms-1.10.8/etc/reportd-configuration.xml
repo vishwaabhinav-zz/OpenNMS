@@ -2,7 +2,7 @@
 <reportd-configuration 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://xmlns.opennms.org/xsd/config/reportd-configuration"
-  storage-location="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/reports/"
+  storage-location="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/reports/"
   persist-reports="yes"
 > 
   <!--  

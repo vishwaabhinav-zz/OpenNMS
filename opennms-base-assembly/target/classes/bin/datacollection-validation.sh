@@ -1,7 +1,7 @@
 #!/bin/sh - 
 
 JAVA_OPTIONS="-Xmx256m"
-opennms_home="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
+opennms_home="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
 
 app_class=org.opennms.netmgt.config.DataCollectionConfigFactory
 

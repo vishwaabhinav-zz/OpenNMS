@@ -3,7 +3,7 @@
     xmlns:http-dc="http://xmlns.opennms.org/xsd/config/http-datacollection" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://xmlns.opennms.org/xsd/config/http-datacollection http://www.opennms.org/xsd/config/http-datacollection-config.xsd" 
-    rrdRepository="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/snmp/" >
+    rrdRepository="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/snmp/" >
   <!--
   <http-collection name="doc-count">
     <rrd step="300">

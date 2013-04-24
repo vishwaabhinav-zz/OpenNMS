@@ -1,4 +1,4 @@
-#Sun Apr 21 17:21:50 IST 2013
+#Mon Apr 22 11:49:39 IST 2013
 org.opennms.report.availability.DaysOfWeek=org.opennms.report.availability.descriptors.DaysOfWeekDescriptor
 org.opennms.report.availability.Rows=org.opennms.report.availability.descriptors.RowsDescriptor
 org.opennms.report.availability.ViewInfo=org.opennms.report.availability.descriptors.ViewInfoDescriptor

@@ -3,8 +3,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:schemaLocation="http://xmlns.opennms.org/xsd/config/provisiond-configuration"
    
-  foreign-source-dir="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/foreign-sources" 
-  requistion-dir="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/imports"
+  foreign-source-dir="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/foreign-sources" 
+  requistion-dir="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/imports"
    
   importThreads="8" scanThreads="10" rescanThreads="10" writeThreads="8" >
   

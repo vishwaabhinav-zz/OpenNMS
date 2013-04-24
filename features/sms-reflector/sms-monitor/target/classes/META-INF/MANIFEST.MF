@@ -18,7 +18,7 @@ Created-By: Apache Maven Bundle Plugin
 Require-Bundle: com.springsource.com.sun.xml.bind
 Build-Jdk: 1.6.0_27
 Bundle-Version: 1.10.8
-Bnd-LastModified: 1366544153159
+Bnd-LastModified: 1366609053346
 Bundle-ManifestVersion: 2
 Bundle-Description: Generated using Pax-Construct
 Import-Package: com.sun.xml.bind.marshaller,javax.xml.bind,javax.xml.b

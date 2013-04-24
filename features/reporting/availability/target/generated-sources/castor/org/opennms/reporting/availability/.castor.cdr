@@ -1,4 +1,4 @@
-#Sun Apr 21 17:06:45 IST 2013
+#Mon Apr 22 11:09:02 IST 2013
 org.opennms.reporting.availability.Report=org.opennms.reporting.availability.descriptors.ReportDescriptor
 org.opennms.reporting.availability.Rows=org.opennms.reporting.availability.descriptors.RowsDescriptor
 org.opennms.reporting.availability.Section=org.opennms.reporting.availability.descriptors.SectionDescriptor

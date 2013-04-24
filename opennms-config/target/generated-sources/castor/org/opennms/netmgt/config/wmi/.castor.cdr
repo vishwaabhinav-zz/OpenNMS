@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:57 IST 2013
+#Mon Apr 22 10:57:35 IST 2013
 org.opennms.netmgt.config.wmi.WmiCollection=org.opennms.netmgt.config.wmi.descriptors.WmiCollectionDescriptor
 org.opennms.netmgt.config.wmi.Range=org.opennms.netmgt.config.wmi.descriptors.RangeDescriptor
 org.opennms.netmgt.config.wmi.Wpm=org.opennms.netmgt.config.wmi.descriptors.WpmDescriptor

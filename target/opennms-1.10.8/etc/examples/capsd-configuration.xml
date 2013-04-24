@@ -429,7 +429,7 @@
     </smb-config>
     <ip-management policy="managed">
         <range begin="192.168.0.0" end="192.168.0.255" />
-        <include-url>file:/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
+        <include-url>file:/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
     </ip-management>
     <ip-management policy="unmanaged">
         <specific>0.0.0.0</specific>

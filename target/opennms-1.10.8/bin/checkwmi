@@ -1,9 +1,9 @@
 #!/bin/sh -
 
-JINTEROP_DEPS_JAR=`ls -1 "/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/j-interopdeps-*.jar | head -n 1`
-JINTEROP_JAR=`ls -1 "/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/j-interop-*.jar | head -n 1`
-JCIFS_JAR=`ls -1 "/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/jcifs-*.jar | head -n 1`
-WMI_JAR=`ls -1 "/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/opennms-wmi-*.jar | head -n 1`
-LOG4J_JAR=`ls -1 "/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/log4j-*.jar | head -n 1`
-COMMONS_CLI_JAR=`ls -1 "/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/commons-cli-*.jar | head -n 1`
-exec /home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/bin/runjava -r -- -Xmx256m -cp "$JINTEROP_DEPS_JAR:$JINTEROP_JAR:$JCIFS_JAR:$WMI_JAR:$LOG4J_JAR:$COMMONS_CLI_JAR" org.opennms.protocols.wmi.CheckWmi "$@"
+JINTEROP_DEPS_JAR=`ls -1 "/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/j-interopdeps-*.jar | head -n 1`
+JINTEROP_JAR=`ls -1 "/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/j-interop-*.jar | head -n 1`
+JCIFS_JAR=`ls -1 "/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/jcifs-*.jar | head -n 1`
+WMI_JAR=`ls -1 "/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/opennms-wmi-*.jar | head -n 1`
+LOG4J_JAR=`ls -1 "/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/log4j-*.jar | head -n 1`
+COMMONS_CLI_JAR=`ls -1 "/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"/lib/commons-cli-*.jar | head -n 1`
+exec /media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/bin/runjava -r -- -Xmx256m -cp "$JINTEROP_DEPS_JAR:$JINTEROP_JAR:$JCIFS_JAR:$WMI_JAR:$LOG4J_JAR:$COMMONS_CLI_JAR" org.opennms.protocols.wmi.CheckWmi "$@"

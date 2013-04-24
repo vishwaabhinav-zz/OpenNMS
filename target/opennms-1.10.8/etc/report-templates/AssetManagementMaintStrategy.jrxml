@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<template><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/styles/defaultStyles.jrtx"]]></template>
+	<template><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/styles/defaultStyles.jrtx"]]></template>
 	<subDataset name="summaryNodeAge">
 		<parameter name="DS_DATE_FORMAT" class="java.lang.String" isForPrompting="false">
 			<parameterDescription><![CDATA[]]></parameterDescription>
@@ -218,7 +218,7 @@ ORDER BY
 		<defaultValueExpression><![CDATA["YYYY-MM-DD"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="COMPANY_LOGO" class="java.lang.String">
-		<defaultValueExpression><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/images/company-logo.png"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/images/company-logo.png"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select now()]]>

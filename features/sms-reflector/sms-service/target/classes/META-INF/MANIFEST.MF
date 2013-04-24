@@ -12,7 +12,7 @@ Bundle-Name: org.opennms.features.sms-reflector.sms-service [org.openn
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_27
 Bundle-Version: 1.10.8
-Bnd-LastModified: 1366544131802
+Bnd-LastModified: 1366609005495
 Bundle-ManifestVersion: 2
 Bundle-Description: Generated using Pax-Construct
 Import-Package: org.apache.commons.lang.builder,org.apache.log4j,org.o

@@ -1,2 +1,2 @@
-#Sun Apr 21 17:18:40 IST 2013
+#Mon Apr 22 11:45:36 IST 2013
 org.opennms.netmgt.importer.config.types.InterfaceSnmpPrimaryType=org.opennms.netmgt.importer.config.types.descriptors.InterfaceSnmpPrimaryTypeDescriptor

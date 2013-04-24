@@ -38,7 +38,7 @@
 #############################################################
 
 
-OPENNMS_HOME="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
+OPENNMS_HOME="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
 SEND_EVENT=${OPENNMS_HOME}/bin/send-event.pl
 EVENT_UEI=uei.opennms.org/internal/configureSNMP
 

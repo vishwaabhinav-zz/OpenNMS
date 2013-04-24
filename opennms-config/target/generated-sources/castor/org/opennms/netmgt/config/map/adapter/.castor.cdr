@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:57 IST 2013
+#Mon Apr 22 10:57:28 IST 2013
 org.opennms.netmgt.config.map.adapter.Cmap=org.opennms.netmgt.config.map.adapter.descriptors.CmapDescriptor
 org.opennms.netmgt.config.map.adapter.Package=org.opennms.netmgt.config.map.adapter.descriptors.PackageDescriptor
 org.opennms.netmgt.config.map.adapter.ExcludeRange=org.opennms.netmgt.config.map.adapter.descriptors.ExcludeRangeDescriptor

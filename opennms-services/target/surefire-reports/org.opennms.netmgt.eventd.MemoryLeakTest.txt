@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: org.opennms.netmgt.eventd.MemoryLeakTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.135 sec

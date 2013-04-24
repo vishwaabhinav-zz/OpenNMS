@@ -7,7 +7,7 @@
 		<filter>IPADDR != '0.0.0.0'</filter>	 
 		<specific>0.0.0.0</specific>
 		<include-range begin="192.168.0.1" end="192.168.0.254"/>
-		<include-url>file:/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
+		<include-url>file:/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
 		
 		<service name="SNMP" interval="300000" user-defined="false" status="on">
 			<parameter key="thresholding-group" value="default-snmp"/>

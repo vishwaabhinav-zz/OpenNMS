@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:55 IST 2013
+#Mon Apr 22 10:57:32 IST 2013
 org.opennms.netmgt.config.poller.Service=org.opennms.netmgt.config.poller.descriptors.ServiceDescriptor
 org.opennms.netmgt.config.poller.Downtime=org.opennms.netmgt.config.poller.descriptors.DowntimeDescriptor
 org.opennms.netmgt.config.poller.CriticalService=org.opennms.netmgt.config.poller.descriptors.CriticalServiceDescriptor

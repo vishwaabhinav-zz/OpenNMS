@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:56 IST 2013
+#Mon Apr 22 10:57:36 IST 2013
 org.opennms.netmgt.config.threshd.Parameter=org.opennms.netmgt.config.threshd.descriptors.ParameterDescriptor
 org.opennms.netmgt.config.threshd.Group=org.opennms.netmgt.config.threshd.descriptors.GroupDescriptor
 org.opennms.netmgt.config.threshd.Expression=org.opennms.netmgt.config.threshd.descriptors.ExpressionDescriptor
@@ -7,9 +7,9 @@ org.opennms.netmgt.config.threshd.ResourceFilter=org.opennms.netmgt.config.thres
 org.opennms.netmgt.config.threshd.ThreshdConfiguration=org.opennms.netmgt.config.threshd.descriptors.ThreshdConfigurationDescriptor
 org.opennms.netmgt.config.threshd.Thresholder=org.opennms.netmgt.config.threshd.descriptors.ThresholderDescriptor
 org.opennms.netmgt.config.threshd.Basethresholddef=org.opennms.netmgt.config.threshd.descriptors.BasethresholddefDescriptor
-org.opennms.netmgt.config.threshd.Threshold=org.opennms.netmgt.config.threshd.descriptors.ThresholdDescriptor
-org.opennms.netmgt.config.threshd.Service=org.opennms.netmgt.config.threshd.descriptors.ServiceDescriptor
 org.opennms.netmgt.config.threshd.Package=org.opennms.netmgt.config.threshd.descriptors.PackageDescriptor
-org.opennms.netmgt.config.threshd.Filter=org.opennms.netmgt.config.threshd.descriptors.FilterDescriptor
+org.opennms.netmgt.config.threshd.Service=org.opennms.netmgt.config.threshd.descriptors.ServiceDescriptor
+org.opennms.netmgt.config.threshd.Threshold=org.opennms.netmgt.config.threshd.descriptors.ThresholdDescriptor
 org.opennms.netmgt.config.threshd.IncludeRange=org.opennms.netmgt.config.threshd.descriptors.IncludeRangeDescriptor
+org.opennms.netmgt.config.threshd.Filter=org.opennms.netmgt.config.threshd.descriptors.FilterDescriptor
 org.opennms.netmgt.config.threshd.ExcludeRange=org.opennms.netmgt.config.threshd.descriptors.ExcludeRangeDescriptor

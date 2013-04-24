@@ -13,7 +13,7 @@ END
 # TODO: Is this needed?  If so, document why
 ulimit -s 2048
 
-opennms_home="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
+opennms_home="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
 opennms_webapp="$opennms_home/webapps/opennms"
 
 if [ $# -ne 6 ]; then

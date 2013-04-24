@@ -2,9 +2,9 @@
 <engine-configuration 
 	xmlns="http://xmlns.opennms.org/xsd/drools-engine" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://xmlns.opennms.org/xsd/drools-engine /home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/xsds/drools-engine.xsd ">
+	xsi:schemaLocation="http://xmlns.opennms.org/xsd/drools-engine /media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/xsds/drools-engine.xsd ">
   <rule-set name="locationMonitorRules">
-    <rule-file>/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/LocationMonitorRules.drl</rule-file>
+    <rule-file>/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/LocationMonitorRules.drl</rule-file>
     <event>uei.opennms.org/remote/nodes/nodeLostService</event>
     <event>uei.opennms.org/remote/nodes/nodeRegainedService</event>
     <global name="WIDE_SPREAD_THRESHOLD" type="java.lang.Integer" value="3"/>
@@ -12,10 +12,10 @@
     <global name="FLAP_COUNT" type="java.lang.Integer" value="3" />
   </rule-set>
   <rule-set name="nodeParentRules">
-    <rule-file>/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/NodeParentRules.drl</rule-file>
+    <rule-file>/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/NodeParentRules.drl</rule-file>
     <event>uei.opennms.org/nodes/nodeDown</event>
     <event>uei.opennms.org/nodes/nodeUp</event>
-    <app-context>/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/nodeParentRules-context.xml</app-context>
+    <app-context>/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/nodeParentRules-context.xml</app-context>
     <global name="POLL_INTERVAL" type="java.lang.Long" value="3000" />
     <global name="nodeService" type="org.opennms.netmgt.correlation.drools.NodeService" ref="nodeService" />
   </rule-set>

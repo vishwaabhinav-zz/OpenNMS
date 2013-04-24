@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: org.opennms.netmgt.eventd.EventIpcManagerDefaultImplTest
--------------------------------------------------------------------------------
-Tests run: 26, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.462 sec

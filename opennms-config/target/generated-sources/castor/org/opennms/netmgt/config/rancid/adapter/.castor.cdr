@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:56 IST 2013
+#Mon Apr 22 10:57:28 IST 2013
 org.opennms.netmgt.config.rancid.adapter.ExcludeRange=org.opennms.netmgt.config.rancid.adapter.descriptors.ExcludeRangeDescriptor
 org.opennms.netmgt.config.rancid.adapter.IncludeRange=org.opennms.netmgt.config.rancid.adapter.descriptors.IncludeRangeDescriptor
 org.opennms.netmgt.config.rancid.adapter.PolicyManage=org.opennms.netmgt.config.rancid.adapter.descriptors.PolicyManageDescriptor

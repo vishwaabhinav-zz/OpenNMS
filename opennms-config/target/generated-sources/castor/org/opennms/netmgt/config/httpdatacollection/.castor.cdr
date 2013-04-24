@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:56 IST 2013
+#Mon Apr 22 10:57:31 IST 2013
 org.opennms.netmgt.config.httpdatacollection.HttpDatacollectionConfig=org.opennms.netmgt.config.httpdatacollection.descriptors.HttpDatacollectionConfigDescriptor
 org.opennms.netmgt.config.httpdatacollection.Url=org.opennms.netmgt.config.httpdatacollection.descriptors.UrlDescriptor
 org.opennms.netmgt.config.httpdatacollection.Uri=org.opennms.netmgt.config.httpdatacollection.descriptors.UriDescriptor

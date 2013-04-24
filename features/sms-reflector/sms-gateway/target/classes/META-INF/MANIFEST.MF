@@ -8,7 +8,7 @@ Bundle-Name: org.opennms.features.sms-reflector.sms-gateway [org.openn
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_27
 Bundle-Version: 1.10.8
-Bnd-LastModified: 1366544162983
+Bnd-LastModified: 1366609072515
 Bundle-ManifestVersion: 2
 Bundle-Description: Generated using Pax-Construct
 Import-Package: org.opennms.core.soa,org.opennms.core.utils,org.opennm

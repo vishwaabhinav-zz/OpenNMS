@@ -19,7 +19,7 @@
       <attribute name="rescanThreads" type="positiveInteger" use="optional" default="10" />
       <attribute name="writeThreads" type="positiveInteger" use="optional" default="8" />
       <attribute name="requistion-dir" type="string" use="optional" default="$install.dir}/etc/imports" />
-      <attribute name="foreign-source-dir" type="string" use="optional" default="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/foreign-sources" />
+      <attribute name="foreign-source-dir" type="string" use="optional" default="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/foreign-sources" />
     </complexType>
   </element>
   

@@ -11,7 +11,7 @@
     <filter>IPADDR != '0.0.0.0'</filter>
     <specific>0.0.0.0</specific>
     <include-range begin="1.1.1.1" end="254.254.254.254" />
-    <include-url>file:/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
+    <include-url>file:/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
     <rrd step="300">
       <rra>RRA:AVERAGE:0.5:1:2016</rra>
       <rra>RRA:AVERAGE:0.5:12:1488</rra>
@@ -22,7 +22,7 @@
     <service name="ICMP" interval="300000" user-defined="false" status="on">
       <parameter key="retry" value="2" />
       <parameter key="timeout" value="3000" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="icmp" />
       <parameter key="ds-name" value="icmp" />
     </service>
@@ -32,7 +32,7 @@
       <parameter key="port" value="53" />
       <parameter key="lookup" value="localhost" />
       <parameter key="fatal-response-codes" value="2,3,5" /><!-- ServFail, NXDomain, Refused -->
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="dns" />
       <parameter key="ds-name" value="dns" />
     </service>
@@ -40,7 +40,7 @@
       <parameter key="retry" value="1" />
       <parameter key="timeout" value="3000" />
       <parameter key="port" value="25" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="smtp" />
       <parameter key="ds-name" value="smtp" />
     </service>
@@ -59,7 +59,7 @@
       <parameter key="timeout" value="3000" />
       <parameter key="port" value="80" />
       <parameter key="url" value="/" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="http" />
       <parameter key="ds-name" value="http" />
     </service>
@@ -68,7 +68,7 @@
       <parameter key="timeout" value="3000" />
       <parameter key="port" value="8080" />
       <parameter key="url" value="/" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="http-8080" />
       <parameter key="ds-name" value="http-8080" />
     </service>
@@ -77,7 +77,7 @@
       <parameter key="timeout" value="3000" />
       <parameter key="port" value="8000" />
       <parameter key="url" value="/" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="http-8000" />
       <parameter key="ds-name" value="http-8000" />
     </service>
@@ -87,7 +87,7 @@
       <parameter key="port" value="80" />
       <parameter key="url" value="/wiki/Main_Page" />
       <parameter key="host-name" value="www.opennms.org" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="http-hostexample" />
       <parameter key="ds-name" value="http-hostexample" />
     </service>
@@ -96,7 +96,7 @@
       <parameter key="timeout" value="5000" />
       <parameter key="port" value="443" />
       <parameter key="url" value="/" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <!--  an example of using a different dsName and rrd file name -->
       <parameter key="rrd-base-name" value="https" />
       <parameter key="ds-name" value="responseTime" />
@@ -115,7 +115,7 @@
     <service name="HypericHQ" interval="300000" user-defined="false" status="on">
       <parameter key="retry" value="1" />
       <parameter key="timeout" value="3000" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="hyperic-hq" />
       <parameter key="ds-name" value="hyperic-hq" />
       <parameter key="page-sequence">
@@ -172,7 +172,7 @@
       <parameter key="banner" value="SSH" />
       <parameter key="port" value="22" />
       <parameter key="timeout" value="3000" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="ssh" />
       <parameter key="ds-name" value="ssh" />
     </service>
@@ -185,7 +185,7 @@
       <parameter key="retry" value="1" />
       <parameter key="port" value="110" />
       <parameter key="timeout" value="3000" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="pop3" />
       <parameter key="ds-name" value="pop3" />
     </service>
@@ -205,7 +205,7 @@
       <parameter key="port" value="5666" />
       <parameter key="command" value="_NRPE_CHECK" />
       <parameter key="padding" value="2" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="nrpe" />
     </service>
     <service name="NRPE-NoSSL" interval="300000" user-defined="false" status="on">
@@ -215,7 +215,7 @@
       <parameter key="command" value="_NRPE_CHECK" />
       <parameter key="usessl" value="false" />
       <parameter key="padding" value="2" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="nrpe" />
     </service>
     <service name="Windows-Task-Scheduler" interval="300000" user-defined="false" status="on">
@@ -228,7 +228,7 @@
       <parameter key="password" value="admin"/>
       <parameter key="retry" value="2"/>
       <parameter key="timeout" value="3000"/>
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="opennms-jvm"/>
       <parameter key="friendly-name" value="opennms-jvm"/>
     </service>
@@ -256,7 +256,7 @@
       <parameter key="port" value="11211" />
       <parameter key="retry" value="2" />
       <parameter key="timeout" value="3000" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="memcached" />
       <parameter key="rrd-base-name" value="memcached" />
     </service>
@@ -264,7 +264,7 @@
       <parameter key="retry" value="2" />
       <parameter key="timeout" value="5000" />
       <parameter key="port" value="123" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="ntp" />
     </service>
     <service name="RadiusAuth" interval="300000" user-defined="false" status="on">
@@ -273,7 +273,7 @@
       <parameter key="user" value="TEST" />
       <parameter key="password" value="test" />
       <parameter key="secret" value="opennms" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="radiusauth" />
     </service>
     <service name="JBoss4" interval="300000" user-defined="false" status="on">
@@ -287,7 +287,7 @@
           <jboss-home>/server/default/deploy/http-invoker/META-INF/jboss-service.xml
           The default port is 8080
       -->
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="jboss" />
     </service>
     <service name="JBoss32" interval="300000" user-defined="false" status="on">
@@ -301,14 +301,14 @@
           <jboss-home>/server/default/deploy/http-invoker/META-INF/jboss-service.xml
           The default port is 8080
       -->
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="jboss" />
     </service>
     <service name="JVM" interval="300000" user-defined="false" status="on">
       <parameter key="port" value="9003" />
       <parameter key="retry" value="2" />
       <parameter key="timeout" value="3000" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="jmx" />
       <parameter key="friendly-name" value="jvm" />
     </service>
@@ -319,7 +319,7 @@
       <parameter key="command" value="_NRPE_CHECK" />
       <parameter key="usessl" value="true" />
       <parameter key="padding" value="2" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="nrpe" />
     </service>
     <service name="DbTestExample" interval="300000" user-defined="false" status="on">
@@ -330,7 +330,7 @@
       <parameter key="stored-procedure" value="is_db_consistent" />
       <parameter key="schema" value="test" />
       <parameter key="url" value="jdbc:postgresql://dbserver.example.com/dbname" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="dbtransaction" />
     </service>
     <service name="DiskUsage-root" interval="300000" user-defined="false" status="on">
@@ -406,7 +406,7 @@
       <parameter key="ping-count" value="20" />
       <parameter key="failure-ping-count" value="20" />
       <parameter key="wait-interval" value="50" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="strafeping" />
     </service>
     <downtime interval="300000" begin="0" end="432000000"/><!-- 5m, 0, 5d -->
@@ -444,7 +444,7 @@
       <parameter key="timeout" value="3000" />
       <parameter key="port" value="80" />
       <parameter key="url" value="/" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="ds-name" value="http" />
     </service>
 
@@ -571,7 +571,7 @@
     <filter>IPADDR != '0.0.0.0'</filter>
     <specific>0.0.0.0</specific>
     <include-range begin="1.1.1.1" end="254.254.254.254" />
-    <include-url>file:/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
+    <include-url>file:/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
     <rrd step = "300">
       <rra>RRA:AVERAGE:0.5:1:2016</rra>
       <rra>RRA:AVERAGE:0.5:12:1488</rra>
@@ -646,7 +646,7 @@
     <specific>0.0.0.0</specific>
     <include-range begin="1.1.1.1" end="254.254.254.254" />
     <include-range begin="::1" end="ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff" />
-    <include-url>file:/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
+    <include-url>file:/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/include</include-url>
     <rrd step = "300">
       <rra>RRA:AVERAGE:0.5:1:2016</rra>
       <rra>RRA:AVERAGE:0.5:12:1488</rra>
@@ -657,7 +657,7 @@
     <service name="DHCP" interval="300000" user-defined="false" status="on">
       <parameter key="retry" value="2" />
       <parameter key="timeout" value="3000" />
-      <parameter key="rrd-repository" value="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
+      <parameter key="rrd-repository" value="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd/response" />
       <parameter key="rrd-base-name" value="dhcp" />
       <parameter key="ds-name" value="dhcp" />
     </service>

@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="26"/>
-	<template><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/styles/defaultStyles.jrtx"]]></template>
+	<template><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/styles/defaultStyles.jrtx"]]></template>
 	<style name="Table_Detail" hAlign="Left" vAlign="Middle" fontName="SansSerif" fontSize="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{avail_percent} < $P{DS_AVAILABILITY_CRITICAL}]]></conditionExpression>
@@ -30,7 +30,7 @@
 		</conditionalStyle>
 	</style>
 	<parameter name="COMPANY_LOGO" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/images/company-logo.png"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/images/company-logo.png"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SURVEILLANCE_CATEGORY" class="java.lang.String" isForPrompting="false">
 		<parameterDescription><![CDATA[Surveillance Category]]></parameterDescription>
@@ -61,7 +61,7 @@
 		<defaultValueExpression><![CDATA[$P{TIME_RANGE} + " from " + $P{START_TIME}]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/subreports/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/subreports/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="START_TIME_STRING" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[new SimpleDateFormat("EEE MMM d HH:mm:ss Z yyyy").format($P{START_TIME})]]></defaultValueExpression>

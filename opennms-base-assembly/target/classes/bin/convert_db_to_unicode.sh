@@ -17,7 +17,7 @@ SQL_FILE="$1"; shift
 LOG_FILE="/tmp/unicode-convert.log"
 
 if [ -z "$SQL_FILE" ]; then
-	SQL_FILE=/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/create.sql
+	SQL_FILE=/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/create.sql
 fi
 
 FILE="/tmp/pg_dump-${DATABASE}"

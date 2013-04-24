@@ -10,7 +10,7 @@
 # Tue Dec 12 23:05:42 GMT 2006 - dj@opennms.org
 
 if [ -z "$OPENNMS_HOME" ]; then
-	OPENNMS_HOME="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
+	OPENNMS_HOME="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
 fi
 JAVA_CONF="$OPENNMS_HOME/etc/java.conf"
 

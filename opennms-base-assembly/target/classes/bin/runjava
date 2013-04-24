@@ -34,7 +34,7 @@
 #
 # put an '@' here so we don't break maven substition
 
-opennms_home="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
+opennms_home="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
 searchdirs="/usr /opt /Library"
 dryrun=0
 

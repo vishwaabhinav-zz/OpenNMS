@@ -1,4 +1,4 @@
-#Sun Apr 21 17:22:28 IST 2013
+#Mon Apr 22 11:50:48 IST 2013
 org.opennms.netmgt.config.attrsummary.Resource=org.opennms.netmgt.config.attrsummary.descriptors.ResourceDescriptor
 org.opennms.netmgt.config.attrsummary.Summary=org.opennms.netmgt.config.attrsummary.descriptors.SummaryDescriptor
 org.opennms.netmgt.config.attrsummary.Attribute=org.opennms.netmgt.config.attrsummary.descriptors.AttributeDescriptor

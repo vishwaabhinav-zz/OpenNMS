@@ -7,7 +7,7 @@ Bundle-Name: org.opennms.features.rxtx.test
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.6.0_27
 Bundle-Version: 1.10.8
-Bnd-LastModified: 1366544125535
+Bnd-LastModified: 1366608977686
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.opennms.rxtx.test.internal.Activator
 Bundle-Description: Generated using Pax-Construct

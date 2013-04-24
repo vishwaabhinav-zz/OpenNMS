@@ -1,6 +1,6 @@
 #!/bin/sh -
 
-OPENNMS_HOME="/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
+OPENNMS_HOME="/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8"
 
 if [ -f "$OPENNMS_HOME/etc/opennms.conf" ]; then
 	. "$OPENNMS_HOME/etc/opennms.conf"

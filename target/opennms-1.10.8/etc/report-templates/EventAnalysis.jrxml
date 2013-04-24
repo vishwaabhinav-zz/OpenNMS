@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="16"/>
 	<property name="net.sf.jasperreports.chart.theme" value="default"/>
-	<template><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/styles/defaultStyles.jrtx"]]></template>
+	<template><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/styles/defaultStyles.jrtx"]]></template>
 	<style name="Eventdisplay Link Style" forecolor="#000000" hAlign="Left" vAlign="Middle" fontSize="10">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[!$F{eventdisplay}.equals("Y")]]></conditionExpression>
@@ -410,7 +410,7 @@ ON
 	</subDataset>
 	<parameter name="COMPANY_LOGO" class="java.lang.String">
 		<parameterDescription><![CDATA[Company logo]]></parameterDescription>
-		<defaultValueExpression><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/images/company-logo.png"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/assets/images/company-logo.png"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="OPENNMS_URL_BASE" class="java.lang.String">
 		<parameterDescription><![CDATA[OpenNMS URL base for embedded links]]></parameterDescription>

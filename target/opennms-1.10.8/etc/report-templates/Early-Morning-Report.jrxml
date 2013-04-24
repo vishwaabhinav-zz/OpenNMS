@@ -1731,7 +1731,7 @@ WHERE
 			</textField>
 			<image isUsingCache="false">
 				<reportElement isPrintRepeatedValues="false" mode="Opaque" x="391" y="0" width="164" height="45"/>
-				<imageExpression class="java.lang.String"><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/opennms-logo.png"]]></imageExpression>
+				<imageExpression class="java.lang.String"><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/report-templates/opennms-logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>

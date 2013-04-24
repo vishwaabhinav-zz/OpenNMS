@@ -5,10 +5,10 @@
 	xsi:schemaLocation="http://xmlns.opennms.org/xsd/config/opennms-reports">
 	<report id="local_defaultCalendarReport" 
 		type="calendar">
-		<logo>/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/logo.gif</logo>
-		<svg-template>file:///home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/SVGAvailReport.xsl</svg-template>
-		<pdf-template>file:///home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/PDFAvailReport.xsl</pdf-template>
-		<html-template>file:///home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/HTMLAvailReport.xsl</html-template>
+		<logo>/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/logo.gif</logo>
+		<svg-template>file:///media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/SVGAvailReport.xsl</svg-template>
+		<pdf-template>file:///media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/PDFAvailReport.xsl</pdf-template>
+		<html-template>file:///media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/HTMLAvailReport.xsl</html-template>
 		<parameters>
 			<string-parm name="reportCategory" display-name="report category" input-type="reportCategorySelector" />
 			<date-parm name="endDate" display-name="end date" use-absolute-date="false">
@@ -23,10 +23,10 @@
 	</report>
 	<report id="local_defaultClassicReport" 
 		type="classic">
-		<logo>/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/logo.gif</logo>
-		<svg-template>file:///home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/SVGAvailReport.xsl</svg-template>
-		<pdf-template>file:///home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/PDFAvailReport.xsl</pdf-template>
-		<html-template>file:///home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/HTMLAvailReport.xsl</html-template>
+		<logo>/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/logo.gif</logo>
+		<svg-template>file:///media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/SVGAvailReport.xsl</svg-template>
+		<pdf-template>file:///media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/PDFAvailReport.xsl</pdf-template>
+		<html-template>file:///media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/etc/reports/HTMLAvailReport.xsl</html-template>
 		<parameters>
 			<string-parm name="reportCategory" display-name="report category" input-type="reportCategorySelector" />
 			<date-parm name="endDate" display-name="end date" use-absolute-date="false">

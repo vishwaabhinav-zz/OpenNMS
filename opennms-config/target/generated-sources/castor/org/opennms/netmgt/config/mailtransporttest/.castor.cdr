@@ -1,4 +1,4 @@
-#Sun Apr 21 17:01:57 IST 2013
+#Mon Apr 22 10:57:30 IST 2013
 org.opennms.netmgt.config.mailtransporttest.ReadmailTest=org.opennms.netmgt.config.mailtransporttest.descriptors.ReadmailTestDescriptor
 org.opennms.netmgt.config.mailtransporttest.SendmailProtocol=org.opennms.netmgt.config.mailtransporttest.descriptors.SendmailProtocolDescriptor
 org.opennms.netmgt.config.mailtransporttest.SendmailMessage=org.opennms.netmgt.config.mailtransporttest.descriptors.SendmailMessageDescriptor

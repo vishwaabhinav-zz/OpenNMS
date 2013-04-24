@@ -13,7 +13,7 @@
 		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
 	</parameter>
 	<parameter name="rrdDir" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/anonymous/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/media/Study/workspace/opennms-1.10.8-1/target/opennms-1.10.8/share/rrd"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="snmpifalias" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="snmpifname" class="java.lang.String" isForPrompting="false">

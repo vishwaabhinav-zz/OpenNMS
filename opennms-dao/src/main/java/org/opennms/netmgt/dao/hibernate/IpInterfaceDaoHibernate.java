@@ -29,10 +29,12 @@
 package org.opennms.netmgt.dao.hibernate;
 
 import java.net.InetAddress;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
 import org.opennms.netmgt.dao.IpInterfaceDao;
 import org.opennms.netmgt.model.OnmsIpInterface;
 import org.opennms.netmgt.model.OnmsNode;
@@ -161,6 +163,19 @@ public class IpInterfaceDaoHibernate extends AbstractDaoHibernate<OnmsIpInterfac
 		// SELECT ipaddr FROM ipinterface WHERE nodeid = ? AND issnmpprimary = 'P'
 
         return findUnique("from OnmsIpInterface as ipInterface where ipInterface.node.id = ? and ipInterface.isSnmpPrimary = 'P'", nodeId);
+	}
+	
+	@Override
+	public Date findLastPollTimeByNodeId(final Integer nodeId) {
+		Assert.notNull(nodeId, "nodeId cannot be null");
+		// SELECT iplastcapsdpoll FROM ipinterface WHERE nodeid=? AND (ismanaged = 'M' OR ismanaged = 'N')
+
+        return findUnique("select ipInterface.lastCapsdPoll from OnmsIpInterface as ipInterface where ipInterface.node.id = ? and (ipInterface.isManaged = 'M' or ipInterface.isManaged = 'N')", nodeId).getIpLastCapsdPoll();
+	}
+	
+	public int updateLastPollTime(Date ipLastCapsdPoll, String ipAddr, Integer nodeId ) {
+		String query = "update OnmsIpInterface as ipInterface set ipInterface.lastCapsDoll = ? where ipInterface.node.id = ? and ipInterface.ipAddress = ?";
+		return queryInt(query,ipLastCapsdPoll, nodeId, ipAddr);
 	}
 
 }
